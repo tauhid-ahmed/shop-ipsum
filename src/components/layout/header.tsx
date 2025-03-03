@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className="relative">
       <Container>
-        <nav className="flex justify-between items-center py-4 border">
+        <nav className="flex justify-between items-center py-2">
           <div className="">
             <Link
               href={homePath()}
