@@ -2,12 +2,15 @@ import { ThemeSwitch } from "../theme";
 import { Container } from "./container";
 import Link from "next/link";
 import { homePath } from "@/paths";
+import { Button } from "../ui/button";
+import * as paths from "@/paths";
+import DesktopNav from "./desktop-nav";
 
 export default function Header() {
   return (
-    <header className="relative py-2">
+    <header className="relative">
       <Container>
-        <div className="flex justify-between items-center">
+        <nav className="flex justify-between items-center py-4 border">
           <div className="">
             <Link
               href={homePath()}
@@ -16,11 +19,21 @@ export default function Header() {
               BDSTORE
             </Link>
           </div>
-          <div className="">
+          <DesktopNav />
+          <div className="flex items-center gap-4">
             <ThemeSwitch />
+            <LoginButton />
           </div>
-        </div>
+        </nav>
       </Container>
     </header>
+  );
+}
+
+function LoginButton() {
+  return (
+    <Button asChild>
+      <Link href={paths.loginPath()}>Login</Link>
+    </Button>
   );
 }
