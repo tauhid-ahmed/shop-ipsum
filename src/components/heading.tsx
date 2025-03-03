@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type TextProps = {
+type HeadingProps = {
   children: React.ReactNode;
   className?: string;
   size?:
@@ -17,17 +17,17 @@ type TextProps = {
     | "default";
   weight?: "light" | "normal" | "medium" | "semibold" | "bold";
   align?: "left" | "center" | "right";
-  as?: React.ElementType;
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 };
 
-export function Text({
+export function Heading({
   children,
   className,
   size = "2xl",
-  as = "p",
+  as = "h2",
   weight = "normal",
   align = "center",
-}: TextProps) {
+}: HeadingProps) {
   const Comp = as;
 
   const fontSizeClasses = {
