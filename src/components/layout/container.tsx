@@ -19,7 +19,7 @@ export function Container({
           "max-w-7xl w-full": size === "default",
           "max-w-5xl w-full": size === "md",
           "max-w-4xl w-full": size === "sm",
-          "max-w-md w-full": size === "xs",
+          "max-w-lg w-full": size === "xs",
           "w-full": size === "fluid",
         },
         className
