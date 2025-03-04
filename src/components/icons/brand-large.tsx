@@ -1,6 +1,6 @@
 export function BrandLogoLarge({
-  width = 130,
-  height = 22,
+  width = 165,
+  height = 28,
   ...props
 }: React.ComponentPropsWithoutRef<"svg">) {
   return (
