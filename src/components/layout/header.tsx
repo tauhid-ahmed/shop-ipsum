@@ -11,8 +11,8 @@ export default function Header() {
   return (
     <header className="relative">
       <Container>
-        <nav className="flex justify-between items-center py-2">
-          <div className="">
+        <nav className="flex justify-between items-center py-4">
+          <div className="flex-1">
             <Link
               href={homePath()}
               className="font-black tracking-wider text-xl underline"
@@ -21,7 +21,7 @@ export default function Header() {
             </Link>
           </div>
           <DesktopNav />
-          <div className="flex items-center gap-4">
+          <div className="flex justify-end flex-1 items-center gap-4">
             <ThemeSwitch />
             <LoginButton />
           </div>
