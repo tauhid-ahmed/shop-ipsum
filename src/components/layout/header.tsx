@@ -5,6 +5,7 @@ import { homePath } from "@/paths";
 import { Button } from "../ui/button";
 import * as paths from "@/paths";
 import DesktopNav from "./desktop-nav";
+import { BrandLogoLarge } from "../icons/brand-large";
 
 export default function Header() {
   return (
@@ -16,7 +17,7 @@ export default function Header() {
               href={homePath()}
               className="font-black tracking-wider text-xl underline"
             >
-              BDSTORE
+              <BrandLogoLarge />
             </Link>
           </div>
           <DesktopNav />
