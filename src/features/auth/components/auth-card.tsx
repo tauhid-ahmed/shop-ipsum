@@ -27,11 +27,13 @@ export function AuthCard({
         <div className="flex justify-center">
           <BrandLogoSmall />
         </div>
-        <Heading>{title}</Heading>
+        <Heading weight="bold" size="2xl">
+          {title}
+        </Heading>
       </div>
       <div className="relative before:absolute before:inset-0 before:bg-primary before:-z-10 before:blur-2xl before:opacity-10">
-        <Card className="py-14">
-          <div className="px-6 space-y-8">
+        <Card>
+          <div className="py-8 p-6 space-y-8">
             <CardContent>{children}</CardContent>
             <CardContent>
               <div className="text-center text-sm flex items-center gap-3 before:flex-1 before:h-0.25 before:bg-primary/30 after:flex-1 after:h-0.25 after:bg-primary/30 font-medium">
