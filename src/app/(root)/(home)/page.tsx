@@ -2,6 +2,8 @@ import { Heading } from "@/components/heading";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { countdown } from "@/lib/countdown";
+import Slider from "@/components/carousel/slider";
+import CardSlider from "@/components/carousel/card-slider";
 
 export default function Home() {
   return (
@@ -11,6 +13,10 @@ export default function Home() {
           Welcome to BDStore {countdown().days} days and {countdown().hours}{" "}
           hours left to launch
         </Heading>
+        <Slider />
+        <div className="my-32 bg-amber-900 h-96 text-red-500">
+          <CardSlider />
+        </div>
       </Container>
     </Section>
   );
