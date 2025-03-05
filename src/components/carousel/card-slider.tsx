@@ -66,7 +66,7 @@ export default function CardSlider({
         autoplay={
           autoplay
             ? {
-                delay: 3000,
+                delay: duration,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }
@@ -74,7 +74,7 @@ export default function CardSlider({
         }
         pagination={{
           clickable: true,
-          type: "bullets", // Explicitly set pagination type to bullets
+          type: "bullets",
         }}
         navigation={{
           prevEl: prevRef.current,
@@ -84,14 +84,14 @@ export default function CardSlider({
         className="mySwiper"
       >
         {Array.from({ length: 9 }).map((_, index) => (
-          <SwiperSlide key={index} className="bg-gray-500 p-8 text-center">
+          <SwiperSlide key={index} className="bg-gray-800 p-8 text-center">
             Slide {index + 1}
           </SwiperSlide>
         ))}
       </Swiper>
 
       {navigation && (
-        <div className="absolute z-40 top-1/2 -translate-y-1/2 inset-x-0 flex items-center justify-between bg-green-500/10">
+        <div className="absolute z-40 top-1/2 -translate-y-1/2 inset-x-0 flex items-center justify-between bg-green-500/">
           <Button variant="ghost" size="icon" ref={prevRef}>
             <LucideChevronLeft />
           </Button>
