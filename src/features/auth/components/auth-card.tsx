@@ -54,6 +54,7 @@ export function AuthCard({
         </Card>
       </div>
       <div className="flex gap-2 justify-center text-center text-sm">
+        
         {message && <span className="text-muted-foreground">{message}</span>}
         <Link
           className="text-blue-600 dark:text-blue-400 font-semibold hover:underline underline-offset-2 focus:underline active:underline"

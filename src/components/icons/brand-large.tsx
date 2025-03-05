@@ -1,6 +1,9 @@
+import { cn } from "@/lib/utils";
+
 export function BrandLogoLarge({
   width = 165,
   height = 28,
+  className,
   ...props
 }: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -10,7 +13,7 @@ export function BrandLogoLarge({
       viewBox="0 0 237 40"
       width={width}
       height={height}
-      className="text-primary"
+      className={cn("text-primary", className)}
       {...props}
     >
       <path

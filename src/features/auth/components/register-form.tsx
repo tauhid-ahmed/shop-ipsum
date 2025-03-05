@@ -4,8 +4,14 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
-import { signInAction } from "../actions/auth-action";
-import * as paths from "@/paths";
+import { signInAction } from "../auth-action";
+import * as paths from "@/constants/paths";
+
+export type RegisterFormType = {
+  email: string;
+  password: string;
+  confirm_password: string;
+};
 
 export default function RegisterForm() {
   return (

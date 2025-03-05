@@ -17,7 +17,7 @@ export function Section({
         "relative overflow-x-hidden",
         {
           "py-10": padding === "default",
-          "py-12 md:py-16 lg:py-24": padding === "lg",
+          "py-12 md:py-16 lg:py-20": padding === "lg",
           "py-14": className === "md",
           "py-8": className === "sm",
         },

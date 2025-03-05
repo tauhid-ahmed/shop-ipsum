@@ -35,13 +35,13 @@ export function Heading({
     xs: "text-xs",
     sm: "text-sm",
     md: "text-sm",
-    lg: "text-lg",
-    xl: "text-xl",
-    "2xl": "text-2xl",
-    "3xl": "text-3xl",
-    "4xl": "text-4xl",
-    "5xl": "text-5xl",
-    "6xl": "text-6xl",
+    lg: "text-base lg:text-lg",
+    xl: "text-lg lg:text-xl",
+    "2xl": "text-xl lg:text-2xl",
+    "3xl": "text-2xl lg:text-3xl",
+    "4xl": "text-3xl lg:text-4xl",
+    "5xl": "text-3xl md:text-4xl lg:text-5xl",
+    "6xl": "text-4xl md:text-5xl lg:text-6xl",
   } as const;
 
   const fontWeightClasses = {
