@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "BD Store",
+  title: "Shop Ipsum",
   description: "Your one stop shop",
 };
 
