@@ -9,7 +9,7 @@ import { BrandLogoLarge } from "../icons/brand-large";
 
 export default function Header() {
   return (
-    <header className="relative">
+    <header className="border-b border-border">
       <Container>
         <nav className="flex justify-between items-center py-4">
           <div className="flex-1">
@@ -20,7 +20,9 @@ export default function Header() {
               <BrandLogoLarge />
             </Link>
           </div>
-          <DesktopNav />
+          <div className="hidden md:block">
+            <DesktopNav />
+          </div>
           <div className="flex justify-end flex-1 items-center gap-4">
             <ThemeSwitch />
             <LoginButton />
@@ -34,7 +36,7 @@ export default function Header() {
 function LoginButton() {
   return (
     <Button asChild>
-      <Link href={paths.loginPath()}>Login</Link>
+      <Link href={paths.loginPath()}>Sign in</Link>
     </Button>
   );
 }
