@@ -32,10 +32,7 @@ export default function Header() {
           <div className="flex justify-end flex-1 items-center gap-1">
             <SearchOverview />
             <CartView />
-            <ThemeSwitch />
-            <div className="h-6 mx-3">
-              <Separator orientation="vertical" />
-            </div>
+            <Separator className="!h-6 mx-4" orientation="vertical" />
             {/* <LoginButton /> */}
             <ProfileDialog />
           </div>

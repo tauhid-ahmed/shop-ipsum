@@ -14,6 +14,40 @@ import {
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { LucideMonitor } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+export function ThemeToggle() {
+  const { setTheme, resolvedTheme } = useTheme();
+  const [isDark, setIsDark] = React.useState(resolvedTheme === "dark");
+
+  // Sync state when system/theme changes
+  React.useEffect(() => {
+    setIsDark(resolvedTheme === "dark");
+  }, [resolvedTheme]);
+
+  const toggleTheme = () => {
+    setTheme(isDark ? "light" : "dark");
+  };
+
+  return (
+    <div className="flex items-center space-x-1">
+      <Switch checked={isDark} onCheckedChange={toggleTheme} />
+      <button
+        className={cn(
+          "cursor-pointer text-sm text-muted-foreground hover:text-foreground",
+          isDark && "text-primary"
+        )}
+        onClick={() => setTheme("system")}
+      >
+        <LucideMonitor />
+      </button>
+    </div>
+  );
+}
+
 export function ThemeProvider({
   children,
   ...props

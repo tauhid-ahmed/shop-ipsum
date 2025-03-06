@@ -8,6 +8,7 @@ import {
   LucideGift,
   LucideListOrdered,
   LucideLogOut,
+  LucideLogIn,
 } from "lucide-react";
 import {
   Popover,
@@ -17,6 +18,8 @@ import {
 import { Heading } from "@/components/heading";
 import Link from "next/link";
 import { registerPath } from "@/constants/paths";
+import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme";
 
 const menuItems = [
   {
@@ -38,7 +41,7 @@ const menuItems = [
 ];
 
 export default function ProfilePopover() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -46,7 +49,7 @@ export default function ProfilePopover() {
         <Button
           variant="outline"
           onMouseEnter={() => setOpen(true)}
-          onMouseLeave={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
         >
           <LucideCircleUser />
         </Button>
@@ -54,11 +57,11 @@ export default function ProfilePopover() {
       <PopoverContent
         className="relative mx-6 p-0 rounded text-muted-foreground"
         onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
       >
         <span className="absolute inset-x-0 h-4 top-0 -translate-y-2" />
         <div className="divide-y divide-border [&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium">
-          <ProfileHeading />
+          <SignedOutHeading />
           {menuItems.map((item) => (
             <Link
               key={item.name}
@@ -75,41 +78,71 @@ export default function ProfilePopover() {
   );
 }
 
-function ProfileHeading({ isLoggedIn = false }: { isLoggedIn?: boolean }) {
-  const loggedIn = (
-    <div className="flex items-center justify-between gap-2">
-      <Heading as="h3" size="md" weight="bold">
-        New customer?
-      </Heading>
-      <Button asChild variant="link">
-        <Link href={registerPath()}>Register</Link>
-      </Button>
-    </div>
-  );
+type ProfileHeadingProps = {
+  title: string;
+  subtitle: string;
+  className?: string;
+  redirectLink?: string;
+  redirectName?: string;
+  redirectClassName: string;
+};
 
-  const notLoggedIn = (
-    <div className="flex justify-between items-start">
-      <div className="flex flex-col items-start justify-between max-w-40">
+function ProfileHeading({
+  title,
+  subtitle,
+  redirectName,
+  redirectClassName,
+}: ProfileHeadingProps) {
+  return (
+    <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-col items-start justify-between max-w-44 break-words">
         <Heading
           as="h3"
           size="lg"
           weight="bold"
           align="left"
-          className="text-accent-foreground break-words"
+          className="text-accent-foreground"
         >
-          John Doe
+          {title}
         </Heading>
-        <p className="text-xs break-all">johndoe@gmail.com</p>
+        <p className="text-sm">{subtitle}</p>
       </div>
-      <Link
-        className="text-sm text-destructive flex items-center gap-0.5 whitespace-nowrap shrink-0 hover:underline underline-offset-2"
-        href={registerPath()}
-      >
-        <LucideLogOut className="!size-4" />
-        Sign out
-      </Link>
+      <div className="flex flex-col gap-1">
+        <ThemeToggle />
+        <Link
+          className={cn(
+            "flex items-center font-medium gap-1 [&_svg]:!size-4 hover:underline underline-offset-2",
+            redirectClassName
+          )}
+          href={""}
+        >
+          {redirectName}
+        </Link>
+      </div>
     </div>
   );
+}
 
-  return isLoggedIn ? loggedIn : notLoggedIn;
+function SignedInHeading() {
+  return (
+    <ProfileHeading
+      title="John Doe"
+      subtitle="johndoe@gmail.com"
+      redirectName="Sign out"
+      // redirectIcon={<LucideLogOut />}
+      redirectClassName="text-destructive"
+    />
+  );
+}
+
+function SignedOutHeading() {
+  return (
+    <ProfileHeading
+      title="New customer?"
+      subtitle="Please create an account"
+      redirectName="Register"
+      // redirectIcon={<LucideLogIn />}
+      redirectClassName="text-primary"
+    />
+  );
 }
