@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export function SearchOverview() {
   return (
     <div>
-      <Button variant="outline">
+      <Button size="icon" variant="ghost">
         <LucideSearch />
       </Button>
     </div>

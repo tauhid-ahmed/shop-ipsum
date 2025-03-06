@@ -9,10 +9,12 @@ import { BrandLogoLarge } from "../icons/brand-large";
 import CartView from "@/features/cart/cart-view";
 import { BrandLogoSmall } from "../icons/brand-sm";
 import { SearchOverview } from "@/features/products/search-overview";
+import { Separator } from "../ui/separator";
+import ProfileDialog from "@/features/users/profile-popover";
 
 export default function Header() {
   return (
-    <header className="border-b border-border">
+    <header className="border-b border-border bg-background/90 relative backdrop-blur">
       <Container size="fluid">
         <nav className="flex justify-between items-center py-4">
           <div className="flex-1">
@@ -27,11 +29,15 @@ export default function Header() {
           <div className="hidden md:block">
             <DesktopNav />
           </div>
-          <div className="flex justify-end flex-1 items-center gap-2">
+          <div className="flex justify-end flex-1 items-center gap-1">
             <SearchOverview />
             <CartView />
             <ThemeSwitch />
-            <LoginButton />
+            <div className="h-6 mx-3">
+              <Separator orientation="vertical" />
+            </div>
+            {/* <LoginButton /> */}
+            <ProfileDialog />
           </div>
         </nav>
       </Container>

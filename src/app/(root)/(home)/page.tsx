@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/container";
 import { countdown } from "@/lib/countdown";
 import Slider from "@/components/carousel/slider";
 import CardSlider from "@/components/carousel/card-slider";
+import StarRatings from "@/components/star-ratings";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <div className="my-32 bg-amber-900 h-96 text-red-500">
           <CardSlider />
         </div>
+        <StarRatings />
       </Container>
     </Section>
   );

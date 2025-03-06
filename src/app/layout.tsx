@@ -26,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${inter.className} antialiased`}>
+      <body
+        className={`${inter.variable} ${inter.className} antialiased bg-background`}
+      >
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

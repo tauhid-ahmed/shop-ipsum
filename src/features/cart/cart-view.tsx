@@ -17,10 +17,10 @@ export default function CartView() {
     <div>
       <Sheet>
         <SheetTrigger asChild>
-          <Button className="!siz relative" variant="outline">
+          <Button size="icon" className="relative" variant="ghost">
             <LucideShoppingCart />
-            <span className="absolute right-0 top-0 -translate-y-2 translate-x-2">
-              <Badge className="size-5 rounded-full inline-flex items-center justify-center shadow">
+            <span className="absolute right-0 top-0 -translate-y-1 translate-x-1">
+              <Badge className="size-4 rounded-full flex items-center justify-center shadow">
                 9+
               </Badge>
             </span>
