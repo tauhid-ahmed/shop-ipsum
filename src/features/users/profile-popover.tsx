@@ -89,19 +89,20 @@ function ProfileHeading({ isLoggedIn = false }: { isLoggedIn?: boolean }) {
 
   const notLoggedIn = (
     <div className="flex justify-between items-start">
-      <div className="flex flex-col items-start justify-between">
+      <div className="flex flex-col items-start justify-between max-w-40">
         <Heading
           as="h3"
-          size="md"
+          size="lg"
           weight="bold"
-          className="text-accent-foreground"
+          align="left"
+          className="text-accent-foreground break-words"
         >
           John Doe
         </Heading>
-        <p className="text-xs max-w-40 break-all">johndoe@gmail.com</p>
+        <p className="text-xs break-all">johndoe@gmail.com</p>
       </div>
       <Link
-        className="text-sm text-destructive flex items-center gap-0.5 whitespace-nowrap shrink-0"
+        className="text-sm text-destructive flex items-center gap-0.5 whitespace-nowrap shrink-0 hover:underline underline-offset-2"
         href={registerPath()}
       >
         <LucideLogOut className="!size-4" />
