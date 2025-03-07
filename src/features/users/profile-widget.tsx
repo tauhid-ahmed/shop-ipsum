@@ -1,7 +1,4 @@
 "use client";
-
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import {
   LucideCircleUser,
   LucideHeart,
@@ -9,6 +6,7 @@ import {
   LucideListOrdered,
   LucideLogOut,
   LucideLogIn,
+  LucideEllipsisVertical,
 } from "lucide-react";
 import {
   Popover,
@@ -19,7 +17,7 @@ import { Heading } from "@/components/heading";
 import Link from "next/link";
 import { registerPath } from "@/constants/paths";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/theme";
+import { ThemeSwitch } from "@/components/theme-switch";
 
 const menuItems = [
   {
@@ -41,24 +39,13 @@ const menuItems = [
 ];
 
 export default function ProfilePopover() {
-  const [open, setOpen] = useState(false);
-
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          onMouseEnter={() => setOpen(true)}
-          onMouseLeave={() => setOpen(false)}
-        >
-          <LucideCircleUser />
-        </Button>
+    <Popover>
+      <PopoverTrigger className="flex py-1.5 cursor-pointer">
+        <LucideCircleUser />
+        <LucideEllipsisVertical />
       </PopoverTrigger>
-      <PopoverContent
-        className="relative mx-6 p-0 rounded text-muted-foreground"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-      >
+      <PopoverContent className="relative mx-6 p-0 rounded text-muted-foreground">
         <span className="absolute inset-x-0 h-4 top-0 -translate-y-2" />
         <div className="divide-y divide-border [&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium">
           <SignedOutHeading />
@@ -72,6 +59,10 @@ export default function ProfilePopover() {
               {item.name}
             </Link>
           ))}
+          <div className="flex justify-between">
+            <span>Appearance</span>
+            <ThemeSwitch />
+          </div>
         </div>
       </PopoverContent>
     </Popover>
@@ -107,8 +98,7 @@ function ProfileHeading({
         </Heading>
         <p className="text-sm">{subtitle}</p>
       </div>
-      <div className="flex flex-col gap-1">
-        <ThemeToggle />
+      <div className="flex flex-col gap-1.5">
         <Link
           className={cn(
             "flex items-center font-medium gap-1 [&_svg]:!size-4 hover:underline underline-offset-2",
