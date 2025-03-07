@@ -1,4 +1,3 @@
-import { ThemeSwitch } from "../theme";
 import { Container } from "./container";
 import Link from "next/link";
 import { homePath } from "@/constants/paths";
@@ -6,17 +5,17 @@ import { Button } from "../ui/button";
 import * as paths from "@/constants/paths";
 import DesktopNav from "./desktop-nav";
 import { BrandLogoLarge } from "../icons/brand-large";
-import CartView from "@/features/cart/cart-view";
+import CartView from "@/features/cart/cart-widget";
 import { BrandLogoSmall } from "../icons/brand-sm";
 import { SearchOverview } from "@/features/products/search-overview";
 import { Separator } from "../ui/separator";
-import ProfileDialog from "@/features/users/profile-popover";
+import ProfileDialog from "@/features/users/profile-widget";
 
 export default function Header() {
   return (
     <header className="border-b border-border bg-background/90 relative backdrop-blur">
       <Container size="fluid">
-        <nav className="flex justify-between items-center py-4">
+        <nav className="flex gap-4 justify-between items-center py-4">
           <div className="flex-1">
             <Link
               href={homePath()}
@@ -29,11 +28,11 @@ export default function Header() {
           <div className="hidden md:block">
             <DesktopNav />
           </div>
-          <div className="flex justify-end flex-1 items-center gap-1">
+          <div className="flex justify-end flex-1 items-center gap-4">
             <SearchOverview />
             <CartView />
-            <Separator className="!h-6 mx-4" orientation="vertical" />
-            {/* <LoginButton /> */}
+            <LoginButton />
+            <VerticalDivider />
             <ProfileDialog />
           </div>
         </nav>
@@ -44,8 +43,19 @@ export default function Header() {
 
 function LoginButton() {
   return (
-    <Button asChild>
-      <Link href={paths.loginPath()}>Sign in</Link>
-    </Button>
+    <>
+      <VerticalDivider />
+      <Button asChild>
+        <Link href={paths.loginPath()}>Sign in</Link>
+      </Button>
+    </>
+  );
+}
+
+function VerticalDivider() {
+  return (
+    <span className="inline-block align-middle h-5">
+      <Separator orientation="vertical" />
+    </span>
   );
 }
