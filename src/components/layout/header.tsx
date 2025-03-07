@@ -28,7 +28,7 @@ export default function Header() {
           <div className="hidden md:block">
             <DesktopNav />
           </div>
-          <div className="flex justify-end flex-1 items-center gap-4">
+          <div className="flex justify-end flex-1 items-center gap-3">
             <SearchOverview />
             <CartView />
             <LoginButton />
@@ -45,7 +45,7 @@ function LoginButton() {
   return (
     <>
       <VerticalDivider />
-      <Button asChild>
+      <Button variant="outline" shape="pill" asChild>
         <Link href={paths.loginPath()}>Sign in</Link>
       </Button>
     </>

@@ -18,6 +18,7 @@ import Link from "next/link";
 import { registerPath } from "@/constants/paths";
 import { cn } from "@/lib/utils";
 import { ThemeSwitch } from "@/components/theme-switch";
+import { Button } from "@/components/ui/button";
 
 const menuItems = [
   {
@@ -41,9 +42,11 @@ const menuItems = [
 export default function ProfilePopover() {
   return (
     <Popover>
-      <PopoverTrigger className="flex py-1.5 cursor-pointer">
-        <LucideCircleUser />
-        <LucideEllipsisVertical />
+      <PopoverTrigger asChild>
+        <Button variant="transparent" shape="pill">
+          <LucideCircleUser />
+          <LucideEllipsisVertical />
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="relative mx-6 p-0 rounded text-muted-foreground">
         <span className="absolute inset-x-0 h-4 top-0 -translate-y-2" />
