@@ -34,7 +34,7 @@ export default function Navigation() {
           <div
             ref={ref}
             className={cn(
-              "fixed left-0 top-16 w-72 h-[calc(100vh-4rem)] [&>*]:p-8",
+              "fixed left-0 top-16 w-72 h-[calc(100vh-4rem)] [&>*]:p-6",
               open && "pointer-events-auto",
               !open && "pointer-events-none"
             )}
@@ -60,14 +60,13 @@ export default function Navigation() {
                 className="absolute inset-0 bg-popover text-popover-foreground  border border-border shadow-lg"
               >
                 <div className="-mt-4 -ml-2 pb-1 flex justify-between items-center">
-                  {/* <strong>Women</strong> */}
                   <Button
                     variant="ghost"
                     shape="pill"
-                    size="icon"
                     onClick={() => setSubMenuOpen(false)}
                   >
                     <LucidePanelLeftClose />
+                    <strong>Main Menu</strong>
                   </Button>
                 </div>
                 <div className="mt-4">

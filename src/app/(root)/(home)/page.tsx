@@ -14,11 +14,11 @@ export default function Home() {
           Welcome to BDStore {countdown().days} days and {countdown().hours}{" "}
           hours left to launch
         </Heading>
-        <Slider />
+        {/* <Slider />
         <div className="my-32 bg-amber-900 h-96 text-red-500">
           <CardSlider />
         </div>
-        <StarRatings />
+        <StarRatings /> */}
       </Container>
     </Section>
   );

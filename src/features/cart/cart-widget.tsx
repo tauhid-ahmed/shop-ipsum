@@ -53,7 +53,7 @@ function CartHeader() {
     <div className="border-b border-double border-border bg-accent/40 flex gap-1 items-center">
       <Button shape="pill" size="icon" variant="ghost">
         <LucideChevronLeft />
-      </Button>{" "}
+      </Button>
       <strong>Continue Shopping</strong>
     </div>
   );
@@ -72,7 +72,7 @@ function CartBody() {
                   className="text-ellipsis"
                   align="left"
                   as="h3"
-                  size="lg"
+                  size="md"
                   weight="bold"
                 >
                   Product Namesdsdsdsdsdsds
@@ -88,7 +88,9 @@ function CartBody() {
                     >
                       <LucideMinus />
                     </Button>
-                    <div className="h-6 w-8 text-center">13</div>
+                    <div className="h-6 w-8 text-center text-sm flex items-center justify-center font-bold">
+                      13
+                    </div>
                     <Button
                       className="size-6 !p-0 [&_svg]:!size-4"
                       variant="outline"
