@@ -11,12 +11,18 @@ import {
 import { LucideShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+import { Heading } from "@/components/heading";
 
 export default function CartView() {
   return (
     <div>
-      <Sheet>
-        <SheetTrigger asChild>
+      <Popover>
+        <PopoverTrigger asChild>
           <Button size="icon" shape="pill" className="relative" variant="ghost">
             <LucideShoppingCart />
             <span className="absolute right-0 top-0 -translate-y-0.5 translate-x-0">
@@ -25,17 +31,17 @@ export default function CartView() {
               </Badge>
             </span>
           </Button>
-        </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle>Are you absolutely sure?</SheetTitle>
-            <SheetDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </SheetDescription>
-          </SheetHeader>
-        </SheetContent>
-      </Sheet>
+        </PopoverTrigger>
+        <PopoverContent sideOffset={16} className="h-[calc(100vh-4rem)]">
+          <div className="flex flex-col h-full">
+            <div className="border-b border-border py-6">
+              <Heading>Your Cart</Heading>
+            </div>
+            <div className="flex-1"></div>
+            <div className="border-t border-border">Subtotal</div>
+          </div>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }

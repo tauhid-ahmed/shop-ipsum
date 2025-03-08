@@ -56,7 +56,10 @@ export default function ProfilePopover() {
           <LucideEllipsisVertical />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="relative mx-6 p-0 rounded text-muted-foreground">
+      <PopoverContent
+        sideOffset={16}
+        className="relative p-0 rounded text-muted-foreground"
+      >
         <SignedInHeading />
         <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
           {menuItems.map((item) => (
