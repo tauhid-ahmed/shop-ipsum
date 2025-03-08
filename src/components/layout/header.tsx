@@ -1,8 +1,6 @@
 import { Container } from "./container";
 import Link from "next/link";
 import { homePath } from "@/constants/paths";
-import { Button } from "../ui/button";
-import * as paths from "@/constants/paths";
 import DesktopNav from "./desktop-nav";
 import { BrandLogoLarge } from "../icons/brand-large";
 import CartView from "@/features/cart/cart-widget";
@@ -31,24 +29,13 @@ export default function Header() {
           <div className="flex justify-end flex-1 items-center gap-3">
             <SearchOverview />
             <CartView />
-            <LoginButton />
+
             <VerticalDivider />
             <ProfileDialog />
           </div>
         </nav>
       </Container>
     </header>
-  );
-}
-
-function LoginButton() {
-  return (
-    <>
-      <VerticalDivider />
-      <Button variant="outline" shape="pill" asChild>
-        <Link href={paths.loginPath()}>Sign in</Link>
-      </Button>
-    </>
   );
 }
 

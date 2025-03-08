@@ -7,6 +7,9 @@ import {
   LucideLogOut,
   LucideLogIn,
   LucideEllipsisVertical,
+  LucideShoppingCart,
+  LucideShoppingBasket,
+  LucideShoppingBag,
 } from "lucide-react";
 import {
   Popover,
@@ -32,6 +35,11 @@ const menuItems = [
     href: "#",
   },
   {
+    name: "Cart",
+    icon: <LucideShoppingBag />,
+    href: "#",
+  },
+  {
     name: "Wishlist",
     icon: <LucideHeart />,
     href: "#",
@@ -49,9 +57,8 @@ export default function ProfilePopover() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="relative mx-6 p-0 rounded text-muted-foreground">
-        <span className="absolute inset-x-0 h-4 top-0 -translate-y-2" />
-        <div className="divide-y divide-border [&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium">
-          <SignedOutHeading />
+        <SignedInHeading />
+        <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
           {menuItems.map((item) => (
             <Link
               key={item.name}
@@ -62,7 +69,7 @@ export default function ProfilePopover() {
               {item.name}
             </Link>
           ))}
-          <div className="flex justify-between">
+          <div className="flex justify-between bg-accent/40">
             <span>Appearance</span>
             <ThemeSwitch />
           </div>
@@ -88,29 +95,24 @@ function ProfileHeading({
   redirectClassName,
 }: ProfileHeadingProps) {
   return (
-    <div className="flex items-start justify-between gap-2">
-      <div className="flex flex-col items-start justify-between max-w-44 break-words">
-        <Heading
-          as="h3"
-          size="lg"
-          weight="bold"
-          align="left"
-          className="text-accent-foreground"
-        >
-          {title}
-        </Heading>
-        <p className="text-sm">{subtitle}</p>
-      </div>
-      <div className="flex flex-col gap-1.5">
-        <Link
-          className={cn(
-            "flex items-center font-medium gap-1 [&_svg]:!size-4 hover:underline underline-offset-2",
-            redirectClassName
-          )}
-          href={""}
-        >
-          {redirectName}
-        </Link>
+    <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/40">
+      <div className="flex flex-col items-center gap-1">
+        <LucideCircleUser className="size-10" />
+        <div className="">
+          <Heading
+            as="h3"
+            size="lg"
+            weight="bold"
+            className="text-secondary-foreground"
+          >
+            {title}
+          </Heading>
+          <p className="text-sm">{subtitle}</p>
+        </div>
+        <Button variant="link" className="text-destructive" size="sm">
+          <LucideLogOut className="size-4" />
+          Sign Out
+        </Button>
       </div>
     </div>
   );

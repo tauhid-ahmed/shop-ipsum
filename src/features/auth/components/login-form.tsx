@@ -40,8 +40,7 @@ export default function LoginForm() {
             {/* <FormErrors /> */}
           </Label>
           <div className="flex gap-2 items-center text-xs md:text-md">
-            <Checkbox name="remember" className="border-primary/60" /> Remember
-            me
+            <Checkbox name="remember" className="border-primary" /> Remember me
             <Link
               href="#"
               className="ml-auto text-blue-600 dark:text-blue-400 font-semibold hover:underline underline-offset-2 focus:underline active:underline"
