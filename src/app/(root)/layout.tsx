@@ -1,5 +1,6 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import TopHeader from "@/components/layout/top-header";
 
 export default function PublicLayout({
   children,
@@ -8,6 +9,7 @@ export default function PublicLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col">
+      <TopHeader />
       <div className="shrink-0 sticky top-0 z-50">
         <Header />
       </div>
