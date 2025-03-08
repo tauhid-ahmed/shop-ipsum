@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <header className="border-b border-border bg-background/90 relative backdrop-blur">
       <Container size="fluid">
-        <nav className="flex gap-6 justify-between items-center py-4">
+        <nav className="flex gap-6 justify-between items-center py-3.5">
           <div className="flex gap-1 items-center">
             <Navigation />
             <Link
