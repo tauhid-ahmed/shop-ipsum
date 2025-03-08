@@ -1,14 +1,13 @@
 import { Container } from "./container";
 import Link from "next/link";
 import { homePath } from "@/constants/paths";
-import DesktopNav from "./desktop-nav";
 import { BrandLogoLarge } from "../icons/brand-large";
 import CartView from "@/features/cart/cart-widget";
 import { BrandLogoSmall } from "../icons/brand-sm";
 import { SearchOverview } from "@/features/products/search-overview";
 import { Separator } from "../ui/separator";
 import ProfileDialog from "@/features/users/profile-widget";
-import { LucideMenu } from "lucide-react";
+import Navigation from "./navigation";
 
 export default function Header() {
   return (
@@ -16,7 +15,7 @@ export default function Header() {
       <Container size="fluid">
         <nav className="flex gap-6 justify-between items-center py-4">
           <div className="flex gap-1 items-center">
-            <LucideMenu />
+            <Navigation />
             <Link
               href={homePath()}
               className="font-black tracking-wider text-xl underline"
