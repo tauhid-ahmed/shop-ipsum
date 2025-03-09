@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+const config = {
   providers: [
     Credentials({
       name: "credentials",
@@ -11,4 +11,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-});
+
+  session: {
+    strategy: "jwt",
+  },
+
+  pages: {
+    signIn: "/sign-in",
+    signOut: "/signout",
+    error: "/error",
+  },
+};
+
+export const { handlers, signIn, signOut, auth } = NextAuth(config);
