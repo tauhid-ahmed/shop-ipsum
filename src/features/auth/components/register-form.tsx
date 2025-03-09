@@ -19,7 +19,7 @@ export default function RegisterForm() {
       title="Create an account"
       message="Already have an account?"
       redirectName="Sign in"
-      redirectHref={paths.loginPath()}
+      redirectHref={paths.signInPath()}
     >
       <form action={signInAction}>
         <fieldset className="space-y-6">
