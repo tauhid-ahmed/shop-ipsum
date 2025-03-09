@@ -5,11 +5,11 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
-import { signInAction } from "../auth-action";
+import { signInAction } from "../actions";
 import * as paths from "@/constants/paths";
 import React from "react";
 import { FormErrors } from "./form-errors";
-import { FormState } from "../auth-types";
+import { SignInFormState } from "../types";
 
 export type LoginFormType = {
   email: string;
@@ -18,10 +18,12 @@ export type LoginFormType = {
 };
 
 export default function LoginForm() {
-  const [formState, formAction, pending] = React.useActionState(
-    signInAction,
-    {} as FormState
-  );
+  const [formState, formAction, pending] = React.useActionState(signInAction, {
+    email: [],
+    password: [],
+    remember: false,
+    success: false,
+  } satisfies SignInFormState);
   console.log(formState);
   return (
     <AuthCard
@@ -39,8 +41,11 @@ export default function LoginForm() {
             Password: <Input name="password" />
             {/* <FormErrors /> */}
           </Label>
-          <div className="flex gap-2 items-center text-xs md:text-md">
-            <Checkbox name="remember" className="border-primary" /> Remember me
+          <div className="flex items-center text-xs md:text-md">
+            <Label className="flex flex-row items-center">
+              <Checkbox name="remember" className="border-primary" /> Remember
+              me
+            </Label>
             <Link
               href="#"
               className="ml-auto text-blue-600 dark:text-blue-400 font-semibold hover:underline underline-offset-2 focus:underline active:underline"
