@@ -7,8 +7,6 @@ import {
   LucideLogOut,
   LucideLogIn,
   LucideEllipsisVertical,
-  LucideShoppingCart,
-  LucideShoppingBasket,
   LucideShoppingBag,
 } from "lucide-react";
 import {
@@ -18,10 +16,10 @@ import {
 } from "@/components/ui/popover";
 import { Heading } from "@/components/heading";
 import Link from "next/link";
-import { registerPath } from "@/constants/paths";
-import { cn } from "@/lib/utils";
+import { registerPath, signInPath } from "@/constants/paths";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
+import React from "react";
 
 const menuItems = [
   {
@@ -60,7 +58,7 @@ export default function ProfilePopover() {
         sideOffset={16}
         className="relative p-0 rounded text-muted-foreground"
       >
-        <SignedInHeading />
+        <SignedInHeading title="John Doe" subtitle="Member since 2023" />
         <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
           {menuItems.map((item) => (
             <Link
@@ -85,21 +83,13 @@ export default function ProfilePopover() {
 type ProfileHeadingProps = {
   title: string;
   subtitle: string;
-  className?: string;
-  redirectLink?: string;
-  redirectName?: string;
-  redirectClassName: string;
+  footer?: React.ReactNode;
 };
 
-function ProfileHeading({
-  title,
-  subtitle,
-  redirectName,
-  redirectClassName,
-}: ProfileHeadingProps) {
+function ProfileHeading({ title, subtitle, footer }: ProfileHeadingProps) {
   return (
     <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/40">
-      <div className="flex flex-col items-center gap-1">
+      <div className="flex flex-col items-center gap-1 text-center">
         <LucideCircleUser className="size-10" />
         <div className="">
           <Heading
@@ -111,36 +101,49 @@ function ProfileHeading({
             {title}
           </Heading>
           <p className="text-sm">{subtitle}</p>
+          <div className="mt-2">{footer}</div>
         </div>
-        <Button variant="link" className="text-destructive" size="sm">
-          <LucideLogOut className="size-4" />
-          Sign Out
-        </Button>
       </div>
     </div>
   );
 }
 
-function SignedInHeading() {
+function SignedInHeading({
+  title,
+  subtitle,
+}: Exclude<ProfileHeadingProps, "footer">) {
   return (
     <ProfileHeading
-      title="John Doe"
-      subtitle="johndoe@gmail.com"
-      redirectName="Sign out"
-      // redirectIcon={<LucideLogOut />}
-      redirectClassName="text-destructive"
+      title={title}
+      subtitle={subtitle}
+      footer={
+        <Button variant="destructive" size="sm">
+          <LucideLogOut className="size-4" />
+          Sign Out
+        </Button>
+      }
     />
   );
 }
 
-function SignedOutHeading() {
+function SignedOutHeading({
+  title,
+  subtitle,
+}: Exclude<ProfileHeadingProps, "footer">) {
   return (
     <ProfileHeading
-      title="New customer?"
-      subtitle="Please create an account"
-      redirectName="Register"
-      // redirectIcon={<LucideLogIn />}
-      redirectClassName="text-primary"
+      title="New Member?"
+      subtitle="Create an account"
+      footer={
+        <div className="flex justify-center gap-2">
+          <Button variant="secondary" size="sm" asChild>
+            <Link href={signInPath()}> Sign In</Link>
+          </Button>
+          <Button size="sm" asChild>
+            <Link href={registerPath()}>Register</Link>
+          </Button>
+        </div>
+      }
     />
   );
 }
