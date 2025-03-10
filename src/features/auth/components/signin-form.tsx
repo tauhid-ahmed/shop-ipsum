@@ -17,7 +17,7 @@ export type LoginFormType = {
   remember?: boolean;
 };
 
-export default function LoginForm() {
+export default function SignInForm() {
   const [formState, formAction, isPending] = React.useActionState(
     signInAction,
     {
@@ -29,7 +29,7 @@ export default function LoginForm() {
   );
 
   const [checkedChange, setCheckedChange] = React.useState(false);
-  console.log(formState);
+
   return (
     <AuthCard
       title="Sign in to your account"
