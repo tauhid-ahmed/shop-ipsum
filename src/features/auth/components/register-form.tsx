@@ -8,27 +8,21 @@ import * as paths from "@/constants/paths";
 import { type RegisterFormState } from "../types";
 import React from "react";
 import { FormErrors } from "./form-errors";
+import { Checkbox } from "@/components/ui/checkbox";
+import Link from "next/link";
 
 export default function RegisterForm() {
-  const [formState, formAction] = React.useActionState(registerAction, {
-    email: [],
-    password: [],
-    confirm_password: [],
-    success: false,
-  } satisfies RegisterFormState);
+  const [formState, formAction, isPending] = React.useActionState(
+    registerAction,
+    {
+      email: [],
+      password: [],
+      confirm_password: [],
+      success: false,
+    } satisfies RegisterFormState
+  );
 
-  const [formData, setFormData] = React.useState({
-    email: "",
-    password: "",
-    confirm_password: "",
-  });
-
-  const [, startTransition] = React.useTransition();
-  const formDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    startTransition(() => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    });
-  };
+  const [checkedChange, setCheckedChange] = React.useState(false);
 
   return (
     <AuthCard
@@ -38,21 +32,17 @@ export default function RegisterForm() {
       redirectHref={paths.signInPath()}
     >
       <form action={formAction}>
-        <fieldset className="space-y-6">
+        <fieldset className="space-y-4">
           <Label items="stack">
-            Email Address: <Input defaultValue="a@b.com" name="email" />
+            Email Address: <Input name="email" />
+            {!formState.success && <FormErrors errors={formState.email} />}
           </Label>
           <Label>
-            Password:{" "}
-            <Input
-              onChange={formDataChange}
-              defaultValue="12As#aaaa"
-              name="password"
-            />
-            {!formState.success && (
-              <FormErrors errors={formState.password as string[]} />
-            )}
-            {!formData.password && (
+            Password:
+            <Input name="password" />
+            {!formState.success && formState.password.length > 0 ? (
+              <FormErrors errors={formState.password} />
+            ) : (
               <span className="text-xs text-amber-600">
                 At least 8 characters with uppercase, lowercase, numbers, and
                 symbols.
@@ -61,15 +51,36 @@ export default function RegisterForm() {
           </Label>
           <Label>
             Confirm Password:
-            <Input defaultValue="12As#aaaa" name="confirm_password" />
+            <Input name="confirm_password" />
             {!formState.success && (
-              <FormErrors errors={formState.confirm_password as string[]} />
+              <FormErrors errors={formState.confirm_password} />
             )}
           </Label>
-
-          <Button className="w-full">Create an account</Button>
+          <AcceptTerms onChange={setCheckedChange} />
+          <Button disabled={isPending || !checkedChange} className="w-full">
+            Create an account
+          </Button>
         </fieldset>
       </form>
     </AuthCard>
+  );
+}
+
+function AcceptTerms({ onChange }: { onChange: (checked: boolean) => void }) {
+  return (
+    <Label className="group flex gap-2 flex-row items-center">
+      <Checkbox
+        onCheckedChange={onChange}
+        name="remember"
+        className="border-primary"
+      />
+
+      <Link
+        className="group-hover:underline group-hover:text-primary underline-offset-2"
+        href="."
+      >
+        I accept the terms and conditions
+      </Link>
+    </Label>
   );
 }

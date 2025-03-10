@@ -18,13 +18,18 @@ export type LoginFormType = {
 };
 
 export default function LoginForm() {
-  const [formState, formAction, pending] = React.useActionState(signInAction, {
-    email: [],
-    password: [],
-    remember: false,
-    success: false,
-  } satisfies SignInFormState);
-  console.log(formState);
+  const [formState, formAction, isPending] = React.useActionState(
+    signInAction,
+    {
+      email: [],
+      password: [],
+      remember: false,
+      success: false,
+    } satisfies SignInFormState
+  );
+
+  const [checkedChange, setCheckedChange] = React.useState(false);
+  console.log(checkedChange, formState.success);
   return (
     <AuthCard
       title="Sign in to your account"
@@ -33,31 +38,48 @@ export default function LoginForm() {
       redirectHref={paths.registerPath()}
     >
       <form action={formAction}>
-        <fieldset className="space-y-6">
+        <fieldset className="space-y-4">
           <Label items="stack">
             Email Address: <Input name="email" />
+            {!formState.success && <FormErrors errors={formState.email} />}
           </Label>
           <Label>
             Password: <Input name="password" />
-            {/* <FormErrors /> */}
+            {!formState.success && <FormErrors errors={formState.password} />}
           </Label>
           <div className="flex items-center text-xs md:text-md">
-            <Label className="flex flex-row items-center">
-              <Checkbox name="remember" className="border-primary" /> Remember
-              me
-            </Label>
-            <Link
-              href="#"
-              className="ml-auto text-blue-600 dark:text-blue-400 font-semibold hover:underline underline-offset-2 focus:underline active:underline"
-            >
-              Forgot Password?
-            </Link>
+            <RememberMe onChange={setCheckedChange} />
+            <ForgotPasswordRedirect />
           </div>
-          <Button disabled={pending} className="w-full">
-            {pending ? "Signing in..." : "Sign in"}
+          <Button disabled={isPending || !checkedChange} className="w-full">
+            {isPending ? "Signing in..." : "Sign in"}
           </Button>
         </fieldset>
       </form>
     </AuthCard>
+  );
+}
+
+function RememberMe({ onChange }: { onChange: (checked: boolean) => void }) {
+  return (
+    <Label className="flex gap-2 flex-row items-center">
+      <Checkbox
+        onCheckedChange={onChange}
+        name="remember"
+        className="border-primary"
+      />
+      <span>Remember me</span>
+    </Label>
+  );
+}
+
+function ForgotPasswordRedirect() {
+  return (
+    <Link
+      href="#"
+      className="ml-auto text-blue-600 dark:text-blue-400 font-semibold hover:underline underline-offset-2 focus:underline active:underline"
+    >
+      Forgot Password?
+    </Link>
   );
 }

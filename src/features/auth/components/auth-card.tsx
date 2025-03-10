@@ -31,7 +31,7 @@ export function AuthCard({
           {title}
         </Heading>
       </div>
-      <div className="relative before:absolutex before:inset-0 before:bg-primary before:-z-10 before:blur-2xl before:opacity-10">
+      <div className="relative before:absolute before:inset-0 before:bg-primary before:-z-10 before:blur-2xl before:opacity-10">
         <Card>
           <div className="py-8 p-6 space-y-8">
             <CardContent>{children}</CardContent>

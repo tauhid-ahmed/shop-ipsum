@@ -7,7 +7,6 @@ export const signInAction = async (
   prevState: SignInFormState,
   formData: FormData
 ) => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
   const data = {
     email: formData.get("email"),
     password: formData.get("password"),
@@ -17,6 +16,7 @@ export const signInAction = async (
   const safeParsedData = SignInSchema.safeParse(data);
 
   return {
+    ...prevState,
     ...safeParsedData.error?.flatten().fieldErrors,
     success: safeParsedData.success,
     remember: data.remember,
@@ -35,6 +35,7 @@ export const registerAction = async (
   const safeParsedData = RegisterSchema.safeParse(data);
   console.log({ safeParsedData });
   return {
+    ...prevState,
     ...safeParsedData.error?.flatten().fieldErrors,
     success: safeParsedData.success,
   };
