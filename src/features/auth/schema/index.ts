@@ -44,11 +44,7 @@ export const RegisterSchema = z
         message: "Password must contain at least one special character",
       })
       .trim(),
-    confirm_password: z
-      .string({ required_error: "Password does not match!" })
-      .min(PASSWORD_LENGTH, {
-        message: "Password must be at least 4 characters long",
-      }),
+    confirm_password: z.string({ required_error: "Password does not match!" }),
   })
   .refine((data) => data.password === data.confirm_password, {
     message: "Password does not match!",
