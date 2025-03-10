@@ -1,7 +1,7 @@
 "use server";
 
 import { type SignInFormState, type RegisterFormState } from "../types";
-import { SignInSchema, RegisterSchema } from "../schema";
+import { SignInFormSchema, RegisterFormSchema } from "../schema";
 import { encryptPassword, decryptPassword } from "@/lib/utils";
 
 export const signInAction = async (
@@ -14,7 +14,7 @@ export const signInAction = async (
     remember: formData.get("remember") === "on" ? true : false,
   };
 
-  const safeParsedData = SignInSchema.safeParse(data);
+  const safeParsedData = SignInFormSchema.safeParse(data);
 
   return {
     ...prevState,
@@ -32,12 +32,15 @@ export const registerAction = async (
     email: formData.get("email"),
     password: formData.get("password"),
     confirm_password: formData.get("confirm_password"),
+    terms_and_condition:
+      formData.get("terms_and_condition") === "on" ? true : false,
   };
-  const safeParsedData = RegisterSchema.safeParse(data);
-  console.log({ safeParsedData });
+  const safeParsedData = RegisterFormSchema.safeParse(data);
+
   return {
     ...prevState,
     ...safeParsedData.error?.flatten().fieldErrors,
+    terms_and_condition: data.terms_and_condition,
     success: safeParsedData.success,
   };
 };

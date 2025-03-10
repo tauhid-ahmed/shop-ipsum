@@ -21,7 +21,11 @@ export const users = authSchema.table("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
   created_at: timestamp("created_at", { mode: "date" }).defaultNow(),
-  updated_at: timestamp("created_at", { mode: "date" }).defaultNow(),
+  updated_at: timestamp("updated_at", { mode: "date" }).defaultNow(),
+  terms_accepted: boolean("terms_accepted").default(false),
+  terms_accepted_at: timestamp("terms_accepted_at", {
+    mode: "date",
+  }).defaultNow(),
 });
 
 export const accounts = authSchema.table(

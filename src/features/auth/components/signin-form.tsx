@@ -29,7 +29,7 @@ export default function LoginForm() {
   );
 
   const [checkedChange, setCheckedChange] = React.useState(false);
-  console.log(checkedChange, formState.success);
+  console.log(formState);
   return (
     <AuthCard
       title="Sign in to your account"

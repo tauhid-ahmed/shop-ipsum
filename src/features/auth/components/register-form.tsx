@@ -18,11 +18,15 @@ export default function RegisterForm() {
       email: [],
       password: [],
       confirm_password: [],
+      terms_and_condition: false,
       success: false,
     } satisfies RegisterFormState
   );
 
-  const [checkedChange, setCheckedChange] = React.useState(false);
+  const [checkedTermsAndCondition, setCheckedTermsAndCondition] =
+    React.useState(false);
+
+  console.log(formState);
 
   return (
     <AuthCard
@@ -56,8 +60,11 @@ export default function RegisterForm() {
               <FormErrors errors={formState.confirm_password} />
             )}
           </Label>
-          <AcceptTerms onChange={setCheckedChange} />
-          <Button disabled={isPending || !checkedChange} className="w-full">
+          <AcceptTerms onChange={setCheckedTermsAndCondition} />
+          <Button
+            disabled={isPending || !checkedTermsAndCondition}
+            className="w-full"
+          >
             Create an account
           </Button>
         </fieldset>
@@ -68,19 +75,18 @@ export default function RegisterForm() {
 
 function AcceptTerms({ onChange }: { onChange: (checked: boolean) => void }) {
   return (
-    <Label className="group flex gap-2 flex-row items-center">
+    <div className="group flex gap-2 flex-row items-center">
       <Checkbox
         onCheckedChange={onChange}
-        name="remember"
+        name="terms_and_condition"
         className="border-primary"
       />
-
       <Link
-        className="group-hover:underline group-hover:text-primary underline-offset-2"
+        className="group-hover:underline group-hover:text-primary underline-offset-2 text-sm font-medium"
         href="."
       >
         I accept the terms and conditions
       </Link>
-    </Label>
+    </div>
   );
 }

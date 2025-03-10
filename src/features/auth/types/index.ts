@@ -9,5 +9,6 @@ export type RegisterFormState = {
   email: string[];
   password: string[];
   confirm_password: string[];
+  terms_and_condition: boolean;
   success: boolean;
 };
