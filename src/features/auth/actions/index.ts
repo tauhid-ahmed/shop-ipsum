@@ -1,7 +1,7 @@
 "use server";
 
 import { type SignInFormState, type RegisterFormState } from "../types";
-import { SignInFormSchema, RegisterFormSchema } from "../schema";
+import { signInFormSchema, registerFormSchema } from "../schema";
 import { encryptPassword, decryptPassword } from "@/lib/utils";
 import { getUserByEmail } from "@/db/queries";
 
@@ -36,7 +36,7 @@ export const registerAction = async (
     terms_and_condition:
       formData.get("terms_and_condition") === "on" ? true : false,
   };
-  const safeParsedData = RegisterFormSchema.safeParse(data);
+  const safeParsedData = registerFormSchema.safeParse(data);
 
   const errors = safeParsedData.error?.flatten();
 

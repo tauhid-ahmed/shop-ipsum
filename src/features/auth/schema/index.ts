@@ -23,7 +23,7 @@ export const signInFormSchema = z.object({
       message: "Password must contain at least one special character",
     })
     .trim(),
-  remember: z.boolean({ required_error: "Remember me is required" }),
+  remember_me: z.boolean({ required_error: "Remember me is required" }),
 });
 
 export const registerFormSchema = z
