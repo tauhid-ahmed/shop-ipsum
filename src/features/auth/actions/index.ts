@@ -40,14 +40,15 @@ export const registerAction = async (
 
   const errors = safeParsedData.error?.flatten();
 
-  if (safeParsedData.success) {
-    const { email, password, terms_and_condition } = safeParsedData.data;
-    const hashedPassword = encryptPassword(password);
-  }
+  // if (safeParsedData.success) {
+  //   const { email, password, terms_and_condition } = safeParsedData.data;
+  //   const hashedPassword = encryptPassword(password);
+  // }
 
   return {
     ...prevState,
-    ...errors,
+    // ...errors,
+    ...safeParsedData.error?.flatten(),
     terms_and_condition: data.terms_and_condition,
     success: safeParsedData.success,
   };

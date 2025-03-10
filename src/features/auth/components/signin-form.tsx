@@ -8,22 +8,10 @@ import Link from "next/link";
 import { signInAction } from "../actions";
 import * as paths from "@/constants/paths";
 import React from "react";
-import { FormErrors } from "./form-errors";
-import { SignInFormState } from "../types";
+// import { FormErrors } from "./form-errors";
+// import { SignInFormState } from "../types";
 
 export default function SignInForm() {
-  const [formState, formAction, isPending] = React.useActionState(
-    signInAction,
-    {
-      email: [],
-      password: [],
-      remember: false,
-      success: false,
-    } satisfies SignInFormState
-  );
-
-  const [checkedChange, setCheckedChange] = React.useState(false);
-
   return (
     <AuthCard
       title="Sign in to your account"
@@ -31,23 +19,19 @@ export default function SignInForm() {
       redirectName="Create an account"
       redirectHref={paths.registerPath()}
     >
-      <form action={formAction}>
+      <form>
         <fieldset className="space-y-4">
           <Label items="stack">
             Email Address: <Input name="email" />
-            {!formState.success && <FormErrors errors={formState.email} />}
           </Label>
           <Label>
             Password: <Input name="password" />
-            {!formState.success && <FormErrors errors={formState.password} />}
           </Label>
           <div className="flex items-center text-xs md:text-md">
-            <RememberMe onChange={setCheckedChange} />
+            {/* <RememberMe  /> */}
             <ForgotPasswordRedirect />
           </div>
-          <Button disabled={isPending || !checkedChange} className="w-full">
-            {isPending ? "Signing in..." : "Sign in"}
-          </Button>
+          <Button className="w-full"></Button>
         </fieldset>
       </form>
     </AuthCard>

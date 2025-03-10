@@ -1,32 +1,34 @@
 "use client";
-import { Input } from "@/components/ui/input";
 import { AuthCard } from "./auth-card";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { registerAction } from "../actions";
 import * as paths from "@/constants/paths";
-import { type RegisterFormState } from "../types";
 import React from "react";
-import { FormErrors } from "./form-errors";
-import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { registerFormSchema, type RegisterFormSchema } from "../schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form } from "@/components/ui/form";
+import { TextField } from "@/components/text-field";
+import { CheckboxField } from "@/components/checkbox-field";
+
+const defaultValues = {
+  email: "",
+  password: "",
+  confirm_password: "",
+  terms_and_condition: false,
+};
 
 export default function RegisterForm() {
-  const [formState, formAction, isPending] = React.useActionState(
-    registerAction,
-    {
-      email: [],
-      password: [],
-      confirm_password: [],
-      terms_and_condition: false,
-      success: false,
-    } satisfies RegisterFormState
-  );
-
-  const [checkedTermsAndCondition, setCheckedTermsAndCondition] =
-    React.useState(false);
-
-
+  const form = useForm<RegisterFormSchema>({
+    mode: "all",
+    resolver: zodResolver(registerFormSchema),
+    defaultValues,
+  });
+  const termsAndCondition = form.watch("terms_and_condition");
+  const onSubmit = async (f: RegisterFormSchema) => {
+    console.log(f);
+  };
   return (
     <AuthCard
       title="Create an account"
@@ -34,58 +36,43 @@ export default function RegisterForm() {
       redirectName="Sign in"
       redirectHref={paths.signInPath()}
     >
-      <form action={formAction}>
-        <fieldset className="space-y-4">
-          <Label items="stack">
-            Email Address: <Input name="email" />
-            {!formState.success && <FormErrors errors={formState.email} />}
-          </Label>
-          <Label>
-            Password:
-            <Input name="password" />
-            {!formState.success && formState.password.length > 0 ? (
-              <FormErrors errors={formState.password} />
-            ) : (
-              <span className="text-xs text-amber-600">
-                At least 8 characters with uppercase, lowercase, numbers, and
-                symbols.
-              </span>
-            )}
-          </Label>
-          <Label>
-            Confirm Password:
-            <Input name="confirm_password" />
-            {!formState.success && (
-              <FormErrors errors={formState.confirm_password} />
-            )}
-          </Label>
-          <AcceptTerms onChange={setCheckedTermsAndCondition} />
-          <Button
-            disabled={isPending || !checkedTermsAndCondition}
-            className="w-full"
-          >
-            Create an account
-          </Button>
-        </fieldset>
-      </form>
-    </AuthCard>
-  );
-}
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <fieldset className="space-y-6">
+            <TextField
+              label="Email"
+              name="email"
+              placeholder="Enter your email"
+            />
+            <TextField
+              label="Password"
+              name="password"
+              placeholder="Enter your password"
+              type="password"
+            />
+            <TextField
+              label="Confirm Password"
+              name="confirm_password"
+              placeholder="Confirm your password"
+              type="password"
+            />
 
-function AcceptTerms({ onChange }: { onChange: (checked: boolean) => void }) {
-  return (
-    <div className="group flex gap-2 flex-row items-center">
-      <Checkbox
-        onCheckedChange={onChange}
-        name="terms_and_condition"
-        className="border-primary"
-      />
-      <Link
-        className="group-hover:underline group-hover:text-primary underline-offset-2 text-sm font-medium"
-        href="."
-      >
-        I accept the terms and conditions
-      </Link>
-    </div>
+            <div className="flex items-center text-sm gap-2 font-medium">
+              <CheckboxField name="terms_and_condition" />
+              <span className="hover:underline cursor-pointer hover:text-blue-500">
+                <Link href="#">I accept the terms and conditions.</Link>
+              </span>
+            </div>
+
+            <Button
+              disabled={!termsAndCondition || form.formState.isSubmitting}
+              className="w-full"
+            >
+              Create an account
+            </Button>
+          </fieldset>
+        </form>
+      </Form>
+    </AuthCard>
   );
 }
