@@ -2,6 +2,7 @@
 
 import { type SignInFormState, type RegisterFormState } from "../types";
 import { SignInSchema, RegisterSchema } from "../schema";
+import { encryptPassword, decryptPassword } from "@/lib/utils";
 
 export const signInAction = async (
   prevState: SignInFormState,
