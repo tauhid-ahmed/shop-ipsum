@@ -1,5 +1,5 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, SwiperRef } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -10,15 +10,17 @@ import { LucideChevronLeft, LucideChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function CustomSwiper() {
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperRef>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (swiperRef.current && prevRef.current && nextRef.current) {
       const swiper = swiperRef.current.swiper;
-      swiper.params.navigation.prevEl = prevRef.current;
-      swiper.params.navigation.nextEl = nextRef.current;
+      if (typeof swiper.params.navigation === "object") {
+        swiper.params.navigation.prevEl = prevRef.current;
+        swiper.params.navigation.nextEl = nextRef.current;
+      }
       swiper.navigation.init();
       swiper.navigation.update();
     }

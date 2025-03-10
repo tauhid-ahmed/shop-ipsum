@@ -9,7 +9,6 @@ import { useTheme } from "next-themes";
 
 export function ThemeSwitch({
   className,
-  children,
   ...props
 }: React.ComponentProps<typeof SwitchPrimitive.Root>) {
   const { setTheme, resolvedTheme } = useTheme();

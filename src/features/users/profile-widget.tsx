@@ -5,7 +5,6 @@ import {
   LucideGift,
   LucideListOrdered,
   LucideLogOut,
-  LucideLogIn,
   LucideEllipsisVertical,
   LucideShoppingBag,
 } from "lucide-react";
@@ -58,7 +57,8 @@ export default function ProfilePopover() {
         sideOffset={16}
         className="relative p-0 rounded text-muted-foreground"
       >
-        <SignedInHeading title="John Doe" subtitle="Member since 2023" />
+        <SignedInHeading />
+        <SignedOutHeading />
         <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
           {menuItems.map((item) => (
             <Link
@@ -81,8 +81,8 @@ export default function ProfilePopover() {
 }
 
 type ProfileHeadingProps = {
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
   footer?: React.ReactNode;
 };
 
@@ -109,8 +109,8 @@ function ProfileHeading({ title, subtitle, footer }: ProfileHeadingProps) {
 }
 
 function SignedInHeading({
-  title,
-  subtitle,
+  title = "John Doe",
+  subtitle = "Member since 2023",
 }: Exclude<ProfileHeadingProps, "footer">) {
   return (
     <ProfileHeading
@@ -127,13 +127,13 @@ function SignedInHeading({
 }
 
 function SignedOutHeading({
-  title,
-  subtitle,
+  title = "New Customer?",
+  subtitle = "Create an account",
 }: Exclude<ProfileHeadingProps, "footer">) {
   return (
     <ProfileHeading
-      title="New Member?"
-      subtitle="Create an account"
+      title={title}
+      subtitle={subtitle}
       footer={
         <div className="flex justify-center gap-2">
           <Button variant="secondary" size="sm" asChild>

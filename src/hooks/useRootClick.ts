@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 
 export function useRootClick(
   callback: () => void,

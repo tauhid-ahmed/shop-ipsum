@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+// import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 const config = {
   providers: [
@@ -13,6 +13,7 @@ const config = {
 
       async authorize(credentials) {
         return {
+          ...credentials,
           id: "1",
           name: "John Doe",
           email: "jdoe@me.com",
@@ -22,18 +23,18 @@ const config = {
   ],
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      return true;
-    },
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
-    async session({ session, user, token }) {
-      return session;
-    },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      return token;
-    },
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   return true;
+    // },
+    // async redirect({ url, baseUrl }) {
+    //   return baseUrl;
+    // },
+    // async session({ session, user, token }) {
+    //   return session;
+    // },
+    // async jwt({ token, user, account, profile, isNewUser }) {
+    //   return token;
+    // },
   },
 
   session: {

@@ -72,10 +72,14 @@ export default function CardSlider({
               }
             : false
         }
-        pagination={{
-          clickable: true,
-          type: "bullets",
-        }}
+        pagination={
+          pagination
+            ? {
+                clickable: true,
+                type: "bullets",
+              }
+            : false
+        }
         navigation={{
           prevEl: prevRef.current,
           nextEl: nextRef.current,
