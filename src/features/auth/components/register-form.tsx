@@ -26,6 +26,7 @@ export default function RegisterForm() {
   const [checkedTermsAndCondition, setCheckedTermsAndCondition] =
     React.useState(false);
 
+
   return (
     <AuthCard
       title="Create an account"

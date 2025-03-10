@@ -3,6 +3,7 @@
 import { type SignInFormState, type RegisterFormState } from "../types";
 import { SignInFormSchema, RegisterFormSchema } from "../schema";
 import { encryptPassword, decryptPassword } from "@/lib/utils";
+import { getUserByEmail } from "@/db/queries";
 
 export const signInAction = async (
   prevState: SignInFormState,
@@ -37,9 +38,16 @@ export const registerAction = async (
   };
   const safeParsedData = RegisterFormSchema.safeParse(data);
 
+  const errors = safeParsedData.error?.flatten();
+
+  if (safeParsedData.success) {
+    const { email, password, terms_and_condition } = safeParsedData.data;
+    const hashedPassword = encryptPassword(password);
+  }
+
   return {
     ...prevState,
-    ...safeParsedData.error?.flatten().fieldErrors,
+    ...errors,
     terms_and_condition: data.terms_and_condition,
     success: safeParsedData.success,
   };

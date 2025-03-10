@@ -33,6 +33,7 @@ export const RegisterFormSchema = z
       .email("Email is required"),
     password: z.string({ required_error: "Password is required" }).trim(),
     confirm_password: z.string({ required_error: "Password does not match!" }),
+    terms_and_condition: z.boolean(),
   })
   .refine((data) => data.password === data.confirm_password, {
     message: "Password does not match!",

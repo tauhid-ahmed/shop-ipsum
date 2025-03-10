@@ -11,12 +11,6 @@ import React from "react";
 import { FormErrors } from "./form-errors";
 import { SignInFormState } from "../types";
 
-export type LoginFormType = {
-  email: string;
-  password: string;
-  remember?: boolean;
-};
-
 export default function SignInForm() {
   const [formState, formAction, isPending] = React.useActionState(
     signInAction,
