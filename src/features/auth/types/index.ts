@@ -11,5 +11,5 @@ export type NewUserType = {
   name: string;
   email: string;
   password: string;
-  terms_and_condition: boolean;
+  terms_accepted: boolean;
 };

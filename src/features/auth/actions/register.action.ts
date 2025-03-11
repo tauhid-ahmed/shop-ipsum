@@ -35,7 +35,7 @@ export const registerAction = async (
     name: safeParsedData.data.name,
     email: safeParsedData.data.email,
     password: encryptedPassword,
-    terms_and_condition: safeParsedData.data.terms_and_condition,
+    terms_accepted: safeParsedData.data.terms_and_condition,
   };
 
   const newUser = await createUser(data);

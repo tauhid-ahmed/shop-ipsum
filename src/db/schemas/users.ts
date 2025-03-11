@@ -8,7 +8,6 @@ import {
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 import { createId } from "@paralleldrive/cuid2";
-import { sql } from "drizzle-orm";
 
 const authSchema = pgSchema("authentication");
 
