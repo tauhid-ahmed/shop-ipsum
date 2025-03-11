@@ -108,10 +108,12 @@ function CartBody() {
                 The requested quantity is not available
               </p> */}
               <div>
-                <p className="text-sm text-destructive font-medium">
+                <p className="text-sm text-destructive-light font-medium">
                   Final sale
                 </p>
-                <p className="text-xs text-destructive">Only one item left</p>
+                <p className="text-xs text-destructive-light">
+                  Only one item left
+                </p>
               </div>
               {/* <p className="text-emerald-500 text-sm font-medium">
                 Only 43 items left

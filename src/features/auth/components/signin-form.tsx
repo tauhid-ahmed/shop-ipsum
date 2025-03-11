@@ -35,7 +35,7 @@ export default function SignInForm() {
     >
       <Form {...form}>
         <form>
-          <fieldset className="space-y-6">
+          <fieldset className="space-y-8">
             <TextField
               label="Email"
               name="email"
