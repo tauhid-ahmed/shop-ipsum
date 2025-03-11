@@ -16,6 +16,12 @@ export const signInFormSchema = z.object({
 
 export const registerFormSchema = z
   .object({
+    name: z
+      .string({ required_error: MSG.NAME_REQUIRED })
+      .min(MSG.NAME_MIN_LENGTH, { message: MSG.NAME_MIN })
+      .max(MSG.NAME_MAX_LENGTH, { message: MSG.NAME_MAX })
+      .trim(),
+
     email: z
       .string({ required_error: MSG.EMAIL_REQUIRED })
       .email(MSG.EMAIL_REQUIRED),

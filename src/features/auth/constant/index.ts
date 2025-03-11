@@ -2,6 +2,19 @@ export const VALIDATION_MESSAGES = {
   // General
   REQUIRED: "Required.",
 
+  // Name
+  NAME_REQUIRED: "Name required.",
+  NAME_MIN_LENGTH: 3,
+  NAME_MAX_LENGTH: 20,
+  NAME_MIN: "Min 3 characters.",
+  NAME_MAX: "Max 20 characters.",
+
+  // Username
+  USERNAME_REQUIRED: "Username required.",
+  USERNAME_MIN_LENGTH: 3,
+  USERNAME_MAX_LENGTH: 50,
+  USERNAME_MIN: "Min 3 characters.",
+
   // Email
   EMAIL_REQUIRED: "Email required.",
   EMAIL_INVALID: "Invalid email.",

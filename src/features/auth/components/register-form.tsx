@@ -14,6 +14,7 @@ import { CheckboxField } from "@/components/checkbox-field";
 import { NotifyType } from "../types";
 
 const defaultValues = {
+  name: "",
   email: "",
   password: "",
   confirm_password: "",
@@ -42,6 +43,7 @@ export default function RegisterForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <fieldset className="space-y-6">
+            <TextField label="Name" name="name" placeholder="Enter your name" />
             <TextField
               label="Email"
               name="email"
