@@ -8,6 +8,7 @@ import {
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 import { createId } from "@paralleldrive/cuid2";
+import { sql } from "drizzle-orm";
 
 const authSchema = pgSchema("authentication");
 
@@ -16,6 +17,9 @@ export const users = authSchema.table("user", {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: text("name"),
+  username: text("username")
+    .unique()
+    .$defaultFn(() => sql`id`),
   email: text("email").unique(),
   password: text("password"),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
