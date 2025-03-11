@@ -30,6 +30,7 @@ export default function RegisterForm() {
   });
   const termsAndCondition = form.watch("terms_and_condition");
   const onSubmit = async (formData: RegisterFormSchema) => {
+    setNotify(null);
     const data = await registerAction(formData);
     setNotify(data?.notify as NotifyType);
   };
@@ -61,24 +62,26 @@ export default function RegisterForm() {
               placeholder="Confirm your password"
               type="password"
             />
+            <div className="flex flex-col gap-4">
+              <AuthCardNotify notify={notify} />
+              <div className="flex items-center text-sm gap-2 font-medium">
+                <CheckboxField name="terms_and_condition" />
+                <span className="hover:underline cursor-pointer hover:text-blue-500">
+                  <Link href="#">I accept the terms and conditions.</Link>
+                </span>
+              </div>
 
-            <div className="flex items-center text-sm gap-2 font-medium">
-              <CheckboxField name="terms_and_condition" />
-              <span className="hover:underline cursor-pointer hover:text-blue-500">
-                <Link href="#">I accept the terms and conditions.</Link>
-              </span>
+              <Button
+                disabled={
+                  !termsAndCondition ||
+                  form.formState.isSubmitting ||
+                  !form.formState.isValid
+                }
+                className="w-full"
+              >
+                Create an account
+              </Button>
             </div>
-            <AuthCardNotify notify={notify} />
-            <Button
-              disabled={
-                !termsAndCondition ||
-                form.formState.isSubmitting ||
-                !form.formState.isValid
-              }
-              className="w-full"
-            >
-              Create an account
-            </Button>
           </fieldset>
         </form>
       </Form>

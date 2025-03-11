@@ -18,7 +18,14 @@ export const registerAction = async (
     };
 
   const user = await getUserByEmail(safeParsedData.data.email);
-  console.log(user);
+
+  if (user)
+    return {
+      notify: {
+        type: "error",
+        message: MSG.EMAIL_EXISTS,
+      },
+    };
 
   return {
     notify: {
