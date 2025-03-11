@@ -8,7 +8,7 @@ export const signInFormSchema = z.object({
   password: z
     .string({ required_error: MSG.PASSWORD_REQUIRED })
     .min(MSG.PASSWORD_MIN_LENGTH, {
-      message: MSG.PASSWORD_MIN,
+      message: MSG.PASSWORD_REQUIRED,
     })
     .trim(),
   remember_me: z.boolean().optional().default(false),
