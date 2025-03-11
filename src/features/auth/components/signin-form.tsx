@@ -71,10 +71,10 @@ export default function SignInForm() {
 
 function RememberMe() {
   return (
-    <div className="flex gap-2 flex-row items-center">
+    <Label className="flex gap-2 flex-row items-center cursor-pointer">
       <CheckboxField name="remember_me" />
       <span className="text-sm">Remember me</span>
-    </div>
+    </Label>
   );
 }
 
@@ -82,7 +82,7 @@ function ForgotPasswordRedirect() {
   return (
     <Link
       href="#"
-      className="text-sm ml-auto text-blue-600 dark:text-blue-400 font-semibold hover:underline underline-offset-2 focus:underline active:underline"
+      className="text-sm ml-auto text-blue-600 dark:text-blue-400 font-medium hover:underline underline-offset-2 focus:underline active:underline"
     >
       Forgot Password?
     </Link>
