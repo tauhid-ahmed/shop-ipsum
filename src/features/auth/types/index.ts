@@ -13,3 +13,17 @@ export type NewUserType = {
   password: string;
   terms_accepted: boolean;
 };
+
+export type UserType = {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  emailVerified: Date;
+  image: string;
+  created_at: Date;
+  updated_at: Date;
+  terms_accepted: boolean;
+  terms_accepted_at: Date;
+};

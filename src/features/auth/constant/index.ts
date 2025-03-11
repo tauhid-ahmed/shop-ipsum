@@ -39,6 +39,11 @@ export const VALIDATION_MESSAGES = {
   ACCOUNT_LOCKED: "Too many attempts. Account locked.",
   ACCOUNT_NOT_FOUND: "Account not found.",
 
+  // Signin
+  SIGNIN_FAILED: "Failed to sign in.",
+  SIGNIN_SUCCESS: "Signed in successfully.",
+  INVALID_CREDENTIALS: "Invalid credentials.",
+
   // Registration Responses
   ACCOUNT_CREATED: "Account created!",
   ACCOUNT_CREATION_FAILED: "Failed to create account.",

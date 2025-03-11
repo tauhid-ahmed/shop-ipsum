@@ -1,5 +1,5 @@
 "use client";
-import { AuthCard } from "./auth-card";
+import { AuthCard, AuthCardNotify } from "./auth-card";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signInFormSchema, type SignInFormSchema } from "../schema";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
+import { NotifyType } from "../types";
 
 const defaultValues = {
   email: "",
@@ -20,12 +21,18 @@ const defaultValues = {
 };
 
 export default function SignInForm() {
+  const [notify, setNotify] = React.useState<NotifyType | null>(null);
   const form = useForm<SignInFormSchema>({
     mode: "all",
     resolver: zodResolver(signInFormSchema),
     defaultValues,
   });
   const rememberMe = form.watch("remember_me");
+  const onSubmit = async (formData: SignInFormSchema) => {
+    setNotify(null);
+    const data = await signInAction(formData);
+    setNotify(data?.notify as NotifyType);
+  };
   return (
     <AuthCard
       title="Sign in to your account"
@@ -34,7 +41,7 @@ export default function SignInForm() {
       redirectHref={paths.registerPath()}
     >
       <Form {...form}>
-        <form>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <fieldset className="space-y-8">
             <TextField
               label="Email"
@@ -47,21 +54,24 @@ export default function SignInForm() {
               placeholder="Enter your password"
               type="password"
             />
-            <div className="flex items-center gap-2">
-              <RememberMe />
-              <ForgotPasswordRedirect />
+            <div className="flex flex-col gap-4">
+              <AuthCardNotify notify={notify} />
+              <div className="flex items-center gap-2">
+                <RememberMe />
+                <ForgotPasswordRedirect />
+              </div>
+              <Button
+                className="w-full"
+                disabled={
+                  !rememberMe ||
+                  !form.formState.isValid ||
+                  form.formState.isSubmitting
+                }
+                type="submit"
+              >
+                {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
+              </Button>
             </div>
-            <Button
-              className="w-full"
-              disabled={
-                !rememberMe ||
-                !form.formState.isValid ||
-                form.formState.isSubmitting
-              }
-              type="submit"
-            >
-              {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
-            </Button>
           </fieldset>
         </form>
       </Form>

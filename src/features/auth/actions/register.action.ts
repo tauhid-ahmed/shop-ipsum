@@ -25,7 +25,7 @@ export const registerAction = async (
     return {
       notify: {
         type: "error",
-        message: MSG.EMAIL_EXISTS,
+        message: MSG.EMAIL_ALREADY_REGISTERED,
       },
     };
 
