@@ -3,9 +3,8 @@ import { getUserByEmail } from "@/db/queries";
 import { VALIDATION_MESSAGES as MSG } from "../constant";
 
 import { signInFormSchema, SignInFormSchema } from "../schema";
-import { encryptPassword, decryptPassword } from "@/lib/utils";
-import { AuthResponseType, UserType } from "../types";
-// import { AuthResponseType } from "../types";
+import { decryptPassword } from "@/lib/utils";
+import { AuthResponseType } from "../types";
 
 export const signInAction = async (
   formData: SignInFormSchema
@@ -21,12 +20,12 @@ export const signInAction = async (
       },
     };
 
-  const user = await getUserByEmail(safeParsedData.data.email);
+  const user = await getUserByEmail(safeParsedData.data.email.toLowerCase());
   if (!user)
     return {
       notify: {
         type: "error",
-        message: MSG.INVALID_CREDENTIALS, // make error generic message for safety
+        message: MSG.INVALID_CREDENTIALS,
       },
     };
 
@@ -35,8 +34,6 @@ export const signInAction = async (
     user.password
   );
 
-  console.log({ isPasswordMatched });
-
   if (!isPasswordMatched)
     return {
       notify: {
@@ -44,6 +41,8 @@ export const signInAction = async (
         message: MSG.INVALID_CREDENTIALS,
       },
     };
+
+  //
 
   return {
     notify: {

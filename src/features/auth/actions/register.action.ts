@@ -33,7 +33,7 @@ export const registerAction = async (
 
   const data = {
     name: safeParsedData.data.name,
-    email: safeParsedData.data.email,
+    email: safeParsedData.data.email.toLowerCase(),
     password: encryptedPassword,
     terms_accepted: safeParsedData.data.terms_and_condition,
   };

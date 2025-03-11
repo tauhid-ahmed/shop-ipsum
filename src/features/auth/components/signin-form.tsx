@@ -27,7 +27,7 @@ export default function SignInForm() {
     resolver: zodResolver(signInFormSchema),
     defaultValues,
   });
-  const rememberMe = form.watch("remember_me");
+  // const rememberMe = form.watch("remember_me");
   const onSubmit = async (formData: SignInFormSchema) => {
     setNotify(null);
     const data = await signInAction(formData);
@@ -63,9 +63,7 @@ export default function SignInForm() {
               <Button
                 className="w-full"
                 disabled={
-                  !rememberMe ||
-                  !form.formState.isValid ||
-                  form.formState.isSubmitting
+                  !form.formState.isValid || form.formState.isSubmitting
                 }
                 type="submit"
               >
