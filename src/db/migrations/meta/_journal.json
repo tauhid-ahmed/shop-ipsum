@@ -15,6 +15,13 @@
       "when": 1741604810741,
       "tag": "0001_gigantic_the_spike",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1741715116473,
+      "tag": "0002_hard_emma_frost",
+      "breakpoints": true
     }
   ]
 }
