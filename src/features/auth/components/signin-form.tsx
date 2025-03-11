@@ -3,7 +3,7 @@ import { AuthCard } from "./auth-card";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { signInAction } from "../actions";
+import { signInAction } from "../actions/signin.action";
 import * as paths from "@/constants/paths";
 import React from "react";
 import { TextField } from "@/components/text-field";

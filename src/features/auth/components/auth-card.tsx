@@ -6,6 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Link from "next/link";
 
+import { AlertCircle } from "lucide-react";
+
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { NotifyType } from "../types";
+
 type AuthCardProps = {
   title: string;
   children?: React.ReactNode;
@@ -65,5 +70,15 @@ export function AuthCard({
         </Link>
       </div>
     </div>
+  );
+}
+
+export function AuthCardNotify({ notify }: { notify: NotifyType | null }) {
+  if (!notify) return null;
+  return (
+    <Alert variant={notify.type === "error" ? "destructive" : "success"}>
+      <AlertCircle className="h-4 w-4 -mt-0.5" />
+      <AlertDescription>{notify.message}</AlertDescription>
+    </Alert>
   );
 }

@@ -33,4 +33,5 @@ export const VALIDATION_MESSAGES = {
 
   // Misc
   UNKNOWN_ERROR: "Something went wrong.",
+  INVALID_FORM_DATA: "Invalid form data.",
 };

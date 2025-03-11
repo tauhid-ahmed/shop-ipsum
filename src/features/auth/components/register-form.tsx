@@ -1,7 +1,7 @@
 "use client";
-import { AuthCard } from "./auth-card";
+import { AuthCard, AuthCardNotify } from "./auth-card";
 import { Button } from "@/components/ui/button";
-import { registerAction } from "../actions";
+import { registerAction } from "../actions/register.action";
 import * as paths from "@/constants/paths";
 import React from "react";
 import Link from "next/link";
@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { TextField } from "@/components/text-field";
 import { CheckboxField } from "@/components/checkbox-field";
+import { NotifyType } from "../types";
 
 const defaultValues = {
   email: "",
@@ -20,14 +21,16 @@ const defaultValues = {
 };
 
 export default function RegisterForm() {
+  const [notify, setNotify] = React.useState<NotifyType | null>(null);
   const form = useForm<RegisterFormSchema>({
     mode: "all",
     resolver: zodResolver(registerFormSchema),
     defaultValues,
   });
   const termsAndCondition = form.watch("terms_and_condition");
-  const onSubmit = async (f: RegisterFormSchema) => {
-    console.log(f);
+  const onSubmit = async (formData: RegisterFormSchema) => {
+    const data = await registerAction(formData);
+    setNotify(data?.notify as NotifyType);
   };
   return (
     <AuthCard
@@ -63,9 +66,13 @@ export default function RegisterForm() {
                 <Link href="#">I accept the terms and conditions.</Link>
               </span>
             </div>
-
+            <AuthCardNotify notify={notify} />
             <Button
-              disabled={!termsAndCondition || form.formState.isSubmitting}
+              disabled={
+                !termsAndCondition ||
+                form.formState.isSubmitting ||
+                !form.formState.isValid
+              }
               className="w-full"
             >
               Create an account
