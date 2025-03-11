@@ -29,6 +29,48 @@
       "when": 1741719335694,
       "tag": "0003_wooden_jimmy_woo",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1741726771600,
+      "tag": "0004_normal_hairball",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1741726914077,
+      "tag": "0005_foamy_diamondback",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1741726953746,
+      "tag": "0006_legal_hitman",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1741726981278,
+      "tag": "0007_flippant_kid_colt",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1741727013770,
+      "tag": "0008_volatile_pandemic",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1741727135162,
+      "tag": "0009_old_talon",
+      "breakpoints": true
     }
   ]
 }

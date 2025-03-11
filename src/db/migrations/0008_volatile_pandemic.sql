@@ -1,0 +1,1 @@
+ALTER TABLE "authentication"."user" ALTER COLUMN "username" DROP NOT NULL;

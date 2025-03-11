@@ -1,0 +1,1 @@
+ALTER TABLE "authentication"."user" ALTER COLUMN "emailVerified" DROP NOT NULL;

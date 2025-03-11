@@ -15,20 +15,23 @@ export const users = authSchema.table("user", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: text("name"),
+  name: text("name").notNull(),
   username: text("username")
     .unique()
-    .$defaultFn(() => createId()),
-  email: text("email").unique(),
-  password: text("password"),
+    .$defaultFn(() => createId())
+    .notNull(),
+  email: text("email").unique().notNull(),
+  password: text("password").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-  created_at: timestamp("created_at", { mode: "date" }).defaultNow(),
-  updated_at: timestamp("updated_at", { mode: "date" }).defaultNow(),
-  terms_accepted: boolean("terms_accepted").default(false),
+  created_at: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+  updated_at: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
+  terms_accepted: boolean("terms_accepted").default(false).notNull(),
   terms_accepted_at: timestamp("terms_accepted_at", {
     mode: "date",
-  }).defaultNow(),
+  })
+    .defaultNow()
+    .notNull(),
 });
 
 export const accounts = authSchema.table(
