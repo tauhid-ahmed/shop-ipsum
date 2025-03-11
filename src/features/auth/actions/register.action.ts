@@ -19,8 +19,9 @@ export const registerAction = async (
       },
     };
 
-  const user = await getUserByEmail(safeParsedData.data.email);
-
+  const user = await getUserByEmail(
+    safeParsedData.data.email.toLocaleLowerCase()
+  );
   if (user)
     return {
       notify: {
