@@ -3,6 +3,8 @@ import { getUserByEmail } from "@/db/queries";
 import { registerFormSchema, RegisterFormSchema } from "../schema";
 import { AuthResponseType } from "../types";
 import { VALIDATION_MESSAGES as MSG } from "../constant";
+import { encryptPassword } from "@/lib/utils";
+import { createUser } from "@/db/mutations/users";
 
 export const registerAction = async (
   formData: RegisterFormSchema
@@ -27,9 +29,28 @@ export const registerAction = async (
       },
     };
 
+  const encryptedPassword = await encryptPassword(safeParsedData.data.password);
+
+  const data = {
+    name: safeParsedData.data.name,
+    email: safeParsedData.data.email,
+    password: encryptedPassword,
+    terms_and_condition: safeParsedData.data.terms_and_condition,
+  };
+
+  const newUser = await createUser(data);
+
+  if (!newUser)
+    return {
+      notify: {
+        type: "error",
+        message: MSG.UNKNOWN_ERROR,
+      },
+    };
+
   return {
     notify: {
-      type: "error",
+      type: "success",
       message: MSG.ACCOUNT_CREATED,
     },
   };
