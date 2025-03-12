@@ -1,8 +1,10 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-// import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { db } from "./db";
 
 const config = {
+  adapter: DrizzleAdapter(db),
   providers: [
     Credentials({
       name: "credentials",
@@ -26,22 +28,13 @@ const config = {
     async signIn() {
       return true;
     },
+    async session() {
+      return {};
+    },
+    async jwt() {
+      return {};
+    },
   },
-
-  // callbacks: {
-  //   // async signIn({ user, account, profile, email, credentials }) {
-  //   //   return true;
-  //   // },
-  //   // async redirect({ url, baseUrl }) {
-  //   //   return baseUrl;
-  //   // },
-  //   // async session({ session, user, token }) {
-  //   //   return session;
-  //   // },
-  //   // async jwt({ token, user, account, profile, isNewUser }) {
-  //   //   return token;
-  //   // },
-  // },
 
   session: {
     strategy: "jwt",

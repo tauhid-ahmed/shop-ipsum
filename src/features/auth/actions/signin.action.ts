@@ -5,6 +5,7 @@ import { VALIDATION_MESSAGES as MSG } from "../constant";
 import { signInFormSchema, SignInFormSchema } from "../schema";
 import { decryptPassword } from "@/lib/utils";
 import { AuthResponseType } from "../types";
+import { signIn } from "@/auth";
 
 export const signInAction = async (
   formData: SignInFormSchema
@@ -42,7 +43,11 @@ export const signInAction = async (
       },
     };
 
-  //
+  await signIn("credentials", {
+    email: safeParsedData.data.email,
+    password: safeParsedData.data.password,
+    redirect: false,
+  });
 
   return {
     notify: {
