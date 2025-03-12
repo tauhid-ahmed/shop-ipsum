@@ -5,7 +5,7 @@ import { users } from "../schemas";
 export const createUser = async (data: NewUserType) => {
   try {
     return await db.insert(users).values(data).returning();
-  } catch (_) {
+  } catch {
     return [];
   }
 };

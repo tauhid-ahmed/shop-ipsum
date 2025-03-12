@@ -5,7 +5,7 @@ export const getUserByEmail = async (email: string) => {
     return await db.query.users.findFirst({
       where: (user, { eq }) => eq(user.email, email.toLowerCase()),
     });
-  } catch (_) {
+  } catch {
     return null;
   }
 };

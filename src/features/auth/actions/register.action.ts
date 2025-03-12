@@ -1,7 +1,7 @@
 "use server";
 import { getUserByEmail } from "@/db/queries";
 import { registerFormSchema, RegisterFormSchema } from "../schema";
-import { AuthResponseType, AuthUserType } from "../types";
+import { AuthResponseType } from "../types";
 import { VALIDATION_MESSAGES as MSG } from "../constant";
 import { encryptPassword } from "@/lib/utils";
 import { createUser } from "@/db/mutations/users";
