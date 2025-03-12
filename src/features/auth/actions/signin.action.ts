@@ -57,6 +57,7 @@ export const signInAction = async (
     email: user.email,
     name: user.name,
     role: user.role,
+    image: user.image,
     redirectTo: defaultRedirectPath(),
   });
 

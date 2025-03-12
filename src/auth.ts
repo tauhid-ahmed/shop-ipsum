@@ -2,8 +2,9 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "./db";
+import { AuthTokenType } from "./features/auth/types";
 
-const config = {
+export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [
     Credentials({
@@ -11,10 +12,7 @@ const config = {
       credentials: {},
 
       async authorize(credentials) {
-        console.log(credentials);
-        return {
-          ...credentials,
-        };
+        return credentials;
       },
     }),
   ],
@@ -23,11 +21,18 @@ const config = {
     async signIn() {
       return true;
     },
-    async session() {
-      return {};
+    async session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          role: (token as AuthTokenType).role,
+          id: (token as AuthTokenType).id,
+        },
+      };
     },
-    async jwt() {
-      return {};
+    async jwt({ token }) {
+      return token as AuthTokenType;
     },
   },
 
@@ -39,6 +44,4 @@ const config = {
     signIn: "/sign-in",
     error: "/sign-in",
   },
-};
-
-export const { handlers, signIn, signOut, auth } = NextAuth(config);
+});

@@ -56,6 +56,7 @@ export const registerAction = async (
     email: newUser.email,
     role: newUser.role,
     name: newUser.name,
+    image: newUser.image,
     redirectTo: defaultRedirectPath(),
   });
 

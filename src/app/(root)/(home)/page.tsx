@@ -5,8 +5,10 @@ import { countdown } from "@/lib/countdown";
 // import Slider from "@/components/carousel/slider";
 // import CardSlider from "@/components/carousel/card-slider";
 // import StarRatings from "@/components/star-ratings";
+import { auth } from "@/auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
   return (
     <Section>
       <Container>
@@ -14,6 +16,7 @@ export default function Home() {
           Welcome to BDStore {countdown().days} days and {countdown().hours}{" "}
           hours left to launch
         </Heading>
+        {JSON.stringify(session)}
         {/* <Slider />
         <div className="my-32 bg-amber-900 h-96 text-red-500">
           <CardSlider />

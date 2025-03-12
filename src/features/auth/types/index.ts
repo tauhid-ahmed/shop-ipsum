@@ -33,4 +33,18 @@ export type AuthUserType = {
   email: string;
   name: string;
   role: "user" | "admin" | "superadmin";
+  image: string;
+};
+
+export type AuthTokenType = {
+  sub: string;
+  email: string;
+  image?: string | null;
+  name: string;
+  role: "user" | "admin" | "superadmin";
+  iat?: number;
+  exp?: number;
+  id: string;
+  jti?: string;
+  callbackUrl?: string;
 };
