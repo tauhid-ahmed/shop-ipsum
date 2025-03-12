@@ -71,6 +71,13 @@
       "when": 1741727135162,
       "tag": "0009_old_talon",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1741803837767,
+      "tag": "0010_nice_dazzler",
+      "breakpoints": true
     }
   ]
 }
