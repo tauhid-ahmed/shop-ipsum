@@ -6,6 +6,7 @@ import { signInFormSchema, SignInFormSchema } from "../schema";
 import { decryptPassword } from "@/lib/utils";
 import { AuthResponseType } from "../types";
 import { signIn } from "@/auth";
+import { defaultRedirectPath } from "@/constants/paths";
 
 export const signInAction = async (
   formData: SignInFormSchema
@@ -21,7 +22,7 @@ export const signInAction = async (
       },
     };
 
-  const user = await getUserByEmail(safeParsedData.data.email.toLowerCase());
+  const user = await getUserByEmail(safeParsedData.data.email);
   if (!user)
     return {
       notify: {
@@ -52,9 +53,11 @@ export const signInAction = async (
     };
 
   await signIn("credentials", {
-    email: safeParsedData.data.email,
-    password: safeParsedData.data.password,
-    redirect: false,
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    role: user.role,
+    redirectTo: defaultRedirectPath(),
   });
 
   return {

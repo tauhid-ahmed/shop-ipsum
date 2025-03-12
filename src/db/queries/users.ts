@@ -1,8 +1,11 @@
 import { db } from "..";
 
 export const getUserByEmail = async (email: string) => {
-  const user = await db.query.users.findFirst({
-    where: (user, { eq }) => eq(user.email, email),
-  });
-  return user;
+  try {
+    return await db.query.users.findFirst({
+      where: (user, { eq }) => eq(user.email, email.toLowerCase()),
+    });
+  } catch (_) {
+    return null;
+  }
 };

@@ -8,17 +8,12 @@ const config = {
   providers: [
     Credentials({
       name: "credentials",
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
+      credentials: {},
 
       async authorize(credentials) {
+        console.log(credentials);
         return {
           ...credentials,
-          id: "1",
-          name: "John Doe",
-          email: "jdoe@me.com",
         };
       },
     }),

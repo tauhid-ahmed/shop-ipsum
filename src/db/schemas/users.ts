@@ -5,11 +5,18 @@ import {
   primaryKey,
   integer,
   pgSchema,
+  pgEnum,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 import { createId } from "@paralleldrive/cuid2";
 
 const authSchema = pgSchema("authentication");
+
+export const userRoleEnum = pgEnum("user_role", [
+  "user",
+  "admin",
+  "superadmin",
+]);
 
 export const users = authSchema.table("user", {
   id: text("id")
@@ -23,6 +30,7 @@ export const users = authSchema.table("user", {
   email: text("email").unique().notNull(),
   password: text("password"),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
+  role: userRoleEnum("role").default("user").notNull(),
   image: text("image"),
   created_at: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
   updated_at: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),

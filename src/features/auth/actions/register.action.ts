@@ -1,10 +1,12 @@
 "use server";
 import { getUserByEmail } from "@/db/queries";
 import { registerFormSchema, RegisterFormSchema } from "../schema";
-import { AuthResponseType } from "../types";
+import { AuthResponseType, AuthUserType } from "../types";
 import { VALIDATION_MESSAGES as MSG } from "../constant";
 import { encryptPassword } from "@/lib/utils";
 import { createUser } from "@/db/mutations/users";
+import { signIn } from "@/auth";
+import { defaultRedirectPath } from "@/constants/paths";
 
 export const registerAction = async (
   formData: RegisterFormSchema
@@ -39,7 +41,7 @@ export const registerAction = async (
     terms_accepted: safeParsedData.data.terms_and_condition,
   };
 
-  const newUser = await createUser(data);
+  const [newUser] = await createUser(data);
 
   if (!newUser)
     return {
@@ -48,6 +50,14 @@ export const registerAction = async (
         message: MSG.UNKNOWN_ERROR,
       },
     };
+
+  await signIn("credentials", {
+    id: newUser.id,
+    email: newUser.email,
+    role: newUser.role,
+    name: newUser.name,
+    redirectTo: defaultRedirectPath(),
+  });
 
   return {
     notify: {

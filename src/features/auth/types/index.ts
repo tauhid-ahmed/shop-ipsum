@@ -27,3 +27,10 @@ export type UserType = {
   terms_accepted: boolean;
   terms_accepted_at: Date;
 };
+
+export type AuthUserType = {
+  id: string;
+  email: string;
+  name: string;
+  role: "user" | "admin" | "superadmin";
+};
