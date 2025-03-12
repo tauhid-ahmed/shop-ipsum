@@ -30,9 +30,17 @@ export const signInAction = async (
       },
     };
 
+  if (!user.password)
+    return {
+      notify: {
+        type: "success",
+        message: MSG.UNKNOWN_ERROR,
+      },
+    };
+
   const isPasswordMatched = await decryptPassword(
     safeParsedData.data.password,
-    user.password
+    user?.password
   );
 
   if (!isPasswordMatched)
