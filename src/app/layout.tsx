@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { APP_NAME, APP_DESCRIPTION, APP_URL } from "@/constants/app.config";
 import "@/styles/globals.css";
-
+import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({
   variable: "--font-primary",
   subsets: ["latin"],
@@ -29,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${inter.className} antialiased bg-background`}
       >
+        <Analytics />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
