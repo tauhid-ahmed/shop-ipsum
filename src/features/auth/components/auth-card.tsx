@@ -1,8 +1,5 @@
 import { Heading } from "@/components/heading";
 import { BrandLogoSmall } from "@/components/icons/brand-sm";
-import { GithubLogo } from "@/components/icons/github";
-import { GoogleLogo } from "@/components/icons/google";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Link from "next/link";
 
@@ -45,7 +42,9 @@ export function AuthCard({
               Or continue with
             </div>
           </CardContent>
-          <CardFooter className="gap-4">{/* <SocialForm /> */}</CardFooter>
+          <CardFooter className="gap-4">
+            <SocialForm />
+          </CardFooter>
         </div>
       </Card>
       <div className="flex gap-2 justify-center text-center text-sm">

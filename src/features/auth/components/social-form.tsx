@@ -1,35 +1,39 @@
-"use client";
 import { GithubLogo } from "@/components/icons/github";
 import { GoogleLogo } from "@/components/icons/google";
 import { Button } from "@/components/ui/button";
-import { signIn } from "@/auth";
 import { defaultRedirectPath } from "@/constants/paths";
+import { startTransition } from "react";
+import { socialAction } from "../actions/social.action";
 
 export function SocialForm() {
-  const handleSocialLogin = (provider: "google" | "github") => {
-    signIn(provider, { callbackUrl: defaultRedirectPath() });
-    console.log("sds");
-  };
   return (
     <>
-      <Button
-        onClick={() => handleSocialLogin("google")}
-        variant="outline"
+      <form
         className="flex-1"
-        type="button"
+        onSubmit={() => {
+          startTransition(async () => {
+            await socialAction("google");
+          });
+        }}
       >
-        <GoogleLogo />
-        Google
-      </Button>
-      <Button
-        onClick={() => handleSocialLogin("github")}
-        variant="outline"
+        <Button variant={"outline"} className="w-full" type="submit">
+          <GoogleLogo />
+          Google
+        </Button>
+      </form>
+      <form
         className="flex-1"
-        type="button"
+        onSubmit={() => {
+          startTransition(async () => {
+            await socialAction("github");
+          });
+        }}
       >
-        <GithubLogo />
-        Github
-      </Button>
+        <Button variant={"outline"} className="w-full" type="submit">
+          <GithubLogo />
+          GitHub
+        </Button>
+      </form>
     </>
   );
 }

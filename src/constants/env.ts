@@ -5,10 +5,10 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
     AUTH_SECRET: z.string().min(1, "Auth secret must be provided"),
-    GOOGLE_ID: z.string().min(1, "Google ID must be provided"),
-    GOOGLE_SECRET: z.string().min(1, "Google secret must be provided"),
-    GITHUB_ID: z.string().min(1, "Github ID must be provided"),
-    GITHUB_SECRET: z.string().min(1, "Github secret must be provided"),
+    AUTH_GOOGLE_ID: z.string().min(1, "Google ID must be provided"),
+    AUTH_GOOGLE_SECRET: z.string().min(1, "Google secret must be provided"),
+    AUTH_GITHUB_ID: z.string().min(1, "Github ID must be provided"),
+    AUTH_GITHUB_SECRET: z.string().min(1, "Github secret must be provided"),
   },
 
   client: {
@@ -27,9 +27,9 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
     NEXT_PUBLIC_APP_DESCRIPTION: process.env.NEXT_PUBLIC_APP_DESCRIPTION,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-    GOOGLE_ID: process.env.GOOGLE_ID,
-    GOOGLE_SECRET: process.env.GOOGLE_SECRET,
-    GITHUB_ID: process.env.GITHUB_ID,
-    GITHUB_SECRET: process.env.GITHUB_SECRET,
+    AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
+    AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
+    AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
+    AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
   },
 });

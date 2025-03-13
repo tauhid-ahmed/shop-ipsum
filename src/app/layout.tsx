@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${inter.className} antialiased bg-background`}
       >
-        <Analytics />
+        {/* <Analytics /> */}
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

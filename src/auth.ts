@@ -5,7 +5,6 @@ import Github from "next-auth/providers/github";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "./db";
 import { AuthTokenType } from "./features/auth/types";
-import { env } from "./constants/env";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
@@ -17,14 +16,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return credentials;
       },
     }),
-    Google({
-      clientId: env.GOOGLE_ID,
-      clientSecret: env.GOOGLE_SECRET,
-    }),
-    Github({
-      clientId: env.GITHUB_ID,
-      clientSecret: env.GITHUB_SECRET,
-    }),
+    Google,
+    Github,
   ],
 
   callbacks: {
@@ -51,7 +44,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
 
   pages: {
-    signIn: "/sign-in",
-    error: "/sign-in",
+    signIn: "/auth/sign-in",
+    error: "/auth/sign-in",
   },
 });
