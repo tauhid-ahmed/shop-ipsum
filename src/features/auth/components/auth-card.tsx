@@ -10,6 +10,7 @@ import { AlertCircle } from "lucide-react";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { NotifyType } from "../types";
+import { SocialForm } from "./social-form";
 
 type AuthCardProps = {
   title: string;
@@ -44,16 +45,7 @@ export function AuthCard({
               Or continue with
             </div>
           </CardContent>
-          <CardFooter className="gap-4">
-            <Button variant="outline" className="flex-1">
-              <GoogleLogo />
-              Google
-            </Button>
-            <Button variant="outline" className="flex-1">
-              <GithubLogo />
-              Github
-            </Button>
-          </CardFooter>
+          <CardFooter className="gap-4">{/* <SocialForm /> */}</CardFooter>
         </div>
       </Card>
       <div className="flex gap-2 justify-center text-center text-sm">

@@ -34,7 +34,7 @@ export const signInAction = async (
   if (!user.password)
     return {
       notify: {
-        type: "success",
+        type: "error",
         message: MSG.UNKNOWN_ERROR,
       },
     };
@@ -53,11 +53,7 @@ export const signInAction = async (
     };
 
   await signIn("credentials", {
-    id: user.id,
     email: user.email,
-    name: user.name,
-    role: user.role,
-    image: user.image,
     redirectTo: defaultRedirectPath(),
   });
 

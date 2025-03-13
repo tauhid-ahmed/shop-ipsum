@@ -21,9 +21,8 @@ export const registerAction = async (
       },
     };
 
-  const user = await getUserByEmail(
-    safeParsedData.data.email.toLocaleLowerCase()
-  );
+  const user = await getUserByEmail(safeParsedData.data.email);
+
   if (user)
     return {
       notify: {
@@ -52,11 +51,7 @@ export const registerAction = async (
     };
 
   await signIn("credentials", {
-    id: newUser.id,
     email: newUser.email,
-    role: newUser.role,
-    name: newUser.name,
-    image: newUser.image,
     redirectTo: defaultRedirectPath(),
   });
 
