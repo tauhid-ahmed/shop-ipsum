@@ -5,85 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1741604327729,
-      "tag": "0000_optimal_mac_gargan",
+      "when": 1741983175297,
+      "tag": "0000_supreme_stryfe",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1741604810741,
-      "tag": "0001_gigantic_the_spike",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1741715116473,
-      "tag": "0002_hard_emma_frost",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1741719335694,
-      "tag": "0003_wooden_jimmy_woo",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1741726771600,
-      "tag": "0004_normal_hairball",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1741726914077,
-      "tag": "0005_foamy_diamondback",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1741726953746,
-      "tag": "0006_legal_hitman",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1741726981278,
-      "tag": "0007_flippant_kid_colt",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1741727013770,
-      "tag": "0008_volatile_pandemic",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "7",
-      "when": 1741727135162,
-      "tag": "0009_old_talon",
-      "breakpoints": true
-    },
-    {
-      "idx": 10,
-      "version": "7",
-      "when": 1741803837767,
-      "tag": "0010_nice_dazzler",
-      "breakpoints": true
-    },
-    {
-      "idx": 11,
-      "version": "7",
-      "when": 1741806096329,
-      "tag": "0011_flimsy_jubilee",
+      "when": 1741983650569,
+      "tag": "0001_vengeful_omega_flight",
       "breakpoints": true
     }
   ]

@@ -16,7 +16,13 @@ export default async function Home() {
           Welcome to BDStore {countdown().days} days and {countdown().hours}{" "}
           hours left to launch
         </Heading>
-        {JSON.stringify(session)}
+        <div className="p-1">
+          <p>{session?.user?.name}</p>
+          <p>{session?.user?.email}</p>
+          <p>{session?.user?.role}</p>
+          <p>{session?.user?.id}</p>
+          <p>{session?.user?.image}</p>
+        </div>
         {/* <Slider />
         <div className="my-32 bg-amber-900 h-96 text-red-500">
           <CardSlider />

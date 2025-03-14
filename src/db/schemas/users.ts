@@ -6,11 +6,10 @@ import {
   integer,
   pgSchema,
   pgEnum,
+  pgTable,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 import { createId } from "@paralleldrive/cuid2";
-
-const authSchema = pgSchema("authentication");
 
 export const userRoleEnum = pgEnum("user_role", [
   "user",
@@ -18,15 +17,12 @@ export const userRoleEnum = pgEnum("user_role", [
   "superadmin",
 ]);
 
-export const users = authSchema.table("user", {
+export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => createId()),
   name: text("name").notNull(),
-  username: text("username")
-    .unique()
-    .$defaultFn(() => createId())
-    .notNull(),
+  username: text("username").unique(),
   email: text("email").unique().notNull(),
   password: text("password"),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
@@ -42,7 +38,7 @@ export const users = authSchema.table("user", {
     .notNull(),
 });
 
-export const accounts = authSchema.table(
+export const accounts = pgTable(
   "account",
   {
     userId: text("userId")
@@ -68,7 +64,7 @@ export const accounts = authSchema.table(
   ]
 );
 
-export const sessions = authSchema.table("session", {
+export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").primaryKey(),
   userId: text("userId")
     .notNull()
@@ -93,7 +89,7 @@ export const sessions = authSchema.table("session", {
 //   ]
 // );
 
-export const authenticators = authSchema.table(
+export const authenticators = pgTable(
   "authenticator",
   {
     credentialID: text("credentialID").notNull().unique(),

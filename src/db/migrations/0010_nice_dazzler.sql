@@ -1,1 +1,0 @@
-ALTER TABLE "authentication"."user" ALTER COLUMN "password" DROP NOT NULL;

@@ -1,12 +1,12 @@
 {
-  "id": "fac9278c-3e48-48ad-a44a-8651e7908062",
-  "prevId": "1844714d-3836-4af5-8f65-efca5684b9d8",
+  "id": "12ffdf2b-666c-46cf-8a52-d2cfd8ae6b56",
+  "prevId": "923d4071-f4ea-4a01-9d21-addf121dee12",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "authentication.account": {
+    "public.account": {
       "name": "account",
-      "schema": "authentication",
+      "schema": "",
       "columns": {
         "userId": {
           "name": "userId",
@@ -81,7 +81,6 @@
           "name": "account_userId_user_id_fk",
           "tableFrom": "account",
           "tableTo": "user",
-          "schemaTo": "authentication",
           "columnsFrom": [
             "userId"
           ],
@@ -98,9 +97,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "authentication.authenticator": {
+    "public.authenticator": {
       "name": "authenticator",
-      "schema": "authentication",
+      "schema": "",
       "columns": {
         "credentialID": {
           "name": "credentialID",
@@ -157,7 +156,6 @@
           "name": "authenticator_userId_user_id_fk",
           "tableFrom": "authenticator",
           "tableTo": "user",
-          "schemaTo": "authentication",
           "columnsFrom": [
             "userId"
           ],
@@ -182,9 +180,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "authentication.session": {
+    "public.session": {
       "name": "session",
-      "schema": "authentication",
+      "schema": "",
       "columns": {
         "sessionToken": {
           "name": "sessionToken",
@@ -211,7 +209,6 @@
           "name": "session_userId_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "schemaTo": "authentication",
           "columnsFrom": [
             "userId"
           ],
@@ -228,9 +225,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "authentication.user": {
+    "public.user": {
       "name": "user",
-      "schema": "authentication",
+      "schema": "",
       "columns": {
         "id": {
           "name": "id",
@@ -242,13 +239,19 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
           "notNull": false
         },
         "email": {
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "password": {
           "name": "password",
@@ -262,6 +265,14 @@
           "primaryKey": false,
           "notNull": false
         },
+        "role": {
+          "name": "role",
+          "type": "user_role",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'user'"
+        },
         "image": {
           "name": "image",
           "type": "text",
@@ -272,7 +283,28 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "terms_accepted": {
+          "name": "terms_accepted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "terms_accepted_at": {
+          "name": "terms_accepted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
           "default": "now()"
         }
       },
@@ -280,6 +312,13 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
+        "user_username_unique": {
+          "name": "user_username_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "username"
+          ]
+        },
         "user_email_unique": {
           "name": "user_email_unique",
           "nullsNotDistinct": false,
@@ -293,7 +332,17 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.user_role": {
+      "name": "user_role",
+      "schema": "public",
+      "values": [
+        "user",
+        "admin",
+        "superadmin"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},
