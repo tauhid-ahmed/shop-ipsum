@@ -56,9 +56,11 @@ const defaultUser = {
 
 export default function ProfileWidget() {
   const [popoverOpen, setPopoverOpen] = React.useState(false);
-  const { signOut, signIn, user: authUser } = useAuth();
+  const { signOut, user: authUser } = useAuth();
   const user = { ...defaultUser, ...authUser } as AuthUserType;
   const pathname = usePathname();
+
+  console.log(user);
 
   React.useEffect(() => {
     setPopoverOpen(false);
@@ -149,15 +151,16 @@ function GuestUser() {
 }
 
 function RegisteredUser() {
+  const { signOut } = useAuth();
   return (
     <>
       <Button
         className="text-destructive-light"
         variant="secondary"
         size="sm"
-        asChild
+        onClick={() => signOut()}
       >
-        <Link href="#">Sign Out</Link>
+        Sign Out
       </Button>
     </>
   );
