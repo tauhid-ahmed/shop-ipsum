@@ -1,5 +1,4 @@
 "use client";
-
 import {
   LucideChevronLeft,
   LucideMinus,
@@ -16,6 +15,9 @@ import {
 } from "@/components/ui/popover";
 import { Heading } from "@/components/heading";
 import React from "react";
+import { productStatus } from "@/lib/productStatus";
+import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
 
 export default function CartView() {
   return (
@@ -33,9 +35,9 @@ export default function CartView() {
         </PopoverTrigger>
         <PopoverContent
           sideOffset={16}
-          className="w-88 h-[calc(100vh-4rem)] p-0"
+          className="w-88 h-[calc(100vh-8rem)] p-0"
         >
-          <div className="flex flex-col h-full [&>*]:p-6">
+          <div className="flex flex-col h-full [&>*]:p-4">
             <CartHeader />
             <div className="flex-1 overflow-y-scroll bg-accent/20">
               <CartBody />
@@ -61,77 +63,73 @@ function CartHeader() {
 
 function CartBody() {
   return (
-    <div className="flex flex-col gap-2">
-      {Array.from({ length: 9 }).map((_, i) => (
-        <React.Fragment key={i}>
-          <div className="flex gap-4 relative">
-            <div className="h-28 w-24 bg-secondary"></div>
-            <div className="flex flex-col gap-2 overflow-hidden">
-              <div className="overflow-hidden">
-                <Heading
-                  className="text-ellipsis"
-                  align="left"
-                  as="h3"
-                  size="md"
-                  weight="bold"
-                >
-                  Product Namesdsdsdsdsdsds
-                </Heading>
-                <p className="text-sm text-muted-foreground">Description</p>
-              </div>
-              <div className="flex items-center justify-between gap-4">
-                <div className="inline-flex align-middle rounded border-t border-b border-border">
-                  <div className="flex -my-px">
-                    <Button
-                      className="size-6 !p-0 [&_svg]:!size-4"
-                      variant="outline"
-                    >
-                      <LucideMinus />
-                    </Button>
-                    <div className="h-6 w-8 text-center text-sm flex items-center justify-center font-bold">
-                      13
-                    </div>
-                    <Button
-                      className="size-6 !p-0 [&_svg]:!size-4"
-                      variant="outline"
-                    >
-                      <LucidePlus />
-                    </Button>
-                  </div>
+    <div className="flex flex-col gap-3">
+      {Array.from({ length: 9 }).map((_, i) => {
+        const { message, className } = productStatus.stock(
+          Math.floor(Math.random() * 15)
+        );
+        return (
+          <React.Fragment key={i}>
+            <div className="flex gap-4 relative">
+              <div className="h-24 w-20 bg-secondary"></div>
+              <div className="flex flex-col gap-2 overflow-hidden">
+                <div className="overflow-hidden">
+                  <Heading
+                    className="text-ellipsis"
+                    align="left"
+                    as="h3"
+                    size="default"
+                    weight="semibold"
+                  >
+                    Product
+                  </Heading>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Description
+                  </p>
                 </div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  USD$ 23.00
+                <div className="flex items-center justify-between gap-4">
+                  <div className="inline-flex align-middle rounded-lg border-t border-b border-border">
+                    <div className="flex -my-px">
+                      <Button
+                        className="size-5 !p-0 [&_svg]:!size-4"
+                        variant="outline"
+                      >
+                        <LucideMinus />
+                      </Button>
+                      <div className="h-5 w-8 text-center text-sm flex items-center justify-center font-semibold">
+                        13
+                      </div>
+                      <Button
+                        className="size-5 !p-0 [&_svg]:!size-4"
+                        variant="outline"
+                      >
+                        <LucidePlus />
+                      </Button>
+                    </div>
+                  </div>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    <span className="text-xs">USD$</span>{" "}
+                    <strong>{(23).toFixed(2)}</strong>
+                  </p>
+                </div>
+                <p className={cn("text-xs font-medium", className)}>
+                  {message}
                 </p>
               </div>
-              {/* messages */}
-              {/* <p className="text-xs text-destructive">
-                The requested quantity is not available
-              </p> */}
-              <div>
-                <p className="text-sm text-destructive-light font-medium">
-                  Final sale
-                </p>
-                <p className="text-xs text-destructive-light">
-                  Only one item left
-                </p>
+              <div className="absolute top-0 right-1">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  shape="pill"
+                  className="size-5 [&_svg]:!size-4 !text-destructive-light"
+                >
+                  <LucideX />
+                </Button>
               </div>
-              {/* <p className="text-emerald-500 text-sm font-medium">
-                Only 43 items left
-              </p> */}
             </div>
-            <div className="absolute -top-1 -right-1">
-              <Button
-                variant="outline"
-                size="icon"
-                shape="pill"
-                className="size-6 [&_svg]:!size-4"
-              >
-                <LucideX />
-              </Button>
-            </div>
-          </div>
-        </React.Fragment>
-      ))}
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 }
@@ -141,16 +139,18 @@ function CartFooter() {
     <div className="border-t border-border bg-accent/40 flex flex-col gap-3">
       <div className="flex items-center gap-4 pb-4">
         <strong>Subtotal</strong>
+        <Separator orientation="vertical" />
         <span>6&nbsp;items</span>
-        <span className="ml-auto text-lg">
-          USD$ <strong>24523.00</strong>
+        <Separator orientation="vertical" />
+        <span className="ml-auto space-x-2">
+          <span className="text-muted-foreground text-sm">USD$</span>
+          <strong>24523.00</strong>
         </span>
       </div>
+      <Button className="w-full">Proceed to checkout</Button>
       <Button variant="outline" className="w-full">
         View your cart
       </Button>
-      <Button className="w-full">Proceed to checkout</Button>
-      <span className="py-4"></span>
     </div>
   );
 }

@@ -55,10 +55,12 @@ const defaultUser = {
   image: "/favicon.ico",
 };
 
-export default function ProfilePopover() {
+export default function ProfileWidget() {
   const [popoverOpen, setPopoverOpen] = React.useState(false);
   const user = { ...defaultUser } as AuthUserType;
   const pathname = usePathname();
+
+  const isSignedIn = true;
 
   React.useEffect(() => {
     setPopoverOpen(false);
@@ -71,10 +73,7 @@ export default function ProfilePopover() {
       onOpenChange={setPopoverOpen}
     >
       <PopoverTrigger asChild>
-        <Button variant="transparent" shape="pill">
-          <LucideCircleUser />
-          <LucideEllipsisVertical />
-        </Button>
+        <Button shape="pill">Sign In</Button>
       </PopoverTrigger>
       <PopoverContent
         sideOffset={16}
