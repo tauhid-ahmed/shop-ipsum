@@ -17,9 +17,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         console.log({ credentials });
         return {
           id: "1",
-          name: "John Doe",
-          email: "q8V5H@example.com",
           role: "user",
+          ...credentials,
         };
       },
     }),

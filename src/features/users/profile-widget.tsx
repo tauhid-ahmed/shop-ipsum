@@ -1,10 +1,10 @@
 "use client";
+
 import {
   LucideCircleUser,
   LucideHeart,
   LucideGift,
   LucideListOrdered,
-  LucideLogOut,
   LucideEllipsisVertical,
   LucideShoppingBag,
 } from "lucide-react";
@@ -19,6 +19,10 @@ import { registerPath, signInPath } from "@/constants/paths";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
 import React from "react";
+import { auth } from "@/auth";
+import Image from "next/image";
+import { type AuthUserType } from "@/features/auth/types";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   {
@@ -44,9 +48,28 @@ const menuItems = [
   { name: "Gift cards", icon: <LucideGift />, href: "#" },
 ];
 
+const defaultUser = {
+  id: "1",
+  name: "Guest User",
+  email: "Please sign in or create an account",
+  image: "/favicon.ico",
+};
+
 export default function ProfilePopover() {
+  const [popoverOpen, setPopoverOpen] = React.useState(false);
+  const user = { ...defaultUser } as AuthUserType;
+  const pathname = usePathname();
+
+  React.useEffect(() => {
+    setPopoverOpen(false);
+  }, [pathname]);
+
   return (
-    <Popover>
+    <Popover
+      open={popoverOpen}
+      defaultOpen={popoverOpen}
+      onOpenChange={setPopoverOpen}
+    >
       <PopoverTrigger asChild>
         <Button variant="transparent" shape="pill">
           <LucideCircleUser />
@@ -57,8 +80,7 @@ export default function ProfilePopover() {
         sideOffset={16}
         className="relative p-0 rounded text-muted-foreground"
       >
-        <SignedInHeading />
-        <SignedOutHeading />
+        <ProfileHeader user={user} />
         <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
           {menuItems.map((item) => (
             <Link
@@ -80,70 +102,66 @@ export default function ProfilePopover() {
   );
 }
 
-type ProfileHeadingProps = {
-  title?: string;
-  subtitle?: string;
-  footer?: React.ReactNode;
-};
-
-function ProfileHeading({ title, subtitle, footer }: ProfileHeadingProps) {
+function ProfileHeader({ user }: { user: AuthUserType }) {
+  const guestUser = Boolean(user.id);
+  const isUser = !guestUser;
   return (
-    <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/40">
-      <div className="flex flex-col items-center gap-1 text-center">
-        <LucideCircleUser className="size-10" />
-        <div className="">
+    <>
+      <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/40">
+        <div className="size-10 mx-auto rounded-full border-2 border-primary overflow-hidden">
+          <Image
+            src={user.image as string}
+            alt={user.name}
+            width={40}
+            height={40}
+          />
+        </div>
+        <div className="text-center">
           <Heading
             as="h3"
             size="lg"
             weight="bold"
-            className="text-secondary-foreground"
+            className="text-secondary-foreground capitalize"
           >
-            {title}
+            {user.name}
           </Heading>
-          <p className="text-sm">{subtitle}</p>
-          <div className="mt-2">{footer}</div>
+          <p className="text-muted-foreground text-sm font-medium">
+            {user.email}
+          </p>
+          <div className="flex gap-4 justify-center mt-2">
+            {isUser && <RegisteredUser />}
+            {guestUser && <GuestUser />}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
-function SignedInHeading({
-  title = "John Doe",
-  subtitle = "Member since 2023",
-}: Exclude<ProfileHeadingProps, "footer">) {
+function GuestUser() {
   return (
-    <ProfileHeading
-      title={title}
-      subtitle={subtitle}
-      footer={
-        <Button variant="destructive" size="sm">
-          <LucideLogOut className="size-4" />
-          Sign Out
-        </Button>
-      }
-    />
+    <>
+      <Button size="sm" asChild>
+        <Link href={signInPath()}>Sign In</Link>
+      </Button>
+      <Button size="sm" variant="outline" asChild>
+        <Link href={registerPath()}>Register</Link>
+      </Button>
+    </>
   );
 }
 
-function SignedOutHeading({
-  title = "New Customer?",
-  subtitle = "Create an account",
-}: Exclude<ProfileHeadingProps, "footer">) {
+function RegisteredUser() {
   return (
-    <ProfileHeading
-      title={title}
-      subtitle={subtitle}
-      footer={
-        <div className="flex justify-center gap-2">
-          <Button variant="secondary" size="sm" asChild>
-            <Link href={signInPath()}> Sign In</Link>
-          </Button>
-          <Button size="sm" asChild>
-            <Link href={registerPath()}>Register</Link>
-          </Button>
-        </div>
-      }
-    />
+    <>
+      <Button
+        className="text-destructive-light"
+        variant="secondary"
+        size="sm"
+        asChild
+      >
+        <Link href="#">Sign Out</Link>
+      </Button>
+    </>
   );
 }
