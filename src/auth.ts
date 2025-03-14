@@ -11,7 +11,6 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./.env.local" });
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  // debug: true,
   adapter: DrizzleAdapter(db),
   events: {
     linkAccount: async ({ user }) => {
@@ -29,11 +28,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return user;
       },
     }),
-    Google({
-      authorization: {
-        url: "https://accounts.google.com/o/oauth2/v2/auth",
-      },
-    }),
+    // Google({
+    //   authorization: {
+    //     url: "https://accounts.google.com/o/oauth2/v2/auth",
+    //   },
+    // }),
     Github,
   ],
 

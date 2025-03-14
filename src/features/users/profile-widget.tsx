@@ -19,10 +19,10 @@ import { registerPath, signInPath } from "@/constants/paths";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { auth } from "@/auth";
 import Image from "next/image";
 import { type AuthUserType } from "@/features/auth/types";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 const menuItems = [
   {
@@ -49,7 +49,6 @@ const menuItems = [
 ];
 
 const defaultUser = {
-  id: "1",
   name: "Guest User",
   email: "Please sign in or create an account",
   image: "/favicon.ico",
@@ -57,10 +56,9 @@ const defaultUser = {
 
 export default function ProfileWidget() {
   const [popoverOpen, setPopoverOpen] = React.useState(false);
-  const user = { ...defaultUser } as AuthUserType;
+  const { signOut, signIn, user: authUser } = useAuth();
+  const user = { ...defaultUser, ...authUser } as AuthUserType;
   const pathname = usePathname();
-
-  const isSignedIn = true;
 
   React.useEffect(() => {
     setPopoverOpen(false);
@@ -102,7 +100,7 @@ export default function ProfileWidget() {
 }
 
 function ProfileHeader({ user }: { user: AuthUserType }) {
-  const guestUser = Boolean(user.id);
+  const guestUser = Boolean(!user.id);
   const isUser = !guestUser;
   return (
     <>
