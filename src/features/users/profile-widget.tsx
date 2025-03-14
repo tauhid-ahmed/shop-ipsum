@@ -48,19 +48,11 @@ const menuItems = [
   { name: "Gift cards", icon: <LucideGift />, href: "#" },
 ];
 
-const defaultUser = {
-  name: "Guest User",
-  email: "Please sign in or create an account",
-  image: "/favicon.ico",
-};
-
 export default function ProfileWidget() {
   const [popoverOpen, setPopoverOpen] = React.useState(false);
-  const { signOut, user: authUser } = useAuth();
-  const user = { ...defaultUser, ...authUser } as AuthUserType;
-  const pathname = usePathname();
 
-  console.log(user);
+  const { user } = useAuth();
+  const pathname = usePathname();
 
   React.useEffect(() => {
     setPopoverOpen(false);
@@ -79,7 +71,7 @@ export default function ProfileWidget() {
         sideOffset={16}
         className="relative p-0 rounded text-muted-foreground"
       >
-        <ProfileHeader user={user} />
+        <ProfileHeader user={user as AuthUserType} />
         <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
           {menuItems.map((item) => (
             <Link
