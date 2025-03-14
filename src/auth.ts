@@ -5,18 +5,29 @@ import Github from "next-auth/providers/github";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "./db";
 import { AuthTokenType } from "./features/auth/types";
+// import { access } from "fs";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: DrizzleAdapter(db),
+  debug: true,
+  // adapter: DrizzleAdapter(db),
   providers: [
     Credentials({
       name: "credentials",
       async authorize(credentials) {
-        console.log(credentials);
-        return credentials;
+        console.log({ credentials });
+        return {
+          id: "1",
+          name: "John Doe",
+          email: "q8V5H@example.com",
+          role: "user",
+        };
       },
     }),
-    Google,
+    Google({
+      authorization: {
+        url: "https://accounts.google.com/o/oauth2/v2/auth",
+      },
+    }),
     Github,
   ],
 
@@ -35,7 +46,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       };
     },
     async jwt({ token }) {
-      return token as AuthTokenType;
+      return token;
     },
   },
 
@@ -45,6 +56,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
   pages: {
     signIn: "/auth/sign-in",
-    error: "/auth/sign-in",
+    error: "/auth/error",
   },
 });
