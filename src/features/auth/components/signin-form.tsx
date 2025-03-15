@@ -105,7 +105,7 @@ function RememberMe() {
 function ForgotPasswordRedirect() {
   return (
     <Link
-      href="#"
+      href={paths.forgotPasswordPath()}
       className="text-sm ml-auto text-blue-600 dark:text-blue-400 font-medium hover:underline underline-offset-2 focus:underline active:underline"
     >
       Forgot Password?

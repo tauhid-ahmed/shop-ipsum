@@ -8,6 +8,7 @@ import { AuthResponseType } from "../types";
 import { signIn } from "@/auth";
 import { defaultRedirectPath } from "@/constants/paths";
 import { redirect } from "next/navigation";
+import { sendVerificationToken } from "@/db/mutations/email-verify";
 
 export const signInAction = async (
   formData: SignInFormSchema
@@ -53,14 +54,16 @@ export const signInAction = async (
       },
     };
 
+  if (!user.emailVerified) {
+    // TODO: Send verification email
+    await sendVerificationToken(user.email);
+    redirect("/auth/verify-email");
+  }
+
   await signIn("credentials", {
     email: user.email,
     redirectTo: defaultRedirectPath(),
   });
-
-  // if (!user.email_verified) {
-  //   redirect("/auth/verify-email");
-  // }
 
   return {
     notify: {

@@ -1,4 +1,4 @@
-import { LucideLoaderCircle } from "lucide-react";
+import { LucideLoaderCircle, Loader } from "lucide-react";
 import { Section } from "./layout/section";
 
 export default function PageLoader() {
@@ -7,4 +7,8 @@ export default function PageLoader() {
       <LucideLoaderCircle className="animate-spin" />
     </Section>
   );
+}
+
+export function Loader2() {
+  return <Loader className="animate-spin" />;
 }

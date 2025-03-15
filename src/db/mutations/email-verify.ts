@@ -1,11 +1,11 @@
 import { db } from "..";
 import { verificationTokens } from "../schemas";
 import { getVerificationTokenByEmail } from "../queries";
-import { generateVerificationToken } from "@/lib/generate-token";
+import { generateToken } from "@/lib/generate-token";
 import { eq } from "drizzle-orm";
 
-export const createVerificationToken = async (email: string) => {
-  const token = generateVerificationToken();
+export const sendVerificationToken = async (email: string) => {
+  const token = generateToken();
   const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
   const existingToken = await getVerificationTokenByEmail(email);
 
@@ -28,3 +28,5 @@ export const createVerificationToken = async (email: string) => {
     return null;
   }
 };
+
+export const verifyEmail = async (email: string) => {};

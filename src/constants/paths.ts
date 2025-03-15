@@ -3,6 +3,8 @@ export const homePath = () => "/";
 // Auth Routes
 export const signInPath = () => "/auth/sign-in";
 export const registerPath = () => "/auth/register";
+export const verifyEmailPath = () => "/auth/verify-email";
+export const forgotPasswordPath = () => "/auth/forgot-password";
 
 // Products
 export const productsPath = () => "/products";

@@ -4,7 +4,6 @@ import {
   text,
   primaryKey,
   integer,
-  pgSchema,
   pgEnum,
   pgTable,
 } from "drizzle-orm/pg-core";
