@@ -52,5 +52,36 @@ export const registerFormSchema = z
     path: ["confirm_password"],
   });
 
+export const forgotPasswordEmailSchema = z.object({
+  email: z
+    .string({ required_error: MSG.EMAIL_REQUIRED })
+    .email(MSG.EMAIL_REQUIRED),
+});
+
+export const resetPasswordSchema = z.object({
+  password: z
+    .string({ required_error: MSG.PASSWORD_REQUIRED })
+    .min(MSG.PASSWORD_MIN_LENGTH, {
+      message: MSG.PASSWORD_MIN,
+    })
+    .max(64, { message: MSG.PASSWORD_MAX })
+    .regex(/[A-Z]/, {
+      message: MSG.PASSWORD_UPPERCASE,
+    })
+    .regex(/[a-z]/, {
+      message: MSG.PASSWORD_LOWERCASE,
+    })
+    .regex(/[0-9]/, { message: MSG.PASSWORD_NUMBER })
+    .regex(/[^A-Za-z0-9]/, {
+      message: MSG.PASSWORD_SPECIAL_CHAR,
+    })
+    .trim(),
+  confirm_password: z.string({ required_error: MSG.PASSWORD_MISMATCH }),
+});
+
 export type SignInFormSchema = z.infer<typeof signInFormSchema>;
 export type RegisterFormSchema = z.infer<typeof registerFormSchema>;
+export type ForgotPasswordEmailSchema = z.infer<
+  typeof forgotPasswordEmailSchema
+>;
+export type ResetPasswordSchema = z.infer<typeof resetPasswordSchema>;

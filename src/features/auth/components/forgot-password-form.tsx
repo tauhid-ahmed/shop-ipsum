@@ -13,8 +13,5 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function ResetPasswordForm() {
-  const form = useForm({
-    mode: "all",
-  });
   return <div>ResetForm</div>;
 }
