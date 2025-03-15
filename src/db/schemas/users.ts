@@ -25,12 +25,12 @@ export const users = pgTable("user", {
   username: text("username").unique(),
   email: text("email").unique().notNull(),
   password: text("password"),
-  emailVerified: timestamp("email_verified", { mode: "date" }),
+  emailVerified: timestamp("emailVerified", { mode: "date" }),
   role: userRoleEnum("role").default("user").notNull(),
   image: text("image"),
-  created_at: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
-  updated_at: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
-  terms_accepted: boolean("terms_accepted").default(false).notNull(),
+  created_at: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
+  updated_at: timestamp("updatedAt", { mode: "date" }).defaultNow().notNull(),
+  terms_accepted: boolean("termsAccepted").default(false).notNull(),
   terms_accepted_at: timestamp("terms_accepted_at", {
     mode: "date",
   })
@@ -46,7 +46,7 @@ export const accounts = pgTable(
       .references(() => users.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccountType>().notNull(),
     provider: text("provider").notNull(),
-    providerAccountId: text("provider_account_id").notNull(),
+    providerAccountId: text("providerAccountId").notNull(),
     refresh_token: text("refresh_token"),
     access_token: text("access_token"),
     expires_at: integer("expires_at"),
@@ -65,7 +65,7 @@ export const accounts = pgTable(
 );
 
 export const sessions = pgTable("session", {
-  sessionToken: text("session_token").primaryKey(),
+  sessionToken: text("sessionToken").primaryKey(),
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
@@ -91,15 +91,15 @@ export const verificationTokens = pgTable(
 export const authenticators = pgTable(
   "authenticator",
   {
-    credentialID: text("credential_id").notNull().unique(),
+    credentialID: text("credentialID").notNull().unique(),
     userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    providerAccountId: text("provider_account_id").notNull(),
-    credentialPublicKey: text("credential_publicKey").notNull(),
+    providerAccountId: text("providerAccountId").notNull(),
+    credentialPublicKey: text("credentialPublicKey").notNull(),
     counter: integer("counter").notNull(),
-    credentialDeviceType: text("credential_device_type").notNull(),
-    credentialBackedUp: boolean("credential_backed_up").notNull(),
+    credentialDeviceType: text("credentialDeviceType").notNull(),
+    credentialBackedUp: boolean("credentialBackedUp").notNull(),
     transports: text("transports"),
   },
   (authenticator) => [

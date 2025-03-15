@@ -53,14 +53,14 @@ export const signInAction = async (
       },
     };
 
-  // await signIn("credentials", {
-  //   email: user.email,
-  //   redirectTo: defaultRedirectPath(),
-  // });
+  await signIn("credentials", {
+    email: user.email,
+    redirectTo: defaultRedirectPath(),
+  });
 
-  if (!user.email_verified) {
-    redirect("/auth/verify-email");
-  }
+  // if (!user.email_verified) {
+  //   redirect("/auth/verify-email");
+  // }
 
   return {
     notify: {

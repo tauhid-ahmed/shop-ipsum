@@ -13,14 +13,21 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 export default function EmailVerificationForm() {
+  const [value, setValue] = React.useState("");
   return (
     <AuthCard>
       <AuthCardHeader title="Verify your email" />
       <AuthCardBody>
         <div className="w-fit mx-auto space-y-4">
-          <InputOTP maxLength={6}>
+          <InputOTP
+            value={value}
+            onChange={setValue}
+            maxLength={6}
+            pattern={REGEXP_ONLY_DIGITS}
+          >
             <InputOTPGroup className="[&>*]:size-12 [&>*]:text-xl">
               <InputOTPSlot index={0} />
               <InputOTPSlot index={1} />
