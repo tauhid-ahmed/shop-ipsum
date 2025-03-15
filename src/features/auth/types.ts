@@ -1,5 +1,10 @@
-export type NotifyType = { type: "error" | "success"; message: string };
+// Notification Type
+export type NotifyType = {
+  type: "error" | "success";
+  message: string;
+};
 
+// Auth Response Type
 export type AuthResponseType =
   | Record<string, string[] | undefined>
   | undefined
@@ -7,6 +12,7 @@ export type AuthResponseType =
       notify: NotifyType;
     };
 
+// New User Type
 export type NewUserType = {
   name: string;
   email: string;
@@ -14,6 +20,7 @@ export type NewUserType = {
   terms_accepted: boolean;
 };
 
+// User Type
 export type UserType = {
   id: string;
   name: string;
@@ -28,6 +35,7 @@ export type UserType = {
   terms_accepted_at: Date;
 };
 
+// Authenticated User Type
 export type AuthUserType = {
   id: string;
   email: string;
@@ -36,6 +44,7 @@ export type AuthUserType = {
   image: string;
 };
 
+// Auth Token Type
 export type AuthTokenType = {
   sub: string;
   email: string;
