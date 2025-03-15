@@ -1,13 +1,12 @@
 import { Heading } from "@/components/heading";
 import { BrandLogoSmall } from "@/components/icons/brand-sm";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 
 import { AlertCircle } from "lucide-react";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { NotifyType } from "../types";
-import { SocialForm } from "./social-form";
 
 export function AuthCard({ children }: { children: React.ReactNode }) {
   return <div className="space-y-8">{children}</div>;

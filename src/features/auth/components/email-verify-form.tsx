@@ -17,9 +17,9 @@ import {
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "@/components/loader";
+// import { Loader2 } from "@/components/loader";
 import { tokenVerifyAction } from "../actions/email-verify.action";
-import { CircleCheck } from "lucide-react";
+// import { CircleCheck } from "lucide-react";
 import { defaultRedirectPath } from "@/constants/paths";
 import { NotifyType } from "../types";
 

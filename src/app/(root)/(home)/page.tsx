@@ -20,7 +20,7 @@ export default async function Home() {
         <div className="p-1">
           <p>{session?.user?.name}</p>
           <p>{session?.user?.email}</p>
-          <p>{session?.user?.role}</p>
+          {/* <p>{session?.user?.role}</p> */}
           <p>{session?.user?.id}</p>
           <p>{session?.user?.image}</p>
         </div>

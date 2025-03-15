@@ -1,7 +1,6 @@
 import { GithubLogo } from "@/components/icons/github";
 import { GoogleLogo } from "@/components/icons/google";
 import { Button } from "@/components/ui/button";
-import { defaultRedirectPath } from "@/constants/paths";
 import { startTransition } from "react";
 import { socialAction } from "../actions/social.action";
 

@@ -37,7 +37,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user }) {
       console.log("========");
       console.log(user.email);
       return true;

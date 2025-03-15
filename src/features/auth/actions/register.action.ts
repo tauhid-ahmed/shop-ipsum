@@ -5,8 +5,6 @@ import { AuthResponseType } from "../types";
 import { VALIDATION_MESSAGES as MSG } from "../data";
 import { encryptPassword } from "@/lib/utils";
 import { createUser } from "@/db/mutations/users";
-import { signIn } from "@/auth";
-import { defaultRedirectPath } from "@/constants/paths";
 import { sendVerificationToken } from "@/db/mutations/email-verify";
 import { redirect } from "next/navigation";
 
