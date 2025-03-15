@@ -55,7 +55,6 @@ export const signInAction = async (
     };
 
   if (!user.emailVerified) {
-    // TODO: Send verification email
     await sendVerificationToken(user.email);
     redirect("/auth/verify-email");
   }

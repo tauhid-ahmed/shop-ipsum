@@ -10,15 +10,15 @@ export default async function middleware(req: NextRequest) {
   const isPublicRoute = paths.publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = paths.authRoutes.includes(nextUrl.pathname);
 
-  // if (nextUrl.pathname.startsWith("/api/auth")) return null;
+  if (nextUrl.pathname.startsWith("/api/auth")) return null;
 
-  // if (isLoggedIn && isAuthRoute) {
-  //   return NextResponse.redirect(new URL(paths.defaultRedirectPath(), nextUrl));
-  // }
+  if (isLoggedIn && isAuthRoute) {
+    return NextResponse.redirect(new URL(paths.defaultRedirectPath(), nextUrl));
+  }
 
-  // if (!isLoggedIn && !isPublicRoute && !isAuthRoute) {
-  //   return NextResponse.redirect(new URL(paths.signInPath(), nextUrl));
-  // }
+  if (!isLoggedIn && !isPublicRoute && !isAuthRoute) {
+    return NextResponse.redirect(new URL(paths.signInPath(), nextUrl));
+  }
 }
 
 export const config = {

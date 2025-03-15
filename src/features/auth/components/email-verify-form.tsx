@@ -5,6 +5,7 @@ import {
   AuthCardBody,
   AuthCardEmailVerifyFooter,
   AuthCardHeader,
+  AuthCardNotify,
 } from "./auth-card";
 import { Button } from "@/components/ui/button";
 import React, { useState, useTransition, useEffect } from "react";
@@ -20,11 +21,15 @@ import { Loader2 } from "@/components/loader";
 import { tokenVerifyAction } from "../actions/email-verify.action";
 import { CircleCheck } from "lucide-react";
 import { defaultRedirectPath } from "@/constants/paths";
+import { NotifyType } from "../types";
 
 export default function EmailVerificationForm() {
   const [otp, setOtp] = useState("");
   const [isPending, startTransition] = useTransition();
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [verification, setVerification] = useState<{
+    type: "success" | "error";
+    message: string;
+  }>();
   const router = useRouter();
 
   // Handle form submission
@@ -33,19 +38,17 @@ export default function EmailVerificationForm() {
     if (otp.length !== 6) return; // Ensure valid OTP length before proceeding
 
     startTransition(async () => {
-      const success = await tokenVerifyAction(otp);
-      if (success) {
-        setIsSuccess(true);
-      }
+      const data = await tokenVerifyAction(otp);
+      setVerification(data);
     });
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (verification?.type === "success") {
       const redirectDelay = 500;
       setTimeout(() => router.push(defaultRedirectPath()), redirectDelay);
     }
-  }, [isSuccess, router]);
+  }, [verification?.type, router]);
 
   return (
     <AuthCard>
@@ -71,23 +74,13 @@ export default function EmailVerificationForm() {
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
-
+            <AuthCardNotify notify={verification as NotifyType} />
             <Button
               disabled={otp.length !== 6 || isPending}
               type="submit"
               className="w-full flex items-center justify-center"
             >
-              {isSuccess ? (
-                <>
-                  Verified <CircleCheck className="ml-2 text-green-500" />
-                </>
-              ) : isPending ? (
-                <>
-                  Verifying... <Loader2 className="ml-2 animate-spin" />
-                </>
-              ) : (
-                "Verify"
-              )}
+              Verify
             </Button>
           </div>
         </form>

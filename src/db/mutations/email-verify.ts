@@ -1,5 +1,5 @@
 import { db } from "..";
-import { verificationTokens } from "../schemas";
+import { users, verificationTokens } from "../schemas";
 import { getVerificationTokenByEmail } from "../queries";
 import { generateToken } from "@/lib/generate-token";
 import { eq } from "drizzle-orm";
@@ -29,4 +29,17 @@ export const sendVerificationToken = async (email: string) => {
   }
 };
 
-export const verifyEmail = async (email: string) => {};
+export const verifyEmail = async (email: string) => {
+  console.log(email);
+  try {
+    return await db
+      .update(users)
+      .set({
+        emailVerified: new Date(),
+      })
+      .where(eq(users.email, email))
+      .returning();
+  } catch {
+    return null;
+  }
+};

@@ -78,7 +78,12 @@ export const userApi = () => "/api/user";
 
 // Routes Validation (for route protection)
 export const publicRoutes = [homePath(), signInPath(), registerPath()];
-export const authRoutes = [signInPath(), registerPath(), forgotPasswordPath()];
+export const authRoutes = [
+  signInPath(),
+  registerPath(),
+  forgotPasswordPath(),
+  verifyEmailPath(),
+];
 export const userRoutes = [userProfilePath(), orderHistoryPath()];
 export const adminRoutes = [
   adminDashboardPath(),

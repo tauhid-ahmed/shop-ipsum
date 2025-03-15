@@ -7,6 +7,8 @@ import { encryptPassword } from "@/lib/utils";
 import { createUser } from "@/db/mutations/users";
 import { signIn } from "@/auth";
 import { defaultRedirectPath } from "@/constants/paths";
+import { sendVerificationToken } from "@/db/mutations/email-verify";
+import { redirect } from "next/navigation";
 
 export const registerAction = async (
   formData: RegisterFormSchema
@@ -50,10 +52,10 @@ export const registerAction = async (
       },
     };
 
-  await signIn("credentials", {
-    email: newUser.email,
-    redirectTo: defaultRedirectPath(),
-  });
+  if (!newUser.emailVerified) {
+    await sendVerificationToken(newUser.email);
+    redirect("/auth/verify-email");
+  }
 
   return {
     notify: {
