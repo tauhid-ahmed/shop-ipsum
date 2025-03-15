@@ -1,6 +1,6 @@
 "use server";
 import { getUserByEmail } from "@/db/queries";
-import { VALIDATION_MESSAGES as MSG } from "../constant";
+import { VALIDATION_MESSAGES as MSG } from "../data";
 
 import { signInFormSchema, SignInFormSchema } from "../schema";
 import { decryptPassword } from "@/lib/utils";
@@ -20,7 +20,7 @@ export const signInAction = async (
       ...safeParsedData.error.flatten().fieldErrors,
       notify: {
         type: "error",
-        message: MSG.INVALID_FORM_DATA,
+        message: MSG.SIGNIN.INVALID_CREDENTIALS,
       },
     };
 
@@ -29,7 +29,7 @@ export const signInAction = async (
     return {
       notify: {
         type: "error",
-        message: MSG.INVALID_CREDENTIALS,
+        message: MSG.SIGNIN.INVALID_CREDENTIALS,
       },
     };
 
@@ -37,7 +37,7 @@ export const signInAction = async (
     return {
       notify: {
         type: "error",
-        message: MSG.UNKNOWN_ERROR,
+        message: MSG.MISC.UNKNOWN_ERROR,
       },
     };
 
@@ -50,7 +50,7 @@ export const signInAction = async (
     return {
       notify: {
         type: "error",
-        message: MSG.INVALID_CREDENTIALS,
+        message: MSG.SIGNIN.INVALID_CREDENTIALS,
       },
     };
 
@@ -68,7 +68,7 @@ export const signInAction = async (
   return {
     notify: {
       type: "success",
-      message: MSG.EMAIL_VERIFICATION_REQUIRED,
+      message: MSG.SIGNIN.EMAIL_VERIFICATION_REQUIRED,
     },
   };
 };

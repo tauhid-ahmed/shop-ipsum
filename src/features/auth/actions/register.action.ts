@@ -2,7 +2,7 @@
 import { getUserByEmail } from "@/db/queries";
 import { registerFormSchema, RegisterFormSchema } from "../schema";
 import { AuthResponseType } from "../types";
-import { VALIDATION_MESSAGES as MSG } from "../constant";
+import { VALIDATION_MESSAGES as MSG } from "../data";
 import { encryptPassword } from "@/lib/utils";
 import { createUser } from "@/db/mutations/users";
 import { signIn } from "@/auth";
@@ -17,7 +17,7 @@ export const registerAction = async (
       ...safeParsedData.error.flatten().fieldErrors,
       notify: {
         type: "error",
-        message: MSG.INVALID_FORM_DATA,
+        message: MSG.SIGNIN.INVALID_CREDENTIALS,
       },
     };
 
@@ -27,7 +27,7 @@ export const registerAction = async (
     return {
       notify: {
         type: "error",
-        message: MSG.EMAIL_ALREADY_REGISTERED,
+        message: MSG.REGISTRATION.EMAIL_ALREADY_REGISTERED,
       },
     };
 
@@ -46,7 +46,7 @@ export const registerAction = async (
     return {
       notify: {
         type: "error",
-        message: MSG.UNKNOWN_ERROR,
+        message: MSG.MISC.UNKNOWN_ERROR,
       },
     };
 
@@ -58,7 +58,7 @@ export const registerAction = async (
   return {
     notify: {
       type: "success",
-      message: MSG.ACCOUNT_CREATED,
+      message: MSG.REGISTRATION.ACCOUNT_CREATED,
     },
   };
 };
