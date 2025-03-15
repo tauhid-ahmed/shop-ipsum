@@ -1,5 +1,11 @@
 "use client";
-import { AuthCard, AuthCardNotify } from "./auth-card";
+import {
+  AuthCard,
+  AuthCardBody,
+  AuthCardHeader,
+  AuthCardNotify,
+  AuthCardRedirectFooter,
+} from "./auth-card";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -13,6 +19,7 @@ import { signInFormSchema, type SignInFormSchema } from "../schema";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { NotifyType } from "../types";
+import { SocialForm } from "./social-form";
 
 const defaultValues = {
   email: "",
@@ -34,50 +41,54 @@ export default function SignInForm() {
   };
 
   return (
-    <AuthCard
-      title="Sign in to your account"
-      message="Don't have an account yet?"
-      redirectName="Create an account"
-      redirectHref={paths.registerPath()}
-    >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <input
-            type="hidden"
-            name="redirect"
-            value={"?callback=name='john'"}
-          />
-          <fieldset className="space-y-6">
-            <TextField
-              label="Email"
-              name="email"
-              placeholder="Enter your email"
+    <AuthCard>
+      <AuthCardHeader title="Sign in to your account" />
+      <AuthCardBody>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <input
+              type="hidden"
+              name="redirect"
+              value={"?callback=name='john'"}
             />
-            <TextField
-              label="Password"
-              name="password"
-              placeholder="Enter your password"
-              type="password"
-            />
-            <div className="flex flex-col gap-4">
-              <AuthCardNotify notify={notify} />
-              <div className="flex items-center gap-2">
-                <RememberMe />
-                <ForgotPasswordRedirect />
+            <fieldset>
+              <TextField
+                label="Email"
+                name="email"
+                placeholder="Enter your email"
+              />
+              <TextField
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                type="password"
+              />
+              <div className="flex flex-col gap-4">
+                <AuthCardNotify notify={notify} />
+                <div className="flex items-center gap-2">
+                  <RememberMe />
+                  <ForgotPasswordRedirect />
+                </div>
+                <Button
+                  className="w-full"
+                  disabled={
+                    !form.formState.isValid || form.formState.isSubmitting
+                  }
+                  type="submit"
+                >
+                  {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
+                </Button>
               </div>
-              <Button
-                className="w-full"
-                disabled={
-                  !form.formState.isValid || form.formState.isSubmitting
-                }
-                type="submit"
-              >
-                {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
-              </Button>
-            </div>
-          </fieldset>
-        </form>
-      </Form>
+            </fieldset>
+          </form>
+        </Form>
+        <SocialForm />
+      </AuthCardBody>
+      <AuthCardRedirectFooter
+        message="Don't have an account yet?"
+        redirectName="Create an account"
+        redirectHref={paths.registerPath()}
+      />
     </AuthCard>
   );
 }

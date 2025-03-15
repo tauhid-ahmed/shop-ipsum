@@ -1,5 +1,11 @@
 "use client";
-import { AuthCard, AuthCardNotify } from "./auth-card";
+import {
+  AuthCard,
+  AuthCardBody,
+  AuthCardHeader,
+  AuthCardNotify,
+  AuthCardRedirectFooter,
+} from "./auth-card";
 import { Button } from "@/components/ui/button";
 import { registerAction } from "../actions/register.action";
 import * as paths from "@/constants/paths";
@@ -12,6 +18,7 @@ import { Form } from "@/components/ui/form";
 import { TextField } from "@/components/text-field";
 import { CheckboxField } from "@/components/checkbox-field";
 import { NotifyType } from "../types";
+import { SocialForm } from "./social-form";
 
 const defaultValues = {
   name: "",
@@ -35,56 +42,64 @@ export default function RegisterForm() {
     setNotify(data?.notify as NotifyType);
   };
   return (
-    <AuthCard
-      title="Create an account"
-      message="Already have an account?"
-      redirectName="Sign in"
-      redirectHref={paths.signInPath()}
-    >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <fieldset className="space-y-6">
-            <TextField label="Name" name="name" placeholder="Enter your name" />
-            <TextField
-              label="Email"
-              name="email"
-              placeholder="Enter your email"
-            />
-            <TextField
-              label="Password"
-              name="password"
-              placeholder="Enter your password"
-              type="password"
-            />
-            <TextField
-              label="Confirm Password"
-              name="confirm_password"
-              placeholder="Confirm your password"
-              type="password"
-            />
-            <div className="flex flex-col gap-4">
-              <AuthCardNotify notify={notify} />
-              <div className="flex items-center text-sm gap-2 font-medium">
-                <CheckboxField name="terms_and_condition" />
-                <span className="hover:underline cursor-pointer hover:text-blue-500">
-                  <Link href="#">I accept the terms and conditions.</Link>
-                </span>
-              </div>
+    <AuthCard>
+      <AuthCardHeader title="Create an account" />
+      <AuthCardBody>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <fieldset>
+              <TextField
+                label="Name"
+                name="name"
+                placeholder="Enter your name"
+              />
+              <TextField
+                label="Email"
+                name="email"
+                placeholder="Enter your email"
+              />
+              <TextField
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                type="password"
+              />
+              <TextField
+                label="Confirm Password"
+                name="confirm_password"
+                placeholder="Confirm your password"
+                type="password"
+              />
+              <div className="flex flex-col gap-4">
+                <AuthCardNotify notify={notify} />
+                <div className="flex items-center text-sm gap-2 font-medium">
+                  <CheckboxField name="terms_and_condition" />
+                  <span className="hover:underline cursor-pointer hover:text-blue-500">
+                    <Link href="#">I accept the terms and conditions.</Link>
+                  </span>
+                </div>
 
-              <Button
-                disabled={
-                  !termsAndCondition ||
-                  form.formState.isSubmitting ||
-                  !form.formState.isValid
-                }
-                className="w-full"
-              >
-                Create an account
-              </Button>
-            </div>
-          </fieldset>
-        </form>
-      </Form>
+                <Button
+                  disabled={
+                    !termsAndCondition ||
+                    form.formState.isSubmitting ||
+                    !form.formState.isValid
+                  }
+                  className="w-full"
+                >
+                  Create an account
+                </Button>
+              </div>
+            </fieldset>
+          </form>
+        </Form>
+        <SocialForm />
+      </AuthCardBody>
+      <AuthCardRedirectFooter
+        message="Already have an account?"
+        redirectName="Sign in"
+        redirectHref={paths.signInPath()}
+      />
     </AuthCard>
   );
 }
