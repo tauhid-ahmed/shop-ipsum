@@ -5,10 +5,10 @@ import * as paths from "@/constants/paths";
 export default async function middleware(req: NextRequest) {
   const session = await auth();
   const { nextUrl } = req;
-  const isLoggedIn = !!session?.user;
+  // const isLoggedIn = !!session?.user;
 
-  const isPublicRoute = paths.publicRoutes.includes(nextUrl.pathname);
-  const isAuthRoute = paths.authRoutes.includes(nextUrl.pathname);
+  // const isPublicRoute = paths.publicRoutes.includes(nextUrl.pathname);
+  // const isAuthRoute = paths.authRoutes.includes(nextUrl.pathname);
 
   // if (nextUrl.pathname.startsWith("/api/auth")) return null;
 
