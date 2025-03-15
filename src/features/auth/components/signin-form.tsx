@@ -42,6 +42,11 @@ export default function SignInForm() {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
+          <input
+            type="hidden"
+            name="redirect"
+            value={"?callback=name='john'"}
+          />
           <fieldset className="space-y-8">
             <TextField
               label="Email"

@@ -25,9 +25,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const { email } = credentials;
         const user = await getUserByEmail(email as string);
         if (!user) return null;
-        console.log(
-          "dcjcnerncno3nrocnownrocnownercnwnconwoencnwoencwcwnecjn---=4=2=424204024-2-492-499-2-4-92-4-92--4-92-4-9-24-2-=4204242"
-        );
         return user;
       },
     }),
@@ -40,7 +37,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 
   callbacks: {
-    async signIn() {
+    async signIn({ user, account }) {
+      console.log("========");
+      console.log(user.email);
       return true;
     },
     async session({ session, token }) {
@@ -60,6 +59,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           token.role = userData.role;
           token.id = userData.id;
         }
+        console.log({ account, user, token });
       }
       return token;
     },
