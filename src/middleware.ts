@@ -19,6 +19,8 @@ export default async function middleware(req: NextRequest) {
   // if (!isLoggedIn && !isPublicRoute && !isAuthRoute) {
   //   return NextResponse.redirect(new URL(paths.signInPath(), nextUrl));
   // }
+
+  return NextResponse.next();
 }
 
 export const config = {
