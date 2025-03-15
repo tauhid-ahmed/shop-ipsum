@@ -8,6 +8,8 @@ import { SearchOverview } from "@/features/products/search-overview";
 import { Separator } from "../ui/separator";
 import ProfileDialog from "@/features/users/profile-widget";
 import Navigation from "./navigation";
+import SignedOut from "../signed-out";
+import { ModeToggle } from "../mode-toggle";
 
 export default function Header() {
   return (
@@ -28,6 +30,9 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <SearchOverview />
             <CartView />
+            <SignedOut>
+              <ModeToggle />
+            </SignedOut>
             <VerticalDivider />
             <ProfileDialog />
           </div>

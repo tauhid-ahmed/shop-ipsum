@@ -18,10 +18,11 @@ import React from "react";
 import { productStatus } from "@/lib/productStatus";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
+import SignedIn from "@/components/signed-in";
 
 export default function CartView() {
   return (
-    <div>
+    <SignedIn>
       <Popover>
         <PopoverTrigger asChild>
           <Button size="icon" shape="pill" className="relative" variant="ghost">
@@ -46,7 +47,7 @@ export default function CartView() {
           </div>
         </PopoverContent>
       </Popover>
-    </div>
+    </SignedIn>
   );
 }
 

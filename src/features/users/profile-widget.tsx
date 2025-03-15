@@ -5,7 +5,6 @@ import {
   LucideHeart,
   LucideGift,
   LucideListOrdered,
-  LucideEllipsisVertical,
   LucideShoppingBag,
 } from "lucide-react";
 import {
@@ -23,6 +22,9 @@ import Image from "next/image";
 import { type AuthUserType } from "@/features/auth/types";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import SignedIn from "@/components/signed-in";
+import SignedOut from "@/components/signed-out";
+import ProfileImage from "@/components/profile-image";
 
 const menuItems = [
   {
@@ -64,31 +66,40 @@ export default function ProfileWidget() {
       defaultOpen={popoverOpen}
       onOpenChange={setPopoverOpen}
     >
-      <PopoverTrigger asChild>
-        <Button shape="pill">Sign In</Button>
-      </PopoverTrigger>
-      <PopoverContent
-        sideOffset={16}
-        className="relative p-0 rounded text-muted-foreground"
-      >
-        <ProfileHeader user={user as AuthUserType} />
-        <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
-          {menuItems.map((item) => (
-            <Link
-              key={item.name}
-              className="flex items-center gap-2 cursor-pointer hover:bg-accent"
-              href={item.href}
-            >
-              {item.icon}
-              {item.name}
-            </Link>
-          ))}
-          <div className="flex justify-between bg-accent/40">
-            <span>Appearance</span>
-            <ThemeSwitch />
+      <SignedOut>
+        <Button asChild>
+          <Link href={signInPath()}>Sign In</Link>
+        </Button>
+      </SignedOut>
+      <SignedIn>
+        <PopoverTrigger className="cursor-pointer">
+          <ProfileImage />
+        </PopoverTrigger>
+      </SignedIn>
+      <SignedIn>
+        <PopoverContent
+          sideOffset={16}
+          className="relative p-0 rounded text-muted-foreground"
+        >
+          <ProfileHeader user={user as AuthUserType} />
+          <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                className="flex items-center gap-2 cursor-pointer hover:bg-accent"
+                href={item.href}
+              >
+                {item.icon}
+                {item.name}
+              </Link>
+            ))}
+            <div className="flex justify-between bg-accent/40">
+              <span>Appearance</span>
+              <ThemeSwitch />
+            </div>
           </div>
-        </div>
-      </PopoverContent>
+        </PopoverContent>
+      </SignedIn>
     </Popover>
   );
 }
