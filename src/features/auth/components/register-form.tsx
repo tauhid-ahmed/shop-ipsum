@@ -43,7 +43,7 @@ export default function RegisterForm() {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <fieldset className="space-y-8">
+          <fieldset className="space-y-6">
             <TextField label="Name" name="name" placeholder="Enter your name" />
             <TextField
               label="Email"

@@ -15,6 +15,7 @@ type AuthCardProps = {
   message?: string;
   redirectName: string;
   redirectHref: string;
+  socialForm?: boolean;
 };
 
 export function AuthCard({
@@ -23,9 +24,10 @@ export function AuthCard({
   message,
   redirectName,
   redirectHref,
+  socialForm = true,
 }: AuthCardProps) {
   return (
-    <div className="space-y-10">
+    <div className="space-y-8">
       <div className="space-y-4">
         <div className="flex justify-center">
           <BrandLogoSmall />
@@ -37,14 +39,11 @@ export function AuthCard({
       <Card>
         <div className="py-10 p-8 space-y-6">
           <CardContent>{children}</CardContent>
-          <CardContent>
-            <div className="text-center text-sm flex items-center gap-3 before:flex-1 before:h-0.25 before:bg-primary/30 after:flex-1 after:h-0.25 after:bg-primary/30 font-medium">
-              Or continue with
-            </div>
-          </CardContent>
-          <CardFooter className="gap-4">
-            <SocialForm />
-          </CardFooter>
+          {socialForm && (
+            <CardFooter className="gap-4 flex flex-col">
+              <SocialForm />
+            </CardFooter>
+          )}
         </div>
       </Card>
       <div className="flex gap-2 justify-center text-center text-sm">

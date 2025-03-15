@@ -13,7 +13,6 @@ import { signInFormSchema, type SignInFormSchema } from "../schema";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { NotifyType } from "../types";
-import { useRouter } from "next/navigation";
 
 const defaultValues = {
   email: "",
@@ -48,7 +47,7 @@ export default function SignInForm() {
             name="redirect"
             value={"?callback=name='john'"}
           />
-          <fieldset className="space-y-8">
+          <fieldset className="space-y-6">
             <TextField
               label="Email"
               name="email"
