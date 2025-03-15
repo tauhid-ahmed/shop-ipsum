@@ -1,0 +1,1 @@
+ALTER TABLE "authenticator" RENAME COLUMN "credential_backedUp" TO "credential_backed_up";

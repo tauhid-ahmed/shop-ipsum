@@ -41,11 +41,12 @@ export const VALIDATION_MESSAGES = {
 
   // Signin
   SIGNIN_FAILED: "Failed to sign in.",
+  EMAIL_VERIFICATION_REQUIRED: "Please verify your email address to proceed.",
   SIGNIN_SUCCESS: "Signed in successfully.",
   INVALID_CREDENTIALS: "Invalid credentials.",
 
   // Registration Responses
-  ACCOUNT_CREATED: "Account created!",
+  ACCOUNT_CREATED: "Account created. Please verify your email!",
   ACCOUNT_CREATION_FAILED: "Failed to create account.",
   EMAIL_ALREADY_REGISTERED: "Email already registered.",
 

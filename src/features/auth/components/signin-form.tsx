@@ -13,6 +13,7 @@ import { signInFormSchema, type SignInFormSchema } from "../schema";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { NotifyType } from "../types";
+import { useRouter } from "next/navigation";
 
 const defaultValues = {
   email: "",
@@ -29,10 +30,10 @@ export default function SignInForm() {
   });
   // const rememberMe = form.watch("remember_me");
   const onSubmit = async (formData: SignInFormSchema) => {
-    setNotify(null);
     const data = await signInAction(formData);
     setNotify(data?.notify as NotifyType);
   };
+
   return (
     <AuthCard
       title="Sign in to your account"
