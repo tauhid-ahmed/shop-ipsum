@@ -69,13 +69,13 @@ export default function EmailVerificationForm() {
               maxLength={6}
               pattern={REGEXP_ONLY_DIGITS}
             >
-              <InputOTPGroup className="[&>*]:size-12 [&>*]:text-xl">
+              <InputOTPGroup className="[&>*]:size-10 sm:[&>*]:size-12 [&>*]:text-xl">
                 <InputOTPSlot index={0} />
                 <InputOTPSlot index={1} />
                 <InputOTPSlot index={2} />
               </InputOTPGroup>
               <InputOTPSeparator />
-              <InputOTPGroup className="[&>*]:size-12 [&>*]:text-xl">
+              <InputOTPGroup className="[&>*]:size-10 sm:[&>*]:size-12 [&>*]:text-xl">
                 <InputOTPSlot index={3} />
                 <InputOTPSlot index={4} />
                 <InputOTPSlot index={5} />
