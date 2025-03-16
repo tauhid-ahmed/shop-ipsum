@@ -11,7 +11,7 @@ export const createUser = async (data: NewUserType) => {
   }
 };
 
-export const updateUser = async (id: string) => {
+export const updateUserEmailVerification = async (id: string) => {
   try {
     return await db
       .update(users)

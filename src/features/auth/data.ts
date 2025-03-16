@@ -86,8 +86,12 @@ export const VALIDATION_MESSAGES = {
 
   ACCOUNT_VERIFICATION: {
     EMAIL_SENT:
-      "A verification email has been sent to your address. Please check your inbox.",
+      "A verification email has been successfully sent to your address. Please check your inbox to complete the process.",
     EMAIL_ALREADY_VERIFIED: "Your email address has already been verified.",
-    VERIFICATION_FAILED: "Verification failed. Please try again later.",
+    VERIFICATION_FAILED:
+      "Verification failed. Please try again later or contact support for assistance.",
+    VERIFICATION_SUCCESS: "Your account has been successfully verified.",
+    ACCOUNT_EXISTS_WITH_DIFFERENT_PROVIDER:
+      "An account with this email already exists using a different provider.",
   },
 };

@@ -20,6 +20,8 @@ import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { NotifyType } from "../types";
 import { SocialForm } from "./social-form";
+import { useSearchParams } from "next/navigation";
+import { VALIDATION_MESSAGES } from "../data";
 
 const defaultValues = {
   email: "",
@@ -39,6 +41,18 @@ export default function SignInForm() {
     const data = await signInAction(formData);
     setNotify(data?.notify as NotifyType);
   };
+
+  const searchParams = useSearchParams();
+  React.useEffect(() => {
+    if (searchParams.get("error") === "AccessDenied") {
+      setNotify({
+        type: "error",
+        message:
+          VALIDATION_MESSAGES.ACCOUNT_VERIFICATION
+            .ACCOUNT_EXISTS_WITH_DIFFERENT_PROVIDER,
+      });
+    }
+  }, [searchParams]);
 
   return (
     <AuthCard>

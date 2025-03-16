@@ -5,23 +5,20 @@ import Github from "next-auth/providers/github";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "./db";
 import { AuthTokenType } from "./features/auth/types";
-import { getUserByEmail } from "./db/queries";
-import { updateUser } from "./db/mutations/users";
+import { getUserByEmail, getUserByEmailWithAccount } from "./db/queries";
+import { updateUserEmailVerification } from "./db/mutations/users";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  debug: true,
-  secret: process.env.AUTH_SECRET,
   adapter: DrizzleAdapter(db),
   events: {
     linkAccount: async ({ user }) => {
-      await updateUser(user.id as string);
+      await updateUserEmailVerification(user.id as string);
     },
   },
   providers: [
     Credentials({
       name: "credentials",
       async authorize(credentials) {
-        // no validation because validation is done on the server actions.
         const { email } = credentials;
         const user = await getUserByEmail(email as string);
         if (!user) return null;
@@ -37,9 +34,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 
   callbacks: {
-    async signIn({ user }) {
-      console.log("========");
-      console.log(user.email);
+    async signIn({ user, account }) {
+      if (account?.provider === "credentials") return true;
+      const userWithAccount = await getUserByEmailWithAccount(
+        user.email as string
+      );
+      if (!userWithAccount || !userWithAccount.provider) return true;
+      if (userWithAccount?.provider !== account?.provider) return false;
       return true;
     },
     async session({ session, token }) {
@@ -59,7 +60,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           token.role = userData.role;
           token.id = userData.id;
         }
-        console.log({ account, user, token });
       }
       return token;
     },
