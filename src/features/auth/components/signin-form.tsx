@@ -46,11 +46,6 @@ export default function SignInForm() {
       <AuthCardBody>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <input
-              type="hidden"
-              name="redirect"
-              value={"?callback=name='john'"}
-            />
             <fieldset>
               <TextField
                 label="Email"
