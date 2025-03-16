@@ -7,10 +7,10 @@ import { db } from "./db";
 import { AuthTokenType } from "./features/auth/types";
 import { getUserByEmail } from "./db/queries";
 import { updateUser } from "./db/mutations/users";
-import dotenv from "dotenv";
-dotenv.config({ path: "./.env.local" });
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  debug: true,
+  secret: process.env.AUTH_SECRET,
   adapter: DrizzleAdapter(db),
   events: {
     linkAccount: async ({ user }) => {
