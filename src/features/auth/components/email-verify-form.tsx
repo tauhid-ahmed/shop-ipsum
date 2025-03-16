@@ -22,6 +22,7 @@ import { tokenVerifyAction } from "../actions/email-verify.action";
 // import { CircleCheck } from "lucide-react";
 import { defaultRedirectPath } from "@/constants/paths";
 import { NotifyType } from "../types";
+import { useSearchParams } from "next/navigation";
 
 export default function EmailVerificationForm() {
   const [otp, setOtp] = useState("");
@@ -31,6 +32,12 @@ export default function EmailVerificationForm() {
     message: string;
   }>();
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+  useEffect(() => {
+    setOtp(token || "");
+  }, [token]);
 
   // Handle form submission
   const handleSubmit = (event: React.FormEvent) => {

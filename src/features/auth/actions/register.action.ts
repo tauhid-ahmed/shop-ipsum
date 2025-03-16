@@ -5,8 +5,9 @@ import { AuthResponseType } from "../types";
 import { VALIDATION_MESSAGES as MSG } from "../data";
 import { encryptPassword } from "@/lib/utils";
 import { createUser } from "@/db/mutations/users";
-import { sendVerificationToken } from "@/db/mutations/email-verify";
+import { createVerificationToken } from "@/db/mutations/email-verify";
 import { redirect } from "next/navigation";
+import senVerificationEmail from "@/lib/resend";
 
 export const registerAction = async (
   formData: RegisterFormSchema
@@ -51,7 +52,15 @@ export const registerAction = async (
     };
 
   if (!newUser.emailVerified) {
-    await sendVerificationToken(newUser.email);
+    const newVerificationToken = await createVerificationToken(newUser.email);
+    if (!newVerificationToken)
+      return {
+        notify: {
+          type: "error",
+          message: MSG.MISC.UNKNOWN_ERROR,
+        },
+      };
+    await senVerificationEmail(newUser.email, newVerificationToken.token);
     redirect("/auth/verify-email");
   }
 

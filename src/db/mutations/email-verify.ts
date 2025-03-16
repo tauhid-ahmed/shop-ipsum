@@ -4,7 +4,7 @@ import { getVerificationTokenByEmail } from "../queries";
 import { generateToken } from "@/lib/generate-token";
 import { eq } from "drizzle-orm";
 
-export const sendVerificationToken = async (email: string) => {
+export const createVerificationToken = async (email: string) => {
   const token = generateToken();
   const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
   const existingToken = await getVerificationTokenByEmail(email);
@@ -16,7 +16,7 @@ export const sendVerificationToken = async (email: string) => {
   }
 
   try {
-    return await db
+    const data = await db
       .insert(verificationTokens)
       .values({
         identifier: email,
@@ -24,6 +24,8 @@ export const sendVerificationToken = async (email: string) => {
         expires,
       })
       .returning();
+
+    return data[0];
   } catch {
     return null;
   }

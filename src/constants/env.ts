@@ -9,6 +9,7 @@ export const env = createEnv({
     AUTH_GOOGLE_SECRET: z.string().min(1, "Google secret must be provided"),
     AUTH_GITHUB_ID: z.string().min(1, "Github ID must be provided"),
     AUTH_GITHUB_SECRET: z.string().min(1, "Github secret must be provided"),
+    RESEND_API_KEY: z.string().min(1, "Resend API key must be provided"),
   },
 
   client: {
@@ -31,5 +32,6 @@ export const env = createEnv({
     AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
     AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
     AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
   },
 });
