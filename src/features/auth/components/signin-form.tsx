@@ -44,7 +44,7 @@ export default function SignInForm() {
 
   const searchParams = useSearchParams();
   React.useEffect(() => {
-    if (searchParams.get("error") === "AccessDenied") {
+    if (searchParams.get("error")) {
       setNotify({
         type: "error",
         message:
