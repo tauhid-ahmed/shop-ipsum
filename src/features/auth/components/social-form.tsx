@@ -1,10 +1,23 @@
 import { GithubLogo } from "@/components/icons/github";
 import { GoogleLogo } from "@/components/icons/google";
 import { Button } from "@/components/ui/button";
-import { startTransition } from "react";
+import { useState } from "react";
 import { socialAction } from "../actions/social.action";
 
 export function SocialForm() {
+  const [loading, setLoading] = useState(false);
+
+  const handleSocialLogin = async (provider: "google" | "github") => {
+    setLoading(true);
+    try {
+      await socialAction(provider);
+    } catch (error) {
+      console.error("Social login failed", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="text-center text-sm flex items-center gap-3 before:flex-1 before:h-0.25 before:bg-primary/30 after:flex-1 after:h-0.25 after:bg-primary/30 font-medium w-full px-4">
@@ -13,28 +26,36 @@ export function SocialForm() {
       <div className="flex gap-2 w-full">
         <form
           className="flex-1"
-          onSubmit={() => {
-            startTransition(async () => {
-              await socialAction("google");
-            });
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSocialLogin("google");
           }}
         >
-          <Button variant={"outline"} className="w-full" type="submit">
+          <Button
+            variant={"outline"}
+            className="w-full"
+            type="submit"
+            disabled={loading}
+          >
             <GoogleLogo />
-            Google
+            {loading ? "Loading..." : "Google"}
           </Button>
         </form>
         <form
           className="flex-1"
-          onSubmit={() => {
-            startTransition(async () => {
-              await socialAction("github");
-            });
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSocialLogin("github");
           }}
         >
-          <Button variant={"outline"} className="w-full" type="submit">
+          <Button
+            variant={"outline"}
+            className="w-full"
+            type="submit"
+            disabled={loading}
+          >
             <GithubLogo />
-            GitHub
+            {loading ? "Loading..." : "GitHub"}
           </Button>
         </form>
       </div>
