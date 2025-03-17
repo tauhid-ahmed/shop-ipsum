@@ -41,6 +41,8 @@ type SliderProps = {
   speed?: number;
   loop?: boolean;
   pagination?: boolean;
+  data: Record<string, string>[];
+  render: (item: Record<string, string>) => React.ReactNode;
 };
 
 export function CardSlider({
@@ -50,6 +52,8 @@ export function CardSlider({
   speed = 600,
   loop = true,
   pagination = false,
+  data = [],
+  render,
 }: SliderProps) {
   const swiperRef = useSwiper();
 
@@ -86,9 +90,9 @@ export function CardSlider({
       modules={[Navigation, Autoplay, Pagination]}
       className="mySwiper"
     >
-      {Array.from({ length: 5 }).map((_, index) => (
-        <SwiperSlide key={index} className="bg-gray-800 text-center">
-          <div className="h-72 border">Slide {index + 1}</div>
+      {data.map((item, index) => (
+        <SwiperSlide key={index}>
+          <div className="flex items-center justify-center">{render(item)}</div>
         </SwiperSlide>
       ))}
     </Swiper>
