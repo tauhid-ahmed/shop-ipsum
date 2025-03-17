@@ -92,7 +92,7 @@ function Categories() {
           CATEGORIES
         </Heading>
       </SheetTitle>
-      <div className="flex gap-4 text-sm [&_a]:underline [&_a]:underline-offset-2 text-accent-foreground/80">
+      <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm [&_a]:underline [&_a]:underline-offset-2 text-accent-foreground/80">
         <Link href="#">Activeware</Link>
         <Link href="#">Dresses</Link>
         <Link href="#">Outerware</Link>
@@ -120,7 +120,7 @@ function Product() {
     <div className="flex flex-col gap-2 max-h-48 overflow-y-scroll">
       <Link
         href="#"
-        className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10"
+        className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10 rounded"
       >
         <div className="size-12 rounded bg-secondary"></div>
         <div className="flex flex-col p-1">
@@ -135,7 +135,7 @@ function Product() {
       </Link>
       <Link
         href="#"
-        className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10"
+        className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10 rounded"
       >
         <div className="size-12 rounded bg-secondary"></div>
         <div className="flex flex-col p-1">
@@ -150,7 +150,7 @@ function Product() {
       </Link>
       <Link
         href="#"
-        className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10"
+        className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10 rounded"
       >
         <div className="size-12 rounded bg-secondary"></div>
         <div className="flex flex-col p-1">
