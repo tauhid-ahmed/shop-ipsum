@@ -47,7 +47,7 @@ export default function CustomSwiper() {
       >
         {[...Array(6)].map((_, index) => (
           <SwiperSlide key={index}>
-            <div className="h-60 md:h-84 relative">
+            <div className="h-84 relative">
               <Image
                 src={`/assets/banner/image-0${index + 1}.svg`}
                 alt="placeholder"
