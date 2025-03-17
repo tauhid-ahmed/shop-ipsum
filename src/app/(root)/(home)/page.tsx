@@ -40,8 +40,8 @@ export default async function Home() {
                 Get 25% off during our one-time sale
               </Heading>
               <p className="text-lg text-muted-foreground">
-                Most of our products are limited releases that won't come back.
-                Get your favorite items while they're in stock.
+                Most of our products are limited releases that won&apos;t come
+                back. Get your favorite items while they&apos;re in stock.
               </p>
               <div className="">
                 <Button size="lg">Get access to our one-time sale</Button>
