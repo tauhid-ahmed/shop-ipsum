@@ -20,7 +20,7 @@ export function SocialForm() {
 
   return (
     <>
-      <div className="text-center text-sm flex items-center gap-3 before:flex-1 before:h-0.25 before:bg-primary/30 after:flex-1 after:h-0.25 after:bg-primary/30 font-medium w-full px-4">
+      <div className="text-center text-sm flex items-center gap-3 before:flex-1 before:h-0.25 after:flex-1 after:h-0.25 before:bg-accent-foreground/20 after:bg-accent-foreground/20 font-medium w-full pt-4">
         Or continue with
       </div>
       <div className="flex gap-2 w-full">

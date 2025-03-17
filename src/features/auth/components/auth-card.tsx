@@ -10,7 +10,7 @@ import { NotifyType } from "../types";
 import { Logo } from "@/components/logo";
 
 export function AuthCard({ children }: { children: React.ReactNode }) {
-  return <div className="space-y-8">{children}</div>;
+  return <div className="space-y-10">{children}</div>;
 }
 
 export function AuthCardHeader({
@@ -33,8 +33,8 @@ export function AuthCardHeader({
 
 export function AuthCardBody({ children }: { children: React.ReactNode }) {
   return (
-    <Card className="px-1 sm:px-4 py-12">
-      <CardContent className="space-y-6 [&_fieldset]:space-y-6">
+    <Card className="px-6 sm:p-12 py-12">
+      <CardContent className="p-0 space-y-6 [&_fieldset]:space-y-6">
         {children}
       </CardContent>
     </Card>

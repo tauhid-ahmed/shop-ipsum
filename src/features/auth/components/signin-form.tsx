@@ -72,9 +72,9 @@ export default function SignInForm() {
                 placeholder="Enter your password"
                 type="password"
               />
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-6">
                 <AuthCardNotify notify={notify} />
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <RememberMe />
                   <ForgotPasswordRedirect />
                 </div>
@@ -104,7 +104,7 @@ export default function SignInForm() {
 
 function RememberMe() {
   return (
-    <Label className="flex gap-2 flex-row items-center cursor-pointer">
+    <Label className="flex gap-3 flex-row items-center cursor-pointer">
       <CheckboxField name="remember_me" />
       <span className="text-sm">Remember me</span>
     </Label>

@@ -16,12 +16,12 @@ export function Container({
   return (
     <div
       className={cn(
-        "mx-auto px-4",
+        "mx-auto px-6",
         {
           "max-w-7xl w-full": size === "default",
           "max-w-5xl w-full": size === "md",
           "max-w-4xl w-full": size === "sm",
-          "max-w-md w-full": size === "xs",
+          "max-w-[30rem] w-full": size === "xs",
           "w-full": size === "fluid",
           "px-0": flush,
         },

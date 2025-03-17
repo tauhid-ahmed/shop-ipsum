@@ -72,7 +72,7 @@ export default function RegisterForm() {
               />
               <div className="flex flex-col gap-4">
                 <AuthCardNotify notify={notify} />
-                <div className="flex items-center text-sm gap-2 font-medium">
+                <div className="flex items-center text-sm gap-3 font-medium">
                   <CheckboxField name="terms_and_condition" />
                   <span className="hover:underline cursor-pointer hover:text-blue-500">
                     <Link href="#">I accept the terms and conditions.</Link>
