@@ -33,8 +33,8 @@ export function AuthCardHeader({
 
 export function AuthCardBody({ children }: { children: React.ReactNode }) {
   return (
-    <Card className="sm:px-4 py-12">
-      <CardContent className="space-y-4 sm:space-y-5 [&_fieldset]:space-y-4 sm:[&_fieldset]:space-y-6">
+    <Card className="px-1 sm:px-4 py-12">
+      <CardContent className="space-y-6 [&_fieldset]:space-y-6">
         {children}
       </CardContent>
     </Card>

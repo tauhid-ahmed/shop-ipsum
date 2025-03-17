@@ -8,7 +8,9 @@ export default function AuthLayout({
 }) {
   return (
     <Section padding="lg">
-      <Container size="xs">{children}</Container>
+      <Container size="xs" flush>
+        {children}
+      </Container>
     </Section>
   );
 }

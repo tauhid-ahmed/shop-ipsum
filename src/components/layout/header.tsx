@@ -59,22 +59,24 @@ import { Input } from "../ui/input";
 
 export default function Header() {
   return (
-    <header className="border-b border-border py-4 z-50 relative backdrop-blur-2xl bg-background/90 text-sm text-muted-foregroundx">
+    <header className="border-b border-border py-4 z-50 relative backdrop-blur-2xl bg-background/90 text-sm">
       <Container size="fluid">
         <nav className="flex items-center">
-          <div className="flex flex-1 md:hidden">
+          <div className="flex flex-1 lg:hidden">
             <Navigation />
             <SearchWidget />
           </div>
-          <div className="flex-1 md:flex gap-4 hidden text-secondary-foreground">
+          <div className="flex-1 lg:flex gap-4 hidden text-secondary-foreground">
             <span>Women</span>
             <span>Men</span>
             <span>Children</span>
+            <span>Store</span>
+            <span>Featured</span>
           </div>
           <Logo />
           <div className="flex-1 flex justify-end">
             <div className="flex items-center">
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <SearchWidget />
               </div>
               <ProfileWidget />
