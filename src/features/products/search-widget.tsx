@@ -20,7 +20,6 @@ import { Input } from "@/components/ui/input";
 import { Heading } from "@/components/heading";
 import Link from "next/link";
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
 
 export function SearchWidget() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -55,7 +54,7 @@ export function SearchWidget() {
                   </Heading>
                 </SheetTitle>
                 <SheetClose asChild>
-                  <Button variant="ghost" size="icon">
+                  <Button variant="ghost" size="icon" shape="pill">
                     <LucideX />
                   </Button>
                 </SheetClose>
@@ -67,7 +66,7 @@ export function SearchWidget() {
                   reset
                   placeholder="Search..."
                 />
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" shape="pill">
                   <LucideSearch />
                 </Button>
               </div>
