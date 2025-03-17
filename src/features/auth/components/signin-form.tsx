@@ -103,6 +103,11 @@ export default function SignInForm() {
         redirectName="Create an account"
         redirectHref={paths.registerPath()}
       />
+      <div className="text-center p-2 text-sm font-medium text-white bg-rose-500 dark:bg-rose-800 rounded border border-border">
+        Verification code is unavailable on the free tier. Use{" "}
+        <strong className="underline">Google</strong> or{" "}
+        <strong className="underline">GitHub</strong> to sign in.
+      </div>
     </AuthCard>
   );
 }

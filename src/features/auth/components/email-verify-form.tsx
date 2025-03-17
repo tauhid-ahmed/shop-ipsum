@@ -3,7 +3,6 @@
 import {
   AuthCard,
   AuthCardBody,
-  // AuthCardEmailVerifyFooter,
   AuthCardHeader,
   AuthCardNotify,
 } from "./auth-card";
@@ -16,12 +15,9 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-// import { Loader2 } from "@/components/loader";
 import { tokenVerifyAction } from "../actions/email-verify.action";
-// import { CircleCheck } from "lucide-react";
 import { type NotifyType } from "../types";
 import { VALIDATION_MESSAGES } from "../data";
-// import { defaultRedirectPath } from "@/constants/paths";
 
 export type Notify = {
   type: "error" | "success" | "";
@@ -36,16 +32,12 @@ export default function EmailVerificationForm({ notify }: { notify: Notify }) {
     message: "",
     type: "",
   });
-  // const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const data = await tokenVerifyAction(otp);
     if (data.message === VALIDATION_MESSAGES.TOKEN.VERIFIED) {
       setVerification({ message: data.message, type: data.type });
-      // setTimeout(() => {
-      //   router.push(defaultRedirectPath());
-      // }, 1000);
     }
   };
 
@@ -84,6 +76,11 @@ export default function EmailVerificationForm({ notify }: { notify: Notify }) {
           </div>
         </form>
       </AuthCardBody>
+      <div className="text-center p-2 text-sm font-medium text-white bg-rose-500 dark:bg-rose-800 rounded border border-border">
+        Verification code is unavailable on the free tier. Use{" "}
+        <strong className="underline">Google</strong> or{" "}
+        <strong className="underline">GitHub</strong> to sign in.
+      </div>
       <div className="p-4">{notify.identifier}</div>
     </AuthCard>
   );
