@@ -46,8 +46,8 @@ type SliderProps = {
 };
 
 export function CardSlider({
-  autoplay = false,
-  duration = 3000,
+  autoplay = true,
+  duration = 6000,
   slidesPerView = 4,
   speed = 600,
   loop = true,

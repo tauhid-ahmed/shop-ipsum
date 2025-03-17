@@ -12,6 +12,8 @@ import {
 
 type ProductRevealProps = {
   title: string;
+  duration?: number;
+  speed?: number;
 };
 
 const data = [
@@ -47,12 +49,16 @@ const data = [
   },
 ];
 
-export default function ProductReveal({ title }: ProductRevealProps) {
+export default function ProductReveal({
+  title,
+  duration,
+  speed,
+}: ProductRevealProps) {
   return (
     <Section padding="sm">
       <Container>
         <SwiperProvider>
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div className="flex justify-between items-center">
               <Heading align="left" weight="bold">
                 {title}
@@ -60,6 +66,8 @@ export default function ProductReveal({ title }: ProductRevealProps) {
               <NavigationControls />
             </div>
             <CardSlider
+              duration={duration}
+              speed={speed}
               data={data}
               render={(item) => (
                 <div className="flex flex-col gap-4">
@@ -68,7 +76,7 @@ export default function ProductReveal({ title }: ProductRevealProps) {
                     alt={item.title}
                     width={300}
                     height={300}
-                    className="size-72 object-cover"
+                    className="h-84 w-96 object-cover"
                   />
                   <div className="space-y-4 text-left">
                     <Heading align="left" size="md" weight="bold">
