@@ -1,6 +1,6 @@
 // import Header2 from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import TopHeader from "@/components/layout/top-header";
+// import TopHeader from "@/components/layout/top-header";
 import Header from "@/components/layout/header";
 
 export default function PublicLayout({

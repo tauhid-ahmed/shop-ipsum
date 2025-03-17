@@ -1,10 +1,5 @@
 "use client";
-import {
-  LucideAlignLeft,
-  LucideListMinus,
-  LucideMenu,
-  LucidePanelLeftClose,
-} from "lucide-react";
+import { LucideListMinus, LucidePanelLeftClose } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";

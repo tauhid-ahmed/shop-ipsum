@@ -1,13 +1,9 @@
 "use client";
-import { LucideShoppingBag, LucideUser } from "lucide-react";
-import { BrandLogoSmall } from "../icons/brand-sm";
 import { Container } from "./container";
-import { ModeToggle } from "../mode-toggle";
 import { SearchWidget } from "@/features/products/search-widget";
 import ProfileWidget from "@/features/users/profile-widget";
 import { CartWidget } from "@/features/cart/cart-widget";
-import { BrandLogoLarge } from "../icons/brand-large";
-import Image from "next/image";
+
 import { Logo } from "../logo";
 import Navigation from "./navigation";
 import { Label } from "@radix-ui/react-dropdown-menu";
@@ -71,7 +67,6 @@ export default function Header() {
             <SearchWidget />
           </div>
           <div className="flex-1 md:flex gap-4 hidden text-secondary-foreground">
-            {/* <Menu /> */}
             <span>Women</span>
             <span>Men</span>
             <span>Children</span>
@@ -79,9 +74,6 @@ export default function Header() {
           <Logo />
           <div className="flex-1 flex justify-end">
             <div className="flex items-center">
-              {/* <div className="hidden md:block">
-                <ModeToggle />
-              </div> */}
               <div className="hidden md:block">
                 <SearchWidget />
               </div>
