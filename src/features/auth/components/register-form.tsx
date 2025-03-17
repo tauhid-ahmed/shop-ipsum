@@ -19,6 +19,8 @@ import { TextField } from "@/components/text-field";
 import { CheckboxField } from "@/components/checkbox-field";
 import { NotifyType } from "../types";
 import { SocialForm } from "./social-form";
+import { VALIDATION_MESSAGES } from "../data";
+import { useRouter } from "next/navigation";
 
 const defaultValues = {
   name: "",
@@ -41,6 +43,21 @@ export default function RegisterForm() {
     const data = await registerAction(formData);
     setNotify(data?.notify as NotifyType);
   };
+
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (
+      notify?.message === VALIDATION_MESSAGES.ACCOUNT_VERIFICATION.EMAIL_SENT
+    ) {
+      const timeoutId = setTimeout(() => {
+        router.push(paths.verifyEmailPath());
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [notify]);
+
   return (
     <AuthCard>
       <AuthCardHeader title="Create an account" />

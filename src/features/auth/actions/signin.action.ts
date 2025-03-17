@@ -7,9 +7,7 @@ import { decryptPassword } from "@/lib/utils";
 import { AuthResponseType } from "../types";
 import { signIn } from "@/auth";
 import { defaultRedirectPath } from "@/constants/paths";
-import { redirect } from "next/navigation";
 import { createVerificationToken } from "@/db/mutations/email-verify";
-import senVerificationEmail from "@/lib/resend";
 
 export const signInAction = async (
   formData: SignInFormSchema
@@ -56,17 +54,13 @@ export const signInAction = async (
     };
 
   if (!user.emailVerified) {
-    const newVerificationToken = await createVerificationToken(user.email);
-
-    if (!newVerificationToken)
-      return {
-        notify: {
-          type: "error",
-          message: MSG.MISC.UNKNOWN_ERROR,
-        },
-      };
-    await senVerificationEmail(user.email, newVerificationToken.token);
-    redirect("/auth/verify-email");
+    await createVerificationToken(user.email);
+    return {
+      notify: {
+        type: "success",
+        message: MSG.ACCOUNT_VERIFICATION.EMAIL_SENT,
+      },
+    };
   }
 
   await signIn("credentials", {

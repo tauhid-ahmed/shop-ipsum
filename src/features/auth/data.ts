@@ -2,96 +2,91 @@ export const VALIDATION_MESSAGES = {
   REQUIRED: "This field is required.",
 
   NAME: {
-    REQUIRED: "Please provide your name.",
+    REQUIRED: "Name is required.",
     MIN_LENGTH: "Name must be at least 3 characters.",
     MAX_LENGTH: "Name cannot exceed 20 characters.",
-    MIN: "Minimum length for name is 3 characters.",
-    MAX: "Maximum length for name is 20 characters.",
+    MIN: "Minimum name length is 3 characters.",
+    MAX: "Maximum name length is 20 characters.",
   },
 
   USERNAME: {
-    REQUIRED: "Please provide a username.",
+    REQUIRED: "Username is required.",
     MIN_LENGTH: "Username must be at least 3 characters.",
     MAX_LENGTH: "Username cannot exceed 50 characters.",
-    MIN: "Username must be at least 3 characters.",
+    MIN: "Minimum username length is 3 characters.",
   },
 
   EMAIL: {
-    REQUIRED: "Please enter your email address.",
-    INVALID: "Please enter a valid email address.",
-    EXISTS: "This email is already registered with us.",
+    REQUIRED: "Email is required.",
+    INVALID: "Enter a valid email address.",
+    EXISTS: "This email is already registered.",
   },
 
   PASSWORD: {
-    REQUIRED: "Please provide a password.",
-    MIN_LENGTH: "Password must be at least 8 characters long.",
+    REQUIRED: "Password is required.",
+    MIN_LENGTH: "Password must be at least 8 characters.",
     MAX_LENGTH: "Password cannot exceed 64 characters.",
-    MIN: "Password should be at least 8 characters.",
-    MAX: "Password should not exceed 64 characters.",
-    UPPERCASE: "Password must contain at least one uppercase letter.",
-    LOWERCASE: "Password must contain at least one lowercase letter.",
-    NUMBER: "Password must include at least one numeric character.",
-    SPECIAL_CHAR: "Password must include at least one special character.",
-    MISMATCH: "The passwords you entered do not match.",
+    MIN: "Minimum password length is 8 characters.",
+    MAX: "Maximum password length is 64 characters.",
+    UPPERCASE: "Include at least one uppercase letter.",
+    LOWERCASE: "Include at least one lowercase letter.",
+    NUMBER: "Include at least one number.",
+    SPECIAL_CHAR: "Include at least one special character.",
+    MISMATCH: "Passwords do not match.",
   },
 
   TERMS: {
-    REQUIRED: "You must accept the terms and conditions to continue.",
+    REQUIRED: "You must accept the terms to continue.",
   },
 
   AUTH_RESPONSES: {
-    LOGIN_FAILED: "The provided email or password is incorrect.",
-    ACCOUNT_LOCKED:
-      "Too many unsuccessful login attempts. Your account has been temporarily locked.",
-    ACCOUNT_NOT_FOUND: "No account found with this email address.",
+    LOGIN_FAILED: "Incorrect email or password.",
+    ACCOUNT_LOCKED: "Too many failed attempts. Account temporarily locked.",
+    ACCOUNT_NOT_FOUND: "No account found with this email.",
   },
 
   SIGNIN: {
-    FAILED: "We encountered an error while signing you in. Please try again.",
-    EMAIL_VERIFICATION_REQUIRED:
-      "Please verify your email address before proceeding.",
-    SUCCESS: "You have successfully signed in.",
-    INVALID_CREDENTIALS:
-      "Invalid credentials provided. Please check your email and password.",
+    FAILED: "Sign-in failed. Please try again.",
+    EMAIL_VERIFICATION_REQUIRED: "Verify your email before signing in.",
+    SUCCESS: "Signed in successfully.",
+    INVALID_CREDENTIALS: "Invalid email or password.",
   },
 
   REGISTRATION: {
-    ACCOUNT_CREATED:
-      "Your account has been successfully created. Please verify your email address.",
-    ACCOUNT_CREATION_FAILED:
-      "An error occurred while creating your account. Please try again later.",
-    EMAIL_ALREADY_REGISTERED:
-      "This email address is already associated with an existing account.",
+    ACCOUNT_CREATED: "Account created successfully. Please verify your email.",
+    ACCOUNT_CREATION_FAILED: "Account creation failed. Try again later.",
+    EMAIL_ALREADY_REGISTERED: "This email is already in use.",
   },
 
   MISC: {
-    UNKNOWN_ERROR: "An unknown error occurred. Please try again later.",
-    INVALID_FORM_DATA:
-      "The form contains invalid data. Please correct the errors and try again.",
+    UNKNOWN_ERROR: "An error occurred. Please try again.",
+    INVALID_FORM_DATA: "Invalid form data. Please correct and retry.",
   },
 
-  // Future enhancements might include messages related to 2FA, account security, and other user actions.
   TWOFA: {
     REQUIRED: "Two-factor authentication code is required.",
-    INVALID: "The two-factor authentication code you entered is invalid.",
+    INVALID: "Invalid authentication code.",
   },
 
   PASSWORD_RECOVERY: {
-    EMAIL_SENT: "A password recovery email has been sent to your inbox.",
-    EMAIL_NOT_FOUND:
-      "No account found with this email address for password recovery.",
-    RECOVERY_FAILED:
-      "An error occurred while processing your password recovery request. Please try again.",
+    EMAIL_SENT: "Password reset email sent.",
+    EMAIL_NOT_FOUND: "No account found with this email.",
+    RECOVERY_FAILED: "Password recovery failed. Try again.",
   },
 
   ACCOUNT_VERIFICATION: {
-    EMAIL_SENT:
-      "A verification email has been successfully sent to your address. Please check your inbox to complete the process.",
-    EMAIL_ALREADY_VERIFIED: "Your email address has already been verified.",
-    VERIFICATION_FAILED:
-      "Verification failed. Please try again later or contact support for assistance.",
-    VERIFICATION_SUCCESS: "Your account has been successfully verified.",
+    EMAIL_SENT: "Verification email sent. Check your inbox.",
+    EMAIL_ALREADY_VERIFIED: "Email already verified.",
+    VERIFICATION_FAILED: "Verification failed. Try again later.",
+    VERIFICATION_SUCCESS: "Account verified successfully.",
     ACCOUNT_EXISTS_WITH_DIFFERENT_PROVIDER:
-      "An account with this email already exists using a different provider.",
+      "An account exists with a different provider.",
+  },
+
+  TOKEN: {
+    EXPIRED: "Session expired. Please log in again.",
+    INVALID: "Invalid token. Please try again.",
+    REQUIRED: "Token is required.",
+    VERIFIED: "Token verified successfully.",
   },
 };

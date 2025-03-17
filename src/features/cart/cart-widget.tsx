@@ -4,11 +4,9 @@ import {
   LucideMinus,
   LucidePlus,
   LucideShoppingBag,
-  LucideShoppingCart,
   LucideX,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Popover,
   PopoverTrigger,
@@ -26,14 +24,12 @@ export function CartWidget() {
     <SignedIn>
       <Popover>
         <PopoverTrigger asChild>
-          <Button size="icon" shape="pill" className="relative" variant="ghost">
-            <LucideShoppingBag />
-            <span className="absolute right-0 top-0 -translate-y-0.5 translate-x-0">
-              <Badge className="size-4 rounded-full flex items-center justify-center shadow">
-                9+
-              </Badge>
-            </span>
-          </Button>
+          <div className="flex items-center">
+            <Button size="icon" shape="pill" variant="ghost">
+              <LucideShoppingBag />
+            </Button>
+            <span className="text-sm">0</span>
+          </div>
         </PopoverTrigger>
         <PopoverContent
           sideOffset={16}

@@ -22,6 +22,7 @@ import { NotifyType } from "../types";
 import { SocialForm } from "./social-form";
 import { useSearchParams } from "next/navigation";
 import { VALIDATION_MESSAGES } from "../data";
+import { useRouter } from "next/navigation";
 
 const defaultValues = {
   email: "",
@@ -36,13 +37,14 @@ export default function SignInForm() {
     resolver: zodResolver(signInFormSchema),
     defaultValues,
   });
+  const router = useRouter();
   // const rememberMe = form.watch("remember_me");
   const onSubmit = async (formData: SignInFormSchema) => {
     const data = await signInAction(formData);
     setNotify(data?.notify as NotifyType);
   };
-
   const searchParams = useSearchParams();
+
   React.useEffect(() => {
     if (searchParams.get("error")) {
       setNotify({
@@ -53,6 +55,18 @@ export default function SignInForm() {
       });
     }
   }, [searchParams]);
+
+  React.useEffect(() => {
+    if (
+      notify?.message === VALIDATION_MESSAGES.ACCOUNT_VERIFICATION.EMAIL_SENT
+    ) {
+      const timeoutId = setTimeout(() => {
+        router.push(paths.verifyEmailPath());
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [notify]);
 
   return (
     <AuthCard>

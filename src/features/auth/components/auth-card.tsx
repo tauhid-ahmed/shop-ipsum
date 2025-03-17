@@ -75,7 +75,7 @@ export function AuthCardEmailVerifyFooter() {
 }
 
 export function AuthCardNotify({ notify }: { notify: NotifyType | null }) {
-  if (!notify) return null;
+  if (!notify?.message) return null;
   return (
     <Alert variant={notify.type === "error" ? "destructive" : "success"}>
       <AlertCircle className="h-4 w-4 -mt-0.5" />

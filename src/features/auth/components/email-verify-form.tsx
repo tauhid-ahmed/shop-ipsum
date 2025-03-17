@@ -8,7 +8,7 @@ import {
   AuthCardNotify,
 } from "./auth-card";
 import { Button } from "@/components/ui/button";
-import React, { useState, useTransition, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   InputOTP,
   InputOTPGroup,
@@ -20,42 +20,35 @@ import { useRouter } from "next/navigation";
 // import { Loader2 } from "@/components/loader";
 import { tokenVerifyAction } from "../actions/email-verify.action";
 // import { CircleCheck } from "lucide-react";
+import { type NotifyType } from "../types";
+import { VALIDATION_MESSAGES } from "../data";
 import { defaultRedirectPath } from "@/constants/paths";
-import { NotifyType } from "../types";
-import { useSearchParams } from "next/navigation";
 
-export default function EmailVerificationForm() {
-  const [otp, setOtp] = useState("");
-  const [isPending, startTransition] = useTransition();
-  const [verification, setVerification] = useState<{
-    type: "success" | "error";
-    message: string;
-  }>();
+export type Notify = {
+  type: "error" | "success" | "";
+  message: string;
+  identifier: string;
+  token: string;
+};
+
+export default function EmailVerificationForm({ notify }: { notify: Notify }) {
+  const [otp, setOtp] = useState(notify.token || "");
+  const [verification, setVerification] = useState({
+    message: "",
+    type: "",
+  });
   const router = useRouter();
 
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token");
-  useEffect(() => {
-    setOtp(token || "");
-  }, [token]);
-
-  // Handle form submission
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (otp.length !== 6) return; // Ensure valid OTP length before proceeding
-
-    startTransition(async () => {
-      const data = await tokenVerifyAction(otp);
-      setVerification(data);
-    });
-  };
-
-  useEffect(() => {
-    if (verification?.type === "success") {
-      const redirectDelay = 500;
-      setTimeout(() => router.push(defaultRedirectPath()), redirectDelay);
+    const data = await tokenVerifyAction(otp);
+    if (data.message === VALIDATION_MESSAGES.TOKEN.VERIFIED) {
+      setVerification({ message: data.message, type: data.type });
+      // setTimeout(() => {
+      //   router.push(defaultRedirectPath());
+      // }, 1000);
     }
-  }, [verification?.type, router]);
+  };
 
   return (
     <AuthCard>
@@ -83,7 +76,7 @@ export default function EmailVerificationForm() {
             </InputOTP>
             <AuthCardNotify notify={verification as NotifyType} />
             <Button
-              disabled={otp.length !== 6 || isPending}
+              disabled={otp.length !== 6}
               type="submit"
               className="w-full flex items-center justify-center"
             >
@@ -92,7 +85,7 @@ export default function EmailVerificationForm() {
           </div>
         </form>
       </AuthCardBody>
-      <AuthCardEmailVerifyFooter />
+      <div className="p-4">{notify.identifier}</div>
     </AuthCard>
   );
 }

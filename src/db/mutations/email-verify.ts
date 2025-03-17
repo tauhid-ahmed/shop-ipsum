@@ -10,9 +10,7 @@ export const createVerificationToken = async (email: string) => {
   const existingToken = await getVerificationTokenByEmail(email);
 
   if (existingToken) {
-    await db
-      .delete(verificationTokens)
-      .where(eq(verificationTokens.identifier, email));
+    await deleteVerificationToken(email);
   }
 
   try {
@@ -33,12 +31,25 @@ export const createVerificationToken = async (email: string) => {
 
 export const createEmailVerification = async (email: string) => {
   try {
-    return await db
+    const user = await db
       .update(users)
       .set({
         emailVerified: new Date(),
       })
       .where(eq(users.email, email))
+      .returning();
+
+    return user[0];
+  } catch {
+    return null;
+  }
+};
+
+export const deleteVerificationToken = async (email: string) => {
+  try {
+    return await db
+      .delete(verificationTokens)
+      .where(eq(verificationTokens.identifier, email))
       .returning();
   } catch {
     return null;
