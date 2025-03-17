@@ -33,6 +33,7 @@ export default function ProfileImage({
           width={40}
           height={40}
           alt={user?.name || "Guest User"}
+          priority={true}
           className="object-cover size-full rounded-full"
         />
       ) : (

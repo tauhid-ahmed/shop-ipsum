@@ -1,7 +1,7 @@
 "use server";
 import { getVerificationTokenByToken } from "@/db/queries/email-verify";
 import { NotifyType } from "../types";
-import { verifyEmail } from "@/db/mutations/email-verify";
+import { createEmailVerification } from "@/db/mutations/email-verify";
 import { signIn } from "@/auth";
 
 export const tokenVerifyAction = async (token: string): Promise<NotifyType> => {
@@ -16,7 +16,7 @@ export const tokenVerifyAction = async (token: string): Promise<NotifyType> => {
       type: "error",
     };
 
-  const user = await verifyEmail(tokenData.identifier);
+  const user = await createEmailVerification(tokenData.identifier);
   if (!user)
     return {
       message: "User not found",

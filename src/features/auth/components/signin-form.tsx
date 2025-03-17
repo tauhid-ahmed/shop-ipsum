@@ -61,17 +61,8 @@ export default function SignInForm() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <fieldset>
-              <TextField
-                label="Email"
-                name="email"
-                placeholder="Enter your email"
-              />
-              <TextField
-                label="Password"
-                name="password"
-                placeholder="Enter your password"
-                type="password"
-              />
+              <TextField label="Email" name="email" />
+              <TextField label="Password" name="password" type="password" />
               <div className="flex flex-col gap-6">
                 <AuthCardNotify notify={notify} />
                 <div className="flex items-center gap-3">

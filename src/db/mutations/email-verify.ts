@@ -31,8 +31,7 @@ export const createVerificationToken = async (email: string) => {
   }
 };
 
-export const verifyEmail = async (email: string) => {
-  console.log(email);
+export const createEmailVerification = async (email: string) => {
   try {
     return await db
       .update(users)

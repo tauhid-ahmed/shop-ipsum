@@ -19,10 +19,3 @@ export const getVerificationTokenByEmail = async (email: string) => {
     return null;
   }
 };
-
-export const getTokenValidity = async (token: string) => {
-  const tokenData = await getVerificationTokenByToken(token);
-  if (!tokenData) return false;
-  const now = new Date();
-  return tokenData && tokenData.expires > now;
-};

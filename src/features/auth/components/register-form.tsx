@@ -48,26 +48,12 @@ export default function RegisterForm() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <fieldset>
-              <TextField
-                label="Name"
-                name="name"
-                placeholder="Enter your name"
-              />
-              <TextField
-                label="Email"
-                name="email"
-                placeholder="Enter your email"
-              />
-              <TextField
-                label="Password"
-                name="password"
-                placeholder="Enter your password"
-                type="password"
-              />
+              <TextField label="Name" name="name" />
+              <TextField label="Email" name="email" />
+              <TextField label="Password" name="password" type="password" />
               <TextField
                 label="Confirm Password"
                 name="confirm_password"
-                placeholder="Confirm your password"
                 type="password"
               />
               <div className="flex flex-col gap-4">
