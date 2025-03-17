@@ -1,6 +1,8 @@
+import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
+import { LucideUser } from "lucide-react";
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 const imagePath = "/assets/profile/user.svg";
 
@@ -14,7 +16,7 @@ export default function ProfileImage({
   size = "default",
   align,
 }: ProfileImageProps) {
-  const { data: session } = useSession();
+  const { user } = useAuth();
 
   return (
     <div
@@ -25,13 +27,17 @@ export default function ProfileImage({
         "mx-auto": align === "center",
       })}
     >
-      <Image
-        src={session?.user?.image || imagePath}
-        width={40}
-        height={40}
-        alt={session?.user?.name || "Guest User"}
-        className="object-cover size-full rounded-full"
-      />
+      {user.image ? (
+        <Image
+          src={user?.image || imagePath}
+          width={40}
+          height={40}
+          alt={user?.name || "Guest User"}
+          className="object-cover size-full rounded-full"
+        />
+      ) : (
+        <LucideUser />
+      )}
     </div>
   );
 }

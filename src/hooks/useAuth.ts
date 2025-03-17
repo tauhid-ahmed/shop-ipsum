@@ -6,13 +6,12 @@ const defaultUser = {
   id: "",
   name: "Guest User",
   email: "Please sign in or create an account",
-  image: "/favicon.ico",
+  image: "",
 };
 
 export function useAuth() {
   const { data: session, status } = useSession();
   const user = session?.user ?? defaultUser;
-  user.image = user.image ? user.image : defaultUser.image;
 
   return {
     user,

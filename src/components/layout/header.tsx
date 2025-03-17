@@ -70,8 +70,6 @@ export default function Header() {
             <span>Women</span>
             <span>Men</span>
             <span>Children</span>
-            <span>Store</span>
-            <span>Featured</span>
           </div>
           <Logo />
           <div className="flex-1 flex justify-end">
