@@ -3,6 +3,7 @@ import {
   LucideChevronLeft,
   LucideMinus,
   LucidePlus,
+  LucideShoppingBag,
   LucideShoppingCart,
   LucideX,
 } from "lucide-react";
@@ -20,13 +21,13 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import SignedIn from "@/components/signed-in";
 
-export default function CartView() {
+export function CartWidget() {
   return (
     <SignedIn>
       <Popover>
         <PopoverTrigger asChild>
           <Button size="icon" shape="pill" className="relative" variant="ghost">
-            <LucideShoppingCart />
+            <LucideShoppingBag />
             <span className="absolute right-0 top-0 -translate-y-0.5 translate-x-0">
               <Badge className="size-4 rounded-full flex items-center justify-center shadow">
                 9+

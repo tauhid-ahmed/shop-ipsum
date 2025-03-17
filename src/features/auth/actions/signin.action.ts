@@ -38,7 +38,7 @@ export const signInAction = async (
     return {
       notify: {
         type: "error",
-        message: MSG.MISC.UNKNOWN_ERROR,
+        message: MSG.SIGNIN.INVALID_CREDENTIALS,
       },
     };
 

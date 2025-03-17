@@ -8,6 +8,8 @@ import { useEffect, useRef } from "react";
 import { Container } from "../layout/container";
 import { LucideChevronLeft, LucideChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ProfileImage from "../profile-image";
+import Image from "next/image";
 
 export default function CustomSwiper() {
   const swiperRef = useRef<SwiperRef>(null);
@@ -35,9 +37,9 @@ export default function CustomSwiper() {
           spaceBetween={0}
           slidesPerView={1}
           loop={true}
-          speed={600}
+          speed={500}
           autoplay={{
-            delay: 3000,
+            delay: 6000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
@@ -49,14 +51,32 @@ export default function CustomSwiper() {
             clickable: true,
           }}
         >
-          <SwiperSlide className="bg-gray-600 py-12 text-center rounded-lg">
-            Slide 1
+          <SwiperSlide className="h-96">
+            <Image
+              src="/assets/banner/image-01.webp"
+              alt="image-01"
+              width={1920}
+              height={1080}
+              className="size-full object-cover"
+            />
           </SwiperSlide>
-          <SwiperSlide className="bg-gray-600 py-12 text-center rounded-lg">
-            Slide 2
+          <SwiperSlide className="h-96">
+            <Image
+              src="/assets/banner/image-02.webp"
+              alt="image-01"
+              width={1920}
+              height={1080}
+              className="size-full object-cover"
+            />
           </SwiperSlide>
-          <SwiperSlide className="bg-gray-600 py-12 text-center rounded-lg">
-            Slide 3
+          <SwiperSlide className="h-96">
+            <Image
+              src="/assets/banner/image-03.webp"
+              alt="image-01"
+              width={1920}
+              height={1080}
+              className="size-full object-cover"
+            />
           </SwiperSlide>
         </Swiper>
         <div className="absolute z-10 top-1/2 -translate-y-1/2 inset-x-0 flex items-center justify-between">

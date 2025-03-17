@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  LucideCircleUser,
   LucideHeart,
   LucideGift,
   LucideListOrdered,
   LucideShoppingBag,
+  LucideUser,
 } from "lucide-react";
 import {
   Popover,
@@ -28,7 +28,7 @@ import { signOut } from "next-auth/react";
 const menuItems = [
   {
     name: "My Profile",
-    icon: <LucideCircleUser />,
+    icon: <LucideUser />,
     href: "#",
   },
   {
@@ -63,40 +63,31 @@ export default function ProfileWidget() {
       defaultOpen={popoverOpen}
       onOpenChange={setPopoverOpen}
     >
-      <SignedOut>
-        <Button asChild>
-          <Link href={signInPath()}>Sign In</Link>
-        </Button>
-      </SignedOut>
-      <SignedIn>
-        <PopoverTrigger className="cursor-pointer">
-          <ProfileImage />
-        </PopoverTrigger>
-      </SignedIn>
-      <SignedIn>
-        <PopoverContent
-          sideOffset={16}
-          className="relative p-0 rounded text-muted-foreground"
-        >
-          <ProfileHeader />
-          <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                className="flex items-center gap-2 cursor-pointer hover:bg-accent"
-                href={item.href}
-              >
-                {item.icon}
-                {item.name}
-              </Link>
-            ))}
-            <div className="flex justify-between bg-accent/40">
-              <span>Appearance</span>
-              <ThemeSwitch />
-            </div>
+      <PopoverTrigger className="cursor-pointer">
+        <ProfileImage />
+      </PopoverTrigger>
+      <PopoverContent
+        sideOffset={16}
+        className="relative p-0 rounded text-muted-foreground"
+      >
+        <ProfileHeader />
+        <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
+          {menuItems.map((item) => (
+            <Link
+              key={item.name}
+              className="flex items-center gap-2 cursor-pointer hover:bg-accent"
+              href={item.href}
+            >
+              {item.icon}
+              {item.name}
+            </Link>
+          ))}
+          <div className="flex justify-between bg-accent/40">
+            <span>Appearance</span>
+            <ThemeSwitch />
           </div>
-        </PopoverContent>
-      </SignedIn>
+        </div>
+      </PopoverContent>
     </Popover>
   );
 }

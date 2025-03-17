@@ -13,7 +13,7 @@ export function BrandLogoLarge({
       viewBox="0 0 237 40"
       width={width}
       height={height}
-      className={cn("text-primary", className)}
+      className={cn("text-primary brightness-1500", className)}
       {...props}
     >
       <path

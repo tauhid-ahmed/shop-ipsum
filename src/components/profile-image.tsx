@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 
-const imagePath = "/favicon.ico";
+const imagePath = "/assets/profile/user.svg";
 
 type ProfileImageProps = {
   size?: "default" | "md" | "lg";
@@ -18,8 +18,8 @@ export default function ProfileImage({
 
   return (
     <div
-      className={cn(`rounded-full overflow-hidden`, {
-        "size-8": size === "default",
+      className={cn(`rounded-full overflow-hidden p-1.5`, {
+        "size-9": size === "default",
         "size-12": size === "md",
         "size-14": size === "lg",
         "mx-auto": align === "center",
@@ -30,7 +30,7 @@ export default function ProfileImage({
         width={40}
         height={40}
         alt={session?.user?.name || "Guest User"}
-        className="object-cover size-full"
+        className="object-cover size-full rounded-full"
       />
     </div>
   );

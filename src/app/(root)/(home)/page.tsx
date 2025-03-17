@@ -2,9 +2,9 @@ import { Heading } from "@/components/heading";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { countdown } from "@/lib/countdown";
-// import Slider from "@/components/carousel/slider";
-// import CardSlider from "@/components/carousel/card-slider";
-// import StarRatings from "@/components/star-ratings";
+import Slider from "@/components/carousel/slider";
+import CardSlider from "@/components/carousel/card-slider";
+import StarRatings from "@/components/star-ratings";
 import { auth } from "@/auth";
 
 export default async function Home() {
@@ -24,11 +24,11 @@ export default async function Home() {
           <p>{session?.user?.id}</p>
           <p>{session?.user?.image}</p>
         </div>
-        {/* <Slider />
+        <Slider />
         <div className="my-32 bg-amber-900 h-96 text-red-500">
           <CardSlider />
         </div>
-        <StarRatings /> */}
+        <StarRatings />
       </Container>
     </Section>
   );

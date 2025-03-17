@@ -1,5 +1,10 @@
 "use client";
-import { LucideMenu, LucidePanelLeftClose } from "lucide-react";
+import {
+  LucideAlignLeft,
+  LucideListMinus,
+  LucideMenu,
+  LucidePanelLeftClose,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
@@ -27,7 +32,7 @@ export default function Navigation() {
         shape="pill"
         size="icon"
       >
-        <LucideMenu />
+        <LucideListMinus />
       </Button>
       <AnimatePresence mode="wait">
         {open && (

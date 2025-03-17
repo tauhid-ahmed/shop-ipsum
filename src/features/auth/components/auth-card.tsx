@@ -7,6 +7,7 @@ import { AlertCircle } from "lucide-react";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { NotifyType } from "../types";
+import { Logo } from "@/components/logo";
 
 export function AuthCard({ children }: { children: React.ReactNode }) {
   return <div className="space-y-8">{children}</div>;
@@ -21,7 +22,7 @@ export function AuthCardHeader({
 }) {
   return (
     <div className="flex flex-col items-center space-y-4">
-      <BrandLogoSmall />
+      <Logo />
       <Heading weight="bold" size="2xl">
         {title}
       </Heading>
