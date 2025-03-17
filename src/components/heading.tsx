@@ -35,7 +35,7 @@ export function Heading({
     default: "text-base",
     xs: "text-xs",
     sm: "text-sm",
-    md: "text-sm",
+    md: "text-md",
     lg: "text-base lg:text-lg",
     xl: "text-lg lg:text-xl",
     "2xl": "text-xl lg:text-2xl",
