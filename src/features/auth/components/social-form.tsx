@@ -9,13 +9,8 @@ export function SocialForm() {
 
   const handleSocialLogin = async (provider: "google" | "github") => {
     setLoading(true);
-    try {
-      await socialAction(provider);
-    } catch (error) {
-      console.error("Social login failed", error);
-    } finally {
-      setLoading(false);
-    }
+    await socialAction(provider);
+    setLoading(false);
   };
 
   return (
@@ -38,7 +33,6 @@ export function SocialForm() {
             disabled={loading}
           >
             <GoogleLogo />
-            {loading ? "Loading..." : "Google"}
           </Button>
         </form>
         <form
@@ -55,7 +49,6 @@ export function SocialForm() {
             disabled={loading}
           >
             <GithubLogo />
-            {loading ? "Loading..." : "GitHub"}
           </Button>
         </form>
       </div>

@@ -21,6 +21,7 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import ProfileImage from "@/components/profile-image";
 import { signOut } from "next-auth/react";
+import * as paths from "@/constants/paths";
 
 const menuItems = [
   {
@@ -107,15 +108,22 @@ function ProfileHeader() {
           <p className="text-muted-foreground text-sm font-medium">
             {user.email}
           </p>
-          <div className="flex gap-4 justify-center mt-2">
-            <Button
-              className="text-destructive-light"
-              variant="secondary"
-              size="sm"
-              onClick={() => signOut()}
-            >
-              Sign Out
-            </Button>
+          <div className="flex gap-2 justify-center mt-2">
+            {user.id && (
+              <Button variant="outline" onClick={() => signOut()}>
+                Sign Out
+              </Button>
+            )}
+            {!user.id && (
+              <>
+                <Button asChild>
+                  <Link href={paths.signInPath()}>Sign in</Link>
+                </Button>
+                <Button variant="outline">
+                  <Link href={paths.registerPath()}> Register</Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
