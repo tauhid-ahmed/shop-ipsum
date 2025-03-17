@@ -9,6 +9,9 @@ import {
   CardSlider,
   NavigationControls,
 } from "@/components/carousel/card-slider";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { LucideHeart } from "lucide-react";
 
 type ProductRevealProps = {
   title: string;
@@ -20,32 +23,32 @@ const data = [
   {
     id: "1",
     image: "/assets/product/product-01.jpg",
-    title: "Product 1",
-    description: "Description 1",
+    title: "Classic T-Shirt",
+    description: "Premium cotton, perfect fit.",
   },
   {
     id: "2",
     image: "/assets/product/product-02.jpg",
-    title: "Product 2",
-    description: "Description 2",
+    title: "Casual Shirt",
+    description: "Lightweight and stylish.",
   },
   {
     id: "3",
     image: "/assets/product/product-03.jpg",
-    title: "Product 3",
-    description: "Description 3",
+    title: "Formal Shirt",
+    description: "Elegant design for any occasion.",
   },
   {
     id: "4",
     image: "/assets/product/product-04.jpg",
-    title: "Product 4",
-    description: "Description 4",
+    title: "Vintage T-Shirt",
+    description: "Retro vibes, modern comfort.",
   },
   {
     id: "5",
     image: "/assets/product/product-02.jpg",
-    title: "Product 5",
-    description: "Description 5",
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
   },
 ];
 
@@ -70,20 +73,36 @@ export default function ProductReveal({
               speed={speed}
               data={data}
               render={(item) => (
-                <div className="flex flex-col gap-4">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={300}
-                    height={300}
-                    className="h-84 w-96 object-cover"
-                  />
-                  <div className="space-y-4 text-left">
-                    <Heading align="left" size="md" weight="bold">
+                <Link
+                  href="#"
+                  className="flex flex-col gap-4 relative bg-accent/20"
+                >
+                  <div className="w-fit">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={300}
+                      height={300}
+                      className="size-96 object-cover"
+                    />
+                  </div>
+                  <div className="text-center space-y-2 p-4">
+                    <Heading size="md" weight="bold">
                       {item.title}
                     </Heading>
+                    <p>{item.description}</p>
+                    <Button variant="secondary">Add to cart</Button>
                   </div>
-                </div>
+                  <div className="absolute top-0 right-0 p-2">
+                    <Button
+                      onClick={() => console.log("clicked")}
+                      size="icon"
+                      variant="ghost"
+                    >
+                      <LucideHeart />
+                    </Button>
+                  </div>
+                </Link>
               )}
             />
           </div>
