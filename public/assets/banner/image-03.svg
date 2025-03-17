@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 340">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8A2387;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E94057;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F27121;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Circuit pattern -->
+    <pattern id="circuitPattern" patternUnits="userSpaceOnUse" width="120" height="120" patternTransform="rotate(15)">
+      <path d="M10,10 L40,10 L40,40 L70,40 L70,70 L100,70 L100,100" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none" />
+      <path d="M20,20 L50,20 L50,50 L80,50 L80,80 L110,80 L110,110" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none" />
+      <circle cx="10" cy="10" r="3" fill="rgba(255,255,255,0.2)" />
+      <circle cx="40" cy="10" r="3" fill="rgba(255,255,255,0.2)" />
+      <circle cx="40" cy="40" r="3" fill="rgba(255,255,255,0.2)" />
+      <circle cx="70" cy="40" r="3" fill="rgba(255,255,255,0.2)" />
+      <circle cx="70" cy="70" r="3" fill="rgba(255,255,255,0.2)" />
+      <circle cx="100" cy="70" r="3" fill="rgba(255,255,255,0.2)" />
+      <circle cx="100" cy="100" r="3" fill="rgba(255,255,255,0.2)" />
+    </pattern>
+    
+    <!-- Glow effect -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="1240" height="340" fill="url(#bg-gradient)" />
+  
+  <!-- Circuit pattern overlay -->
+  <rect width="1240" height="340" fill="url(#circuitPattern)" />
+  
+  <!-- Left side decorative elements -->
+  <g transform="translate(200,170)">
+    <!-- AI Brain visualization - with multiple colors -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.8" />
+    <path d="M-25,-40 C-40,-25 -40,25 -25,40 C-10,55 10,55 25,40 C40,25 40,-25 25,-40 C10,-55 -10,-55 -25,-40 Z" 
+          fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.8" />
+    
+    <!-- Colorful neural connections -->
+    <path d="M-40,0 L40,0" stroke="#4FACFE" stroke-width="2" opacity="0.9" />
+    <path d="M0,-40 L0,40" stroke="#43E97B" stroke-width="2" opacity="0.9" />
+    <path d="M-30,-30 L30,30" stroke="#F9D423" stroke-width="2" opacity="0.9" />
+    <path d="M-30,30 L30,-30" stroke="#FF6B6B" stroke-width="2" opacity="0.9" />
+    
+    <!-- Colorful nodes -->
+    <circle cx="0" cy="0" r="8" fill="#FFFFFF" opacity="0.9" />
+    <circle cx="-40" cy="0" r="6" fill="#4FACFE" opacity="0.9" />
+    <circle cx="40" cy="0" r="6" fill="#4FACFE" opacity="0.9" />
+    <circle cx="0" cy="-40" r="6" fill="#43E97B" opacity="0.9" />
+    <circle cx="0" cy="40" r="6" fill="#43E97B" opacity="0.9" />
+    <circle cx="-30" cy="-30" r="6" fill="#F9D423" opacity="0.9" />
+    <circle cx="30" cy="30" r="6" fill="#F9D423" opacity="0.9" />
+    <circle cx="-30" cy="30" r="6" fill="#FF6B6B" opacity="0.9" />
+    <circle cx="30" cy="-30" r="6" fill="#FF6B6B" opacity="0.9" />
+  </g>
+  
+  <!-- Right side decorative elements -->
+  <g transform="translate(1040,170)">
+    <!-- Colorful digital clothing items -->
+    
+    <!-- Digital shirt -->
+    <path d="M-50,-50 L0,-50 L10,-30 L20,-40 L30,-20 L40,-40 L50,-30 L60,-50 L110,-50 L90,30 L-30,30 Z" 
+          fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.8" />
+    
+    <!-- Colorful nodes on shirt -->
+    <circle cx="30" cy="-20" r="7" fill="#4FACFE" opacity="0.9" />
+    <circle cx="0" cy="0" r="5" fill="#43E97B" opacity="0.9" />
+    <circle cx="60" cy="0" r="5" fill="#F9D423" opacity="0.9" />
+    
+    <!-- Digital shoe -->
+    <path d="M-30,50 C-15,30 20,30 40,50 C50,60 55,70 40,80 C20,90 -15,90 -30,80 C-45,70 -45,60 -30,50 Z" 
+          fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.8" />
+    
+    <!-- Colorful elements on shoe -->
+    <path d="M-20,65 L30,65" stroke="#FF6B6B" stroke-width="2" opacity="0.9" />
+    <circle cx="5" cy="65" r="5" fill="#4FACFE" opacity="0.9" />
+  </g>
+  
+  <!-- Central content -->
+  <g>
+    <!-- Main heading with colorful text -->
+    <text x="620" y="90" font-family="Arial, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#FFFFFF" filter="drop-shadow(0px 2px 5px rgba(0,0,0,0.5))">AI FLASH SALE</text>
+    
+    <!-- Colorful separator line -->
+    <line x1="370" y1="110" x2="870" y2="110" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" filter="url(#glow)" />
+    
+    <!-- Limited time offer bar -->
+    <rect x="445" y="125" width="350" height="35" rx="17.5" fill="rgba(0,0,0,0.4)" />
+    <text x="620" y="150" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">24 HOURS ONLY • ENDS SOON</text>
+    
+    <!-- Main offer text -->
+    <text x="620" y="190" font-family="Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="middle" fill="#FFFFFF" filter="drop-shadow(0px 2px 4px rgba(0,0,0,0.5))">SMART STYLE PICKS</text>
+    
+    <!-- Colorful discount text -->
+    <text x="620" y="230" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">UP TO 70% OFF</text>
+    
+    <!-- Categories with colorful dots -->
+    <g transform="translate(620,265)">
+      <circle cx="-200" cy="-5" r="5" fill="#4FACFE" />
+      <text x="-190" y="0" font-family="Arial, sans-serif" font-size="22" text-anchor="start" fill="#FFFFFF">SHOES</text>
+      
+      <circle cx="-70" cy="-5" r="5" fill="#43E97B" />
+      <text x="-60" y="0" font-family="Arial, sans-serif" font-size="22" text-anchor="start" fill="#FFFFFF">CLOTHING</text>
+      
+      <circle cx="90" cy="-5" r="5" fill="#F9D423" />
+      <text x="100" y="0" font-family="Arial, sans-serif" font-size="22" text-anchor="start" fill="#FFFFFF">ACCESSORIES</text>
+    </g>
+    
+    <!-- CTA Button with gradient -->
+    <defs>
+      <linearGradient id="button-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#4FACFE;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#00F2FE;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <rect x="495" y="275" width="250" height="50" rx="25" fill="url(#button-gradient)" />
+    <text x="620" y="310" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">SHOP NOW</text>
+  </g>
+  
+  <!-- Floating colorful particles -->
+  <g>
+    <circle cx="130" cy="60" r="3" fill="#4FACFE" />
+    <circle cx="160" cy="90" r="2" fill="#43E97B" />
+    <circle cx="190" cy="40" r="4" fill="#F9D423" />
+    <circle cx="220" cy="70" r="2" fill="#FF6B6B" />
+    
+    <circle cx="1020" cy="60" r="3" fill="#4FACFE" />
+    <circle cx="1050" cy="90" r="2" fill="#43E97B" />
+    <circle cx="1080" cy="40" r="4" fill="#F9D423" />
+    <circle cx="1110" cy="70" r="2" fill="#FF6B6B" />
+    
+    <circle cx="300" cy="30" r="2" fill="#4FACFE" />
+    <circle cx="400" cy="20" r="3" fill="#43E97B" />
+    <circle cx="500" cy="40" r="2" fill="#F9D423" />
+    <circle cx="600" cy="30" r="3" fill="#FF6B6B" />
+    <circle cx="700" cy="20" r="2" fill="#4FACFE" />
+    <circle cx="800" cy="40" r="3" fill="#43E97B" />
+    <circle cx="900" cy="30" r="2" fill="#F9D423" />
+  </g>
+</svg>

@@ -44,28 +44,25 @@ export default function CustomSwiper() {
           prevEl: prevRef.current,
           nextEl: nextRef.current,
         }}
-        pagination={{
-          clickable: true,
-        }}
       >
-        {[...Array(2)].map((_, index) => (
+        {[...Array(6)].map((_, index) => (
           <SwiperSlide key={index}>
             <div className="h-60 md:h-84 relative">
               <Image
-                src={`/assets/banner/image-0${index + 1}.webp`}
+                src={`/assets/banner/image-0${index + 1}.svg`}
                 alt="placeholder"
                 fill
-                className="h-full w-full object-top object-cover"
+                className="size-full object-cover object-top"
               />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="absolute z-10 top-1/2 -translate-y-1/2 inset-x-0 flex items-center justify-between">
-        <Button variant="ghost" size="icon" ref={prevRef}>
+      <div className="absolute z-10 top-1/2 -translate-y-1/2 -inset-x-6 flex items-center justify-between">
+        <Button variant="ghost" size="icon" shape="pill" ref={prevRef}>
           <LucideChevronLeft />
         </Button>
-        <Button variant="ghost" size="icon" ref={nextRef} className="">
+        <Button variant="ghost" size="icon" shape="pill" ref={nextRef}>
           <LucideChevronRight />
         </Button>
       </div>
