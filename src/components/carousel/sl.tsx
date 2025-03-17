@@ -43,7 +43,7 @@ type SliderProps = {
   pagination?: boolean;
 };
 
-export function CardSlider({
+export default function CardSlider({
   autoplay = false,
   duration = 3000,
   slidesPerView = 4,
@@ -102,13 +102,26 @@ export function NavigationControls() {
   const handleNext = () => swiperRef.current?.swiper?.slideNext();
 
   return (
-    <div className="flex justify-center gap-0.5">
-      <Button variant="outline" size="icon" onClick={handlePrev}>
+    <div className="flex gap-4 justify-center mt-4">
+      <Button variant="ghost" size="icon" onClick={handlePrev}>
         <LucideChevronLeft />
       </Button>
-      <Button variant="outline" size="icon" onClick={handleNext}>
+      <Button variant="ghost" size="icon" onClick={handleNext}>
         <LucideChevronRight />
       </Button>
     </div>
+  );
+}
+
+export function Page() {
+  return (
+    <SwiperProvider>
+      <div className="p-6">
+        <h1 className="text-2xl font-bold mb-4">Our Products</h1>
+        <NavigationControls />
+        <CardSlider autoplay pagination />
+        <NavigationControls />
+      </div>
+    </SwiperProvider>
   );
 }

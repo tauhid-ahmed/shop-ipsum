@@ -18,9 +18,9 @@ export function Section({
         {
           "py-10": padding === "default",
           "py-12 md:py-16 lg:py-20": padding === "lg",
-          "py-14": className === "md",
-          "py-8": className === "sm",
-          "py-0": className === "none",
+          "py-14": padding === "md",
+          "py-8": padding === "sm",
+          "py-0": padding === "none",
         },
         className
       )}
