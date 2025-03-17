@@ -27,6 +27,7 @@ export function Heading({
   as = "h2",
   weight = "normal",
   align = "center",
+  ...props
 }: HeadingProps) {
   const Comp = as;
 
@@ -67,6 +68,7 @@ export function Heading({
         textAlignClasses[align],
         className
       )}
+      {...props}
     >
       {children}
     </Comp>

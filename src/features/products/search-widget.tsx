@@ -1,11 +1,17 @@
 "use client";
-import { LucideSearch } from "lucide-react";
+import { LucideSearch, LucideX } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+  SheetClose,
+} from "@/components/ui/sheet";
 import { Container } from "@/components/layout/container";
 import { Input } from "@/components/ui/input";
-import { Logo } from "@/components/logo";
+import { Heading } from "@/components/heading";
 
 export function SearchWidget() {
   return (
@@ -17,13 +23,24 @@ export function SearchWidget() {
       </SheetTrigger>
       <SheetContent side="top">
         <Container size="xs">
-          <div className="pt-20 pb-10 space-y-4">
-            <Logo />
-            <div className="flex gap-4">
-              <Input placeholder="Search..." />
-              <Button variant="outline">
-                <LucideSearch />
-              </Button>
+          <div className="relative">
+            <div className="absolute right-0 top-4">
+              <SheetClose asChild>
+                <Button variant="ghost" size="icon">
+                  <LucideX />
+                </Button>
+              </SheetClose>
+            </div>
+            <div className="py-14 space-y-2">
+              <SheetTitle asChild className="flex items-center">
+                <Heading size="lg">WHAT ARE YOU LOOKING FOR?</Heading>
+              </SheetTitle>
+              <div className="flex border-b-2 border-border focus-within:border-b-primary">
+                <Input reset placeholder="Search..." />
+                <Button variant="ghost" size="icon">
+                  <LucideSearch />
+                </Button>
+              </div>
             </div>
           </div>
         </Container>

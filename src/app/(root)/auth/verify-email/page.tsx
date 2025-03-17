@@ -1,8 +1,5 @@
 import { getVerificationTokenByToken } from "@/db/queries";
 import EmailVerificationForm from "@/features/auth/components/email-verify-form";
-import { NotifyType } from "@/features/auth/types";
-import { notFound } from "next/navigation";
-import { VALIDATION_MESSAGES as MSG } from "@/features/auth/data";
 
 type Props = {
   searchParams: Promise<{

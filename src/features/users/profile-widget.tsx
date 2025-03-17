@@ -14,14 +14,11 @@ import {
 } from "@/components/ui/popover";
 import { Heading } from "@/components/heading";
 import Link from "next/link";
-import { signInPath } from "@/constants/paths";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import SignedIn from "@/components/signed-in";
-import SignedOut from "@/components/signed-out";
 import ProfileImage from "@/components/profile-image";
 import { signOut } from "next-auth/react";
 
@@ -71,18 +68,18 @@ export default function ProfileWidget() {
         className="relative p-0 rounded text-muted-foreground"
       >
         <ProfileHeader />
-        <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border">
+        <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border bg-accent/20">
           {menuItems.map((item) => (
             <Link
               key={item.name}
-              className="flex items-center gap-2 cursor-pointer hover:bg-accent"
+              className="flex items-center gap-2 cursor-pointer hover:bg-primary/10"
               href={item.href}
             >
               {item.icon}
               {item.name}
             </Link>
           ))}
-          <div className="flex justify-between bg-accent/40">
+          <div className="flex justify-between bg-accent/60">
             <span>Appearance</span>
             <ThemeSwitch />
           </div>
@@ -96,8 +93,8 @@ function ProfileHeader() {
   const { user } = useAuth();
   return (
     <>
-      <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/40">
-        <ProfileImage align="center" size="lg" />
+      <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/60">
+        <ProfileImage align="center" size="lg" border />
         <div className="text-center">
           <Heading
             as="h3"

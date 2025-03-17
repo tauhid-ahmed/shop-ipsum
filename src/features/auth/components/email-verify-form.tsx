@@ -3,12 +3,12 @@
 import {
   AuthCard,
   AuthCardBody,
-  AuthCardEmailVerifyFooter,
+  // AuthCardEmailVerifyFooter,
   AuthCardHeader,
   AuthCardNotify,
 } from "./auth-card";
 import { Button } from "@/components/ui/button";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   InputOTP,
   InputOTPGroup,
@@ -16,13 +16,12 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { useRouter } from "next/navigation";
 // import { Loader2 } from "@/components/loader";
 import { tokenVerifyAction } from "../actions/email-verify.action";
 // import { CircleCheck } from "lucide-react";
 import { type NotifyType } from "../types";
 import { VALIDATION_MESSAGES } from "../data";
-import { defaultRedirectPath } from "@/constants/paths";
+// import { defaultRedirectPath } from "@/constants/paths";
 
 export type Notify = {
   type: "error" | "success" | "";
@@ -37,7 +36,7 @@ export default function EmailVerificationForm({ notify }: { notify: Notify }) {
     message: "",
     type: "",
   });
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();

@@ -1,5 +1,5 @@
 import { Heading } from "@/components/heading";
-import { BrandLogoSmall } from "@/components/icons/brand-sm";
+
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 
