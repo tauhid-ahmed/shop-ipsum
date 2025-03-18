@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import { LucideChevronLeft, LucideChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type SwiperContextType = {
   swiperRef: React.RefObject<SwiperRef | null>;
@@ -43,16 +44,18 @@ type SliderProps = {
   pagination?: boolean;
   data: Record<string, string>[];
   render: (item: Record<string, string>) => React.ReactNode;
+  spaceBetween?: number;
 };
 
 export function CardSlider({
   autoplay = true,
   duration = 6000,
-  slidesPerView = 4,
+  slidesPerView,
   speed = 600,
   loop = true,
   pagination = false,
   data = [],
+  spaceBetween = 16,
   render,
 }: SliderProps) {
   const swiperRef = useSwiper();
@@ -61,13 +64,17 @@ export function CardSlider({
     <Swiper
       ref={swiperRef}
       slidesPerView={slidesPerView}
-      spaceBetween={16}
-      breakpoints={{
-        0: { slidesPerView: 1 },
-        640: { slidesPerView: 2 },
-        768: { slidesPerView: 3 },
-        1024: { slidesPerView: 4 },
-      }}
+      spaceBetween={spaceBetween}
+      breakpoints={
+        !slidesPerView
+          ? {
+              0: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 4 },
+            }
+          : undefined
+      }
       loop={loop}
       speed={speed}
       autoplay={
@@ -99,17 +106,22 @@ export function CardSlider({
   );
 }
 
-export function NavigationControls() {
+export function NavigationControls({ className }: { className?: string }) {
   const swiperRef = useSwiper();
 
   const handlePrev = () => swiperRef.current?.swiper?.slidePrev();
   const handleNext = () => swiperRef.current?.swiper?.slideNext();
 
   return (
-    <div className="flex justify-between absolute top-1/2 -translate-y-4/2 -inset-x-4 z-20 pointer-events-none">
+    <div
+      className={cn(
+        "flex justify-between absolute top-1/2 -translate-y-1/2 -inset-x-4 z-20 pointer-events-none",
+        className
+      )}
+    >
       <Button
-        className="backdrop-blur-xl pointer-events-auto lg:-translate-x-4 lg:group-hover:translate-x-0 transition-transform lg:opacity-0 lg:group-hover:opacity-100 shadow"
-        variant="transparent"
+        className="pointer-events-auto"
+        variant="secondary"
         size="icon"
         shape="pill"
         onClick={handlePrev}
@@ -117,8 +129,8 @@ export function NavigationControls() {
         <LucideChevronLeft />
       </Button>
       <Button
-        className="backdrop-blur-xl pointer-events-auto lg:translate-x-4 lg:group-hover:translate-x-0 lg:transition-transform lg:opacity-0 group-hover:opacity-100 shadow"
-        variant="transparent"
+        variant="secondary"
+        className="pointer-events-auto"
         size="icon"
         shape="pill"
         onClick={handleNext}

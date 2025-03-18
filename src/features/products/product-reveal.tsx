@@ -17,13 +17,8 @@ import {
   LucideMoveRight,
   LucidePlus,
 } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+
+import { QuickShop } from "./quick-shop";
 import StarRatings from "@/components/star-ratings";
 
 type ProductRevealProps = {
@@ -147,9 +142,9 @@ export default function ProductReveal({
                         </div>
                         <StarRatings />
                       </div>
-                      <div className="absolute top-1 right-1 z-10 bg-white/80 dark:bg-black/80 p-0.5 rounded-full">
+                      <div className="absolute top-1.5 right-1.5 z-10 bg-secondary/50 rounded-full shadow-sm">
                         <Button
-                          className="hover:text-rose-500"
+                          className="hover:text-rose-400"
                           variant="transparent"
                           size="icon"
                         >
@@ -159,57 +154,13 @@ export default function ProductReveal({
                     </div>
                   )}
                 />
-                <NavigationControls />
+                <NavigationControls className="-translate-y-4/2" />
               </div>
             </div>
           </SwiperProvider>
         </Container>
       </Section>
-      <ProductQuickShop
-        open={selectedProduct !== null}
-        close={() => setSelectedProduct(null)}
-        selectedProduct={selectedProduct ?? null}
-      />
+      <QuickShop />
     </>
-  );
-}
-
-function ProductQuickShop({
-  open,
-  close,
-  selectedProduct,
-}: {
-  open: boolean;
-  close: () => void;
-  selectedProduct: Record<string, string> | null;
-}) {
-  return (
-    <Dialog open={open} onOpenChange={close}>
-      <DialogContent>
-        <div className="flex flex-col gap-4">
-          <div className="w-full h-80 border">
-            {selectedProduct?.image && (
-              <Image
-                src={selectedProduct?.image ?? "image"}
-                width={400}
-                height={400}
-                alt={selectedProduct?.title ?? "Name"}
-                className="size-full object-contain"
-              />
-            )}
-          </div>
-          <div>
-            <DialogHeader>
-              <DialogTitle className="text-left">
-                {selectedProduct?.title}
-              </DialogTitle>
-            </DialogHeader>
-            <DialogDescription>
-              {selectedProduct?.description}
-            </DialogDescription>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
   );
 }
