@@ -39,7 +39,7 @@ export function Heading({
     lg: "text-base lg:text-lg",
     xl: "text-lg lg:text-xl",
     "2xl": "text-xl lg:text-2xl",
-    "3xl": "text-2xl lg:text-3xl",
+    "3xl": "text-3xl",
     "4xl": "text-3xl lg:text-4xl",
     "5xl": "text-3xl md:text-4xl lg:text-5xl",
     "6xl": "text-4xl md:text-5xl lg:text-6xl",

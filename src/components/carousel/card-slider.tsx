@@ -99,7 +99,9 @@ export function CardSlider({
     >
       {data.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className="flex items-center justify-center">{render(item)}</div>
+          <div className="flex items-center justify-center flex-1 h-full">
+            {render(item)}
+          </div>
         </SwiperSlide>
       ))}
     </Swiper>

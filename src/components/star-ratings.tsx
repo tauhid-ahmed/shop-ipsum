@@ -35,14 +35,14 @@ export default function UserRatings({
       className={cn("flex items-center", {
         "gap-1": size === "sm",
         "gap-1 lg:gap-1.5": size === "md",
-        "gap-1.5 lg:gap-3": size === "lg",
+        "gap-1 lg:gap-2": size === "lg",
       })}
     >
       <span
         className={cn("text-muted-foreground", {
           "w-10 text-sm mt-0.5": size === "sm",
           "w-12 text-base mt-0.5 font-medium": size === "md",
-          "w-12 lg:w-16 text-lg lg:text-xl mt-0.5 lg:mt-1 font-medium":
+          "w-13 lg:w-14 text-lg lg:text-xl mt-0.5 lg:mt-1 font-medium":
             size === "lg",
         })}
       >
@@ -75,11 +75,13 @@ export default function UserRatings({
         })}
       </div>
       {description && (
-        <div className="flex justify-evenly items-center w-full">
-          <span className="size-1 bg-primary/40 rounded-full"></span>
-          <span className="text-primary text-base lg:text-lg">
-            See all {totalReviews} reviews
-          </span>
+        <div className="flex flex-wrap gap-4 items-center w-full">
+          <div className="flex items-center gap-6 pl-4">
+            <span className="size-1 bg-primary/40 rounded-full"></span>
+            <span className="text-primary whitespace-nowrap text-base lg:text-xl font-medium">
+              See all {totalReviews} reviews
+            </span>
+          </div>
         </div>
       )}
     </div>
@@ -130,8 +132,8 @@ function Star({
         "relative inline-block",
         isInteractive ? "cursor-pointer" : "cursor-default",
         size === "sm" && "w-4 h-4",
-        size === "md" && "size-5 lg:size-6",
-        size === "lg" && "size-6 lg:size-7"
+        size === "md" && "size-4 lg:size-5",
+        size === "lg" && "size-5.5 lg:size-7"
       )}
       onMouseMove={(e) =>
         handleInteraction(e, (fillRatio) => onHover(starIndex, fillRatio))
