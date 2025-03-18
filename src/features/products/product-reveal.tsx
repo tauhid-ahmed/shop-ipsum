@@ -72,7 +72,7 @@ export default function ProductReveal({
     <Section padding="sm">
       <Container>
         <SwiperProvider>
-          <div className="relative space-y-6">
+          <div className="space-y-10 group">
             <div className="flex justify-between items-baseline">
               <Heading align="left" weight="bold">
                 {title}
@@ -83,67 +83,73 @@ export default function ProductReveal({
                 </Link>
               </Button>
             </div>
-            <CardSlider
-              duration={duration}
-              speed={speed}
-              data={data}
-              render={(item) => (
-                <div className="w-full max-w-80 space-y-6 group relative overflow-hidden rounded shadow-sm">
-                  <div className="relative">
-                    <div className="relative h-80 rounded overflow-hidden">
-                      <Image
-                        src={item.image}
-                        width={300}
-                        height={300}
-                        alt={item.title}
-                        className="size-full object-cover"
-                      />
-                      <Link
-                        href="/"
-                        className="absolute inset-0 bg-accent/30 grid place-items-center opacity-0 group-hover:opacity-100 "
-                      >
-                        <Button variant="ghost" shape="pill" size="icon">
-                          <LucideLink />
+            <div className="relative">
+              <CardSlider
+                duration={duration}
+                speed={speed}
+                data={data}
+                render={(item) => (
+                  <div className="w-full max-w-80 space-y-4 relative overflow-hidden rounded shadow-sm">
+                    <div className="relative group/card">
+                      <div className="relative h-80 rounded overflow-hidden">
+                        <Image
+                          src={item.image}
+                          width={300}
+                          height={300}
+                          alt={item.title}
+                          className="size-full object-cover"
+                        />
+                        <Link
+                          href="/"
+                          className="absolute inset-0 bg-accent/30 grid place-items-center opacity-0 group-hover/card:opacity-100 "
+                        >
+                          <Button variant="ghost" shape="pill" size="icon">
+                            <LucideLink />
+                          </Button>
+                        </Link>
+                      </div>
+                      <div className="absolute bottom-2 inset-x-6 opacity-0 group-hover/card:opacity-100 transition-opacity">
+                        <Button
+                          size="sm"
+                          shape="pill"
+                          className="w-full uppercase"
+                        >
+                          <LucidePlus /> QuickShop
                         </Button>
-                      </Link>
+                      </div>
                     </div>
-                    <div className="absolute bottom-2 inset-x-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button
+                    <div className="text-center">
+                      <Heading
+                        weight="medium"
+                        className="text-muted-foreground"
                         size="sm"
-                        shape="pill"
-                        className="w-full uppercase"
                       >
-                        <LucidePlus /> QuickShop
+                        {item.title}
+                      </Heading>
+                      <p className="text-foreground/80 text-ellipsis">
+                        {item.description}
+                      </p>
+                      <div>
+                        <span className="text-primary font-semibold">
+                          {item.price}
+                        </span>
+                      </div>
+                      <StarRatings />
+                    </div>
+                    <div className="absolute top-1 right-1 z-10 bg-white/80 dark:bg-black/80 p-0.5 rounded-full">
+                      <Button
+                        className="hover:text-rose-500"
+                        variant="transparent"
+                        size="icon"
+                      >
+                        <LucideHeart />
                       </Button>
                     </div>
                   </div>
-                  <div className="text-center">
-                    <Heading
-                      weight="medium"
-                      className="text-muted-foreground"
-                      size="sm"
-                    >
-                      {item.title}
-                    </Heading>
-                    <p className="text-foreground/80 text-ellipsis">
-                      {item.description}
-                    </p>
-                    <div>
-                      <span className="text-primary font-semibold">
-                        {item.price}
-                      </span>
-                    </div>
-                    <StarRatings />
-                  </div>
-                  <div className="absolute top-1 right-1 z-10 bg-white dark:bg-black p-0.5 rounded-full">
-                    <Button variant="transparent" size="icon">
-                      <LucideHeart />
-                    </Button>
-                  </div>
-                </div>
-              )}
-            />
-            <NavigationControls />
+                )}
+              />
+              <NavigationControls />
+            </div>
           </div>
         </SwiperProvider>
       </Container>

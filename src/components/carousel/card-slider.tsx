@@ -106,9 +106,9 @@ export function NavigationControls() {
   const handleNext = () => swiperRef.current?.swiper?.slideNext();
 
   return (
-    <div className="flex justify-between gap-0.5 absolute top-1/2 -translate-y-3/2 -inset-x-4 z-20 pointer-events-none">
+    <div className="flex justify-between absolute top-1/2 -translate-y-4/2 -inset-x-4 z-20 pointer-events-none">
       <Button
-        className="backdrop-blur-3xl pointer-events-auto"
+        className="backdrop-blur-xl pointer-events-auto lg:-translate-x-4 lg:group-hover:translate-x-0 transition-transform lg:opacity-0 lg:group-hover:opacity-100 shadow"
         variant="transparent"
         size="icon"
         shape="pill"
@@ -117,7 +117,7 @@ export function NavigationControls() {
         <LucideChevronLeft />
       </Button>
       <Button
-        className="backdrop-blur-3xl pointer-events-auto"
+        className="backdrop-blur-xl pointer-events-auto lg:translate-x-4 lg:group-hover:translate-x-0 lg:transition-transform lg:opacity-0 group-hover:opacity-100 shadow"
         variant="transparent"
         size="icon"
         shape="pill"
