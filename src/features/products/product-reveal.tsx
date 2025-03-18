@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 
 import { QuickShop } from "./quick-shop";
-import StarRatings from "@/components/star-ratings";
+import UserRatings from "@/components/star-ratings";
 
 type ProductRevealProps = {
   title: string;
@@ -140,7 +140,7 @@ export default function ProductReveal({
                         <div>
                           <span className=" font-semibold">{item.price}</span>
                         </div>
-                        <StarRatings />
+                        <UserRatings size="sm" averageRating={4} />
                       </div>
                       <div className="absolute top-1.5 right-1.5 z-10 bg-secondary/50 rounded-full shadow-sm">
                         <Button

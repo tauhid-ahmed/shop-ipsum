@@ -12,7 +12,7 @@ import {
 } from "@/components/carousel/card-slider";
 
 import Image from "next/image";
-import StarRatings from "@/components/star-ratings";
+import UserRatings from "@/components/star-ratings";
 
 const data = {
   id: "1",
@@ -24,7 +24,7 @@ const data = {
 
 export function QuickShop() {
   return (
-    <Dialog open={false}>
+    <Dialog open={true}>
       <DialogContent className="w-fit">
         <div className="flex flex-col gap-4 relative">
           <SwiperProvider>
@@ -57,7 +57,7 @@ export function QuickShop() {
             </DialogHeader>
             <DialogDescription>
               <div className="flex flex-col gap-2">
-                <StarRatings />
+                <UserRatings averageRating={4.3} size="lg" />
               </div>
             </DialogDescription>
           </div>
