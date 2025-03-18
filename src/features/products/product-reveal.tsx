@@ -90,7 +90,7 @@ export default function ProductReveal({
                 data={data}
                 render={(item) => (
                   <div className="w-full max-w-80 space-y-4 relative overflow-hidden rounded shadow-sm">
-                    <div className="relative group/card">
+                    <div className="relative group/card overflow-hidden">
                       <div className="relative h-80 rounded overflow-hidden">
                         <Image
                           src={item.image}
@@ -108,11 +108,11 @@ export default function ProductReveal({
                           </Button>
                         </Link>
                       </div>
-                      <div className="absolute bottom-2 inset-x-6 opacity-0 group-hover/card:opacity-100 transition-opacity">
+                      <div className="absolute bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-2">
                         <Button
                           size="sm"
                           shape="pill"
-                          className="w-full uppercase"
+                          className="w-full uppercase backdrop-blur-2xl"
                         >
                           <LucidePlus /> QuickShop
                         </Button>
@@ -130,9 +130,7 @@ export default function ProductReveal({
                         {item.description}
                       </p>
                       <div>
-                        <span className="text-primary font-semibold">
-                          {item.price}
-                        </span>
+                        <span className=" font-semibold">{item.price}</span>
                       </div>
                       <StarRatings />
                     </div>
