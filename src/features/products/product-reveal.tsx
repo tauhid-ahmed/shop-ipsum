@@ -11,7 +11,12 @@ import {
 } from "@/components/carousel/card-slider";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { LucideHeart, LucideLink, LucidePlus } from "lucide-react";
+import {
+  LucideHeart,
+  LucideLink,
+  LucideMoveRight,
+  LucidePlus,
+} from "lucide-react";
 import StarRatings from "@/components/star-ratings";
 
 type ProductRevealProps = {
@@ -67,12 +72,16 @@ export default function ProductReveal({
     <Section padding="sm">
       <Container>
         <SwiperProvider>
-          <div className="space-y-6">
-            <div className="flex justify-between items-center">
+          <div className="relative space-y-6">
+            <div className="flex justify-between items-baseline">
               <Heading align="left" weight="bold">
                 {title}
               </Heading>
-              <NavigationControls />
+              <Button asChild variant="link">
+                <Link href="/">
+                  Shop the collection <LucideMoveRight />
+                </Link>
+              </Button>
             </div>
             <CardSlider
               duration={duration}
@@ -99,7 +108,11 @@ export default function ProductReveal({
                       </Link>
                     </div>
                     <div className="absolute bottom-2 inset-x-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button shape="pill" className="w-full uppercase">
+                      <Button
+                        size="sm"
+                        shape="pill"
+                        className="w-full uppercase"
+                      >
                         <LucidePlus /> QuickShop
                       </Button>
                     </div>
@@ -130,6 +143,7 @@ export default function ProductReveal({
                 </div>
               )}
             />
+            <NavigationControls />
           </div>
         </SwiperProvider>
       </Container>

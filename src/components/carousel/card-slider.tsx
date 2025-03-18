@@ -106,11 +106,23 @@ export function NavigationControls() {
   const handleNext = () => swiperRef.current?.swiper?.slideNext();
 
   return (
-    <div className="flex justify-center gap-0.5">
-      <Button variant="outline" size="icon" onClick={handlePrev}>
+    <div className="flex justify-between gap-0.5 absolute top-1/2 -translate-y-3/2 -inset-x-4 z-20 pointer-events-none">
+      <Button
+        className="backdrop-blur-3xl pointer-events-auto"
+        variant="transparent"
+        size="icon"
+        shape="pill"
+        onClick={handlePrev}
+      >
         <LucideChevronLeft />
       </Button>
-      <Button variant="outline" size="icon" onClick={handleNext}>
+      <Button
+        className="backdrop-blur-3xl pointer-events-auto"
+        variant="transparent"
+        size="icon"
+        shape="pill"
+        onClick={handleNext}
+      >
         <LucideChevronRight />
       </Button>
     </div>
