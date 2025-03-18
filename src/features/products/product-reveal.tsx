@@ -17,6 +17,13 @@ import {
   LucideMoveRight,
   LucidePlus,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import StarRatings from "@/components/star-ratings";
 
 type ProductRevealProps = {
@@ -68,89 +75,141 @@ export default function ProductReveal({
   duration,
   speed,
 }: ProductRevealProps) {
+  const [selectedProduct, setSelectedProduct] = React.useState<Record<
+    string,
+    string
+  > | null>(null);
   return (
-    <Section padding="sm">
-      <Container>
-        <SwiperProvider>
-          <div className="space-y-10 group">
-            <div className="flex justify-between items-baseline">
-              <Heading align="left" weight="bold">
-                {title}
-              </Heading>
-              <Button asChild variant="link">
-                <Link href="/">
-                  Shop the collection <LucideMoveRight />
-                </Link>
-              </Button>
-            </div>
-            <div className="relative">
-              <CardSlider
-                duration={duration}
-                speed={speed}
-                data={data}
-                render={(item) => (
-                  <div className="w-full max-w-80 space-y-4 relative overflow-hidden rounded shadow-sm">
-                    <div className="relative group/card overflow-hidden">
-                      <div className="relative h-80 rounded overflow-hidden">
-                        <Image
-                          src={item.image}
-                          width={300}
-                          height={300}
-                          alt={item.title}
-                          className="size-full object-cover"
-                        />
-                        <Link
-                          href="/"
-                          className="absolute inset-0 bg-accent/30 grid place-items-center opacity-0 group-hover/card:opacity-100 "
-                        >
-                          <Button variant="ghost" shape="pill" size="icon">
-                            <LucideLink />
+    <>
+      <Section padding="sm">
+        <Container>
+          <SwiperProvider>
+            <div className="space-y-10 group">
+              <div className="flex justify-between items-baseline">
+                <Heading align="left" weight="bold">
+                  {title}
+                </Heading>
+                <Button asChild variant="link">
+                  <Link href="/">
+                    Shop the collection <LucideMoveRight />
+                  </Link>
+                </Button>
+              </div>
+              <div className="relative">
+                <CardSlider
+                  duration={duration}
+                  speed={speed}
+                  data={data}
+                  render={(item) => (
+                    <div className="w-full max-w-80 space-y-4 relative overflow-hidden rounded shadow-sm">
+                      <div className="relative group/card overflow-hidden">
+                        <div className="relative h-80 rounded overflow-hidden">
+                          <Image
+                            src={item.image}
+                            width={300}
+                            height={300}
+                            alt={item.title}
+                            className="size-full object-cover"
+                          />
+                          <Link
+                            href="/"
+                            className="absolute inset-0 bg-accent/30 grid place-items-center opacity-0 group-hover/card:opacity-100 "
+                          >
+                            <Button variant="ghost" shape="pill" size="icon">
+                              <LucideLink />
+                            </Button>
+                          </Link>
+                        </div>
+                        <div className="absolute bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-2">
+                          <Button
+                            size="sm"
+                            shape="pill"
+                            className="w-full uppercase backdrop-blur-2xl"
+                            onClick={() => setSelectedProduct(item)}
+                          >
+                            <LucidePlus /> QuickShop
                           </Button>
-                        </Link>
+                        </div>
                       </div>
-                      <div className="absolute bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-2">
-                        <Button
+                      <div className="text-center">
+                        <Heading
+                          weight="medium"
+                          className="text-muted-foreground"
                           size="sm"
-                          shape="pill"
-                          className="w-full uppercase backdrop-blur-2xl"
                         >
-                          <LucidePlus /> QuickShop
+                          {item.title}
+                        </Heading>
+                        <p className="text-foreground/80 text-ellipsis">
+                          {item.description}
+                        </p>
+                        <div>
+                          <span className=" font-semibold">{item.price}</span>
+                        </div>
+                        <StarRatings />
+                      </div>
+                      <div className="absolute top-1 right-1 z-10 bg-white/80 dark:bg-black/80 p-0.5 rounded-full">
+                        <Button
+                          className="hover:text-rose-500"
+                          variant="transparent"
+                          size="icon"
+                        >
+                          <LucideHeart />
                         </Button>
                       </div>
                     </div>
-                    <div className="text-center">
-                      <Heading
-                        weight="medium"
-                        className="text-muted-foreground"
-                        size="sm"
-                      >
-                        {item.title}
-                      </Heading>
-                      <p className="text-foreground/80 text-ellipsis">
-                        {item.description}
-                      </p>
-                      <div>
-                        <span className=" font-semibold">{item.price}</span>
-                      </div>
-                      <StarRatings />
-                    </div>
-                    <div className="absolute top-1 right-1 z-10 bg-white/80 dark:bg-black/80 p-0.5 rounded-full">
-                      <Button
-                        className="hover:text-rose-500"
-                        variant="transparent"
-                        size="icon"
-                      >
-                        <LucideHeart />
-                      </Button>
-                    </div>
-                  </div>
-                )}
-              />
-              <NavigationControls />
+                  )}
+                />
+                <NavigationControls />
+              </div>
             </div>
+          </SwiperProvider>
+        </Container>
+      </Section>
+      <ProductQuickShop
+        open={selectedProduct !== null}
+        close={() => setSelectedProduct(null)}
+        selectedProduct={selectedProduct ?? null}
+      />
+    </>
+  );
+}
+
+function ProductQuickShop({
+  open,
+  close,
+  selectedProduct,
+}: {
+  open: boolean;
+  close: () => void;
+  selectedProduct: Record<string, string> | null;
+}) {
+  return (
+    <Dialog open={open} onOpenChange={close}>
+      <DialogContent>
+        <div className="flex flex-col gap-4">
+          <div className="w-full h-80 border">
+            {selectedProduct?.image && (
+              <Image
+                src={selectedProduct?.image ?? "image"}
+                width={400}
+                height={400}
+                alt={selectedProduct?.title ?? "Name"}
+                className="size-full object-contain"
+              />
+            )}
           </div>
-        </SwiperProvider>
-      </Container>
-    </Section>
+          <div>
+            <DialogHeader>
+              <DialogTitle className="text-left">
+                {selectedProduct?.title}
+              </DialogTitle>
+            </DialogHeader>
+            <DialogDescription>
+              {selectedProduct?.description}
+            </DialogDescription>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
