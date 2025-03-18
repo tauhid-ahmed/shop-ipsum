@@ -29,7 +29,7 @@ export default async function Home() {
         speed={getRandomSpeed()}
         title="New Arrivals"
       />
-      <Section padding="lg">
+      <Section padding="sm">
         <Container>
           <div className="relative h-96 md:h-[500px] bg-accent/50 flex items-center justify-center px-4">
             <div className="absolute inset-0 -z-10 opacity-20">
