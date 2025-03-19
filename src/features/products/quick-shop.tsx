@@ -12,7 +12,7 @@ import {
 } from "@/components/carousel/card-slider";
 
 import Image from "next/image";
-import UserRatings, { StarList } from "@/components/star-ratings";
+import UserRatings from "@/components/star-ratings";
 import { DotSeparator } from "@/components/dot-separator";
 
 const data = {
@@ -71,8 +71,12 @@ export function QuickShop() {
                   size="lg"
                   isInteractive={false}
                 >
-                  <StarList />
-                  <DotSeparator />
+                  <div className="flex gap-1 items-center">
+                    <UserRatings.AverageRating />
+                    <UserRatings.StarList />
+                    <DotSeparator />
+                    <UserRatings.TotalReviews />
+                  </div>
                 </UserRatings>
               </div>
               <div className="h-96"></div>

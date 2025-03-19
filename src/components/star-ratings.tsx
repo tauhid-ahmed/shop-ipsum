@@ -81,17 +81,32 @@ export default function UserRatings({
   );
 }
 
-export function AverageRating() {
+function AverageRating({ className }: { className?: string }) {
   const { displayedRating } = useRatingContext();
-  return <span>{displayedRating}</span>;
+  return (
+    <span
+      className={cn(
+        "text-muted-foreground text-sm lg:text-lg mt-0.5",
+        className
+      )}
+    >
+      {displayedRating}
+    </span>
+  );
 }
 
-export function UserReviewsCount() {
+function UserReviewsCount({ className }: { className?: string }) {
   const { totalReviews } = useRatingContext();
-  return <span>{totalReviews}</span>;
+  return (
+    <span
+      className={cn("text-primary text-sm lg:text-lg font-medium", className)}
+    >
+      See all {totalReviews} reviews
+    </span>
+  );
 }
 
-export function StarList() {
+function StarList() {
   const {
     size,
     displayedRating,
@@ -201,3 +216,8 @@ function Star({
     </div>
   );
 }
+
+UserRatings.displayName = "UserRatings";
+UserRatings.StarList = StarList;
+UserRatings.AverageRating = AverageRating;
+UserRatings.TotalReviews = UserReviewsCount;
