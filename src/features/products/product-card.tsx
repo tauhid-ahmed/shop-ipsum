@@ -29,7 +29,7 @@ export default function ProductCard({ data }: { data: data }) {
           />
           <Link
             href="/"
-            className="absolute inset-0 bg-accent/30 grid place-items-center opacity-0 group-hover/card:opacity-100 "
+            className="absolute inset-0 bg-accent/30 grid place-items-center opacity-0 group-hover/card:opacity-100"
           >
             <Button variant="ghost" shape="pill" size="icon">
               <LucideLink />
