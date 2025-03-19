@@ -17,12 +17,12 @@ interface EmblaContextType {
   autoplay: boolean;
   loop: boolean;
   delay: number;
-  data: number;
+  data: Record<string, string>[];
   canScroll: boolean;
 }
 
 const EmblaContext = createContext<EmblaContextType | null>(null);
-const useEmblaContext = () => {
+export const useEmblaContext = () => {
   const context = useContext(EmblaContext);
   if (!context) {
     throw new Error("useEmblaContext must be used within an EmblaProvider");
@@ -30,21 +30,20 @@ const useEmblaContext = () => {
   return context;
 };
 
-// Embla Provider Component
 interface EmblaProviderProps {
   loop?: boolean;
   autoplay?: boolean;
   delay?: number;
-  data?: number;
+  data?: Record<string, string>[]; // Supports nested objects and arrays
   align?: "start" | "center" | "end";
   children: ReactNode;
 }
 
-export default function EmblaProvider({
+export default function Embla({
   loop = true,
   autoplay = true,
   delay = 6000,
-  data = 3,
+  data = [{}, {}, {}],
   align = "start",
   children,
 }: EmblaProviderProps) {
@@ -79,35 +78,23 @@ export default function EmblaProvider({
 
   return (
     <EmblaContext.Provider
-      value={{ emblaRef, emblaApi, autoplay, loop, delay, data, canScroll }}
+      value={{
+        emblaRef,
+        emblaApi,
+        autoplay,
+        loop,
+        delay,
+        data,
+        canScroll,
+      }}
     >
       {children}
     </EmblaContext.Provider>
   );
 }
 
-// Main Carousel Component
-export function EmblaCarousel() {
-  const { data } = useEmblaContext();
-  return (
-    <>
-      <CarouselContainer>
-        {Array.from({ length: data }).map((_, i) => (
-          <CarouselSlide key={i}>
-            <div className="flex items-center justify-center border h-40">
-              {i + 1}
-            </div>
-          </CarouselSlide>
-        ))}
-      </CarouselContainer>
-      <Pagination />
-      <NavigationControls />
-    </>
-  );
-}
-
 // Carousel Container
-function CarouselContainer({ children }: { children: ReactNode }) {
+function EmblaContainer({ children }: { children: ReactNode }) {
   const { emblaRef } = useEmblaContext();
   return (
     <div className="overflow-hidden h-full" ref={emblaRef}>
@@ -117,11 +104,9 @@ function CarouselContainer({ children }: { children: ReactNode }) {
 }
 
 // Individual Slide
-function CarouselSlide({ children }: { children: ReactNode }) {
+function EmblaSlide({ children }: { children: ReactNode }) {
   return (
-    <div className="shrink-0 grow-0 basis-full min-w-0 h-full sm:basis-full md:basis-1/2 lg:basis-1/3">
-      {children}
-    </div>
+    <div className="shrink-0 grow-0 basis-full min-w-0 h-full">{children}</div>
   );
 }
 
@@ -151,6 +136,9 @@ function Pagination() {
   const { emblaApi, data, canScroll } = useEmblaContext();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  // Ensure data is treated as an array
+  const dataArray = Array.isArray(data) ? data : [data];
+
   useEffect(() => {
     if (!emblaApi) return;
 
@@ -173,7 +161,7 @@ function Pagination() {
 
   return (
     <div className="flex justify-center gap-2 mt-4 relative z-10">
-      {Array.from({ length: data }).map((_, i) => (
+      {dataArray.map((_, i) => (
         <button
           key={i}
           onClick={() => scrollTo(i)}
@@ -186,3 +174,8 @@ function Pagination() {
     </div>
   );
 }
+
+Embla.Container = EmblaContainer;
+Embla.Slide = EmblaSlide;
+Embla.NavigationControls = NavigationControls;
+Embla.Pagination = Pagination;
