@@ -51,7 +51,7 @@ interface EmblaProviderProps {
 export default function Embla({
   loop = true,
   autoplay = true,
-  delay = 600,
+  delay = 6000,
   data = [],
   align = "start",
   playOnInit = false,
