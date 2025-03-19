@@ -45,6 +45,7 @@ type SliderProps = {
   data: Record<string, string>[];
   render: (item: Record<string, string>) => React.ReactNode;
   spaceBetween?: number;
+  className?: string;
 };
 
 export function CardSlider({
@@ -56,6 +57,7 @@ export function CardSlider({
   pagination = false,
   data = [],
   spaceBetween = 16,
+  className,
   render,
 }: SliderProps) {
   const swiperRef = useSwiper();
@@ -99,7 +101,7 @@ export function CardSlider({
     >
       {data.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className="flex items-center justify-center flex-1 h-full">
+          <div className={cn("flex items-center justify-center", className)}>
             {render(item)}
           </div>
         </SwiperSlide>
