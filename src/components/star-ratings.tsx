@@ -94,7 +94,7 @@ function UserReviewsCount({ className }: { className?: string }) {
   const { totalReviews } = useRatingContext();
   return (
     <span
-      className={cn("text-primary text-sm lg:text-lg font-medium", className)}
+      className={cn("text-primary text-sm lg:text-base font-medium", className)}
     >
       See all {totalReviews} reviews
     </span>
@@ -188,7 +188,7 @@ function Star({
         isInteractive && "cursor-pointer",
         size === "sm" && "size-4",
         size === "md" && "size-4 lg:size-5",
-        size === "lg" && "size-5 md:size-6 lg:size-8"
+        size === "lg" && "size-5 md:size-6 lg:size-7"
       )}
       onMouseMove={(e) =>
         handleInteraction(e, (fillRatio) => onHover(starIndex, fillRatio))
@@ -199,7 +199,7 @@ function Star({
       <div className="absolute inset-0 translate-x-4"></div>
       <div className="relative size-full z-10">
         {/* Empty star */}
-        <LucideStar className="absolute inset-0 stroke-1 stroke-yellow-500 fill-yellow-500/50 w-full h-full" />
+        <LucideStar className="absolute inset-0 stroke-1 stroke-yellow-500 dark:fill-yellow-500/60 fill-yellow-500/30 w-full h-full" />
         {/* Filled Portion */}
         <div
           className="absolute inset-0 overflow-hidden"

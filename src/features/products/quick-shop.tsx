@@ -30,7 +30,7 @@ const data = [
 
 export function QuickShop() {
   return (
-    <Dialog open={true}>
+    <Dialog open={false}>
       <DialogContent className="flex flex-col md:flex-row sm:max-w-xl md:max-w-5xl">
         <div className="w-full md:w-84 relative">
           <Embla data={data}>
@@ -45,19 +45,19 @@ export function QuickShop() {
         <div className="flex-1 flex flex-col">
           <div className="space-y-2">
             <DialogHeader>
-              <DialogTitle className="text-left text-2xl lg:text-3xl">
+              <DialogTitle className="text-left text-xl">
                 {data[0].title}
               </DialogTitle>
             </DialogHeader>
             <DialogDescription>
-              <span className="text-xl lg:text-2xl font-semibold">
+              <span className="text-xl lg:text-lg font-semibold">
                 {data[0].price}
               </span>
             </DialogDescription>
             <div className="flex flex-col gap-2">
               <UserRatings averageRating={4.3} size="lg" isInteractive={false}>
                 <div className="flex gap-1 items-center">
-                  <UserRatings.AverageRating className="lg:text-xl" />
+                  <UserRatings.AverageRating />
                   <UserRatings.StarList />
                   <DotSeparator />
                   <UserRatings.TotalReviews />
