@@ -1,17 +1,39 @@
 "use client";
 import { LucideStar } from "lucide-react";
-import React from "react";
-import { useStarRating } from "@/hooks/useStarRating";
+import React, { useState, useContext, createContext, MouseEvent } from "react";
 import { cn } from "@/lib/utils";
 
-export type UserRatingsProps = {
+interface UserRatingsProps {
   totalReviews?: number;
   averageRating?: number;
   isInteractive?: boolean;
   minAllowedRating?: number;
   maxStars?: number;
   size?: "sm" | "md" | "lg";
-  description?: boolean;
+  children: React.ReactNode;
+}
+
+interface RatingContextProps {
+  size: "sm" | "md" | "lg";
+  displayedRating: number;
+  maxStars: number;
+  isInteractive: boolean;
+  handleRatingUpdate: (newRating: number) => void;
+  handleStarHover: (starIndex: number, fillRatio: number) => void;
+  setHoveredRating: React.Dispatch<React.SetStateAction<number | null>>;
+  totalReviews: number;
+}
+
+const RatingContext = createContext<RatingContextProps | null>(null);
+
+const useRatingContext = () => {
+  const context = useContext(RatingContext);
+  if (!context) {
+    throw new Error(
+      "useRatingContext must be used within a UserRatingsProvider"
+    );
+  }
+  return context;
 };
 
 export default function UserRatings({
@@ -21,92 +43,115 @@ export default function UserRatings({
   minAllowedRating = 1,
   maxStars = 5,
   size = "md",
-  description = true,
+  children,
 }: UserRatingsProps) {
-  const {
-    displayedRating,
-    handleStarHover,
-    handleRatingUpdate,
-    setHoveredRating,
-  } = useStarRating(averageRating, minAllowedRating, isInteractive);
+  const [currentRating, setCurrentRating] = useState<number>(
+    Math.max(averageRating, minAllowedRating)
+  );
+  const [hoveredRating, setHoveredRating] = useState<number | null>(null);
+
+  const displayedRating = isInteractive
+    ? hoveredRating ?? currentRating
+    : Math.max(averageRating, minAllowedRating);
+
+  const handleStarHover = (starIndex: number, fillRatio: number) => {
+    if (isInteractive)
+      setHoveredRating(Math.max(starIndex - 1 + fillRatio, minAllowedRating));
+  };
+
+  const handleRatingUpdate = (newRating: number) => {
+    if (isInteractive) setCurrentRating(Math.max(newRating, minAllowedRating));
+  };
 
   return (
-    <div
-      className={cn("flex items-center", {
-        "gap-1": size === "sm",
-        "gap-1 lg:gap-1.5": size === "md",
-        "gap-1 lg:gap-2": size === "lg",
-      })}
+    <RatingContext.Provider
+      value={{
+        size,
+        displayedRating,
+        maxStars,
+        isInteractive,
+        handleRatingUpdate,
+        handleStarHover,
+        setHoveredRating,
+        totalReviews,
+      }}
     >
-      <span
-        className={cn("text-muted-foreground", {
-          "w-10 text-sm mt-0.5": size === "sm",
-          "w-12 text-base mt-0.5 font-medium": size === "md",
-          "w-13 lg:w-14 text-lg lg:text-xl mt-0.5 lg:mt-1 font-medium":
-            size === "lg",
-        })}
-      >
-        ({displayedRating.toFixed(2)})
-      </span>
-      <div
-        className={cn(
-          "inline-flex items-center gap-1",
-          size === "sm" && "gap-0.5"
-        )}
-      >
-        {[...Array(maxStars)].map((_, index) => {
-          const starIndex = index + 1;
-          const fillRatio = Math.max(0, Math.min(1, displayedRating - index));
+      {children}
+    </RatingContext.Provider>
+  );
+}
 
-          return (
-            <Star
-              key={starIndex}
-              starIndex={starIndex}
-              fillRatio={fillRatio}
-              isInteractive={isInteractive}
-              onPartialClick={(fillRatio) =>
-                handleRatingUpdate(starIndex - 1 + fillRatio)
-              }
-              onHover={handleStarHover}
-              onLeave={() => isInteractive && setHoveredRating(null)}
-              size={size}
-            />
-          );
-        })}
-      </div>
-      {description && (
-        <div className="flex flex-wrap gap-4 items-center w-full">
-          <div className="flex items-center gap-6 pl-4">
-            <span className="size-1 bg-primary/40 rounded-full"></span>
-            <span className="text-primary whitespace-nowrap text-base lg:text-xl font-medium">
-              See all {totalReviews} reviews
-            </span>
-          </div>
-        </div>
+export function AverageRating() {
+  const { displayedRating } = useRatingContext();
+  return <span>{displayedRating}</span>;
+}
+
+export function UserReviewsCount() {
+  const { totalReviews } = useRatingContext();
+  return <span>{totalReviews}</span>;
+}
+
+export function StarList() {
+  const {
+    size,
+    displayedRating,
+    maxStars,
+    isInteractive,
+    handleRatingUpdate,
+    handleStarHover,
+    setHoveredRating,
+  } = useRatingContext();
+  return (
+    <div
+      className={cn(
+        "flex items-center gap-1 w-fit overflow-hidden",
+        {
+          "lg:gap-1.5": size === "md",
+          "lg:gap-2": size === "lg",
+        },
+        !isInteractive && "!gap-0"
       )}
+    >
+      {[...Array(maxStars)].map((_, index) => {
+        const starIndex = index + 1;
+        const fillRatio = Math.max(0, Math.min(1, displayedRating - index));
+
+        return (
+          <Star
+            key={starIndex}
+            starIndex={starIndex}
+            fillRatio={fillRatio}
+            onPartialClick={(fillRatio) =>
+              handleRatingUpdate(starIndex - 1 + fillRatio)
+            }
+            onHover={handleStarHover}
+            onLeave={() => isInteractive && setHoveredRating(null)}
+          />
+        );
+      })}
     </div>
   );
+}
+
+interface StarProps {
+  starIndex: number;
+  fillRatio: number;
+  onPartialClick: (fillRatio: number) => void;
+  onHover: (starIndex: number, fillRatio: number) => void;
+  onLeave: () => void;
 }
 
 function Star({
   starIndex,
   fillRatio,
-  isInteractive,
   onPartialClick,
   onHover,
   onLeave,
-  size,
-}: {
-  starIndex: number;
-  fillRatio: number;
-  isInteractive: boolean;
-  onPartialClick: (fillRatio: number) => void;
-  onHover: (starIndex: number, fillRatio: number) => void;
-  onLeave: () => void;
-  size: "sm" | "md" | "lg";
-}) {
+}: StarProps) {
+  const { size, isInteractive } = useRatingContext();
+
   const handleInteraction = (
-    e: React.MouseEvent<HTMLDivElement>,
+    e: MouseEvent<HTMLDivElement>,
     callback: (fillRatio: number) => void
   ) => {
     if (!isInteractive) return;
@@ -129,11 +174,11 @@ function Star({
   return (
     <div
       className={cn(
-        "relative inline-block",
-        isInteractive ? "cursor-pointer" : "cursor-default",
-        size === "sm" && "w-4 h-4",
+        "relative inline-block align-middle",
+        isInteractive && "cursor-pointer",
+        size === "sm" && "size-4",
         size === "md" && "size-4 lg:size-5",
-        size === "lg" && "size-5.5 lg:size-7"
+        size === "lg" && "size-5 md:size-6 lg:size-8"
       )}
       onMouseMove={(e) =>
         handleInteraction(e, (fillRatio) => onHover(starIndex, fillRatio))
@@ -141,15 +186,17 @@ function Star({
       onMouseLeave={onLeave}
       onClick={(e) => handleInteraction(e, onPartialClick)}
     >
-      {/* Empty Star */}
-      <LucideStar className="absolute inset-0 text-yellow-400 w-full h-full" />
-
-      {/* Filled Portion */}
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: `inset(0 ${100 - fillRatio * 100}% 0 0)` }}
-      >
-        <LucideStar className="fill-yellow-400 stroke-0 w-full h-full" />
+      <div className="absolute inset-0 translate-x-4"></div>
+      <div className="relative size-full z-10">
+        {/* Empty star */}
+        <LucideStar className="absolute inset-0 stroke-0 fill-primary/20 w-full h-full" />
+        {/* Filled Portion */}
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{ clipPath: `inset(0 ${100 - fillRatio * 100}% 0 0)` }}
+        >
+          <LucideStar className="fill-amber-400 stroke-0 w-full h-full" />
+        </div>
       </div>
     </div>
   );

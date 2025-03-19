@@ -12,8 +12,8 @@ import {
 } from "@/components/carousel/card-slider";
 
 import Image from "next/image";
-import UserRatings from "@/components/star-ratings";
-import { Heading } from "@/components/heading";
+import UserRatings, { StarList } from "@/components/star-ratings";
+import { DotSeparator } from "@/components/dot-separator";
 
 const data = {
   id: "1",
@@ -52,6 +52,7 @@ export function QuickShop() {
               <NavigationControls />
             </div>
           </SwiperProvider>
+
           <div className="flex-1">
             <div className="space-y-2">
               <DialogHeader>
@@ -65,7 +66,14 @@ export function QuickShop() {
                 </span>
               </DialogDescription>
               <div className="flex flex-col gap-2">
-                <UserRatings averageRating={4.3} size="lg" />
+                <UserRatings
+                  averageRating={4.3}
+                  size="lg"
+                  isInteractive={false}
+                >
+                  <StarList />
+                  <DotSeparator />
+                </UserRatings>
               </div>
               <div className="h-96"></div>
             </div>
