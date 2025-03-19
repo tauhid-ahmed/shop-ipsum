@@ -33,7 +33,7 @@ const data = [
 export function QuickShop() {
   return (
     <Dialog open={true}>
-      <DialogContent className="flex flex-col md:flex-row sm:max-w-xl md:max-w-5xl">
+      <DialogContent className="flex flex-col md:flex-row md:gap-10 max-w-md md:max-w-4xl">
         <div className="w-full md:w-84 relative cursor-grab">
           <Embla data={data}>
             <Embla.Container>
@@ -44,7 +44,7 @@ export function QuickShop() {
         </div>
 
         {/* Right Column */}
-        <div className="flex-1 items-start flex flex-col">
+        <div className="flex-1 items-center md:items-start flex flex-col">
           <div className="space-y-2">
             <DialogHeader>
               <DialogTitle className="text-left text-xl">
@@ -56,7 +56,7 @@ export function QuickShop() {
                 {data[0].price}
               </span>
             </DialogDescription>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
               <UserRatings averageRating={4.3} size="lg" isInteractive={false}>
                 <div className="flex gap-1 items-center">
                   <UserRatings.AverageRating />
@@ -78,7 +78,7 @@ export function QuickShop() {
 
 function ADD_TO_CART() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       <Button size="lg">Add to cart</Button>
       <Button size="lg" variant="link">
         View Details
