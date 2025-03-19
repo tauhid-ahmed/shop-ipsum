@@ -13,12 +13,15 @@ const data = [
 
 export default function IntroBanner() {
   return (
-    <Embla data={data}>
+    <Embla data={data} playOnInit={true} delay={6000} stopOnLastSnap={false}>
       <Section>
         <Container>
-          <Embla.Container>
-            <Carousel />
-          </Embla.Container>
+          <div className="relative">
+            <Embla.Container>
+              <Carousel />
+            </Embla.Container>
+            <Embla.NavigationControls />
+          </div>
         </Container>
       </Section>
     </Embla>

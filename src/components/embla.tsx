@@ -9,6 +9,11 @@ import React, {
 import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import {
+  LucideCircleChevronLeft,
+  LucideCircleChevronRight,
+} from "lucide-react";
 
 // Embla Context
 interface EmblaContextType {
@@ -19,6 +24,7 @@ interface EmblaContextType {
   delay: number;
   data: Record<string, string>[];
   canScroll: boolean;
+  slidesPerView?: number;
 }
 
 const EmblaContext = createContext<EmblaContextType | null>(null);
@@ -37,17 +43,31 @@ interface EmblaProviderProps {
   data?: Record<string, string>[]; // Supports nested objects and arrays
   align?: "start" | "center" | "end";
   children: ReactNode;
+  playOnInit?: boolean;
+  stopOnLastSnap?: boolean;
+  slidesPerView?: number;
 }
 
 export default function Embla({
   loop = true,
   autoplay = true,
-  delay = 6000,
-  data = [{}, {}, {}],
+  delay = 600,
+  data = [],
   align = "start",
+  playOnInit = false,
   children,
+  stopOnLastSnap = true,
+  slidesPerView = 1,
 }: EmblaProviderProps) {
-  const autoplayRef = Autoplay({ delay, stopOnInteraction: false });
+  const autoplayRef = Autoplay({
+    delay,
+    stopOnInteraction: false,
+    playOnInit: playOnInit,
+    stopOnMouseEnter: true,
+    stopOnFocusIn: true,
+    stopOnLastSnap: stopOnLastSnap,
+  });
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop, align }, [autoplayRef]);
   const [canScroll, setCanScroll] = useState(false);
 
@@ -86,6 +106,7 @@ export default function Embla({
         delay,
         data,
         canScroll,
+        slidesPerView,
       }}
     >
       {children}
@@ -94,24 +115,43 @@ export default function Embla({
 }
 
 // Carousel Container
-function EmblaContainer({ children }: { children: ReactNode }) {
+function EmblaContainer({
+  children,
+  className,
+  ...props
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   const { emblaRef } = useEmblaContext();
   return (
-    <div className="overflow-hidden h-full" ref={emblaRef}>
-      <div className="flex h-full">{children}</div>
+    <div className={cn("overflow-hidden h-full")} ref={emblaRef} {...props}>
+      <div className={cn("flex h-full -mx-2", className)}>{children}</div>
     </div>
   );
 }
 
 // Individual Slide
 function EmblaSlide({ children }: { children: ReactNode }) {
+  const { slidesPerView } = useEmblaContext();
+  console.log({ slidesPerView });
   return (
-    <div className="shrink-0 grow-0 basis-full min-w-0 h-full">{children}</div>
+    <div
+      className={cn("shrink-0 grow-0 min-w-0 h-full px-2", {
+        "basis-full": slidesPerView === 1,
+        "basis-full sm:basis-1/2": slidesPerView === 2,
+        "basis-full sm:basis-1/2 md:basis-1/3": slidesPerView === 3,
+        "basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4":
+          slidesPerView === 4,
+      })}
+    >
+      {children}
+    </div>
   );
 }
 
 // Navigation Controls
-function NavigationControls() {
+function NavigationControls({ className }: { className?: string }) {
   const { emblaApi, canScroll } = useEmblaContext();
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -120,13 +160,18 @@ function NavigationControls() {
   if (!canScroll) return null;
 
   return (
-    <div className="flex justify-between">
-      <button className="absolute left-0" onClick={scrollPrev}>
-        Prev
-      </button>
-      <button className="absolute right-0" onClick={scrollNext}>
-        Next
-      </button>
+    <div
+      className={cn(
+        "flex justify-between absolute -inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none [&_button]:pointer-events-auto mix-blend-color-multiply",
+        className
+      )}
+    >
+      <Button variant="ghost" size="icon" onClick={scrollPrev}>
+        <LucideCircleChevronLeft />
+      </Button>
+      <Button variant="ghost" size="icon" onClick={scrollNext}>
+        <LucideCircleChevronRight />
+      </Button>
     </div>
   );
 }

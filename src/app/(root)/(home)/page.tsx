@@ -1,6 +1,5 @@
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
-import Slider from "@/components/carousel/slider";
 import ProductReveal from "@/features/products/product-reveal";
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/ui/button";
@@ -15,16 +14,8 @@ export default async function Home() {
   return (
     <>
       <IntroBanner />
-      <ProductReveal
-        duration={getRandomDuration()}
-        speed={getRandomSpeed()}
-        title="Trending"
-      />
-      <ProductReveal
-        duration={getRandomDuration()}
-        speed={getRandomSpeed()}
-        title="New Arrivals"
-      />
+      <ProductReveal title="Trending" />
+      <ProductReveal title="New Arrivals" />
       <Section padding="sm">
         <Container>
           <div className="relative h-96 md:h-[500px] bg-accent/50 flex items-center justify-center px-4">
@@ -46,16 +37,8 @@ export default async function Home() {
           </div>
         </Container>
       </Section>
-      <ProductReveal
-        duration={getRandomDuration()}
-        speed={getRandomSpeed()}
-        title="Best Sellers"
-      />
-      <ProductReveal
-        duration={getRandomDuration()}
-        speed={getRandomSpeed()}
-        title="Featured"
-      />
+      <ProductReveal title="Best Sellers" />
+      <ProductReveal title="Featured" />
     </>
   );
 }

@@ -84,12 +84,7 @@ export default function UserRatings({
 function AverageRating({ className }: { className?: string }) {
   const { displayedRating } = useRatingContext();
   return (
-    <span
-      className={cn(
-        "text-muted-foreground text-sm lg:text-lg mt-0.5",
-        className
-      )}
-    >
+    <span className={cn("text-muted-foreground text-sm mt-0.5", className)}>
       {displayedRating}
     </span>
   );
@@ -204,7 +199,7 @@ function Star({
       <div className="absolute inset-0 translate-x-4"></div>
       <div className="relative size-full z-10">
         {/* Empty star */}
-        <LucideStar className="absolute inset-0 stroke-0 fill-primary/20 w-full h-full" />
+        <LucideStar className="absolute inset-0 stroke-1 stroke-yellow-500 fill-yellow-500/50 w-full h-full" />
         {/* Filled Portion */}
         <div
           className="absolute inset-0 overflow-hidden"

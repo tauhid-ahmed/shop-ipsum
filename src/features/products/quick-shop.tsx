@@ -25,7 +25,7 @@ const data = {
 
 export function QuickShop() {
   return (
-    <Dialog open={false}>
+    <Dialog open={true}>
       <DialogContent className="flex flex-col md:flex-row sm:max-w-5xl [&_.swiper]:h-full [&_.swiper-wrapper]:h-full [&_.swiper-slide]:h-full">
         <div className="w-96 h-full border">
           <SwiperProvider>
