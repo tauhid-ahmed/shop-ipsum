@@ -31,9 +31,8 @@ const data = [
 export function QuickShop() {
   return (
     <Dialog open={true}>
-      <DialogContent className="flex flex-col md:flex-row sm:max-w-5xl">
-        {/* Left Column */}
-        <div className="w-96 relative">
+      <DialogContent className="flex flex-col md:flex-row sm:max-w-xl md:max-w-5xl">
+        <div className="w-full md:w-84 relative">
           <Embla data={data}>
             <Embla.Container>
               <Carousel />
@@ -43,8 +42,7 @@ export function QuickShop() {
         </div>
 
         {/* Right Column */}
-        <div className="flex-1 border flex flex-col">
-          <div className="h-96"></div>
+        <div className="flex-1 flex flex-col">
           <div className="space-y-2">
             <DialogHeader>
               <DialogTitle className="text-left text-2xl lg:text-3xl">
@@ -59,7 +57,7 @@ export function QuickShop() {
             <div className="flex flex-col gap-2">
               <UserRatings averageRating={4.3} size="lg" isInteractive={false}>
                 <div className="flex gap-1 items-center">
-                  <UserRatings.AverageRating />
+                  <UserRatings.AverageRating className="lg:text-xl" />
                   <UserRatings.StarList />
                   <DotSeparator />
                   <UserRatings.TotalReviews />
@@ -67,6 +65,7 @@ export function QuickShop() {
               </UserRatings>
             </div>
           </div>
+          <div className="h-96"></div>
         </div>
       </DialogContent>
     </Dialog>
@@ -77,13 +76,13 @@ function Carousel() {
   const { data } = useEmblaContext();
   return data.map((item: Record<string, string>, index) => (
     <Embla.Slide key={index}>
-      <div className="h-full w-fit mx-auto">
+      <div className="h-96 md:h-full w-full mx-auto bg-secondary">
         <Image
           src={item.image}
           width={300}
           height={300}
           alt={item.id}
-          className="size-full object-cover"
+          className="size-full object-contain"
         />
       </div>
     </Embla.Slide>
