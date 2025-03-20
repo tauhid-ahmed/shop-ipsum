@@ -38,7 +38,7 @@ export default function ProductCard({ data }: { data: Product }) {
       </div>
       <Link
         href="#"
-        className="text-center space-y-0.5 sm:space-y-1 px-1 overflow-hidden bg-secondary/20 py-4"
+        className="text-center space-y-0.5 sm:space-y-1 px-1 overflow-hidden bg-secondary/20 py-4 relative"
       >
         <Heading
           align="center"

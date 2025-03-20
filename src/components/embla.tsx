@@ -173,8 +173,8 @@ function NavigationControls({
   return (
     <div
       className={cn(
-        "flex justify-between absolute -inset-x-6 top-1/2 -translate-y-1/2 pointer-events-none [&_button]:pointer-events-auto",
-        hidden && "lg:flex hidden",
+        "flex justify-between absolute -inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none [&_button]:pointer-events-auto",
+        hidden && "lg:flex hidden -inset-x-6",
         className
       )}
     >

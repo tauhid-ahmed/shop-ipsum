@@ -75,10 +75,7 @@ export default function ProductReveal({
                   </Link>
                 </Button>
               </div>
-              <div
-                className="relative group/
-              embla"
-              >
+              <div className="relative group/embla">
                 <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
                   <Embla.Container>
                     <Carousel />

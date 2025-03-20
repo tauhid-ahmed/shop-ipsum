@@ -264,18 +264,6 @@ const data = [
     averageRating: 4.7,
     totalReviews: 125,
   },
-  {
-    id: "21",
-    images: [
-      "/assets/product/product-21.png",
-      "/assets/product/product-21.png",
-    ],
-    title: "Premium Wool Sweater",
-    description: "Cozy and warm with a modern cut.",
-    price: "$64.99",
-    averageRating: 4.8,
-    totalReviews: 135,
-  },
 ];
 
 export function QuickShop() {

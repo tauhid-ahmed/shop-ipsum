@@ -15,7 +15,7 @@ const data: DataType[] = [
   { id: "2", image: "/assets/banner/banner-02.png" },
   { id: "3", image: "/assets/banner/banner-03.png" },
   { id: "4", image: "/assets/banner/banner-04.png" },
-  { id: "4", image: "/assets/banner/banner-05.png" },
+  { id: "5", image: "/assets/banner/banner-05.png" },
 ];
 
 export default function IntroBanner() {
