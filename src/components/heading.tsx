@@ -23,10 +23,10 @@ type HeadingProps = {
 export function Heading({
   children,
   className,
-  size = "2xl",
+  size = "default",
   as = "h2",
-  weight = "normal",
-  align = "center",
+  weight = "medium",
+  align = "left",
   ...props
 }: HeadingProps) {
   const Comp = as;
@@ -64,7 +64,7 @@ export function Heading({
   return (
     <Comp
       className={cn(
-        "font-primary",
+        "font-primary text-foreground",
         fontSizeClasses[size],
         fontWeightClasses[weight],
         textAlignClasses[align],
