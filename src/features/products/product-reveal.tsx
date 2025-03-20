@@ -71,11 +71,14 @@ export default function ProductReveal({
                 </Heading>
                 <Button asChild variant="link">
                   <Link href="/">
-                    Shop the collection <LucideMoveRight />
+                    See more <LucideMoveRight />
                   </Link>
                 </Button>
               </div>
-              <div className="relative group/embla">
+              <div
+                className="relative group/
+              embla"
+              >
                 <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
                   <Embla.Container>
                     <Carousel />

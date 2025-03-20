@@ -43,7 +43,7 @@ export default function ProductCard({ data }: { data: Product }) {
         <Heading
           align="center"
           weight="medium"
-          className="text-foreground/80 font-semibold"
+          className="text-foreground/70 font-semibold"
           as="h3"
           size="sm"
         >
@@ -53,7 +53,10 @@ export default function ProductCard({ data }: { data: Product }) {
           {data.description}
         </p>
         <div>
-          <span className="font-semibold text-foreground/90">{data.price}</span>
+          <span className="font-semibold text-foreground/70">
+            <PrevPrice />
+            {data.price}
+          </span>
         </div>
         <UserRatings size="sm" averageRating={data.averageRating}>
           <div className="flex justify-center items-center gap-1">
@@ -101,5 +104,17 @@ function QuickShopButton({ id }: { id: string }) {
         </Button>
       </div>
     </>
+  );
+}
+
+function PrevPrice({
+  price = `${Math.floor(Math.random() * 10) + 1}.99`,
+}: {
+  price?: string;
+}) {
+  return (
+    <span className="text-sm text-destructive px-1 relative before:absolute before:inset-x-0 before:h-px before:bg-destructive before:top-1/2 mr-0.5">
+      {price}
+    </span>
   );
 }
