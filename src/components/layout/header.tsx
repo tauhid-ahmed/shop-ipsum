@@ -29,7 +29,7 @@ export default function Header() {
           </div>
           <Logo />
           <div className="flex-1 flex justify-end">
-            <div className="flex items-center">
+            <div className="flex gap-1 items-center">
               <div className="hidden lg:block">
                 <SearchWidget />
               </div>
