@@ -1,7 +1,7 @@
 "use client";
 
 import React, { PropsWithChildren, useEffect, useState } from "react";
-import { ReactLenis as OriginalReactLenis } from "@studio-freight/react-lenis";
+import { ReactLenis as OriginalReactLenis } from "lenis/react";
 
 // Define the options interface with more specific types
 interface LenisOptions {
