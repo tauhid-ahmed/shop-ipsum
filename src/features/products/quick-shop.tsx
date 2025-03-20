@@ -228,8 +228,9 @@ function ADD_TO_CART() {
 }
 
 function Carousel() {
-  const { data } = useEmblaContext();
+  const { data, selectedSlide } = useEmblaContext();
   const [product] = data as [Product];
+  console.log(selectedSlide);
   return product.images.map((item: string, index) => (
     <Embla.Slide key={index}>
       <div className="h-72 sm:h-84 md:h-full w-full mx-auto bg-secondary rounded">

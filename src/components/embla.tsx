@@ -22,6 +22,7 @@ interface EmblaContextType<T = unknown> {
   data: T[];
   canScroll: boolean;
   slidesPerView?: number;
+  selectedSlide: number;
 }
 
 const EmblaContext = createContext<EmblaContextType | null>(null);
@@ -67,10 +68,16 @@ export default function Embla({
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop, align }, [autoplayRef]);
   const [canScroll, setCanScroll] = useState(false);
+  const [selectedSlide, setSelectedSlide] = useState(0);
 
   // Check if carousel can scroll based on container size vs content size
   useEffect(() => {
     if (!emblaApi) return;
+
+    const handleSelectedSlide = () =>
+      setSelectedSlide(emblaApi.selectedScrollSnap());
+
+    emblaApi.on("select", handleSelectedSlide);
 
     const updateCanScroll = () => {
       const canScrollValue =
@@ -104,6 +111,7 @@ export default function Embla({
         data,
         canScroll,
         slidesPerView,
+        selectedSlide,
       }}
     >
       {children}
