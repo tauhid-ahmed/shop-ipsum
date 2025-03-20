@@ -108,7 +108,7 @@ function QuickShopButton({ id }: { id: string }) {
 }
 
 function PrevPrice({
-  price = `${Math.floor(Math.random() * 10) + 1}.99`,
+  price = `${Math.floor(Math.random() * 10) + 55}.99`,
 }: {
   price?: string;
 }) {
