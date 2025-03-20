@@ -11,10 +11,11 @@ type DataType = {
 };
 
 const data: DataType[] = [
-  { id: "1", image: "/assets/banner/image-01.webp" },
-  { id: "2", image: "/assets/banner/image-02.webp" },
-  { id: "3", image: "/assets/banner/image-03.webp" },
-  { id: "4", image: "/assets/banner/image-03.webp" },
+  { id: "1", image: "/assets/banner/banner-01.png" },
+  { id: "2", image: "/assets/banner/banner-02.png" },
+  { id: "3", image: "/assets/banner/banner-03.png" },
+  { id: "4", image: "/assets/banner/banner-04.png" },
+  { id: "4", image: "/assets/banner/banner-05.png" },
 ];
 
 export default function IntroBanner() {
