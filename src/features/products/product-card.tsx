@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/components/heading";
 import UserRatings from "@/components/star-ratings";
+import { useProductRevealContext } from "./product-reveal";
 
 export type data = {
   id: string;
@@ -16,6 +17,7 @@ export type data = {
 };
 
 export default function ProductCard({ data }: { data: data }) {
+  const { openQuickShop, handleProductId } = useProductRevealContext();
   return (
     <div className="w-full max-w-80 space-y-4 relative overflow-hidden rounded shadow-sm">
       <div className="relative group/card overflow-hidden">
@@ -41,6 +43,10 @@ export default function ProductCard({ data }: { data: data }) {
             size="sm"
             shape="pill"
             className="w-full uppercase backdrop-blur-2xl"
+            onClick={() => {
+              openQuickShop();
+              handleProductId(data.id);
+            }}
           >
             <LucidePlus /> QuickShop
           </Button>

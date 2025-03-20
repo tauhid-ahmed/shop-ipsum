@@ -12,30 +12,65 @@ import { DotSeparator } from "@/components/dot-separator";
 import Embla, { useEmblaContext } from "@/components/embla";
 import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Button } from "@/components/ui/button";
+import { useProductRevealContext } from "./product-reveal";
 
 const data = [
   {
     id: "1",
-    image: "/assets/product/product-01.jpg",
+    image: ["/assets/product/product-01.jpg", "/assets/product/product-01.jpg"],
     title: "Classic T-Shirt",
     description: "Premium cotton, perfect fit.",
     price: "$24.99",
+    averageRating: "4.5",
+    totalReviews: "100",
   },
   {
     id: "2",
-    image: "/assets/product/product-02.jpg",
-    title: "Classic T-Shirt",
-    description: "Premium cotton, perfect fit.",
-    price: "$24.99",
+    image: ["/assets/product/product-02.jpg", "/assets/product/product-02.jpg"],
+    title: "Casual Shirt",
+    description: "Lightweight and stylish.",
+    price: "$29.99",
+    averageRating: "4.2",
+    totalReviews: "80",
   },
-];
+  {
+    id: "3",
+    image: ["/assets/product/product-03.jpg", "/assets/product/product-03.jpg"],
+    title: "Formal Shirt",
+    description: "Elegant design for any occasion.",
+    price: "$39.99",
+    averageRating: "4.8",
+    totalReviews: "120",
+  },
+  {
+    id: "4",
+    image: ["/assets/product/product-04.jpg", "/assets/product/product-05.jpg"],
+    title: "Vintage T-Shirt",
+    description: "Retro vibes, modern comfort.",
+    price: "$27.99",
+    averageRating: "4.6",
+    totalReviews: "90",
+  },
+  {
+    id: "5",
+    image: ["/assets/product/product-05.jpg", "/assets/product/product-05.jpg"],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: "4.7",
+    totalReviews: "110",
+  },
+] as const;
 
 export function QuickShop() {
+  const { quickShop, openQuickShop, productId } = useProductRevealContext();
+  const product = data.find((product) => product.id === productId);
+
   return (
-    <Dialog open={true}>
+    <Dialog open={quickShop} onOpenChange={openQuickShop}>
       <DialogContent className="flex flex-col md:flex-row md:gap-10 max-w-md md:max-w-4xl">
         <div className="w-full md:w-84 relative cursor-grab">
-          <Embla data={data}>
+          <Embla data={[product]}>
             <Embla.Container>
               <Carousel />
             </Embla.Container>
@@ -86,7 +121,8 @@ function ADD_TO_CART() {
 
 function Carousel() {
   const { data } = useEmblaContext();
-  return data.map((item: Record<string, string>, index) => (
+  const [product] = data;
+  return data[0].image.map((item: Record<string, string>, index) => (
     <Embla.Slide key={index}>
       <div className="h-72 sm:h-84 md:h-full w-full mx-auto bg-secondary rounded">
         <Image
