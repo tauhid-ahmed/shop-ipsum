@@ -6,10 +6,6 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import IntroBanner from "@/components/banner/intro.banner";
 
-const getRandomDuration = () =>
-  Math.floor(Math.random() * (5000 - 3000 + 1)) + 3000;
-const getRandomSpeed = () => Math.floor(Math.random() * (800 - 500 + 1)) + 500;
-
 export default async function Home() {
   return (
     <>

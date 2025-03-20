@@ -14,10 +14,22 @@ import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Button } from "@/components/ui/button";
 import { useProductRevealContext } from "./product-reveal";
 
+type Product = {
+  id: string;
+  images: string[];
+  title: string;
+  description: string;
+  price: string;
+  averageRating: number;
+  totalReviews: number;
+};
 const data = [
   {
     id: "1",
-    image: ["/assets/product/product-01.jpg", "/assets/product/product-01.jpg"],
+    images: [
+      "/assets/product/product-01.jpg",
+      "/assets/product/product-01.jpg",
+    ],
     title: "Classic T-Shirt",
     description: "Premium cotton, perfect fit.",
     price: "$24.99",
@@ -26,7 +38,10 @@ const data = [
   },
   {
     id: "2",
-    image: ["/assets/product/product-02.jpg", "/assets/product/product-02.jpg"],
+    images: [
+      "/assets/product/product-02.jpg",
+      "/assets/product/product-02.jpg",
+    ],
     title: "Casual Shirt",
     description: "Lightweight and stylish.",
     price: "$29.99",
@@ -35,7 +50,10 @@ const data = [
   },
   {
     id: "3",
-    image: ["/assets/product/product-03.jpg", "/assets/product/product-03.jpg"],
+    images: [
+      "/assets/product/product-03.jpg",
+      "/assets/product/product-03.jpg",
+    ],
     title: "Formal Shirt",
     description: "Elegant design for any occasion.",
     price: "$39.99",
@@ -44,7 +62,10 @@ const data = [
   },
   {
     id: "4",
-    image: ["/assets/product/product-04.jpg", "/assets/product/product-05.jpg"],
+    images: [
+      "/assets/product/product-04.jpg",
+      "/assets/product/product-05.jpg",
+    ],
     title: "Vintage T-Shirt",
     description: "Retro vibes, modern comfort.",
     price: "$27.99",
@@ -53,7 +74,10 @@ const data = [
   },
   {
     id: "5",
-    image: ["/assets/product/product-05.jpg", "/assets/product/product-05.jpg"],
+    images: [
+      "/assets/product/product-05.jpg",
+      "/assets/product/product-05.jpg",
+    ],
     title: "Slim Fit Shirt",
     description: "Tailored for a sleek look.",
     price: "$34.99",
@@ -121,15 +145,15 @@ function ADD_TO_CART() {
 
 function Carousel() {
   const { data } = useEmblaContext();
-  const [product] = data;
-  return data[0].image.map((item: Record<string, string>, index) => (
+  const [product] = data as [Product];
+  return product.images.map((item: string, index) => (
     <Embla.Slide key={index}>
       <div className="h-72 sm:h-84 md:h-full w-full mx-auto bg-secondary rounded">
         <Image
-          src={item.image}
+          src={item}
           width={300}
           height={300}
-          alt={item.id}
+          alt={"item.id"}
           className="size-full object-contain"
         />
       </div>

@@ -102,6 +102,7 @@ function ProfileHeader() {
             size="lg"
             weight="bold"
             className="text-secondary-foreground capitalize"
+            align="center"
           >
             {user.name}
           </Heading>

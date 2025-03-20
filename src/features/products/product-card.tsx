@@ -6,9 +6,9 @@ import { Heading } from "@/components/heading";
 import UserRatings from "@/components/star-ratings";
 import { useProductRevealContext } from "./product-reveal";
 
-export type data = {
+export type Product = {
   id: string;
-  image: string;
+  images: string[];
   title: string;
   description: string;
   price: string;
@@ -16,14 +16,14 @@ export type data = {
   totalReviews: number;
 };
 
-export default function ProductCard({ data }: { data: data }) {
+export default function ProductCard({ data }: { data: Product }) {
   const { openQuickShop, handleProductId } = useProductRevealContext();
   return (
-    <div className="w-full max-w-80 space-y-4 relative overflow-hidden rounded shadow-sm">
+    <div className="w-full max-w-80 space-y-4 relative overflow-hidden rounded border border-border shadow-sm">
       <div className="relative group/card overflow-hidden">
-        <div className="relative w-full rounded overflow-hidden">
+        <div className="relative h-96 w-full rounded overflow-hidden">
           <Image
-            src={data.image}
+            src={data.images[0]}
             width={300}
             height={300}
             alt={data.title}
@@ -52,8 +52,14 @@ export default function ProductCard({ data }: { data: data }) {
           </Button>
         </div>
       </div>
-      <div className="text-center">
-        <Heading weight="medium" className="text-muted-foreground" size="sm">
+      <div className="text-center space-y-0.5">
+        <Heading
+          align="center"
+          weight="medium"
+          className="text-muted-foreground"
+          as="h3"
+          size="md"
+        >
           {data.title}
         </Heading>
         <p className="text-foreground/80 text-ellipsis">{data.description}</p>

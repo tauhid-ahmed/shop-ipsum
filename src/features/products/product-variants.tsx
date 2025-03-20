@@ -1,8 +1,6 @@
 import { Heading } from "@/components/heading";
-import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
-import { LucideCircle } from "lucide-react";
 import React from "react";
 
 type ProductSizeVariantsProps = {

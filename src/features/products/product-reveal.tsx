@@ -15,10 +15,19 @@ type ProductRevealProps = {
   title: string;
 };
 
-const data = [
+type Product = {
+  id: string;
+  images: string[];
+  title: string;
+  description: string;
+  price: string;
+  averageRating: number;
+  totalReviews: number;
+};
+
+const data: Product[] = [
   {
     id: "1",
-    image: "/assets/product/product-01.jpg",
     images: [
       "/assets/product/product-01.jpg",
       "/assets/product/product-01.jpg",
@@ -26,12 +35,11 @@ const data = [
     title: "Classic T-Shirt",
     description: "Premium cotton, perfect fit.",
     price: "$24.99",
-    averageRating: "4.5",
-    totalReviews: "100",
+    averageRating: 4.5,
+    totalReviews: 100,
   },
   {
     id: "2",
-    image: "/assets/product/product-02.jpg",
     images: [
       "/assets/product/product-02.jpg",
       "/assets/product/product-02.jpg",
@@ -39,12 +47,11 @@ const data = [
     title: "Casual Shirt",
     description: "Lightweight and stylish.",
     price: "$29.99",
-    averageRating: "4.2",
-    totalReviews: "80",
+    averageRating: 4.2,
+    totalReviews: 80,
   },
   {
     id: "3",
-    image: "/assets/product/product-03.jpg",
     images: [
       "/assets/product/product-03.jpg",
       "/assets/product/product-03.jpg",
@@ -52,12 +59,11 @@ const data = [
     title: "Formal Shirt",
     description: "Elegant design for any occasion.",
     price: "$39.99",
-    averageRating: "4.8",
-    totalReviews: "120",
+    averageRating: 4.8,
+    totalReviews: 120,
   },
   {
     id: "4",
-    image: "/assets/product/product-04.jpg",
     images: [
       "/assets/product/product-04.jpg",
       "/assets/product/product-05.jpg",
@@ -65,12 +71,11 @@ const data = [
     title: "Vintage T-Shirt",
     description: "Retro vibes, modern comfort.",
     price: "$27.99",
-    averageRating: "4.6",
-    totalReviews: "90",
+    averageRating: 4.6,
+    totalReviews: 90,
   },
   {
     id: "5",
-    image: "/assets/product/product-05.jpg",
     images: [
       "/assets/product/product-05.jpg",
       "/assets/product/product-05.jpg",
@@ -78,10 +83,10 @@ const data = [
     title: "Slim Fit Shirt",
     description: "Tailored for a sleek look.",
     price: "$34.99",
-    averageRating: "4.7",
-    totalReviews: "110",
+    averageRating: 4.7,
+    totalReviews: 110,
   },
-] as const;
+];
 
 const ProductRevealContext = React.createContext<{
   quickShop: boolean;
@@ -130,13 +135,9 @@ export default function ProductReveal({ title }: ProductRevealProps) {
                 </Button>
               </div>
               <div className="relative">
-                <Embla
-                  data={data as unknown as Record<string, string>[]}
-                  delay={6000}
-                  slidesPerView={4}
-                >
+                <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
                   <Embla.Container>
-                    <Carousel setQuickShop={setQuickShop} />
+                    <Carousel />
                   </Embla.Container>
                   <Embla.NavigationControls className="-mt-10" />
                 </Embla>
@@ -144,22 +145,18 @@ export default function ProductReveal({ title }: ProductRevealProps) {
             </div>
           </Container>
         </Section>
-        <QuickShop open={quickShop} setOpen={setQuickShop} />
+        <QuickShop />
       </ProductRevealContext.Provider>
     </>
   );
 }
 
-function Carousel({ setQuickShop }: any) {
+function Carousel() {
   const { data } = useEmblaContext();
-  return data.map((item: Record<string, string>, index) => (
+  return data.map((item, index) => (
     <Embla.Slide key={index}>
       <div className="w-fit mx-auto">
-        <ProductCard
-          openQuickShop={() => setQuickShop(true)}
-          key={index}
-          data={item}
-        />
+        <ProductCard key={index} data={item as Product} />
       </div>
     </Embla.Slide>
   ));

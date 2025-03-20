@@ -16,13 +16,13 @@ import {
 } from "lucide-react";
 
 // Embla Context
-interface EmblaContextType {
+interface EmblaContextType<T = unknown> {
   emblaRef: ReturnType<typeof useEmblaCarousel>[0];
   emblaApi: UseEmblaCarouselType[1];
   autoplay: boolean;
   loop: boolean;
   delay: number;
-  data: Record<string, string>[];
+  data: T[];
   canScroll: boolean;
   slidesPerView?: number;
 }
@@ -36,11 +36,11 @@ export const useEmblaContext = () => {
   return context;
 };
 
-interface EmblaProviderProps {
+interface EmblaProviderProps<T = unknown> {
   loop?: boolean;
   autoplay?: boolean;
   delay?: number;
-  data?: Record<string, string>[]; // Supports nested objects and arrays
+  data?: T[];
   align?: "start" | "center" | "end";
   children: ReactNode;
   playOnInit?: boolean;
@@ -167,10 +167,10 @@ function NavigationControls({ className }: { className?: string }) {
         className
       )}
     >
-      <Button variant="ghost" size="icon" onClick={scrollPrev}>
+      <Button variant="outline" size="icon" shape="pill" onClick={scrollPrev}>
         <LucideCircleChevronLeft />
       </Button>
-      <Button variant="ghost" size="icon" onClick={scrollNext}>
+      <Button variant="outline" size="icon" shape="pill" onClick={scrollNext}>
         <LucideCircleChevronRight />
       </Button>
     </div>
