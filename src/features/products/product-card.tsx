@@ -19,16 +19,18 @@ export type Product = {
 export default function ProductCard({ data }: { data: Product }) {
   const { openQuickShop, handleProductId } = useProductRevealContext();
   return (
-    <div className="w-full max-w-80 space-y-4 relative overflow-hidden rounded border border-border shadow-sm">
+    <div className="w-full space-y-4 relative overflow-hidden rounded border border-border shadow-sm">
       <div className="relative group/card overflow-hidden">
-        <div className="relative h-96 w-full rounded overflow-hidden">
-          <Image
-            src={data.images[0]}
-            width={300}
-            height={300}
-            alt={data.title}
-            className="size-full object-cover"
-          />
+        <div className="relative h-44 sm:h-60 md:h-72 lg:h-84 bg-secondary rounded overflow-hidden p-2 flex items-center justify-center">
+          <div className="inline-block h-full rounded overflow-hidden">
+            <Image
+              src={data.images[0]}
+              width={300}
+              height={300}
+              alt={data.title}
+              className="size-full object-contain"
+            />
+          </div>
           <Link
             href="/"
             className="absolute inset-0 bg-accent/30 grid place-items-center opacity-0 group-hover/card:opacity-100"
@@ -52,7 +54,7 @@ export default function ProductCard({ data }: { data: Product }) {
           </Button>
         </div>
       </div>
-      <div className="text-center space-y-0.5">
+      <div className="text-center space-y-0.5 sm:space-y-1 px-1 overflow-hidden">
         <Heading
           align="center"
           weight="medium"
@@ -62,9 +64,11 @@ export default function ProductCard({ data }: { data: Product }) {
         >
           {data.title}
         </Heading>
-        <p className="text-foreground/80 text-ellipsis">{data.description}</p>
+        <p className="text-foreground/80 text-xs md:text-md lg:text-base text-ellipsis whitespace-nowrap">
+          {data.description}
+        </p>
         <div>
-          <span className=" font-semibold">{data.price}</span>
+          <span className="font-semibold text-foreground/60">{data.price}</span>
         </div>
         <UserRatings size="sm" averageRating={data.averageRating}>
           <div className="flex justify-center items-center gap-1">
@@ -73,7 +77,7 @@ export default function ProductCard({ data }: { data: Product }) {
           </div>
         </UserRatings>
       </div>
-      <div className="absolute top-1.5 right-1.5 z-10">
+      <div className="absolute top-0.5 right-0.5 z-10 scale-75">
         <Button variant="outline" size="icon">
           <LucideHeart />
         </Button>

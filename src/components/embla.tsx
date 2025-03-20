@@ -142,8 +142,7 @@ function EmblaSlide({ children }: { children: ReactNode }) {
         "basis-full": slidesPerView === 1,
         "basis-full sm:basis-1/2": slidesPerView === 2,
         "basis-full sm:basis-1/2 md:basis-1/3": slidesPerView === 3,
-        "basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4":
-          slidesPerView === 4,
+        "basis-2/4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4": slidesPerView === 4,
       })}
     >
       {children}
@@ -167,10 +166,22 @@ function NavigationControls({ className }: { className?: string }) {
         className
       )}
     >
-      <Button variant="outline" size="icon" shape="pill" onClick={scrollPrev}>
+      <Button
+        className="relative -translate-x-4"
+        variant="outline"
+        size="icon"
+        shape="pill"
+        onClick={scrollPrev}
+      >
         <LucideCircleChevronLeft />
       </Button>
-      <Button variant="outline" size="icon" shape="pill" onClick={scrollNext}>
+      <Button
+        className="relative translate-x-4"
+        variant="outline"
+        size="icon"
+        shape="pill"
+        onClick={scrollNext}
+      >
         <LucideCircleChevronRight />
       </Button>
     </div>

@@ -29,8 +29,8 @@ const data: Product[] = [
   {
     id: "1",
     images: [
-      "/assets/product/product-01.jpg",
-      "/assets/product/product-01.jpg",
+      "/assets/product/product-01.png",
+      "/assets/product/product-01.png",
     ],
     title: "Classic T-Shirt",
     description: "Premium cotton, perfect fit.",
@@ -41,8 +41,8 @@ const data: Product[] = [
   {
     id: "2",
     images: [
-      "/assets/product/product-02.jpg",
-      "/assets/product/product-02.jpg",
+      "/assets/product/product-02.png",
+      "/assets/product/product-02.png",
     ],
     title: "Casual Shirt",
     description: "Lightweight and stylish.",
@@ -53,8 +53,8 @@ const data: Product[] = [
   {
     id: "3",
     images: [
-      "/assets/product/product-03.jpg",
-      "/assets/product/product-03.jpg",
+      "/assets/product/product-03.png",
+      "/assets/product/product-03.png",
     ],
     title: "Formal Shirt",
     description: "Elegant design for any occasion.",
@@ -65,8 +65,8 @@ const data: Product[] = [
   {
     id: "4",
     images: [
-      "/assets/product/product-04.jpg",
-      "/assets/product/product-05.jpg",
+      "/assets/product/product-04.png",
+      "/assets/product/product-05.png",
     ],
     title: "Vintage T-Shirt",
     description: "Retro vibes, modern comfort.",
@@ -77,8 +77,56 @@ const data: Product[] = [
   {
     id: "5",
     images: [
-      "/assets/product/product-05.jpg",
-      "/assets/product/product-05.jpg",
+      "/assets/product/product-05.png",
+      "/assets/product/product-05.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "6",
+    images: [
+      "/assets/product/product-06.png",
+      "/assets/product/product-06.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "7",
+    images: [
+      "/assets/product/product-07.png",
+      "/assets/product/product-07.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "8",
+    images: [
+      "/assets/product/product-08.png",
+      "/assets/product/product-08.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "9",
+    images: [
+      "/assets/product/product-09.png",
+      "/assets/product/product-09.png",
     ],
     title: "Slim Fit Shirt",
     description: "Tailored for a sleek look.",
@@ -155,7 +203,7 @@ function Carousel() {
   const { data } = useEmblaContext();
   return data.map((item, index) => (
     <Embla.Slide key={index}>
-      <div className="w-fit mx-auto">
+      <div className="w-full mx-auto">
         <ProductCard key={index} data={item as Product} />
       </div>
     </Embla.Slide>
