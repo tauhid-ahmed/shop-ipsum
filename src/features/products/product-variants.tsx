@@ -5,21 +5,23 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { LucideCircle } from "lucide-react";
 import React from "react";
 
-type ProductVariantsProps = {
-  value: string;
-  onChange: (value: string) => void;
-  title: string;
+type ProductSizeVariantsProps = {
+  value?: string;
+  onChange?: (value: string) => void;
+  title?: string;
+  className?: string;
 };
 
 const data = ["XXS", "XS", "S", "M", "L", "XL", "XXL"];
 
-export function ProductSizeVariants({ title = "Size" }: { title?: string }) {
+export function ProductSizeVariants({
+  title = "Size",
+  className,
+}: ProductSizeVariantsProps) {
   const [value, setValue] = React.useState("L");
   return (
-    <div className="">
-      <Heading size="default" align="left">
-        {title}
-      </Heading>
+    <div className={cn("space-y-1", className)}>
+      <Heading>{title}</Heading>
       <RadioGroupPrimitive.Root
         value={value}
         onValueChange={setValue}
@@ -27,7 +29,7 @@ export function ProductSizeVariants({ title = "Size" }: { title?: string }) {
       >
         {data.map((item) => (
           <RadioGroupPrimitive.Item
-            className="rounded py-1 sm:py-2 text-xs w-10 lg:text-sm lg:w-12 border border-border data-[state=checked]:bg-primary data-[state=checked]:text-white data-[state=checked]:border-primary cursor-pointer font-medium"
+            className="rounded py-1.5 sm:py-2 text-xs w-10 lg:text-sm lg:w-12 border border-border data-[state=checked]:bg-primary data-[state=checked]:text-white data-[state=checked]:border-primary cursor-pointer font-medium"
             key={item}
             value={item}
           >
@@ -89,6 +91,7 @@ interface ProductColorVariantsProps {
   defaultColor?: (typeof colors)[number];
   /** Optional callback when color changes */
   onColorChange?: (color: (typeof colors)[number]) => void;
+  className?: string;
 }
 
 /**
@@ -98,6 +101,7 @@ export function ProductColorVariants({
   title = "Color",
   defaultColor = "red",
   onColorChange,
+  className,
 }: ProductColorVariantsProps) {
   const [selectedColor, setSelectedColor] =
     React.useState<(typeof colors)[number]>(defaultColor);
@@ -109,8 +113,8 @@ export function ProductColorVariants({
   };
 
   return (
-    <div className="product-color-variants">
-      <h3 className="font-semibold mb-2">{title}</h3>
+    <div className={cn("space-y-1", className)}>
+      <Heading as="h3">{title}</Heading>
       <RadioGroupPrimitive.Root
         value={selectedColor}
         onValueChange={handleColorChange}
@@ -122,11 +126,11 @@ export function ProductColorVariants({
             value={color}
             aria-label={`Select ${color} color`}
             className={cn(
-              "relative flex flex-wrap items-center justify-center rounded-full size-6 sm:size-8 lg:size-10 border-2 cursor-pointer transition-all",
-              "focus:outline-none scale-120",
+              "relative flex flex-wrap items-center justify-center rounded-full size-6 sm:size-7 lg:size-8 border-2 cursor-pointer transition-all",
+              "focus:outline-none scale-110 opacity-100",
               selectedColor === color
                 ? borderColorMap[color]
-                : "border-gray-200 border-2 scale-100"
+                : "border-gray-200 border-2 scale-100 opacity-70"
             )}
           >
             {/* Inner Color Swatch */}

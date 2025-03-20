@@ -32,7 +32,7 @@ const data = [
 
 export function QuickShop() {
   return (
-    <Dialog open={false}>
+    <Dialog open={true}>
       <DialogContent className="flex flex-col md:flex-row md:gap-10 max-w-md md:max-w-4xl">
         <div className="w-full md:w-84 relative cursor-grab">
           <Embla data={data}>
@@ -44,20 +44,12 @@ export function QuickShop() {
         </div>
 
         {/* Right Column */}
-        <div className="flex-1 items-center md:items-start flex flex-col">
-          <div className="space-y-2">
-            <DialogHeader>
-              <DialogTitle className="text-left text-xl">
-                {data[0].title}
-              </DialogTitle>
-            </DialogHeader>
-            <DialogDescription>
-              <span className="text-xl lg:text-lg font-semibold">
-                {data[0].price}
-              </span>
-            </DialogDescription>
-            <div className="flex flex-col gap-4">
-              <UserRatings averageRating={4.3} size="lg" isInteractive={false}>
+        <div className="flex-1 items-center md:items-start md:justify-center flex flex-col">
+          <div className="space-y-4 md:space-y-8">
+            <DialogHeader className="text-left">
+              <DialogTitle className="text-xl">{data[0].title}</DialogTitle>
+              <span className="text-lg">{data[0].price}</span>
+              <UserRatings averageRating={4.3} size="md" isInteractive={false}>
                 <div className="flex gap-1 items-center">
                   <UserRatings.AverageRating />
                   <UserRatings.StarList />
@@ -65,6 +57,9 @@ export function QuickShop() {
                   <UserRatings.TotalReviews />
                 </div>
               </UserRatings>
+            </DialogHeader>
+
+            <div className="flex flex-col gap-4 md:gap-8">
               <ProductColorVariants />
               <ProductSizeVariants />
               <ADD_TO_CART />
@@ -78,7 +73,7 @@ export function QuickShop() {
 
 function ADD_TO_CART() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-1 md:gap-2">
       <Button size="lg">Add to cart</Button>
       <Button size="lg" variant="link">
         View Details
