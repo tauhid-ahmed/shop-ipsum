@@ -5,6 +5,7 @@ import { APP_NAME, APP_DESCRIPTION, APP_URL } from "@/constants/app.config";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import SessionProvider from "@/providers/session-provider";
+import Lenis from "@/components/lenis";
 const inter = Inter({
   variable: "--font-primary",
   subsets: ["latin"],
@@ -35,14 +36,16 @@ export default function RootLayout({
           sizes="<generated>"
         />
       </head>
-      <body
-        className={`${inter.variable} ${inter.className} antialiased bg-background`}
-      >
-        <SessionProvider>
-          <Analytics />
-          <ThemeProvider>{children}</ThemeProvider>
-        </SessionProvider>
-      </body>
+      <Lenis>
+        <body
+          className={`${inter.variable} ${inter.className} antialiased bg-background`}
+        >
+          <SessionProvider>
+            <Analytics />
+            <ThemeProvider>{children}</ThemeProvider>
+          </SessionProvider>
+        </body>
+      </Lenis>
     </html>
   );
 }
