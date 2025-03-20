@@ -13,6 +13,7 @@ import ProductCard from "./product-card";
 
 type ProductRevealProps = {
   title: string;
+  data: Product[];
 };
 
 type Product = {
@@ -24,69 +25,6 @@ type Product = {
   averageRating: number;
   totalReviews: number;
 };
-
-const data: Product[] = [
-  {
-    id: "1",
-    images: [
-      "/assets/product/product-01.jpg",
-      "/assets/product/product-01.jpg",
-    ],
-    title: "Classic T-Shirt",
-    description: "Premium cotton, perfect fit.",
-    price: "$24.99",
-    averageRating: 4.5,
-    totalReviews: 100,
-  },
-  {
-    id: "2",
-    images: [
-      "/assets/product/product-02.jpg",
-      "/assets/product/product-02.jpg",
-    ],
-    title: "Casual Shirt",
-    description: "Lightweight and stylish.",
-    price: "$29.99",
-    averageRating: 4.2,
-    totalReviews: 80,
-  },
-  {
-    id: "3",
-    images: [
-      "/assets/product/product-03.jpg",
-      "/assets/product/product-03.jpg",
-    ],
-    title: "Formal Shirt",
-    description: "Elegant design for any occasion.",
-    price: "$39.99",
-    averageRating: 4.8,
-    totalReviews: 120,
-  },
-  {
-    id: "4",
-    images: [
-      "/assets/product/product-04.jpg",
-      "/assets/product/product-05.jpg",
-    ],
-    title: "Vintage T-Shirt",
-    description: "Retro vibes, modern comfort.",
-    price: "$27.99",
-    averageRating: 4.6,
-    totalReviews: 90,
-  },
-  {
-    id: "5",
-    images: [
-      "/assets/product/product-05.jpg",
-      "/assets/product/product-05.jpg",
-    ],
-    title: "Slim Fit Shirt",
-    description: "Tailored for a sleek look.",
-    price: "$34.99",
-    averageRating: 4.7,
-    totalReviews: 110,
-  },
-];
 
 const ProductRevealContext = React.createContext<{
   quickShop: boolean;
@@ -105,7 +43,10 @@ export const useProductRevealContext = () => {
   return context;
 };
 
-export default function ProductReveal({ title }: ProductRevealProps) {
+export default function ProductReveal({
+  title,
+  data = [],
+}: ProductRevealProps) {
   const [quickShop, setQuickShop] = React.useState(false);
   const [productId, setProductId] = React.useState("");
 
@@ -123,9 +64,9 @@ export default function ProductReveal({ title }: ProductRevealProps) {
       >
         <Section padding="sm">
           <Container>
-            <div className="space-y-10 group">
+            <div className="space-y-4 group">
               <div className="flex justify-between items-baseline">
-                <Heading align="left" weight="bold">
+                <Heading as="h2" size="2xl" align="left" weight="bold">
                   {title}
                 </Heading>
                 <Button asChild variant="link">
@@ -134,7 +75,7 @@ export default function ProductReveal({ title }: ProductRevealProps) {
                   </Link>
                 </Button>
               </div>
-              <div className="relative">
+              <div className="relative group/embla">
                 <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
                   <Embla.Container>
                     <Carousel />
@@ -155,7 +96,7 @@ function Carousel() {
   const { data } = useEmblaContext();
   return data.map((item, index) => (
     <Embla.Slide key={index}>
-      <div className="w-fit mx-auto">
+      <div className="w-full mx-auto">
         <ProductCard key={index} data={item as Product} />
       </div>
     </Embla.Slide>

@@ -27,64 +27,148 @@ const data = [
   {
     id: "1",
     images: [
-      "/assets/product/product-01.jpg",
-      "/assets/product/product-01.jpg",
+      "/assets/product/product-01.png",
+      "/assets/product/product-01.png",
     ],
     title: "Classic T-Shirt",
     description: "Premium cotton, perfect fit.",
     price: "$24.99",
-    averageRating: "4.5",
-    totalReviews: "100",
+    averageRating: 4.5,
+    totalReviews: 100,
   },
   {
     id: "2",
     images: [
-      "/assets/product/product-02.jpg",
-      "/assets/product/product-02.jpg",
+      "/assets/product/product-02.png",
+      "/assets/product/product-02.png",
     ],
     title: "Casual Shirt",
     description: "Lightweight and stylish.",
     price: "$29.99",
-    averageRating: "4.2",
-    totalReviews: "80",
+    averageRating: 4.2,
+    totalReviews: 80,
   },
   {
     id: "3",
     images: [
-      "/assets/product/product-03.jpg",
-      "/assets/product/product-03.jpg",
+      "/assets/product/product-03.png",
+      "/assets/product/product-03.png",
     ],
     title: "Formal Shirt",
     description: "Elegant design for any occasion.",
     price: "$39.99",
-    averageRating: "4.8",
-    totalReviews: "120",
+    averageRating: 4.8,
+    totalReviews: 120,
   },
   {
     id: "4",
     images: [
-      "/assets/product/product-04.jpg",
-      "/assets/product/product-05.jpg",
+      "/assets/product/product-04.png",
+      "/assets/product/product-05.png",
     ],
     title: "Vintage T-Shirt",
     description: "Retro vibes, modern comfort.",
     price: "$27.99",
-    averageRating: "4.6",
-    totalReviews: "90",
+    averageRating: 4.6,
+    totalReviews: 90,
   },
   {
     id: "5",
     images: [
-      "/assets/product/product-05.jpg",
-      "/assets/product/product-05.jpg",
+      "/assets/product/product-05.png",
+      "/assets/product/product-05.png",
     ],
     title: "Slim Fit Shirt",
     description: "Tailored for a sleek look.",
     price: "$34.99",
-    averageRating: "4.7",
-    totalReviews: "110",
+    averageRating: 4.7,
+    totalReviews: 110,
   },
-] as const;
+  {
+    id: "6",
+    images: [
+      "/assets/product/product-06.png",
+      "/assets/product/product-06.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "7",
+    images: [
+      "/assets/product/product-07.png",
+      "/assets/product/product-07.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "8",
+    images: [
+      "/assets/product/product-08.png",
+      "/assets/product/product-08.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "9",
+    images: [
+      "/assets/product/product-09.png",
+      "/assets/product/product-09.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "10",
+    images: [
+      "/assets/product/product-10.png",
+      "/assets/product/product-10.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "11",
+    images: [
+      "/assets/product/product-11.png",
+      "/assets/product/product-11.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+  {
+    id: "12",
+    images: [
+      "/assets/product/product-12.png",
+      "/assets/product/product-12.png",
+    ],
+    title: "Slim Fit Shirt",
+    description: "Tailored for a sleek look.",
+    price: "$34.99",
+    averageRating: 4.7,
+    totalReviews: 110,
+  },
+];
 
 export function QuickShop() {
   const { quickShop, openQuickShop, productId } = useProductRevealContext();
@@ -98,7 +182,7 @@ export function QuickShop() {
             <Embla.Container>
               <Carousel />
             </Embla.Container>
-            <Embla.NavigationControls />
+            <Embla.NavigationControls hidden={false} />
           </Embla>
         </div>
 

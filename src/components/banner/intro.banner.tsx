@@ -11,9 +11,10 @@ type DataType = {
 };
 
 const data: DataType[] = [
-  { id: "1", image: "/assets/banner/image-01.svg" },
-  { id: "2", image: "/assets/banner/image-02.svg" },
-  { id: "3", image: "/assets/banner/image-03.svg" },
+  { id: "1", image: "/assets/banner/image-01.webp" },
+  { id: "2", image: "/assets/banner/image-02.webp" },
+  { id: "3", image: "/assets/banner/image-03.webp" },
+  { id: "4", image: "/assets/banner/image-03.webp" },
 ];
 
 export default function IntroBanner() {
@@ -21,7 +22,7 @@ export default function IntroBanner() {
     <Embla data={data} playOnInit={true} delay={6000} stopOnLastSnap={false}>
       <Section>
         <Container>
-          <div className="relative">
+          <div className="relative group/embla">
             <Embla.Container>
               <Carousel />
             </Embla.Container>
@@ -38,7 +39,7 @@ function Carousel() {
   const product = data as DataType[];
   return product.map((item, index) => (
     <Embla.Slide key={index}>
-      <div className="h-96 relative">
+      <div className="h-60 sm:h-72 md:h-80 lg:h-96 relative">
         <Image
           src={item.image}
           fill

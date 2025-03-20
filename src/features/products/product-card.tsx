@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { LucideLink, LucidePlus, LucideHeart } from "lucide-react";
+import { LucidePlus, LucideHeart, LucideShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/components/heading";
@@ -17,54 +17,43 @@ export type Product = {
 };
 
 export default function ProductCard({ data }: { data: Product }) {
-  const { openQuickShop, handleProductId } = useProductRevealContext();
   return (
-    <div className="w-full max-w-80 space-y-4 relative overflow-hidden rounded border border-border shadow-sm">
+    <div className="w-full relative overflow-hidden rounded border border-border shadow-sm">
       <div className="relative group/card overflow-hidden">
-        <div className="relative h-96 w-full rounded overflow-hidden">
-          <Image
-            src={data.images[0]}
-            width={300}
-            height={300}
-            alt={data.title}
-            className="size-full object-cover"
-          />
-          <Link
-            href="/"
-            className="absolute inset-0 bg-accent/30 grid place-items-center opacity-0 group-hover/card:opacity-100"
-          >
-            <Button variant="ghost" shape="pill" size="icon">
-              <LucideLink />
-            </Button>
-          </Link>
-        </div>
-        <div className="absolute bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-2">
-          <Button
-            size="sm"
-            shape="pill"
-            className="w-full uppercase backdrop-blur-2xl"
-            onClick={() => {
-              openQuickShop();
-              handleProductId(data.id);
-            }}
-          >
-            <LucidePlus /> QuickShop
-          </Button>
-        </div>
+        <Link
+          href="#"
+          className="relative h-44 sm:h-60 md:h-72 lg:h-80 bg-secondary rounded overflow-hidden flex items-center justify-center"
+        >
+          <div className="inline-block h-full rounded overflow-hidden">
+            <Image
+              src={data.images[0]}
+              width={300}
+              height={300}
+              alt={data.title}
+              className="size-full object-contain"
+            />
+          </div>
+        </Link>
+        <QuickShopButton id={data.id} />
       </div>
-      <div className="text-center space-y-0.5">
+      <Link
+        href="#"
+        className="text-center space-y-0.5 sm:space-y-1 px-1 overflow-hidden bg-secondary/20 py-4"
+      >
         <Heading
           align="center"
           weight="medium"
-          className="text-muted-foreground"
+          className="text-foreground/80 font-semibold"
           as="h3"
-          size="md"
+          size="sm"
         >
           {data.title}
         </Heading>
-        <p className="text-foreground/80 text-ellipsis">{data.description}</p>
+        <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap font-medium">
+          {data.description}
+        </p>
         <div>
-          <span className=" font-semibold">{data.price}</span>
+          <span className="font-semibold text-foreground/90">{data.price}</span>
         </div>
         <UserRatings size="sm" averageRating={data.averageRating}>
           <div className="flex justify-center items-center gap-1">
@@ -72,12 +61,45 @@ export default function ProductCard({ data }: { data: Product }) {
             <UserRatings.StarList />
           </div>
         </UserRatings>
-      </div>
-      <div className="absolute top-1.5 right-1.5 z-10">
+      </Link>
+      <div className="absolute top-0 right-0 z-10 scale-75">
         <Button variant="outline" size="icon">
           <LucideHeart />
         </Button>
       </div>
     </div>
+  );
+}
+
+function QuickShopButton({ id }: { id: string }) {
+  const { openQuickShop, handleProductId } = useProductRevealContext();
+  return (
+    <>
+      <div className="absolute bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4 hidden lg:block">
+        <Button
+          size="md"
+          className="w-full uppercase backdrop-blur-2xl"
+          onClick={() => {
+            openQuickShop();
+            handleProductId(id);
+          }}
+        >
+          <LucidePlus /> QuickShop
+        </Button>
+      </div>
+      <div className="absolute right-0 bottom-0 scale-75 lg:hidden ">
+        <Button
+          onClick={() => {
+            openQuickShop();
+            handleProductId(id);
+          }}
+          variant="outline"
+          size="icon"
+          className="shadow"
+        >
+          <LucideShoppingCart />
+        </Button>
+      </div>
+    </>
   );
 }
