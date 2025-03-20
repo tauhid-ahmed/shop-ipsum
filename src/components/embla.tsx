@@ -136,7 +136,6 @@ function EmblaContainer({
 // Individual Slide
 function EmblaSlide({ children }: { children: ReactNode }) {
   const { slidesPerView } = useEmblaContext();
-  console.log({ slidesPerView });
   return (
     <div
       className={cn("shrink-0 grow-0 min-w-0 h-full px-2", {

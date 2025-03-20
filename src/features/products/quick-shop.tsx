@@ -58,7 +58,9 @@ export function QuickShop() {
                 </div>
               </UserRatings>
             </DialogHeader>
-
+            <DialogDescription className="sr-only">
+              Product variants section
+            </DialogDescription>
             <div className="flex flex-col gap-4 md:gap-8">
               <ProductColorVariants />
               <ProductSizeVariants />
