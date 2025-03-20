@@ -64,9 +64,9 @@ export default function ProductReveal({
       >
         <Section padding="sm">
           <Container>
-            <div className="space-y-10 group">
+            <div className="space-y-4 group">
               <div className="flex justify-between items-baseline">
-                <Heading align="left" weight="bold">
+                <Heading as="h2" size="2xl" align="left" weight="bold">
                   {title}
                 </Heading>
                 <Button asChild variant="link">
@@ -75,7 +75,7 @@ export default function ProductReveal({
                   </Link>
                 </Button>
               </div>
-              <div className="relative">
+              <div className="relative group/embla">
                 <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
                   <Embla.Container>
                     <Carousel />

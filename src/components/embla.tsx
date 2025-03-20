@@ -10,10 +10,7 @@ import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
-import {
-  LucideCircleChevronLeft,
-  LucideCircleChevronRight,
-} from "lucide-react";
+import { LucideChevronLeft, LucideChevronRight } from "lucide-react";
 
 // Embla Context
 interface EmblaContextType<T = unknown> {
@@ -151,7 +148,13 @@ function EmblaSlide({ children }: { children: ReactNode }) {
 }
 
 // Navigation Controls
-function NavigationControls({ className }: { className?: string }) {
+function NavigationControls({
+  className,
+  hidden = true,
+}: {
+  className?: string;
+  hidden?: boolean;
+}) {
   const { emblaApi, canScroll } = useEmblaContext();
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -162,27 +165,36 @@ function NavigationControls({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex justify-between absolute -inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none [&_button]:pointer-events-auto mix-blend-color-multiply",
+        "flex justify-between absolute -inset-x-6 top-1/2 -translate-y-1/2 pointer-events-none [&_button]:pointer-events-auto",
+        hidden && "lg:flex hidden",
         className
       )}
     >
       <Button
-        className="relative -translate-x-4"
+        className={cn(
+          "transition-transform",
+          hidden &&
+            "-translate-x-4 opacity-0 group-hover/embla:opacity-100 group-hover/embla:translate-x-0"
+        )}
         variant="outline"
         size="icon"
         shape="pill"
         onClick={scrollPrev}
       >
-        <LucideCircleChevronLeft />
+        <LucideChevronLeft />
       </Button>
       <Button
-        className="relative translate-x-4"
+        className={cn(
+          "transition-transform",
+          hidden &&
+            "translate-x-4 opacity-0 group-hover/embla:opacity-100 group-hover/embla:translate-x-0"
+        )}
         variant="outline"
         size="icon"
         shape="pill"
         onClick={scrollNext}
       >
-        <LucideCircleChevronRight />
+        <LucideChevronRight />
       </Button>
     </div>
   );

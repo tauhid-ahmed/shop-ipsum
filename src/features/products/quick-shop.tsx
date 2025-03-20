@@ -182,7 +182,7 @@ export function QuickShop() {
             <Embla.Container>
               <Carousel />
             </Embla.Container>
-            <Embla.NavigationControls />
+            <Embla.NavigationControls hidden={false} />
           </Embla>
         </div>
 

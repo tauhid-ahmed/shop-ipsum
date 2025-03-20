@@ -22,7 +22,7 @@ export default function IntroBanner() {
     <Embla data={data} playOnInit={true} delay={6000} stopOnLastSnap={false}>
       <Section>
         <Container>
-          <div className="relative">
+          <div className="relative group/embla">
             <Embla.Container>
               <Carousel />
             </Embla.Container>

@@ -58,17 +58,17 @@ export default function ProductCard({ data }: { data: Product }) {
         <Heading
           align="center"
           weight="medium"
-          className="text-muted-foreground"
+          className="text-foreground/80 font-semibold"
           as="h3"
-          size="md"
+          size="sm"
         >
           {data.title}
         </Heading>
-        <p className="text-foreground/80 text-xs md:text-md lg:text-base text-ellipsis whitespace-nowrap">
+        <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap font-medium">
           {data.description}
         </p>
         <div>
-          <span className="font-semibold text-foreground/60">{data.price}</span>
+          <span className="font-semibold text-foreground/90">{data.price}</span>
         </div>
         <UserRatings size="sm" averageRating={data.averageRating}>
           <div className="flex justify-center items-center gap-1">
