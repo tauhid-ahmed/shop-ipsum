@@ -93,9 +93,7 @@ function AverageRating({ className }: { className?: string }) {
 function UserReviewsCount({ className }: { className?: string }) {
   const { totalReviews } = useRatingContext();
   return (
-    <span
-      className={cn("text-primary text-sm lg:text-base font-medium", className)}
-    >
+    <span className={cn("text-primary text-sm", className)}>
       See all {totalReviews} reviews
     </span>
   );
@@ -188,7 +186,7 @@ function Star({
         isInteractive && "cursor-pointer",
         size === "sm" && "size-4",
         size === "md" && "size-4 lg:size-5",
-        size === "lg" && "size-5 md:size-6 lg:size-7"
+        size === "lg" && "size-5 lg:size-6"
       )}
       onMouseMove={(e) =>
         handleInteraction(e, (fillRatio) => onHover(starIndex, fillRatio))
