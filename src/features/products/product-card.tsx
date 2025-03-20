@@ -19,9 +19,9 @@ export type Product = {
 export default function ProductCard({ data }: { data: Product }) {
   const { openQuickShop, handleProductId } = useProductRevealContext();
   return (
-    <div className="w-full space-y-4 relative overflow-hidden rounded border border-border shadow-sm">
+    <div className="w-full space-y-4x relative overflow-hidden rounded border border-border shadow-sm">
       <div className="relative group/card overflow-hidden">
-        <div className="relative h-44 sm:h-60 md:h-72 lg:h-84 bg-secondary rounded overflow-hidden p-2 flex items-center justify-center">
+        <div className="relative h-44 sm:h-60 md:h-72 lg:h-84 bg-secondary rounded overflow-hidden flex items-center justify-center">
           <div className="inline-block h-full rounded overflow-hidden">
             <Image
               src={data.images[0]}
@@ -54,7 +54,7 @@ export default function ProductCard({ data }: { data: Product }) {
           </Button>
         </div>
       </div>
-      <div className="text-center space-y-0.5 sm:space-y-1 px-1 overflow-hidden">
+      <div className="text-center space-y-0.5 sm:space-y-1 px-1 overflow-hidden bg-secondary/20 py-4">
         <Heading
           align="center"
           weight="medium"

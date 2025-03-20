@@ -13,6 +13,7 @@ import ProductCard from "./product-card";
 
 type ProductRevealProps = {
   title: string;
+  data: Product[];
 };
 
 type Product = {
@@ -24,117 +25,6 @@ type Product = {
   averageRating: number;
   totalReviews: number;
 };
-
-const data: Product[] = [
-  {
-    id: "1",
-    images: [
-      "/assets/product/product-01.png",
-      "/assets/product/product-01.png",
-    ],
-    title: "Classic T-Shirt",
-    description: "Premium cotton, perfect fit.",
-    price: "$24.99",
-    averageRating: 4.5,
-    totalReviews: 100,
-  },
-  {
-    id: "2",
-    images: [
-      "/assets/product/product-02.png",
-      "/assets/product/product-02.png",
-    ],
-    title: "Casual Shirt",
-    description: "Lightweight and stylish.",
-    price: "$29.99",
-    averageRating: 4.2,
-    totalReviews: 80,
-  },
-  {
-    id: "3",
-    images: [
-      "/assets/product/product-03.png",
-      "/assets/product/product-03.png",
-    ],
-    title: "Formal Shirt",
-    description: "Elegant design for any occasion.",
-    price: "$39.99",
-    averageRating: 4.8,
-    totalReviews: 120,
-  },
-  {
-    id: "4",
-    images: [
-      "/assets/product/product-04.png",
-      "/assets/product/product-05.png",
-    ],
-    title: "Vintage T-Shirt",
-    description: "Retro vibes, modern comfort.",
-    price: "$27.99",
-    averageRating: 4.6,
-    totalReviews: 90,
-  },
-  {
-    id: "5",
-    images: [
-      "/assets/product/product-05.png",
-      "/assets/product/product-05.png",
-    ],
-    title: "Slim Fit Shirt",
-    description: "Tailored for a sleek look.",
-    price: "$34.99",
-    averageRating: 4.7,
-    totalReviews: 110,
-  },
-  {
-    id: "6",
-    images: [
-      "/assets/product/product-06.png",
-      "/assets/product/product-06.png",
-    ],
-    title: "Slim Fit Shirt",
-    description: "Tailored for a sleek look.",
-    price: "$34.99",
-    averageRating: 4.7,
-    totalReviews: 110,
-  },
-  {
-    id: "7",
-    images: [
-      "/assets/product/product-07.png",
-      "/assets/product/product-07.png",
-    ],
-    title: "Slim Fit Shirt",
-    description: "Tailored for a sleek look.",
-    price: "$34.99",
-    averageRating: 4.7,
-    totalReviews: 110,
-  },
-  {
-    id: "8",
-    images: [
-      "/assets/product/product-08.png",
-      "/assets/product/product-08.png",
-    ],
-    title: "Slim Fit Shirt",
-    description: "Tailored for a sleek look.",
-    price: "$34.99",
-    averageRating: 4.7,
-    totalReviews: 110,
-  },
-  {
-    id: "9",
-    images: [
-      "/assets/product/product-09.png",
-      "/assets/product/product-09.png",
-    ],
-    title: "Slim Fit Shirt",
-    description: "Tailored for a sleek look.",
-    price: "$34.99",
-    averageRating: 4.7,
-    totalReviews: 110,
-  },
-];
 
 const ProductRevealContext = React.createContext<{
   quickShop: boolean;
@@ -153,7 +43,10 @@ export const useProductRevealContext = () => {
   return context;
 };
 
-export default function ProductReveal({ title }: ProductRevealProps) {
+export default function ProductReveal({
+  title,
+  data = [],
+}: ProductRevealProps) {
   const [quickShop, setQuickShop] = React.useState(false);
   const [productId, setProductId] = React.useState("");
 
