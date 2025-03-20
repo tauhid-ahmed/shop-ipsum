@@ -18,8 +18,8 @@ export type Product = {
 
 export default function ProductCard({ data }: { data: Product }) {
   return (
-    <div className="w-full relative overflow-hidden rounded border border-border shadow-sm">
-      <div className="relative group/card overflow-hidden">
+    <div className="w-full relative overflow-hidden rounded border border-border shadow-sm group/card">
+      <div className="relative overflow-hidden">
         <Link
           href="#"
           className="relative h-44 sm:h-60 md:h-72 lg:h-80 bg-secondary rounded overflow-hidden flex items-center justify-center"
