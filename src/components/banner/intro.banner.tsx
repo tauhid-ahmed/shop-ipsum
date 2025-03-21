@@ -40,7 +40,7 @@ function Carousel() {
   const product = data as DataType[];
   return product.map((item, index) => (
     <Embla.Slide key={index}>
-      <div className="h-60 sm:h-72 md:h-80 lg:h-96 relative">
+      <div className="h-60 md:h-80 lg:h-96 relative">
         <Image
           src={item.image}
           fill
