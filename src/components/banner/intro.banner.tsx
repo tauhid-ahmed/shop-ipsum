@@ -20,7 +20,7 @@ const data: DataType[] = [
 
 export default function IntroBanner() {
   return (
-    <Embla data={data} playOnInit={true} delay={6000} stopOnLastSnap={false}>
+    <Embla data={data} playOnInit={true} delay={6000} stopOnLastSnap={true}>
       <Section padding="sm">
         <Container>
           <div className="relative group/embla">

@@ -51,7 +51,7 @@ export default function Embla({
   autoplay = false,
   delay = 6000,
   data = [],
-  align = "start",
+  align = "center",
   playOnInit = false,
   children,
   stopOnLastSnap = true,

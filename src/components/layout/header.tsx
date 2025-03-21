@@ -15,10 +15,10 @@ import { Button } from "../ui/button";
 
 export default function Header() {
   return (
-    <header className="border-b border-border py-4 z-50 relative backdrop-blur-2xl bg-background/90 text-sm">
+    <header className="border-b border-border py-4 z-50 relative backdrop-blur bg-background/90 text-base">
       <Container size="fluid">
         <nav className="flex items-center">
-          <div className="flex flex-1 lg:hidden">
+          <div className="flex flex-1 gap-1 lg:hidden">
             <Navigation />
             <SearchWidget />
           </div>
