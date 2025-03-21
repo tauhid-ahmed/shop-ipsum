@@ -21,7 +21,7 @@ const data: DataType[] = [
 export default function IntroBanner() {
   return (
     <Embla data={data} playOnInit={true} delay={6000} stopOnLastSnap={false}>
-      <Section>
+      <Section padding="sm">
         <Container>
           <div className="relative group/embla">
             <Embla.Container>
@@ -40,7 +40,7 @@ function Carousel() {
   const product = data as DataType[];
   return product.map((item, index) => (
     <Embla.Slide key={index}>
-      <div className="h-60 md:h-80 lg:h-96 relative">
+      <div className="h-60 md:h-72 lg:h-80 relative rounded overflow-hidden">
         <Image
           src={item.image}
           fill

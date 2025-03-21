@@ -22,9 +22,9 @@ export default function ProductCard({ data }: { data: Product }) {
       <div className="relative overflow-hidden bg-secondary/40">
         <Link
           href="#"
-          className="relative h-44 md:h-54 lg:h-72 rounded overflow-hidden flex items-center justify-center"
+          className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
         >
-          <div className="inline-block h-full rounded overflow-hidden">
+          <div className="inline-block h-full rounded overflow-hidden p-2">
             <Image
               src={data.images[0]}
               width={300}
@@ -100,7 +100,7 @@ function QuickShopButton({ id }: { id: string }) {
           }}
           variant="outline"
           size="icon"
-          className="shadow text-primary"
+          className="text-primary"
         >
           <LucideShoppingCart />
         </Button>

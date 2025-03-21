@@ -19,15 +19,17 @@ export function ProductSizeVariants({
   const [value, setValue] = React.useState("L");
   return (
     <div className={cn("space-y-1", className)}>
-      <Heading>{title}</Heading>
+      <Heading size="md" as="h3">
+        {title}
+      </Heading>
       <RadioGroupPrimitive.Root
         value={value}
         onValueChange={setValue}
-        className="flex flex-wrap gap-1 md:gap-2 text-center"
+        className="flex flex-wrap gap-2 text-center"
       >
         {data.map((item) => (
           <RadioGroupPrimitive.Item
-            className="rounded py-1.5 sm:py-2 text-xs w-10 lg:text-sm lg:w-12 border border-border data-[state=checked]:bg-primary data-[state=checked]:text-white data-[state=checked]:border-primary cursor-pointer font-medium"
+            className="rounded py-2 sm:py-2.5 text-xs w-10 lg:text-sm lg:w-12 border border-border data-[state=checked]:bg-primary data-[state=checked]:text-white data-[state=checked]:border-primary cursor-pointer font-medium"
             key={item}
             value={item}
           >
@@ -112,11 +114,13 @@ export function ProductColorVariants({
 
   return (
     <div className={cn("space-y-1", className)}>
-      <Heading as="h3">{title}</Heading>
+      <Heading size="md" as="h3">
+        {title}
+      </Heading>
       <RadioGroupPrimitive.Root
         value={selectedColor}
         onValueChange={handleColorChange}
-        className="flex flex-wrap gap-1 md:gap-2"
+        className="flex flex-wrap gap-3"
       >
         {colors.map((color) => (
           <RadioGroupPrimitive.Item
@@ -124,11 +128,11 @@ export function ProductColorVariants({
             value={color}
             aria-label={`Select ${color} color`}
             className={cn(
-              "relative flex flex-wrap items-center justify-center rounded-full size-6 sm:size-7 lg:size-8 border-2 cursor-pointer transition-all",
-              "focus:outline-none scale-110 opacity-100",
+              "relative flex flex-wrap items-center justify-center rounded-full border-2 cursor-pointer transition-all",
+              "focus:outline-none scale-110 size-8 lg:size-9",
               selectedColor === color
                 ? borderColorMap[color]
-                : "border-gray-200 border-2 scale-100 opacity-70"
+                : "border-gray-200 border-2"
             )}
           >
             {/* Inner Color Swatch */}

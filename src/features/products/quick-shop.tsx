@@ -272,7 +272,7 @@ export function QuickShop() {
 
   return (
     <Dialog open={quickShop} onOpenChange={openQuickShop}>
-      <DialogContent className="flex flex-col md:flex-row md:gap-10 max-w-md md:max-w-4xl">
+      <DialogContent className="flex flex-col md:flex-row md:gap-10 max-w-md md:max-w-4xl overflow-y-scroll">
         <div className="w-full md:w-84 relative cursor-grab">
           <Embla data={[product]}>
             <Embla.Container>
@@ -286,8 +286,10 @@ export function QuickShop() {
         <div className="flex-1 items-center md:items-start md:justify-center flex flex-col">
           <div className="space-y-4 md:space-y-8">
             <DialogHeader className="text-left">
-              <DialogTitle className="text-xl">{data[0].title}</DialogTitle>
-              <span className="text-lg">{data[0].price}</span>
+              <DialogTitle className="text-xl lg:text-2xl text-foreground/70">
+                {data[0].title}
+              </DialogTitle>
+              <span className="text-lg lg:text-xl">{data[0].price}</span>
               <UserRatings averageRating={4.3} size="md" isInteractive={false}>
                 <div className="flex gap-1 items-center">
                   <UserRatings.AverageRating />
@@ -329,7 +331,7 @@ function Carousel() {
   console.log(selectedSlide);
   return product.images.map((item: string, index) => (
     <Embla.Slide key={index}>
-      <div className="h-72 sm:h-84 md:h-full w-full mx-auto bg-secondary rounded">
+      <div className="h-52 md:h-full w-full mx-auto bg-secondary rounded">
         <Image
           src={item}
           width={300}
