@@ -5,7 +5,11 @@ import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { LucideMoveRight } from "lucide-react";
+import {
+  LucideChevronLeft,
+  LucideChevronRight,
+  LucideMoveRight,
+} from "lucide-react";
 
 import { QuickShop } from "./quick-shop";
 import Embla, { useEmblaContext } from "@/components/embla";
@@ -69,11 +73,21 @@ export default function ProductReveal({
                 <Heading as="h2" size="2xl" align="left" weight="bold">
                   {title}
                 </Heading>
-                <Button asChild variant="link">
-                  <Link href="/">
-                    See more <LucideMoveRight />
-                  </Link>
-                </Button>
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2">
+                    <Button size="icon" variant="ghost" className="size-4">
+                      <LucideChevronLeft />
+                    </Button>
+                    <Button size="icon" variant="ghost" className="size-4">
+                      <LucideChevronRight />
+                    </Button>
+                  </div>
+                  <Button className="" asChild variant="link">
+                    <Link href="/">
+                      See more <LucideMoveRight />
+                    </Link>
+                  </Button>
+                </div>
               </div>
               <div className="relative group/embla">
                 <Embla data={data as Product[]} delay={6000} slidesPerView={4}>

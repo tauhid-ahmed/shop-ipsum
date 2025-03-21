@@ -109,11 +109,7 @@ function QuickShopButton({ id }: { id: string }) {
   );
 }
 
-function PrevPrice({
-  price = `${Math.floor(Math.random() * 10) + 55}.99`,
-}: {
-  price?: string;
-}) {
+function PrevPrice({ price = "55.99" }: { price?: string }) {
   return (
     <span className="text-sm text-destructive px-1 relative before:absolute before:inset-x-0 before:h-px before:bg-destructive before:top-1/2 mr-0.5">
       {price}
