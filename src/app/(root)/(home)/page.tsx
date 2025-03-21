@@ -22,11 +22,12 @@ export default async function Home() {
     <>
       <IntroBanner />
       <ProductReveal data={shuffle([...data])} title="Trending" />
-      <ProductReveal data={shuffle([...data])} title="New Arrivals" />
       <ProductCategoryCard />
+      <ProductReveal data={shuffle([...data])} title="New Arrivals" />
+
       <Section padding="sm">
         <Container>
-          <div className="relative h-96 md:h-[500px] bg-accent/50 flex items-center justify-center px-4">
+          <div className="relative h-60 lg:h-84 bg-accent/50 flex items-center justify-center px-4 rounded overflow-hidden">
             <div className="absolute inset-0 -z-10 opacity-20">
               <Image
                 src="/assets/section/section-bg-01.webp"
@@ -35,20 +36,21 @@ export default async function Home() {
               />
             </div>
             <div className="flex flex-col gap-4 text-center">
-              <Heading size="5xl" weight="bold">
+              <Heading align="center" size="3xl" weight="bold">
                 Get 25% off during our one-time sale
               </Heading>
-              <p className="text-lg text-muted-foreground">
+              <p className="lg:text-lg text-muted-foreground">
                 Most of our products are limited releases that won&apos;t come
                 back. Get your favorite items while they&apos;re in stock.
               </p>
-              <div className="">
-                <Button size="lg">Get access to our one-time sale</Button>
-              </div>
+              <Button className="w-fit mx-auto" size="lg">
+                Get access to our one-time sale
+              </Button>
             </div>
           </div>
         </Container>
       </Section>
+
       <ProductReveal data={shuffle([...data])} title="Best Sellers" />
       <ProductReveal data={shuffle([...data])} title="Featured" />
     </>
