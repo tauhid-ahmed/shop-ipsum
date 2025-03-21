@@ -7,6 +7,7 @@ import Image from "next/image";
 import IntroBanner from "@/components/banner/intro.banner";
 import { Product } from "@/features/products/product-card";
 import { data } from "@/data/products";
+import ProductCategoryCard from "@/features/products/product-category-card";
 
 function shuffle(array: Product[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -22,6 +23,7 @@ export default async function Home() {
       <IntroBanner />
       <ProductReveal data={shuffle([...data])} title="Trending" />
       <ProductReveal data={shuffle([...data])} title="New Arrivals" />
+      <ProductCategoryCard />
       <Section padding="sm">
         <Container>
           <div className="relative h-96 md:h-[500px] bg-accent/50 flex items-center justify-center px-4">
