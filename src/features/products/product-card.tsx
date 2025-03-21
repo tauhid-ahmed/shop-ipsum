@@ -19,10 +19,10 @@ export type Product = {
 export default function ProductCard({ data }: { data: Product }) {
   return (
     <div className="w-full relative overflow-hidden rounded border border-border shadow-sm group/card">
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden bg-secondary/40">
         <Link
           href="#"
-          className="relative h-44 sm:h-60 md:h-72 lg:h-80 bg-secondary rounded overflow-hidden flex items-center justify-center"
+          className="relative h-44 md:h-54 lg:h-72 rounded overflow-hidden flex items-center justify-center"
         >
           <div className="inline-block h-full rounded overflow-hidden">
             <Image
@@ -36,35 +36,37 @@ export default function ProductCard({ data }: { data: Product }) {
         </Link>
         <QuickShopButton id={data.id} />
       </div>
-      <Link
-        href="#"
-        className="text-center space-y-0.5 sm:space-y-1 px-1 overflow-hidden bg-secondary/20 py-4 relative"
-      >
-        <Heading
-          align="center"
-          weight="medium"
-          className="text-foreground/70 font-semibold"
-          as="h3"
-          size="sm"
+      <div className="bg-secondary/20">
+        <Link
+          href="#"
+          className="text-center space-y-0.5 sm:space-y-1 mx-4 block py-4 relative overflow-hidden"
         >
-          {data.title}
-        </Heading>
-        <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap font-medium">
-          {data.description}
-        </p>
-        <div>
-          <span className="font-semibold text-foreground/70">
-            <PrevPrice />
-            {data.price}
-          </span>
-        </div>
-        <UserRatings size="sm" averageRating={data.averageRating}>
-          <div className="flex justify-center items-center gap-1">
-            <UserRatings.AverageRating />
-            <UserRatings.StarList />
+          <Heading
+            align="center"
+            weight="medium"
+            className="text-foreground/70 font-semibold"
+            as="h3"
+            size="sm"
+          >
+            {data.title}
+          </Heading>
+          <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap font-medium">
+            {data.description}
+          </p>
+          <div>
+            <span className="font-semibold text-foreground/70">
+              <PrevPrice />
+              {data.price}
+            </span>
           </div>
-        </UserRatings>
-      </Link>
+          <UserRatings size="sm" averageRating={data.averageRating}>
+            <div className="flex justify-center items-center gap-1">
+              <UserRatings.AverageRating />
+              <UserRatings.StarList />
+            </div>
+          </UserRatings>
+        </Link>
+      </div>
       <div className="absolute top-0 right-0 z-10 scale-90">
         <Button variant="outline" size="icon">
           <LucideHeart />
@@ -81,7 +83,7 @@ function QuickShopButton({ id }: { id: string }) {
       <div className="absolute bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4 hidden lg:block">
         <Button
           size="md"
-          className="w-full uppercase backdrop-blur-2xl"
+          className="w-full uppercase"
           onClick={() => {
             openQuickShop();
             handleProductId(id);
@@ -98,7 +100,7 @@ function QuickShopButton({ id }: { id: string }) {
           }}
           variant="outline"
           size="icon"
-          className="shadow"
+          className="shadow text-primary"
         >
           <LucideShoppingCart />
         </Button>
