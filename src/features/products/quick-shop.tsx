@@ -44,17 +44,17 @@ export function QuickShop() {
         {/* Right Column */}
         <div className="flex-1 items-center md:items-start md:justify-center flex flex-col">
           <div className="space-y-4 md:space-y-8">
-            <DialogHeader className="text-left">
+            <DialogHeader className="text-left space-y-1">
               <DialogTitle className="text-xl lg:text-2xl text-foreground/70">
                 {data[0].title}
               </DialogTitle>
               <span className="text-lg lg:text-xl">{data[0].price}</span>
-              <UserRatings averageRating={4.3} size="md" isInteractive={false}>
+              <UserRatings averageRating={4.3} size="lg" isInteractive={false}>
                 <div className="flex gap-1 items-center">
-                  <UserRatings.AverageRating />
+                  <UserRatings.AverageRating className="lg:text-base" />
                   <UserRatings.StarList />
                   <DotSeparator />
-                  <UserRatings.TotalReviews />
+                  <UserRatings.TotalReviews className="lg:text-base" />
                 </div>
               </UserRatings>
             </DialogHeader>

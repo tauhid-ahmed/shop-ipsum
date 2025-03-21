@@ -5,11 +5,7 @@ import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  LucideChevronLeft,
-  LucideChevronRight,
-  LucideMoveRight,
-} from "lucide-react";
+import { LucideMoveRight } from "lucide-react";
 
 import { QuickShop } from "./quick-shop";
 import Embla, { useEmblaContext } from "@/components/embla";
@@ -67,38 +63,31 @@ export default function ProductReveal({
         }}
       >
         <Section padding="sm">
-          <Container>
-            <div className="space-y-4 group">
-              <div className="flex justify-between items-baseline">
-                <Heading as="h2" size="2xl" align="left" weight="bold">
-                  {title}
-                </Heading>
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-2">
-                    <Button size="icon" variant="ghost" className="size-4">
-                      <LucideChevronLeft />
-                    </Button>
-                    <Button size="icon" variant="ghost" className="size-4">
-                      <LucideChevronRight />
+          <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
+            <Container>
+              <div className="space-y-4 group">
+                <div className="flex justify-between items-baseline">
+                  <Heading as="h2" size="2xl" align="left" weight="bold">
+                    {title}
+                  </Heading>
+                  <div className="flex items-center">
+                    <Embla.InlineNavigationControls />
+                    <Button asChild variant="link">
+                      <Link href="/">
+                        See more <LucideMoveRight />
+                      </Link>
                     </Button>
                   </div>
-                  <Button className="" asChild variant="link">
-                    <Link href="/">
-                      See more <LucideMoveRight />
-                    </Link>
-                  </Button>
                 </div>
-              </div>
-              <div className="relative group/embla">
-                <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
+                <div className="relative group/embla">
                   <Embla.Container>
                     <Carousel />
                   </Embla.Container>
                   <Embla.NavigationControls className="-mt-10" />
-                </Embla>
+                </div>
               </div>
-            </div>
-          </Container>
+            </Container>
+          </Embla>
         </Section>
         <QuickShop />
       </ProductRevealContext.Provider>

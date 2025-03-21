@@ -67,8 +67,8 @@ export default function ProductCard({ data }: { data: Product }) {
           </UserRatings>
         </Link>
       </div>
-      <div className="absolute top-0 right-0 z-10 scale-90">
-        <Button variant="outline" size="icon">
+      <div className="absolute top-0 right-0 z-10">
+        <Button variant="ghost" size="icon">
           <LucideHeart />
         </Button>
       </div>
@@ -92,15 +92,14 @@ function QuickShopButton({ id }: { id: string }) {
           <LucidePlus /> QuickShop
         </Button>
       </div>
-      <div className="absolute right-0 scale-90 bottom-0 lg:hidden ">
+      <div className="absolute right-0 bottom-0 lg:hidden ">
         <Button
           onClick={() => {
             openQuickShop();
             handleProductId(id);
           }}
-          variant="outline"
+          variant="ghost"
           size="icon"
-          className="text-primary"
         >
           <LucideShoppingCart />
         </Button>

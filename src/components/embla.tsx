@@ -48,7 +48,7 @@ interface EmblaProviderProps<T = unknown> {
 
 export default function Embla({
   loop = true,
-  autoplay = true,
+  autoplay = false,
   delay = 6000,
   data = [],
   align = "start",
@@ -208,6 +208,27 @@ function NavigationControls({
   );
 }
 
+// Inline Navigation Controls
+function InlineNavigationControls({ className }: { className?: string }) {
+  const { emblaApi, canScroll } = useEmblaContext();
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  // If we can't scroll, don't render the navigation controls
+  if (!canScroll) return null;
+
+  return (
+    <div className={cn("lg:hidden flex items-center gap-1", className)}>
+      <Button className="w-5" variant="ghost" size="icon" onClick={scrollPrev}>
+        <LucideChevronLeft />
+      </Button>
+      <Button className="w-5" variant="ghost" size="icon" onClick={scrollNext}>
+        <LucideChevronRight />
+      </Button>
+    </div>
+  );
+}
+
 // Pagination Dots
 function Pagination() {
   const { emblaApi, data, canScroll } = useEmblaContext();
@@ -255,4 +276,5 @@ function Pagination() {
 Embla.Container = EmblaContainer;
 Embla.Slide = EmblaSlide;
 Embla.NavigationControls = NavigationControls;
+Embla.InlineNavigationControls = InlineNavigationControls;
 Embla.Pagination = Pagination;
