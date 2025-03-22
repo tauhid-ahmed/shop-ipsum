@@ -44,13 +44,13 @@ export default function ProductCard({ data }: { data: Product }) {
           <Heading
             align="center"
             weight="medium"
-            className="text-foreground/70 font-semibold"
+            className="text-foreground/70 text-ellipsis whitespace-nowrap"
             as="h3"
             size="sm"
           >
             {data.title}
           </Heading>
-          <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap font-medium">
+          <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap">
             {data.description}
           </p>
           <div>
@@ -92,7 +92,7 @@ function QuickShopButton({ id }: { id: string }) {
           <LucidePlus /> QuickShop
         </Button>
       </div>
-      <div className="absolute right-0 bottom-0 lg:hidden ">
+      <div className="absolute right-0 bottom-0 lg:hidden">
         <Button
           onClick={() => {
             openQuickShop();

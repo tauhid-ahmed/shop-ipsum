@@ -66,14 +66,14 @@ export default function ProfileWidget() {
       </PopoverTrigger>
       <PopoverContent
         sideOffset={16}
-        className="relative p-0 rounded text-muted-foreground"
+        className="relative p-0 text-sm rounded text-muted-foreground"
       >
         <ProfileHeader />
-        <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-5 text-sm font-medium divide-y divide-border bg-accent/20">
+        <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-4 text-sm font-medium divide-y divide-border bg-accent/20">
           {menuItems.map((item) => (
             <Link
               key={item.name}
-              className="flex items-center gap-2 cursor-pointer hover:bg-primary/10"
+              className="flex items-center gap-2 cursor-pointer hover:bg-secondary/40"
               href={item.href}
             >
               {item.icon}
@@ -111,16 +111,16 @@ function ProfileHeader() {
           </p>
           <div className="flex gap-2 justify-center mt-2">
             {user.id && (
-              <Button variant="outline" onClick={() => signOut()}>
+              <Button size="sm" variant="outline" onClick={() => signOut()}>
                 Sign Out
               </Button>
             )}
             {!user.id && (
               <>
-                <Button asChild>
+                <Button size="sm" asChild>
                   <Link href={paths.signInPath()}>Sign in</Link>
                 </Button>
-                <Button variant="outline">
+                <Button size="sm" variant="outline">
                   <Link href={paths.registerPath()}> Register</Link>
                 </Button>
               </>
