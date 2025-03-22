@@ -47,8 +47,8 @@ export function QuickShop() {
         {/* Right Column */}
         <div className="flex-1 items-center md:items-start md:justify-center flex flex-col">
           <div className="space-y-4 md:space-y-8">
-            <DialogHeader className="text-left space-y-1">
-              <DialogTitle className="text-xl lg:text-2xl text-foreground/70">
+            <DialogHeader className="text-left">
+              <DialogTitle className="text-xl lg:text-2xl text-foreground">
                 {data[0].title}
               </DialogTitle>
               <span className="text-lg lg:text-xl">{data[0].price}</span>
