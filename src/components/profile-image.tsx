@@ -22,7 +22,7 @@ export default function ProfileImage({
       className={cn(
         `rounded-full overflow-hidden p-1.5 flex items-center justify-center`,
         {
-          "size-9": size === "default",
+          "size-8": size === "default",
           "size-12": size === "md",
           "size-14": size === "lg",
           "mx-auto": align === "center",

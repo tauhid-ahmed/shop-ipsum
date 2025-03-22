@@ -20,9 +20,11 @@ import { Separator } from "@/components/ui/separator";
 import SignedIn from "@/components/signed-in";
 
 export function CartWidget() {
+  const [open, setOpen] = React.useState(false);
+
   return (
     <SignedIn>
-      <Popover>
+      <Popover defaultOpen={open} open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div className="flex items-center">
             <Button size="icon" shape="pill" variant="ghost">
@@ -33,10 +35,10 @@ export function CartWidget() {
         </PopoverTrigger>
         <PopoverContent
           sideOffset={16}
-          className="w-88 h-[calc(100vh-8rem)] p-0"
+          className="w-80 h-[calc(100vh-8rem)] p-0"
         >
           <div className="flex flex-col h-full [&>*]:p-4">
-            <CartHeader />
+            <CartHeader onClick={() => setOpen(false)} />
             <div className="flex-1 overflow-y-scroll bg-accent/20">
               <CartBody />
             </div>
@@ -48,10 +50,10 @@ export function CartWidget() {
   );
 }
 
-function CartHeader() {
+function CartHeader({ onClick }: { onClick: () => void }) {
   return (
     <div className="border-b border-double border-border bg-accent/40 flex gap-1 items-center">
-      <Button shape="pill" size="icon" variant="ghost">
+      <Button onClick={onClick} shape="pill" size="icon" variant="ghost">
         <LucideChevronLeft />
       </Button>
       <strong>Continue Shopping</strong>
@@ -70,57 +72,45 @@ function CartBody() {
           <React.Fragment key={i}>
             <div className="flex gap-4 relative">
               <div className="h-24 w-20 bg-secondary"></div>
-              <div className="flex flex-col gap-2 overflow-hidden">
+              <div className="flex flex-col gap-1 overflow-hidden">
                 <div className="overflow-hidden">
                   <Heading
-                    className="text-ellipsis"
+                    className="text-ellipsis text-foreground/80"
                     align="left"
                     as="h3"
-                    size="default"
+                    size="md"
                     weight="semibold"
                   >
                     Product
                   </Heading>
-                  <p className="text-sm font-medium text-muted-foreground">
+                  <p className="text-xs font-medium text-muted-foreground">
                     Description
                   </p>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <div className="inline-flex align-middle rounded-lg border-t border-b border-border">
                     <div className="flex -my-px">
-                      <Button
-                        className="size-5 !p-0 [&_svg]:!size-4"
-                        variant="outline"
-                      >
+                      <Button className="size-8" size="icon" variant="outline">
                         <LucideMinus />
                       </Button>
-                      <div className="h-5 w-8 text-center text-sm flex items-center justify-center font-semibold">
-                        13
+                      <div className="w-8 text-center text-sm flex items-center justify-center">
+                        55
                       </div>
-                      <Button
-                        className="size-5 !p-0 [&_svg]:!size-4"
-                        variant="outline"
-                      >
+                      <Button className="size-8" size="icon" variant="outline">
                         <LucidePlus />
                       </Button>
                     </div>
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground">
-                    <span className="text-xs">USD$</span>{" "}
-                    <strong>{(23).toFixed(2)}</strong>
+                  <p className="text-sm flex items-baseline gap-1">
+                    <strong className="font-medium">$ {(23).toFixed(2)}</strong>
                   </p>
                 </div>
-                <p className={cn("text-xs font-medium", className)}>
+                <p className={cn("text-xs text-ellipsis", className)}>
                   {message}
                 </p>
               </div>
               <div className="absolute top-0 right-1">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  shape="pill"
-                  className="size-5 [&_svg]:!size-4 !text-destructive-light"
-                >
+                <Button variant="ghost" size="icon">
                   <LucideX />
                 </Button>
               </div>
