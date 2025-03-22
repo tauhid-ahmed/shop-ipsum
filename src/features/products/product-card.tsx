@@ -82,7 +82,7 @@ function QuickShopButton({ id }: { id: string }) {
     <>
       <div className="absolute bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4 hidden lg:block">
         <Button
-          size="md"
+          size="sm"
           className="w-full uppercase"
           onClick={() => {
             openQuickShop();
