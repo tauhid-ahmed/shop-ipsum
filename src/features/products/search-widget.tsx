@@ -59,7 +59,7 @@ export function SearchWidget() {
                   </Button>
                 </SheetClose>
               </div>
-              <div className="flex border-b-2 border-border focus-within:border-b-primary">
+              <div className="flex border-b-2 border-border focus-within:border-b-primary/40">
                 <Input
                   className="!text-xl"
                   ref={inputRef}
@@ -165,3 +165,5 @@ function Product() {
     </div>
   );
 }
+
+// https://www.facebook.com/share/p/1GhmRrensp/

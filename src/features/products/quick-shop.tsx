@@ -90,7 +90,7 @@ function Carousel() {
   console.log(selectedSlide);
   return product.images.map((item: string, index) => (
     <Embla.Slide key={index}>
-      <div className="h-52 md:h-full w-full mx-auto bg-secondary rounded">
+      <div className="h-52 md:h-full w-full mx-auto bg-secondary/40 rounded">
         <Image
           src={item}
           width={300}
