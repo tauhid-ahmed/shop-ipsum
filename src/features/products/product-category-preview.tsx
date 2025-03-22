@@ -13,7 +13,7 @@ export default function ProductCategoryPreview() {
           <Heading as="h2" size="2xl" align="left" weight="bold">
             Shop by category
           </Heading>
-          <div className="grid grid-cols-8 auto-rows-[minmax(theme(spacing.44),theme(spacing.44))] gap-4 [&>*]:border-4 [&>*]:border-primary/10 items-stretch [&>*]:rounded-2xl [&>*]:overflow-hidden overflow-hidden">
+          <div className="grid grid-cols-8 auto-rows-[minmax(theme(spacing.44),theme(spacing.44))] gap-2 [&>*]:border-1 [&>*]:border-primary/30 [&>*]:shadow items-stretch [&>*]:rounded-2xl [&>*]:overflow-hidden overflow-hidden">
             <div className="col-span-8 md:col-span-3 md:row-span-2 h-full">
               <PreviewCard
                 badge="Eid ul fitr fashion"
@@ -69,7 +69,7 @@ function PreviewCard({ image, className, href, badge }: PreviewCardProps) {
         alt="Category preview"
         className="size-full object-cover object-top"
       />
-      <span className="absolute top-0 right-0 z-10 backdrop-blur-3xl bg-background/50 px-2 py-1 rounded font-semibold">
+      <span className="absolute top-0 right-0 z-10 backdrop-blur-3xl bg-background/60 px-2 py-1 rounded font-medium text-sm shadow">
         {badge}
       </span>
     </Link>
