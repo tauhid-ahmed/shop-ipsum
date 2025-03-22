@@ -14,6 +14,9 @@ import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Button } from "@/components/ui/button";
 import { useProductRevealContext } from "./product-reveal";
 import { data } from "@/data/products";
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
+import { signInPath } from "@/constants/paths";
 
 type Product = {
   id: string;
@@ -74,10 +77,20 @@ export function QuickShop() {
 }
 
 function ADD_TO_CART() {
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+  const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      return router.push(signInPath());
+    }
+    alert("To be implemented");
+  };
   return (
     <div className="flex flex-col gap-1 md:gap-2">
-      <Button size="lg">Add to cart</Button>
-      <Button size="lg" variant="link">
+      <Button onClick={handleAddToCart} size="lg">
+        Add to cart
+      </Button>
+      <Button onClick={handleAddToCart} size="lg" variant="link">
         View Details
       </Button>
     </div>
