@@ -5,10 +5,6 @@ import { data } from "@/data/products";
 import ProductCategoryCard from "@/features/products/product-category-preview";
 import ProductPromo from "@/features/products/product-promo";
 
-export async function getStaticParams() {
-  return [{id:1}]
-}
-
 function shuffle(array: Product[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
