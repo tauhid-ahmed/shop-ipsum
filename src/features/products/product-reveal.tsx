@@ -70,14 +70,11 @@ export default function ProductReveal({
                   <Heading as="h2" size="2xl" align="left" weight="bold">
                     {title}
                   </Heading>
-                  <div className="flex items-center">
-                    <Embla.InlineNavigationControls />
-                    <Button asChild variant="link">
-                      <Link href="/">
-                        See more <LucideMoveRight />
-                      </Link>
-                    </Button>
-                  </div>
+                  <Button asChild variant="link">
+                    <Link href="/">
+                      See more <LucideMoveRight />
+                    </Link>
+                  </Button>
                 </div>
                 <div className="relative group/embla">
                   <Embla.Container>

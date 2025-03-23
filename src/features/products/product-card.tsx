@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { LucidePlus, LucideHeart, LucideShoppingCart } from "lucide-react";
+import { LucidePlus, LucideHeart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/components/heading";
@@ -17,6 +17,7 @@ export type Product = {
 };
 
 export default function ProductCard({ data }: { data: Product }) {
+  const { openQuickShop, handleProductId } = useProductRevealContext();
   return (
     <div className="w-full relative overflow-hidden rounded border border-border shadow-sm group/card">
       <div className="relative overflow-hidden bg-secondary/40">
@@ -72,6 +73,13 @@ export default function ProductCard({ data }: { data: Product }) {
           <LucideHeart />
         </Button>
       </div>
+      <div
+        onClick={() => {
+          openQuickShop();
+          handleProductId(data.id);
+        }}
+        className="[@media(pointer:fine)]:hidden absolute size-full inset-0"
+      ></div>
     </div>
   );
 }
@@ -80,7 +88,7 @@ function QuickShopButton({ id }: { id: string }) {
   const { openQuickShop, handleProductId } = useProductRevealContext();
   return (
     <>
-      <div className="absolute bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4 hidden lg:block">
+      <div className="absolute [@media(pointer:coarse)]:hidden bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4">
         <Button
           size="sm"
           className="w-full uppercase"
@@ -90,18 +98,6 @@ function QuickShopButton({ id }: { id: string }) {
           }}
         >
           <LucidePlus /> QuickShop
-        </Button>
-      </div>
-      <div className="absolute right-0 bottom-0 lg:hidden">
-        <Button
-          onClick={() => {
-            openQuickShop();
-            handleProductId(id);
-          }}
-          variant="ghost"
-          size="icon"
-        >
-          <LucideShoppingCart />
         </Button>
       </div>
     </>
