@@ -129,16 +129,16 @@ export function ProductColorVariants({
             aria-label={`Select ${color} color`}
             className={cn(
               "relative flex flex-wrap items-center justify-center rounded-full border-2 cursor-pointer transition-all",
-              "focus:outline-none scale-110 size-8 lg:size-9",
+              "focus:outline-none size-9 lg:size-10 focus:backdrop-blur-3xl focus:ring-2 focus:ring-primary/50 scale-110",
               selectedColor === color
                 ? borderColorMap[color]
-                : "border-gray-200 border-2"
+                : "border-border border-2 scale-100"
             )}
           >
             {/* Inner Color Swatch */}
             <div
               className={cn(
-                "absolute inset-0.5 rounded-full",
+                "absolute inset-0.75 rounded-full",
                 colorData[color]
               )}
             />
