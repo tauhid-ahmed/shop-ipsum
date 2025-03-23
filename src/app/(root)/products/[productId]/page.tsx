@@ -18,7 +18,7 @@ export default function ProductId() {
             <div className="space-y-4 border">
               <div className="h-60 md:h-84 lg:h-96 relative">
                 <Image
-                  src="/assets/product/product-02.png"
+                  src="/assets/product/product-02.webp"
                   alt="prod"
                   width="400"
                   height="400"
@@ -28,7 +28,7 @@ export default function ProductId() {
               <div className="flex gap-4">
                 <div className="size-14 relative border border-border p-1">
                   <Image
-                    src="/assets/product/product-02.png"
+                    src="/assets/product/product-02.webp"
                     alt="prod"
                     width="400"
                     height="400"
@@ -36,7 +36,7 @@ export default function ProductId() {
                 </div>
                 <div className="size-14 relative border border-border p-1">
                   <Image
-                    src="/assets/product/product-02.png"
+                    src="/assets/product/product-02.webp"
                     alt="prod"
                     width="400"
                     height="400"
@@ -44,7 +44,7 @@ export default function ProductId() {
                 </div>
                 <div className="size-14 relative border border-border p-1">
                   <Image
-                    src="/assets/product/product-02.png"
+                    src="/assets/product/product-02.webp"
                     alt="prod"
                     width="400"
                     height="400"
@@ -58,8 +58,8 @@ export default function ProductId() {
               <Heading size="2xl" as="h2">
                 Nike ACG &apos;Wolf Tree&apos; Polartec
               </Heading>
-              <span>$2500.00</span>
-              <p>
+              <strong className="text-xl">$2500.00</strong>
+              <p className="text-sm">
                 Pay in 4 interest-free installments for orders over $5000 with
                 &nbsp;<strong>shop pay</strong>
                 <Button variant="link">Learn more</Button>
