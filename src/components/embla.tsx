@@ -88,7 +88,7 @@ export default function Embla({
     // Initial check
     updateCanScroll();
 
-    // Listen for resize and select events to update scrollability
+    // Listen for resize and select events to update scroll ability
     emblaApi.on("resize", updateCanScroll);
     emblaApi.on("select", updateCanScroll);
     emblaApi.on("reInit", updateCanScroll);

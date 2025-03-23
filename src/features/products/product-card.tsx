@@ -5,6 +5,9 @@ import Link from "next/link";
 import { Heading } from "@/components/heading";
 import UserRatings from "@/components/star-ratings";
 import { useProductRevealContext } from "./product-reveal";
+import { Skeleton } from "@/components/ui/skeleton";
+import React from "react";
+import { cn } from "@/lib/utils";
 
 export type Product = {
   id: string;
@@ -26,13 +29,7 @@ export default function ProductCard({ data }: { data: Product }) {
           className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
         >
           <div className="inline-block h-full rounded overflow-hidden p-2">
-            <Image
-              src={data.images[0]}
-              width={300}
-              height={300}
-              alt={data.title}
-              className="size-full object-contain"
-            />
+            <ProductImage imagePath={data.images[0]} alt={data.title} />
           </div>
         </Link>
         <QuickShopButton id={data.id} />
@@ -109,5 +106,29 @@ function PrevPrice({ price = "55.99" }: { price?: string }) {
     <span className="text-sm text-destructive px-1 relative before:absolute before:inset-x-0 before:h-px before:bg-destructive before:top-1/2 mr-0.5">
       {price}
     </span>
+  );
+}
+
+export function ProductImage({
+  imagePath,
+  alt,
+}: {
+  imagePath: string;
+  alt: string;
+}) {
+  const [loading, setLoading] = React.useState(true);
+
+  return (
+    <>
+      {loading && <Skeleton className="absolute inset-0" />}
+      <Image
+        src={imagePath}
+        width={300}
+        height={300}
+        alt={alt}
+        className={cn("size-full object-contain", loading && "opacity-40")}
+        onLoad={() => setLoading(false)}
+      />
+    </>
   );
 }
