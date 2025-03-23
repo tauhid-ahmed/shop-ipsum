@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { APP_NAME, APP_DESCRIPTION, APP_URL } from "@/constants/app.config";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import SessionProvider from "@/providers/session-provider";
@@ -40,6 +41,7 @@ export default function RootLayout({
       >
         <SessionProvider>
           <Analytics />
+          <SpeedInsights />
           <ThemeProvider>{children}</ThemeProvider>
         </SessionProvider>
       </body>
