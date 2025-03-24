@@ -46,6 +46,7 @@ function Carousel() {
           fill
           alt={item.id}
           className="size-full object-cover"
+          priority
         />
       </div>
     </Embla.Slide>

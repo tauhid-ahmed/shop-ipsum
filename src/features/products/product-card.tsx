@@ -1,11 +1,12 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { LucideHeart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/components/heading";
-import UserRatings from "@/components/star-ratings";
 import { Skeleton } from "@/components/ui/skeleton";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useRef, Ref } from "react";
 import { cn } from "@/lib/utils";
 import { productDetailsPath } from "@/constants/paths";
 import { QuickShop } from "./quick-shop";
@@ -25,8 +26,13 @@ export default function ProductCard({
   quickShop = <QuickShop />,
 }: {
   data: Product;
-  quickShop?: ReactElement<{ productId: string }> | null;
+  quickShop?: ReactElement<{
+    productId?: string;
+    ref?: Ref<{ handleQuickShopOpen: () => void }>;
+  }> | null;
 }) {
+  const quickShopRef = useRef<{ handleQuickShopOpen: () => void } | null>(null);
+
   return (
     <div className="w-full relative overflow-hidden rounded border border-border shadow-sm group/card">
       <div className="relative overflow-hidden bg-secondary/40">
@@ -42,22 +48,17 @@ export default function ProductCard({
           <div className="absolute [@media(pointer:coarse)]:hidden bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4">
             {React.cloneElement(quickShop, {
               productId: data.id,
+              ref: quickShopRef,
             })}
           </div>
         )}
       </div>
       <div className="bg-secondary/20">
         <Link
-          href="#"
+          href={productDetailsPath(data.id)}
           className="text-center space-y-0.5 sm:space-y-1 mx-4 block py-4 relative overflow-hidden"
         >
-          <Heading
-            align="center"
-            weight="medium"
-            className="text-foreground/70 text-ellipsis whitespace-nowrap"
-            as="h3"
-            size="sm"
-          >
+          <Heading align="center" weight="medium" as="h3" size="sm">
             {data.title}
           </Heading>
           <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap">
@@ -69,12 +70,6 @@ export default function ProductCard({
               {data.price}
             </span>
           </div>
-          <UserRatings size="sm" averageRating={data.averageRating}>
-            <div className="flex justify-center items-center gap-1">
-              <UserRatings.AverageRating />
-              <UserRatings.StarList />
-            </div>
-          </UserRatings>
         </Link>
       </div>
       <div className="absolute top-0 right-0 z-10">
@@ -82,7 +77,12 @@ export default function ProductCard({
           <LucideHeart />
         </Button>
       </div>
-      <div className="[@media(pointer:fine)]:hidden absolute size-full inset-0"></div>
+      {quickShop && (
+        <div
+          onClick={() => quickShopRef.current?.handleQuickShopOpen()}
+          className="[@media(pointer:fine)]:hidden absolute size-full inset-0"
+        />
+      )}
     </div>
   );
 }

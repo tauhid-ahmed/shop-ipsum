@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dialog,
   DialogContent,
@@ -17,7 +19,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { productDetailsPath, signInPath } from "@/constants/paths";
 import { LucidePlus } from "lucide-react";
-import React from "react";
+import React, { forwardRef, useImperativeHandle, useState } from "react";
 import Link from "next/link";
 
 type Product = {
@@ -30,9 +32,18 @@ type Product = {
   totalReviews: number;
 };
 
-export function QuickShop({ productId }: { productId?: string }) {
-  const [openQuickShop, setOpenQuickShop] = React.useState(false);
+export const QuickShop = forwardRef(function QuickShop(
+  { productId }: { productId?: string },
+  ref: React.Ref<{ handleQuickShopOpen: () => void }>
+) {
+  const [openQuickShop, setOpenQuickShop] = useState(false);
   const product = data.find((product) => product.id === productId);
+
+  useImperativeHandle(ref, () => ({
+    handleQuickShopOpen: () => setOpenQuickShop(true),
+  }));
+
+  if (!product) return null; // Handle cases where product is undefined
 
   return (
     <>
@@ -49,7 +60,7 @@ export function QuickShop({ productId }: { productId?: string }) {
           <div className="w-full md:w-84 relative cursor-grab">
             <Embla data={[product]}>
               <Embla.Container>
-                <Carousel />
+                <Carousel product={product} />
               </Embla.Container>
               <Embla.NavigationControls hidden={false} />
             </Embla>
@@ -60,11 +71,11 @@ export function QuickShop({ productId }: { productId?: string }) {
             <div className="space-y-4 md:space-y-8">
               <DialogHeader className="text-left">
                 <DialogTitle className="text-xl lg:text-2xl text-foreground">
-                  {data[0].title}
+                  {product.title}
                 </DialogTitle>
-                <span className="text-lg lg:text-xl">{data[0].price}</span>
+                <span className="text-lg lg:text-xl">{product.price}</span>
                 <UserRatings
-                  averageRating={4.3}
+                  averageRating={product.averageRating}
                   size="lg"
                   isInteractive={false}
                 >
@@ -90,7 +101,7 @@ export function QuickShop({ productId }: { productId?: string }) {
       </Dialog>
     </>
   );
-}
+});
 
 function ADD_TO_CART({ productId }: { productId: string }) {
   const { isAuthenticated } = useAuth();
@@ -113,18 +124,15 @@ function ADD_TO_CART({ productId }: { productId: string }) {
   );
 }
 
-function Carousel() {
-  const { data, selectedSlide } = useEmblaContext();
-  const [product] = data as [Product];
-  console.log(selectedSlide);
-  return product.images.map((item: string, index) => (
+function Carousel({ product }: { product: Product }) {
+  return product.images.map((image, index) => (
     <Embla.Slide key={index}>
       <div className="h-52 md:h-full w-full mx-auto bg-secondary/40 rounded">
         <Image
-          src={item}
+          src={image}
           width={300}
           height={300}
-          alt={"item.id"}
+          alt={product.title}
           className="size-full object-contain"
         />
       </div>
