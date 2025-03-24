@@ -62,10 +62,6 @@ export const updateProductApi = (id: string) =>
 export const deleteProductApi = (id: string) =>
   `/api/admin/products/delete/${id}`;
 
-// Product Routes
-export const products = () => "/products";
-export const productDetails = (pid: string) => `/products/${pid}`;
-
 // Order API Routes
 export const ordersApi = () => "/api/orders";
 export const createOrderApi = () => "/api/orders/create";
@@ -85,7 +81,7 @@ export const publicRoutes = [
   homePath(),
   signInPath(),
   registerPath(),
-  products(),
+  productsPath(),
   "/products/:pid",
 ];
 export const authRoutes = [

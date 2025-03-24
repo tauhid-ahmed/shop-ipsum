@@ -8,6 +8,7 @@ import { useProductRevealContext } from "./product-reveal";
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { productDetailsPath } from "@/constants/paths";
 
 export type Product = {
   id: string;
@@ -25,7 +26,7 @@ export default function ProductCard({ data }: { data: Product }) {
     <div className="w-full relative overflow-hidden rounded border border-border shadow-sm group/card">
       <div className="relative overflow-hidden bg-secondary/40">
         <Link
-          href="#"
+          href={productDetailsPath(data.id)}
           className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
         >
           <div className="inline-block h-full rounded overflow-hidden p-2">
