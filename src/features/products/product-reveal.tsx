@@ -7,7 +7,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LucideMoveRight } from "lucide-react";
 
-import { QuickShop } from "./quick-shop";
 import Embla, { useEmblaContext } from "@/components/embla";
 import ProductCard from "./product-card";
 
@@ -26,68 +25,36 @@ type Product = {
   totalReviews: number;
 };
 
-const ProductRevealContext = React.createContext<{
-  quickShop: boolean;
-  openQuickShop: () => void;
-  productId: string;
-  handleProductId: (id: string) => void;
-} | null>(null);
-
-export const useProductRevealContext = () => {
-  const context = React.useContext(ProductRevealContext);
-  if (!context) {
-    throw new Error(
-      "useProductRevealContext must be used within a ProductRevealProvider"
-    );
-  }
-  return context;
-};
-
 export default function ProductReveal({
   title,
   data = [],
 }: ProductRevealProps) {
-  const [quickShop, setQuickShop] = React.useState(false);
-  const [productId, setProductId] = React.useState("");
-
-  const handleProductId = (id: string) => setProductId(id);
-  const openQuickShop = () => setQuickShop(!quickShop);
   return (
     <>
-      <ProductRevealContext.Provider
-        value={{
-          quickShop,
-          openQuickShop,
-          handleProductId,
-          productId,
-        }}
-      >
-        <Section padding="sm">
-          <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
-            <Container>
-              <div className="space-y-4 group">
-                <div className="flex justify-between items-baseline">
-                  <Heading as="h2" size="2xl" align="left" weight="bold">
-                    {title}
-                  </Heading>
-                  <Button asChild variant="link">
-                    <Link href="/">
-                      See more <LucideMoveRight />
-                    </Link>
-                  </Button>
-                </div>
-                <div className="relative group/embla">
-                  <Embla.Container>
-                    <Carousel />
-                  </Embla.Container>
-                  <Embla.NavigationControls className="-mt-10" />
-                </div>
+      <Section padding="sm">
+        <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
+          <Container>
+            <div className="space-y-4 group">
+              <div className="flex justify-between items-baseline">
+                <Heading as="h2" size="2xl" align="left" weight="bold">
+                  {title}
+                </Heading>
+                <Button asChild variant="link">
+                  <Link href="/">
+                    See more <LucideMoveRight />
+                  </Link>
+                </Button>
               </div>
-            </Container>
-          </Embla>
-        </Section>
-        <QuickShop />
-      </ProductRevealContext.Provider>
+              <div className="relative group/embla">
+                <Embla.Container>
+                  <Carousel />
+                </Embla.Container>
+                <Embla.NavigationControls className="-mt-10" />
+              </div>
+            </div>
+          </Container>
+        </Embla>
+      </Section>
     </>
   );
 }

@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { LucidePlus, LucideHeart } from "lucide-react";
+import { LucideHeart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/components/heading";
 import UserRatings from "@/components/star-ratings";
-import { useProductRevealContext } from "./product-reveal";
 import { Skeleton } from "@/components/ui/skeleton";
-import React from "react";
+import React, { ReactElement } from "react";
 import { cn } from "@/lib/utils";
 import { productDetailsPath } from "@/constants/paths";
+import { QuickShop } from "./quick-shop";
 
 export type Product = {
   id: string;
@@ -20,8 +20,13 @@ export type Product = {
   totalReviews: number;
 };
 
-export default function ProductCard({ data }: { data: Product }) {
-  const { openQuickShop, handleProductId } = useProductRevealContext();
+export default function ProductCard({
+  data,
+  quickShop = <QuickShop />,
+}: {
+  data: Product;
+  quickShop?: ReactElement<{ productId: string }> | null;
+}) {
   return (
     <div className="w-full relative overflow-hidden rounded border border-border shadow-sm group/card">
       <div className="relative overflow-hidden bg-secondary/40">
@@ -33,7 +38,13 @@ export default function ProductCard({ data }: { data: Product }) {
             <ProductImage imagePath={data.images[0]} alt={data.title} />
           </div>
         </Link>
-        <QuickShopButton id={data.id} />
+        {quickShop && (
+          <div className="absolute [@media(pointer:coarse)]:hidden bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4">
+            {React.cloneElement(quickShop, {
+              productId: data.id,
+            })}
+          </div>
+        )}
       </div>
       <div className="bg-secondary/20">
         <Link
@@ -71,34 +82,8 @@ export default function ProductCard({ data }: { data: Product }) {
           <LucideHeart />
         </Button>
       </div>
-      <div
-        onClick={() => {
-          openQuickShop();
-          handleProductId(data.id);
-        }}
-        className="[@media(pointer:fine)]:hidden absolute size-full inset-0"
-      ></div>
+      <div className="[@media(pointer:fine)]:hidden absolute size-full inset-0"></div>
     </div>
-  );
-}
-
-function QuickShopButton({ id }: { id: string }) {
-  const { openQuickShop, handleProductId } = useProductRevealContext();
-  return (
-    <>
-      <div className="absolute [@media(pointer:coarse)]:hidden bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4">
-        <Button
-          size="sm"
-          className="w-full uppercase"
-          onClick={() => {
-            openQuickShop();
-            handleProductId(id);
-          }}
-        >
-          <LucidePlus /> QuickShop
-        </Button>
-      </div>
-    </>
   );
 }
 
