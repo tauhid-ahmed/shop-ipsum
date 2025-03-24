@@ -15,9 +15,10 @@ import { Button } from "@/components/ui/button";
 import { data } from "@/data/products";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { signInPath } from "@/constants/paths";
+import { productDetailsPath, signInPath } from "@/constants/paths";
 import { LucidePlus } from "lucide-react";
 import React from "react";
+import Link from "next/link";
 
 type Product = {
   id: string;
@@ -81,7 +82,7 @@ export function QuickShop({ productId }: { productId?: string }) {
               <div className="flex flex-col gap-4 md:gap-8">
                 <ProductColorVariants />
                 <ProductSizeVariants />
-                <ADD_TO_CART />
+                <ADD_TO_CART productId={productId as string} />
               </div>
             </div>
           </div>
@@ -91,7 +92,7 @@ export function QuickShop({ productId }: { productId?: string }) {
   );
 }
 
-function ADD_TO_CART() {
+function ADD_TO_CART({ productId }: { productId: string }) {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
   const handleAddToCart = () => {
@@ -105,8 +106,8 @@ function ADD_TO_CART() {
       <Button onClick={handleAddToCart} size="lg">
         Add to cart
       </Button>
-      <Button onClick={handleAddToCart} size="lg" variant="link">
-        View Details
+      <Button asChild size="lg" variant="link">
+        <Link href={productDetailsPath(productId)}>View Details</Link>
       </Button>
     </div>
   );

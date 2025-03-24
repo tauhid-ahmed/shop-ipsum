@@ -9,10 +9,15 @@ import {
 } from "@/features/products/product-variants";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { useParams } from "next/navigation";
+import { data } from "@/data/products";
+import { notFound } from "next/navigation";
 
 export default function ProductDetails() {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const { productId } = useParams();
+  const product = data.find((prod) => prod.id === productId);
 
   useEffect(
     () =>
@@ -23,7 +28,7 @@ export default function ProductDetails() {
   );
 
   useEffect(() => {}, [isTouchDevice]);
-
+  if (!product) return notFound();
   // handle move
   const handleMove = (
     client: { clientX: number; clientY: number },
@@ -90,7 +95,7 @@ export default function ProductDetails() {
               >
                 {/* Original Image */}
                 <Image
-                  src="/assets/product/product-03.webp"
+                  src={product?.images[0]}
                   alt="prod"
                   width="400"
                   height="400"
@@ -106,7 +111,7 @@ export default function ProductDetails() {
                   className="group-hover:scale-200 [.is-touched_&]:scale-200 absolute inset-0 size-full pointer-events-none transition-transform duration-100 ease-out"
                 >
                   <Image
-                    src="/assets/product/product-03.webp"
+                    src={product?.images[0]}
                     alt="prod"
                     width="400"
                     height="400"
@@ -116,39 +121,29 @@ export default function ProductDetails() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="size-14 relative border border-border p-1">
-                  <Image
-                    src="/assets/product/product-02.webp"
-                    alt="prod"
-                    width="400"
-                    height="400"
-                  />
-                </div>
-                <div className="size-14 relative border border-border p-1">
-                  <Image
-                    src="/assets/product/product-02.webp"
-                    alt="prod"
-                    width="400"
-                    height="400"
-                  />
-                </div>
-                <div className="size-14 relative border border-border p-1">
-                  <Image
-                    src="/assets/product/product-02.webp"
-                    alt="prod"
-                    width="400"
-                    height="400"
-                  />
-                </div>
+                {product?.images.map((image, i) => (
+                  <div
+                    key={i}
+                    className="size-14 relative border border-border p-1"
+                  >
+                    <Image
+                      src={image}
+                      alt="product image"
+                      width="400"
+                      height="400"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
           <div className="flex flex-col flex-1 gap-6">
             <div className="border-b border-border pb-4">
               <Heading size="2xl" as="h2">
-                Nike ACG &apos;Wolf Tree&apos; Polartec
+                {product?.title}
               </Heading>
-              <strong className="text-xl">$2500.00</strong>
+              <strong className="text-xl">{product?.price}</strong>
+              <p>{product?.description}</p>
               <p className="text-sm">
                 Pay in 4 interest-free installments for orders over $5000 with
                 &nbsp;<strong>shop pay</strong>

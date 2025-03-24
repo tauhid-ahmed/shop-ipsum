@@ -9,6 +9,7 @@ import { LucideMoveRight } from "lucide-react";
 
 import Embla, { useEmblaContext } from "@/components/embla";
 import ProductCard from "./product-card";
+import { productsPath } from "@/constants/paths";
 
 type ProductRevealProps = {
   title: string;
@@ -40,7 +41,7 @@ export default function ProductReveal({
                   {title}
                 </Heading>
                 <Button asChild variant="link">
-                  <Link href="/">
+                  <Link href={productsPath()}>
                     See more <LucideMoveRight />
                   </Link>
                 </Button>
