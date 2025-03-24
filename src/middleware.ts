@@ -7,7 +7,9 @@ export default async function middleware(req: NextRequest) {
   const { nextUrl } = req;
   const isLoggedIn = !!session?.user;
 
-  const isPublicRoute = paths.publicRoutes.includes(nextUrl.pathname);
+  const isPublicRoute =
+    paths.publicRoutes.includes(nextUrl.pathname) ||
+    nextUrl.pathname.startsWith("/products");
   const isAuthRoute = paths.authRoutes.includes(nextUrl.pathname);
 
   if (nextUrl.pathname.startsWith("/api/auth")) return null;
