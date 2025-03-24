@@ -56,7 +56,7 @@ export default function ProductDetails() {
 
   // === === === Touch events === === ===
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = () => {
     containerRef.current?.classList.add("is-touched");
   };
 
@@ -68,7 +68,7 @@ export default function ProductDetails() {
     );
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  const handleTouchEnd = () => {
     containerRef.current?.classList.remove("is-touched");
     handleLeave();
   };
