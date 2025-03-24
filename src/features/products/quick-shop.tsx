@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 import UserRatings from "@/components/star-ratings";
 import { DotSeparator } from "@/components/dot-separator";
-import Embla, { useEmblaContext } from "@/components/embla";
+import Embla from "@/components/embla";
 import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Button } from "@/components/ui/button";
 import { data } from "@/data/products";

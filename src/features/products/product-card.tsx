@@ -10,6 +10,7 @@ import React, { ReactElement, useRef, Ref } from "react";
 import { cn } from "@/lib/utils";
 import { productDetailsPath } from "@/constants/paths";
 import { QuickShop } from "./quick-shop";
+import UserRatings from "@/components/star-ratings";
 
 export type Product = {
   id: string;
@@ -56,7 +57,7 @@ export default function ProductCard({
       <div className="bg-secondary/20">
         <Link
           href={productDetailsPath(data.id)}
-          className="text-center space-y-0.5 sm:space-y-1 mx-4 block py-4 relative overflow-hidden"
+          className="flex flex-col items-center space-y-0.5 sm:space-y-1 mx-4 py-4 relative overflow-hidden"
         >
           <Heading align="center" weight="medium" as="h3" size="sm">
             {data.title}
@@ -64,12 +65,16 @@ export default function ProductCard({
           <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap">
             {data.description}
           </p>
-          <div>
-            <span className="font-semibold text-foreground/70">
-              <PrevPrice />
-              {data.price}
-            </span>
-          </div>
+          <span className="font-semibold text-foreground/70">
+            <PrevPrice />
+            {data.price}
+          </span>
+          <UserRatings averageRating={data.averageRating}>
+            <div className="flex items-center gap-1">
+              <UserRatings.AverageRating />
+              <UserRatings.StarList />
+            </div>
+          </UserRatings>
         </Link>
       </div>
       <div className="absolute top-0 right-0 z-10">
