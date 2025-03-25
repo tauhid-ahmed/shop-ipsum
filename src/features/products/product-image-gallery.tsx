@@ -30,6 +30,7 @@ export function ProductImageGallery({
       `${(h / height) * 100}%`
     );
   };
+
   useEffect(
     () =>
       setIsTouchDevice(
