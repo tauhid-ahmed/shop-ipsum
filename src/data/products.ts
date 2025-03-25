@@ -159,7 +159,7 @@ export const data = [
     id: "14",
     images: [
       "/assets/product/product-14.webp",
-      "/assets/product/product-14.webp",
+      "/assets/product/product-10.webp",
     ],
     title: "Casual Sneakers",
     description: "Trendy design with all-day comfort.",
