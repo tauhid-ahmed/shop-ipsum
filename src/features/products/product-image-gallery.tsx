@@ -85,7 +85,7 @@ export function ProductImageGallery({
   };
   return (
     <>
-      <div className="space-y-4 border border-border rounded bg-secondary/20">
+      <div className="space-y-4 border border-border rounded bg-secondary/20 p-4 shadow">
         <motion.div
           initial={{
             opacity: 0.2,
