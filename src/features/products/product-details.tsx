@@ -24,10 +24,20 @@ export default function ProductDetails() {
       setIsTouchDevice(
         "ontouchstart" in window || navigator.maxTouchPoints > 0
       ),
-    [isTouchDevice]
+    []
   );
 
-  useEffect(() => {}, [isTouchDevice]);
+  useEffect(() => {
+    const handleTouchEvent = (e: TouchEvent) => {
+      if (isTouchDevice && containerRef.current?.contains(e.target as Node)) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("touchmove", handleTouchEvent, { passive: false });
+    return () => window.removeEventListener("touchmove", handleTouchEnd);
+  }, [isTouchDevice]);
+
   if (!product) return notFound();
   // handle move
   const handleMove = (
@@ -53,16 +63,19 @@ export default function ProductDetails() {
   };
 
   // handle pointer move
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) =>
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    // if (isTouchDevice && e.pointerType === "touch") return;
     handleMove(
       { clientX: e.clientX, clientY: e.clientY },
       e.currentTarget.getBoundingClientRect()
     );
+  };
 
   // === === === Touch events === === ===
 
   const handleTouchStart = () => {
     containerRef.current?.classList.add("is-touched");
+    setIsTouchDevice(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -75,6 +88,7 @@ export default function ProductDetails() {
 
   const handleTouchEnd = () => {
     containerRef.current?.classList.remove("is-touched");
+    setIsTouchDevice(false);
     handleLeave();
   };
 
