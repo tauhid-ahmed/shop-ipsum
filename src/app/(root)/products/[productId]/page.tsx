@@ -1,6 +1,7 @@
 import { data } from "@/data/products";
 import { notFound } from "next/navigation";
 import ProductDetails from "@/features/products/product-details";
+import ProductReviewStats from "@/features/products/product-review-stats";
 
 type Params = {
   productId: string;
@@ -19,6 +20,7 @@ export default async function ProductDetailsPage({
   return (
     <>
       <ProductDetails product={product} />
+      <ProductReviewStats />
     </>
   );
 }

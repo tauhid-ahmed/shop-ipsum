@@ -1,89 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { usePointerEvent } from "@/hooks/usePointerEvent";
 
 export function ProductImageGallery({
   product,
 }: {
   product: { images: string[] };
 }) {
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const [imageIndex, setImageIndex] = useState(0);
-  // handle move
-  const handleMove = (
-    client: { clientX: number; clientY: number },
-    rect: DOMRect
-  ) => {
-    const { width, height, left, top } = rect;
-    const w = client.clientX - left;
-    const h = client.clientY - top;
-    containerRef.current?.style.setProperty(
-      "--xOrigin",
-      `${(w / width) * 100}%`
-    );
-    containerRef.current?.style.setProperty(
-      "--yOrigin",
-      `${(h / height) * 100}%`
-    );
-  };
 
-  useEffect(
-    () =>
-      setIsTouchDevice(
-        "ontouchstart" in window || navigator.maxTouchPoints > 0
-      ),
-    []
-  );
+  const {
+    containerRef,
+    handleLeave,
+    handlePointerMove,
+    handleTouchEnd,
+    handleTouchStart,
+    handleTouchMove,
+  } = usePointerEvent();
 
-  useEffect(() => {
-    const handleTouchEvent = (e: TouchEvent) => {
-      if (isTouchDevice && containerRef.current?.contains(e.target as Node)) {
-        e.preventDefault();
-      }
-    };
-
-    window.addEventListener("touchmove", handleTouchEvent, { passive: false });
-    return () => window.removeEventListener("touchmove", handleTouchEnd);
-  }, [isTouchDevice]);
-
-  const handleLeave = () => {
-    containerRef.current?.style.setProperty("--xOrigin", `50%`);
-    containerRef.current?.style.setProperty("--yOrigin", `50%`);
-  };
-
-  // handle pointer move
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    // if (isTouchDevice && e.pointerType === "touch") return;
-    handleMove(
-      { clientX: e.clientX, clientY: e.clientY },
-      e.currentTarget.getBoundingClientRect()
-    );
-  };
-
-  // === === === Touch events === === ===
-
-  const handleTouchStart = () => {
-    containerRef.current?.classList.add("is-touched");
-    setIsTouchDevice(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const point = e.touches[0];
-    handleMove(
-      { clientX: point.clientX, clientY: point.clientY },
-      e.currentTarget.getBoundingClientRect()
-    );
-  };
-
-  const handleTouchEnd = () => {
-    containerRef.current?.classList.remove("is-touched");
-    setIsTouchDevice(false);
-    handleLeave();
-  };
   return (
     <>
       <div className="space-y-4 border border-border rounded bg-secondary/20 p-4 shadow">
