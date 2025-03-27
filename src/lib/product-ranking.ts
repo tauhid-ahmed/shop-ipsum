@@ -1,10 +1,11 @@
-import { DateTime } from "luxon";
+import { differenceInDays, isAfter, subDays } from "date-fns";
 
-// Product Interface
-interface Product {
+// Type Definitions
+type Product = {
   id: string;
   name: string;
   price: number;
+  category: string;
   salesCount: number;
   revenue: number;
   createdAt: Date;
@@ -12,132 +13,158 @@ interface Product {
   views: number;
   discountPercentage?: number;
   stockQuantity: number;
-}
+};
 
-// Ranking Criteria Interfaces
-interface RankingOptions {
+type UserPreferences = {
+  budget?: {
+    min: number;
+    max: number;
+  };
+  category?: string;
+  minRating?: number;
+};
+
+type RankingOptions = {
   timeFrame?: number;
-  minSalesThreshold?: number;
-}
+  limit?: number;
+};
 
-class ProductRankingSystem {
-  private products: Product[];
+// Utility Functions
+const calculateSalesVelocity = (salesCount: number, days: number): number =>
+  salesCount / days;
 
-  constructor(products: Product[]) {
-    this.products = products;
-  }
-
-  // Best Selling Products
-  calculateBestSelling(options: RankingOptions = {}): Product[] {
-    const { timeFrame = 30, minSalesThreshold = 0 } = options;
-
-    const cutoffDate = DateTime.now().minus({ days: timeFrame });
-
-    return this.products
-      .filter(
-        (product) =>
-          DateTime.fromJSDate(product.createdAt) >= cutoffDate &&
-          product.salesCount >= minSalesThreshold
-      )
-      .sort((a, b) => b.salesCount - a.salesCount)
-      .slice(0, 10);
-  }
-
-  // Top Trending Products
-  calculateTrendingProducts(options: RankingOptions = {}): Product[] {
-    const { timeFrame = 7, minSalesThreshold = 10 } = options;
-
-    const cutoffDate = DateTime.now().minus({ days: timeFrame });
-
-    return this.products
-      .map((product) => ({
-        ...product,
-        trendScore: this.calculateTrendScore(product, timeFrame),
-      }))
-      .filter(
-        (product) =>
-          DateTime.fromJSDate(product.createdAt) >= cutoffDate &&
-          product.salesCount >= minSalesThreshold
-      )
-      .sort((a, b) => b.trendScore - a.trendScore)
-      .slice(0, 10);
-  }
-
-  // Trend Score Calculation
-  private calculateTrendScore(product: Product, timeFrame: number): number {
-    const salesVelocity = product.salesCount / timeFrame;
+const calculateTrendScore =
+  (timeFrame: number) =>
+  (product: Product): number => {
+    const salesVelocity = calculateSalesVelocity(product.salesCount, timeFrame);
     const viewEngagement = product.views / timeFrame;
 
-    return salesVelocity * 0.4 + product.rating * 0.3 + viewEngagement * 0.3;
-  }
+    return (
+      salesVelocity * 0.4 + // Recent sales performance
+      product.rating * 0.3 + // Product quality
+      viewEngagement * 0.3 // Customer interest
+    );
+  };
 
-  // New Arrivals
-  getNewArrivals(days: number = 30): Product[] {
-    const cutoffDate = DateTime.now().minus({ days });
+const calculateValueScore = (product: Product): number => {
+  const ratingScore = product.rating * 20;
+  const discountScore = (product.discountPercentage || 0) * 2;
+  const popularityScore = (product.salesCount / 100) * 10;
+  const priceEfficiencyScore = (1 / product.price) * 1000;
 
-    return this.products
-      .filter((product) => DateTime.fromJSDate(product.createdAt) >= cutoffDate)
-      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
-      .slice(0, 10);
-  }
+  return ratingScore + discountScore + popularityScore + priceEfficiencyScore;
+};
 
-  // Best Buy (Value Products)
-  calculateBestBuyProducts(): Product[] {
-    return this.products
-      .map((product) => ({
-        ...product,
-        valueScore: this.calculateValueScore(product),
-      }))
-      .sort((a, b) => b.valueScore - a.valueScore)
-      .slice(0, 10);
-  }
+// Ranking Functions
+const filterByTimeframe =
+  (timeFrame: number) =>
+  (product: Product): boolean => {
+    const cutoffDate = subDays(new Date(), timeFrame);
+    return isAfter(product.createdAt, cutoffDate);
+  };
 
-  // Value Score Calculation
-  private calculateValueScore(product: Product): number {
-    const ratingScore = product.rating * 20;
-    const discountScore = (product.discountPercentage || 0) * 2;
-    const popularityScore = (product.salesCount / 100) * 10;
-    const priceEfficiencyScore = (1 / product.price) * 1000;
+const getBestSelling = (
+  products: Product[],
+  options: RankingOptions = {}
+): Product[] => {
+  const { timeFrame = 30, limit = 10 } = options;
 
-    return ratingScore + discountScore + popularityScore + priceEfficiencyScore;
-  }
+  return products
+    .filter(filterByTimeframe(timeFrame))
+    .filter((product) => product.salesCount > 0)
+    .sort((a, b) => b.salesCount - a.salesCount)
+    .slice(0, limit);
+};
 
-  // Recommend Based on User Preferences
-  recommendProducts(userPreferences: Partial<Product>): Product[] {
-    return this.products
-      .map((product) => ({
-        ...product,
-        matchScore: this.calculateMatchScore(product, userPreferences),
-      }))
-      .sort((a, b) => b.matchScore - a.matchScore)
-      .slice(0, 5);
-  }
+const getTrendingProducts = (
+  products: Product[],
+  options: RankingOptions = {}
+): Product[] => {
+  const { timeFrame = 7, limit = 10 } = options;
 
-  // Match Score Calculation
-  private calculateMatchScore(
-    product: Product,
-    preferences: Partial<Product>
-  ): number {
-    let score = 0;
+  const trendScoreCalculator = calculateTrendScore(timeFrame);
 
-    if (preferences.price && Math.abs(product.price - preferences.price) < 50) {
-      score += 20;
-    }
+  return products
+    .map((product) => ({
+      ...product,
+      trendScore: trendScoreCalculator(product),
+    }))
+    .filter(filterByTimeframe(timeFrame))
+    .filter((product) => product.salesCount > 0)
+    .sort((a, b) => b.trendScore - a.trendScore)
+    .slice(0, limit);
+};
 
-    if (preferences.rating && product.rating >= preferences.rating) {
+const getNewArrivals = (products: Product[], days: number = 30): Product[] => {
+  const cutoffDate = subDays(new Date(), days);
+
+  return products
+    .filter((product) => isAfter(product.createdAt, cutoffDate))
+    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    .slice(0, 10);
+};
+
+const getBestBuyProducts = (
+  products: Product[],
+  limit: number = 10
+): Product[] => {
+  return products
+    .map((product) => ({
+      ...product,
+      valueScore: calculateValueScore(product),
+    }))
+    .sort((a, b) => b.valueScore - a.valueScore)
+    .slice(0, limit);
+};
+
+const recommendProducts = (
+  products: Product[],
+  preferences: UserPreferences
+): Product[] => {
+  return products
+    .map((product) => {
+      const matchScore = calculateMatchScore(product, preferences);
+      return { ...product, matchScore };
+    })
+    .filter((product) => product.matchScore > 0)
+    .sort((a, b) => b.matchScore - a.matchScore)
+    .slice(0, 5);
+};
+
+const calculateMatchScore = (
+  product: Product,
+  preferences: UserPreferences
+): number => {
+  let score = 0;
+
+  // Budget Match
+  if (preferences.budget) {
+    const { min, max } = preferences.budget;
+    if (product.price >= min && product.price <= max) {
       score += 30;
     }
-
-    return score;
   }
-}
+
+  // Category Match
+  if (preferences.category && product.category === preferences.category) {
+    score += 25;
+  }
+
+  // Rating Match
+  if (preferences.minRating && product.rating >= preferences.minRating) {
+    score += 20;
+  }
+
+  return score;
+};
 
 // Example Usage
-const productRanking = new ProductRankingSystem([
+const exampleProducts: Product[] = [
   {
     id: "PROD001",
     name: "Wireless Headphones",
     price: 199.99,
+    category: "Electronics",
     salesCount: 500,
     revenue: 99995,
     createdAt: new Date(),
@@ -147,16 +174,15 @@ const productRanking = new ProductRankingSystem([
     stockQuantity: 100,
   },
   // More products...
-]);
+];
 
-// Get best-selling products
-const bestSellers = productRanking.calculateBestSelling();
-
-// Get trending products
-const trendingProducts = productRanking.calculateTrendingProducts();
-
-// Get new arrivals
-const newArrivals = productRanking.getNewArrivals();
-
-// Get best buy recommendations
-const bestBuyProducts = productRanking.calculateBestBuyProducts();
+// Example function calls
+const bestSellers = getBestSelling(exampleProducts);
+const trendingProducts = getTrendingProducts(exampleProducts);
+const newArrivals = getNewArrivals(exampleProducts);
+const bestBuyProducts = getBestBuyProducts(exampleProducts);
+const recommendedProducts = recommendProducts(exampleProducts, {
+  budget: { min: 100, max: 250 },
+  category: "Electronics",
+  minRating: 4,
+});
