@@ -37,7 +37,7 @@ const useRatingContext = () => {
 };
 
 export default function UserRatings({
-  totalReviews = 512,
+  totalReviews = 1000,
   averageRating = 4.8,
   isInteractive = false,
   minAllowedRating = 1,

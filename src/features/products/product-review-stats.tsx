@@ -1,3 +1,4 @@
+"use client";
 import { ProgressCircle } from "@/components/progress-circle";
 import { Heading } from "@/components/heading";
 import { Container } from "@/components/layout/container";
