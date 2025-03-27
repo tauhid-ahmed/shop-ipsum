@@ -1,4 +1,4 @@
-import { differenceInDays, isAfter, subDays } from "date-fns";
+import { differenceInDays } from "date-fns";
 
 // Type Definitions
 type Product = {
@@ -25,52 +25,68 @@ type UserPreferences = {
 };
 
 type RankingOptions = {
-  timeFrame?: number;
+  timeFrameInDays?: number;
   limit?: number;
 };
 
 // Utility Functions
+const DEFAULT_DAYS_SINCE_CREATION = 1;
+const SALES_WEIGHT = 0.4;
+const RATING_WEIGHT = 0.3;
+const VIEW_WEIGHT = 0.3;
+const RATING_MULTIPLIER = 20;
+const DISCOUNT_MULTIPLIER = 2;
+const POPULARITY_DIVISOR = 100;
+const PRICE_EFFICIENCY_MULTIPLIER = 1000;
+const MATCH_SCORE_BUDGET = 30;
+const MATCH_SCORE_CATEGORY = 25;
+const MATCH_SCORE_RATING = 20;
+
 const calculateSalesVelocity = (salesCount: number, days: number): number =>
-  salesCount / days;
+  salesCount / (days || DEFAULT_DAYS_SINCE_CREATION);
 
 const calculateTrendScore =
-  (timeFrame: number) =>
+  (timeFrameInDays: number) =>
   (product: Product): number => {
-    const salesVelocity = calculateSalesVelocity(product.salesCount, timeFrame);
-    const viewEngagement = product.views / timeFrame;
+    const daysSinceCreation = differenceInDays(new Date(), product.createdAt);
+    const salesVelocity = calculateSalesVelocity(
+      product.salesCount,
+      daysSinceCreation
+    );
+    const viewEngagement =
+      product.views / (daysSinceCreation || DEFAULT_DAYS_SINCE_CREATION);
 
     return (
-      salesVelocity * 0.4 + // Recent sales performance
-      product.rating * 0.3 + // Product quality
-      viewEngagement * 0.3 // Customer interest
+      salesVelocity * SALES_WEIGHT +
+      product.rating * RATING_WEIGHT +
+      viewEngagement * VIEW_WEIGHT
     );
   };
 
 const calculateValueScore = (product: Product): number => {
-  const ratingScore = product.rating * 20;
-  const discountScore = (product.discountPercentage || 0) * 2;
-  const popularityScore = (product.salesCount / 100) * 10;
-  const priceEfficiencyScore = (1 / product.price) * 1000;
-
-  return ratingScore + discountScore + popularityScore + priceEfficiencyScore;
+  return (
+    product.rating * RATING_MULTIPLIER +
+    (product.discountPercentage || 0) * DISCOUNT_MULTIPLIER +
+    (product.salesCount / POPULARITY_DIVISOR) * 10 +
+    (1 / product.price) * PRICE_EFFICIENCY_MULTIPLIER
+  );
 };
 
 // Ranking Functions
 const filterByTimeframe =
-  (timeFrame: number) =>
+  (timeFrameInDays: number) =>
   (product: Product): boolean => {
-    const cutoffDate = subDays(new Date(), timeFrame);
-    return isAfter(product.createdAt, cutoffDate);
+    return differenceInDays(new Date(), product.createdAt) <= timeFrameInDays;
   };
 
 const getBestSelling = (
   products: Product[],
   options: RankingOptions = {}
 ): Product[] => {
-  const { timeFrame = 30, limit = 10 } = options;
+  const { timeFrameInDays = 30, limit = 10 } = options;
 
   return products
-    .filter(filterByTimeframe(timeFrame))
+    .filter(filterByTimeframe(timeFrameInDays))
     .filter((product) => product.salesCount > 0)
     .sort((a, b) => b.salesCount - a.salesCount)
     .slice(0, limit);
@@ -80,26 +96,23 @@ const getTrendingProducts = (
   products: Product[],
   options: RankingOptions = {}
 ): Product[] => {
-  const { timeFrame = 7, limit = 10 } = options;
-
-  const trendScoreCalculator = calculateTrendScore(timeFrame);
+  const { timeFrameInDays = 7, limit = 10 } = options;
+  const trendScoreCalculator = calculateTrendScore(timeFrameInDays);
 
   return products
     .map((product) => ({
       ...product,
       trendScore: trendScoreCalculator(product),
     }))
-    .filter(filterByTimeframe(timeFrame))
+    .filter(filterByTimeframe(timeFrameInDays))
     .filter((product) => product.salesCount > 0)
     .sort((a, b) => b.trendScore - a.trendScore)
     .slice(0, limit);
 };
 
 const getNewArrivals = (products: Product[], days: number = 30): Product[] => {
-  const cutoffDate = subDays(new Date(), days);
-
   return products
-    .filter((product) => isAfter(product.createdAt, cutoffDate))
+    .filter(filterByTimeframe(days))
     .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
     .slice(0, 10);
 };
@@ -137,22 +150,19 @@ const calculateMatchScore = (
 ): number => {
   let score = 0;
 
-  // Budget Match
   if (preferences.budget) {
     const { min, max } = preferences.budget;
     if (product.price >= min && product.price <= max) {
-      score += 30;
+      score += MATCH_SCORE_BUDGET;
     }
   }
 
-  // Category Match
   if (preferences.category && product.category === preferences.category) {
-    score += 25;
+    score += MATCH_SCORE_CATEGORY;
   }
 
-  // Rating Match
   if (preferences.minRating && product.rating >= preferences.minRating) {
-    score += 20;
+    score += MATCH_SCORE_RATING;
   }
 
   return score;
@@ -173,7 +183,6 @@ const exampleProducts: Product[] = [
     discountPercentage: 15,
     stockQuantity: 100,
   },
-  // More products...
 ];
 
 // Example function calls
