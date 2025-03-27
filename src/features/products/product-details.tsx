@@ -5,15 +5,15 @@ import { Button } from "@/components/ui/button";
 import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Heading } from "@/components/heading";
 import { ProductImageGallery } from "./product-image-gallery";
-import { Product } from "./product-card";
+import { type Product } from "./product-card";
 
 export default function ProductDetails({ product }: { product: Product }) {
   return (
     <>
       <Section>
         <Container>
-          <div className="flex max-w-md md:max-w-full mx-auto md:flex-row gap-10 flex-col">
-            <div className="flex-1">
+          <div className="flex max-w-md md:max-w-full mx-auto md:flex-row gap-10 lg:gap-16 flex-col">
+            <div className="flex-1 relative">
               <ProductImageGallery product={product} />
             </div>
             <div className="flex-1">

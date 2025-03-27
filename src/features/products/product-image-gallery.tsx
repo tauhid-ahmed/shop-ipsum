@@ -5,6 +5,13 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { usePointerEvent } from "@/hooks/usePointerEvent";
+import { Button } from "@/components/ui/button";
+import {
+  LucideShare,
+  LucideHeart,
+  LucideChevronLeft,
+  LucideChevronRight,
+} from "lucide-react";
 
 export function ProductImageGallery({
   product,
@@ -24,7 +31,7 @@ export function ProductImageGallery({
 
   return (
     <>
-      <div className="space-y-4 border border-border rounded bg-secondary/20 p-4 shadow">
+      <div className="overflow-hidden relative bg-secondary/20">
         <motion.div
           initial={{
             opacity: 0.2,
@@ -42,7 +49,7 @@ export function ProductImageGallery({
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           onPointerLeave={handleLeave}
-          className="h-60 md:h-84 lg:h-96 relative group overflow-hidden"
+          className="w-full h-72 sm:h-96 relative group"
         >
           {/* Original Image */}
           <Image
@@ -50,7 +57,7 @@ export function ProductImageGallery({
             alt="prod"
             width="400"
             height="400"
-            className="object-contain size-full group-hover:opacity-0  [.is-touched_&]:opacity-0"
+            className="object-contain size-full group-hover:opacity-0 [.is-touched_&]:opacity-0"
             draggable="false"
           />
           <div
@@ -69,7 +76,11 @@ export function ProductImageGallery({
             />
           </div>
         </motion.div>
-        <div className={cn("flex gap-4 p-2 justify-center")}>
+        <div
+          className={cn(
+            "flex gap-4 justify-center rounded backdrop-blur py-2 px-10"
+          )}
+        >
           {product?.images.map((image, i) => (
             <div
               onClick={() => setImageIndex(i)}
@@ -84,7 +95,36 @@ export function ProductImageGallery({
             </div>
           ))}
         </div>
+        <div className="absolute top-2 right-2 backdrop-blur rounded group-hover/image:opacity-10">
+          <ProductMetadata />
+        </div>
       </div>
     </>
+  );
+}
+
+function ProductMetadata() {
+  return (
+    <div className="flex flex-col gap-2">
+      <Button variant="ghost" size="icon">
+        <LucideShare />
+      </Button>
+      <Button variant="ghost" size="icon">
+        <LucideHeart />
+      </Button>
+    </div>
+  );
+}
+
+function ImageNavigation() {
+  return (
+    <div className="flex flex-col gap-2 mt-auto">
+      <Button variant="ghost" size="icon">
+        <LucideChevronLeft />
+      </Button>
+      <Button variant="ghost" size="icon">
+        <LucideChevronRight />
+      </Button>
+    </div>
   );
 }
