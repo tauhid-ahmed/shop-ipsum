@@ -42,7 +42,7 @@ export default function ProductCard({
           className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
         >
           <div className="inline-block h-full rounded overflow-hidden p-2">
-            <ProductImage imagePath={data.images[0]} alt={data.title} />
+            <ProductImage imagePath={data.image[0]} alt={data.title} />
           </div>
         </Link>
         {quickShop && (
@@ -63,7 +63,7 @@ export default function ProductCard({
             {data.title}
           </Heading>
           <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap">
-            {data.description}
+            {data.description.split(" ").slice(0, 5).join(" ")}
           </p>
           <span className="font-semibold text-foreground/70">
             <PrevPrice />

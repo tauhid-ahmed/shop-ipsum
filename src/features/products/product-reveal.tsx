@@ -6,39 +6,43 @@ import { Container } from "@/components/layout/container";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LucideMoveRight } from "lucide-react";
-
 import Embla, { useEmblaContext } from "@/components/embla";
 import ProductCard from "./product-card";
 import { productsPath } from "@/constants/paths";
+import { data } from "@/data/products";
 
 type ProductRevealProps = {
-  title: string;
-  data: Product[];
+  category: string;
 };
 
-type Product = {
-  id: string;
-  images: string[];
-  title: string;
-  description: string;
-  price: string;
-  averageRating: number;
-  totalReviews: number;
-};
+export default function ProductReveal({ category }: ProductRevealProps) {
+  const productsData = data.filter((data) =>
+    data.tags.includes(category.toLowerCase())
+  );
 
-export default function ProductReveal({
-  title,
-  data = [],
-}: ProductRevealProps) {
+  const products =
+    productsData.length > 0
+      ? productsData.map((productData) => ({
+          id: productData.id,
+          title: productData.title,
+          brand: productData.brand,
+          description: productData.shortDescription,
+          image: [productData.images[0]],
+          price: productData.price.base,
+          averageRating: 4.5,
+          totalReviews: 512,
+        }))
+      : [];
+
   return (
     <>
       <Section padding="sm">
-        <Embla data={data as Product[]} delay={6000} slidesPerView={4}>
+        <Embla data={products} delay={6000} slidesPerView={4}>
           <Container>
             <div className="space-y-4 group">
               <div className="flex justify-between items-baseline">
                 <Heading as="h2" size="2xl" align="left" weight="bold">
-                  {title}
+                  {category}
                 </Heading>
                 <Button asChild variant="link">
                   <Link href={productsPath()}>

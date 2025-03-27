@@ -1,52 +1,229 @@
 export const data = [
   {
-    id: "CLOTH-TS-002",
-    sku: "CTS-BLK-S-002",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Urban Black Slim Fit Tee",
-    shortDescription: "Slim fit, soft touch, essential black tee.",
-    longDescription:
-      "The Urban Black Slim Fit Tee is designed for a modern, streamlined look. Crafted from a premium blend of cotton and modal, it offers exceptional softness and a flattering fit. Perfect for layering or wearing on its own, this tee is a versatile addition to any wardrobe. Durable and easy to care for, it maintains its shape and color wash after wash.",
-    images: [
-      "/assets/product/product-02.webp",
-      "/assets/product/product-06.webp",
-      "/assets/product/product-10.webp",
-      "/assets/product/product-15.webp",
-      "/assets/product/product-18.webp",
-    ],
-    price: {
-      base: 29.99,
-      currency: "USD",
-      originalPrice: 34.99,
-      discountPercentage: 14,
-    },
-    variants: [
-      {
-        color: "Black",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 180,
+    product: {
+      id: "CLOTH-TS-002",
+      sku: "CTS-BLK-S-002",
+      gtin: {
+        upc: "123456789012",
+        ean: "1234567890128",
+        isbn: null,
       },
-    ],
-    details: [
-      "Cotton-Modal blend",
-      "Slim fit",
-      "Soft touch",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "Cotton-Modal Blend",
-      weight: "160 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
+      type: "clothing",
+      category: {
+        primary: "Apparel",
+        secondary: "T-Shirts",
+        tertiary: "Casual Wear",
+      },
+      brand: {
+        name: "Street Style",
+        manufacturer: "Global Apparel Inc.",
+        brandOrigin: "United States",
+      },
+      productDetails: {
+        title: "Urban Black Slim Fit Tee",
+        shortDescription: "Slim fit, soft touch, essential black tee.",
+        longDescription:
+          "The Urban Black Slim Fit Tee is designed for a modern, streamlined look. Crafted from a premium blend of cotton and modal, it offers exceptional softness and a flattering fit. Perfect for layering or wearing on its own, this tee is a versatile addition to any wardrobe. Durable and easy to care for, it maintains its shape and color wash after wash.",
+        features: [
+          "Cotton-Modal blend",
+          "Slim fit",
+          "Soft touch",
+          "Machine washable",
+        ],
+      },
+      media: {
+        primaryImage: "/assets/product/product-02.webp",
+        images: [
+          "/assets/product/product-02.webp",
+          "/assets/product/product-06.webp",
+          "/assets/product/product-10.webp",
+          "/assets/product/product-15.webp",
+          "/assets/product/product-18.webp",
+        ],
+        videoUrls: [],
+        "360DegreeImageUrl": null,
+      },
+      pricing: {
+        base: {
+          amount: 29.99,
+          currency: "USD",
+        },
+        original: {
+          amount: 34.99,
+          currency: "USD",
+        },
+        discount: {
+          type: "percentage",
+          value: 14,
+          startDate: null,
+          endDate: null,
+        },
+        taxInformation: {
+          taxRate: 0.08,
+          taxIncluded: false,
+          vatNumber: null,
+        },
+        wholesalePrice: 15.99,
+        costPrice: 12.5,
+      },
+      inventory: {
+        management: {
+          type: "standard",
+          trackInventory: true,
+          lowStockThreshold: 20,
+        },
+        variants: [
+          {
+            id: "CTS-BLK-S-002",
+            color: "Black",
+            sizes: ["S", "M", "L", "XL"],
+            inStock: true,
+            stockQuantity: 180,
+            warehouses: [
+              {
+                id: "WH-NY-01",
+                location: "New York Warehouse",
+                quantity: 100,
+              },
+              {
+                id: "WH-CA-02",
+                location: "California Warehouse",
+                quantity: 80,
+              },
+            ],
+          },
+        ],
+      },
+      specifications: {
+        dimensions: {
+          length: 75,
+          width: 55,
+          height: 1,
+          weight: 0.2,
+          units: {
+            length: "cm",
+            weight: "kg",
+          },
+        },
+        materialComposition: {
+          primary: {
+            material: "Cotton",
+            percentage: 60,
+          },
+          secondary: {
+            material: "Modal",
+            percentage: 40,
+          },
+        },
+        technicalSpecs: {
+          weight: "160 GSM",
+          neckline: "Round Neck",
+          sleeveLength: "Short Sleeve",
+          seasonality: ["Spring", "Summer", "Fall"],
+          careInstructions: [
+            "Machine wash cold",
+            "Tumble dry low",
+            "Do not iron",
+            "Do not dry clean",
+          ],
+        },
+      },
+      qualityAndCompliance: {
+        certifications: ["OEKO-TEX Standard 100", "GOTS Organic"],
+        complianceStandards: ["ISO 9001", "Fair Labor Association"],
+        sustainability: {
+          organic: false,
+          recycled: false,
+          fairTrade: false,
+          carbonFootprint: null,
+          sustainabilityScore: null,
+        },
+      },
+      marketingInformation: {
+        tags: ["slim-fit", "black", "casual", "soft", "urban", "trending"],
+        seasonalCollection: "Summer 2023",
+        targetAudience: ["Young Adults", "Urban Professionals"],
+      },
+      ratings: {
+        overall: {
+          average: 4.2,
+          totalReviews: 85,
+        },
+        breakdown: {
+          "5-star": 40,
+          "4-star": 25,
+          "3-star": 15,
+          "2-star": 3,
+          "1-star": 2,
+        },
+        recommendationRate: 87,
+      },
+      shipping: {
+        dimensions: {
+          packageLength: 30,
+          packageWidth: 25,
+          packageHeight: 5,
+          packageWeight: 0.3,
+          units: {
+            length: "cm",
+            weight: "kg",
+          },
+        },
+        shippingMethods: [
+          "Standard Shipping",
+          "Express Shipping",
+          "International Shipping",
+        ],
+        freeShippingEligible: true,
+        shippingRestrictions: {
+          internationalShipping: true,
+          excludedCountries: [],
+        },
+        estimatedDelivery: {
+          domestic: {
+            standard: "3-5 business days",
+            express: "1-2 business days",
+          },
+          international: {
+            standard: "7-14 business days",
+            express: "3-7 business days",
+          },
+        },
+      },
+      returnPolicy: {
+        eligible: true,
+        period: 30,
+        periodUnit: "days",
+        conditions: [
+          "Item must be unworn",
+          "Original tags attached",
+          "Original packaging intact",
+        ],
+        restockingFee: null,
+        returnShipping: {
+          paidBy: "Customer",
+          freeReturnEligibility: false,
+        },
+      },
+      metadata: {
+        createdAt: "2023-10-26T10:00:00Z",
+        updatedAt: "2023-10-27T14:30:00Z",
+        version: "1.2",
+        status: "active",
+      },
     },
-    rating: {
-      average: 4.2,
-      totalReviews: 85,
+  },
+  {
+    marketingInformation: {
+      tags: ["slim-fit", "black", "casual", "soft", "urban", "new arrival"],
+      seasonalCollection: "Summer 2023",
+      targetAudience: ["Young Adults", "Urban Professionals"],
+    },
+    ratings: {
+      overall: {
+        average: 4.2,
+        totalReviews: 85,
+      },
       breakdown: {
         "5-star": 40,
         "4-star": 25,
@@ -54,13 +231,8 @@ export const data = [
         "2-star": 3,
         "1-star": 2,
       },
+      recommendationRate: 87,
     },
-    tags: ["slim-fit", "black", "casual", "soft", "urban", "trending"],
-    sustainability: { organic: false, recycled: false, fairTrade: false },
-    createdAt: "2023-10-26T10:00:00Z",
-    updatedAt: "2023-10-27T14:30:00Z",
-  },
-  {
     id: "CLOTH-SW-001",
     sku: "CSW-GRY-M-001",
     type: "clothing",
@@ -116,6 +288,25 @@ export const data = [
     updatedAt: "2023-10-27T15:00:00Z",
   },
   {
+    marketingInformation: {
+      tags: ["slim-fit", "black", "casual", "soft", "urban", "trending"],
+      seasonalCollection: "Summer 2023",
+      targetAudience: ["Young Adults", "Urban Professionals"],
+    },
+    ratings: {
+      overall: {
+        average: 4.2,
+        totalReviews: 85,
+      },
+      breakdown: {
+        "5-star": 40,
+        "4-star": 25,
+        "3-star": 15,
+        "2-star": 3,
+        "1-star": 2,
+      },
+      recommendationRate: 87,
+    },
     id: "ACC-SC-001",
     sku: "ASC-RED-ONE-001",
     type: "accessories",
