@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 import UserRatings from "@/components/star-ratings";
 import { DotSeparator } from "@/components/dot-separator";
-import Embla from "@/components/embla";
+import Embla, { useEmblaContext } from "@/components/embla";
 import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Button } from "@/components/ui/button";
 import { data } from "@/data/products";
@@ -21,16 +21,6 @@ import { productDetailsPath, signInPath } from "@/constants/paths";
 import { LucidePlus } from "lucide-react";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 import Link from "next/link";
-
-type Product = {
-  id: string;
-  images: string[];
-  title: string;
-  description: string;
-  price: string;
-  averageRating: number;
-  totalReviews: number;
-};
 
 export const QuickShop = forwardRef(function QuickShop(
   { productId }: { productId?: string },
@@ -58,9 +48,9 @@ export const QuickShop = forwardRef(function QuickShop(
       <Dialog open={openQuickShop} onOpenChange={setOpenQuickShop}>
         <DialogContent className="flex flex-col md:flex-row md:gap-10 max-w-md md:max-w-4xl overflow-y-scroll">
           <div className="w-full md:w-84 relative cursor-grab">
-            <Embla data={[product]}>
+            <Embla data={product.media.images}>
               <Embla.Container>
-                <Carousel product={product} />
+                <Carousel title={product.productDetails.title} />
               </Embla.Container>
               <Embla.NavigationControls hidden={false} />
             </Embla>
@@ -71,11 +61,13 @@ export const QuickShop = forwardRef(function QuickShop(
             <div className="space-y-4 md:space-y-8">
               <DialogHeader className="text-left">
                 <DialogTitle className="text-xl lg:text-2xl text-foreground">
-                  {product.title}
+                  {product.productDetails.title}
                 </DialogTitle>
-                <span className="text-lg lg:text-xl">{product.price}</span>
+                <span className="text-lg lg:text-xl">
+                  {product.pricing.base.amount}
+                </span>
                 <UserRatings
-                  averageRating={product.averageRating}
+                  averageRating={product.ratings.average}
                   size="lg"
                   isInteractive={false}
                 >
@@ -124,15 +116,16 @@ function ADD_TO_CART({ productId }: { productId: string }) {
   );
 }
 
-function Carousel({ product }: { product: Product }) {
-  return product.images.map((image, index) => (
+function Carousel({ title }: { title: string }) {
+  const { data: images } = useEmblaContext() as { data: string[] };
+  return images.map((image, index) => (
     <Embla.Slide key={index}>
       <div className="h-52 md:h-full w-full mx-auto bg-secondary/40 rounded">
         <Image
           src={image}
           width={300}
           height={300}
-          alt={product.title}
+          alt={title}
           className="size-full object-contain"
         />
       </div>

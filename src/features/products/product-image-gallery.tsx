@@ -13,11 +13,12 @@ import {
   LucideChevronRight,
 } from "lucide-react";
 
-export function ProductImageGallery({
-  product,
-}: {
-  product: { images: string[] };
-}) {
+type ProductImageGalleryProps = {
+  images: string[];
+  alt: string;
+};
+
+export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
   const [imageIndex, setImageIndex] = useState(0);
 
   const {
@@ -53,8 +54,8 @@ export function ProductImageGallery({
         >
           {/* Original Image */}
           <Image
-            src={product.images[imageIndex]}
-            alt="prod"
+            src={images[imageIndex]}
+            alt={alt}
             width="400"
             height="400"
             className="object-contain size-full group-hover:opacity-0 [.is-touched_&]:opacity-0"
@@ -67,8 +68,8 @@ export function ProductImageGallery({
             className="group-hover:scale-150 [.is-touched_&]:scale-150 absolute inset-0 size-full pointer-events-none transition-transform duration-100 ease-out"
           >
             <Image
-              src={product?.images[imageIndex]}
-              alt="prod"
+              src={images[imageIndex]}
+              alt={alt}
               width="400"
               height="400"
               className="object-contain size-full"
@@ -81,7 +82,7 @@ export function ProductImageGallery({
             "flex gap-4 justify-center rounded backdrop-blur py-2 px-10"
           )}
         >
-          {product?.images.map((image, i) => (
+          {images.map((image, i) => (
             <div
               onClick={() => setImageIndex(i)}
               key={i}

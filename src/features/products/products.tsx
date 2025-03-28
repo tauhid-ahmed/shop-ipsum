@@ -1,7 +1,7 @@
 "use client";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { data } from "@/data/products";
+import { data, ProductType } from "@/data/products";
 import ProductCard from "./product-card";
 
 export default function Products() {
@@ -11,8 +11,8 @@ export default function Products() {
         <div className="flex">
           <div className="w-60"></div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data.map((product) => (
-              <ProductCard key={product.id} data={product} />
+            {data.map((product: ProductType) => (
+              <ProductCard key={product.gtin.ean} data={product} />
             ))}
           </div>
         </div>

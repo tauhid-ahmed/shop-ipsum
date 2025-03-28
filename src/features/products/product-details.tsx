@@ -5,24 +5,29 @@ import { Button } from "@/components/ui/button";
 import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Heading } from "@/components/heading";
 import { ProductImageGallery } from "./product-image-gallery";
-import { type Product } from "./product-card";
+import { type ProductType } from "@/data/products";
 
-export default function ProductDetails({ product }: { product: Product }) {
+export default function ProductDetails({ product }: { product: ProductType }) {
   return (
     <>
       <Section>
         <Container>
           <div className="flex max-w-md md:max-w-full mx-auto md:flex-row gap-10 lg:gap-16 flex-col">
             <div className="flex-1 relative">
-              <ProductImageGallery product={product} />
+              <ProductImageGallery
+                images={product.media.images}
+                alt={product.productDetails.title}
+              />
             </div>
             <div className="flex-1">
               <div className="border-b border-border pb-4">
                 <Heading size="2xl" as="h2">
-                  {product?.title}
+                  {product.productDetails.title}
                 </Heading>
-                <strong className="text-xl">{product?.price}</strong>
-                <p>{product?.description}</p>
+                <strong className="text-xl">
+                  {product.pricing.base.amount}
+                </strong>
+                <p>{product.productDetails.longDescription}</p>
                 <p className="text-sm">
                   Pay in 4 interest-free installments for orders over $5000 with
                   &nbsp;
@@ -40,10 +45,6 @@ export default function ProductDetails({ product }: { product: Product }) {
                   Add to cart
                 </Button>
               </div>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Aperiam nostrum atque, officiis earum doloribus libero?
-              </p>
             </div>
           </div>
         </Container>
