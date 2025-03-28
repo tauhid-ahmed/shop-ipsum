@@ -88,6 +88,7 @@ export const data = [
       period: 30,
       conditions: ["Unworn item", "Original tags attached"],
     },
+    salesCount: 120,
     metadata: {
       createdAt: "2023-10-01T10:00:00Z",
       updatedAt: "2023-10-02T14:30:00Z",
@@ -95,6 +96,7 @@ export const data = [
     },
   },
   {
+    salesCount: 143,
     id: "W-JCKT-003",
     sku: "W-DEN-003",
     gtin: {
@@ -184,6 +186,7 @@ export const data = [
     },
   },
   {
+    salesCount: 1534,
     id: "BAG-LEA-001",
     sku: "BAG-BLK-001",
     gtin: {
@@ -268,6 +271,7 @@ export const data = [
     },
   },
   {
+    salesCount: 333,
     id: "SHOE-001",
     sku: "SHOE-BLK-01",
     gtin: {
@@ -355,6 +359,7 @@ export const data = [
     },
   },
   {
+    salesCount: 432,
     id: "JWL-SS-002",
     sku: "JWL-SIL-01",
     gtin: {
@@ -440,6 +445,7 @@ export const data = [
     },
   },
   {
+    salesCount: 43,
     id: "CHILD-T-003",
     sku: "CHILD-BLU-01",
     gtin: {
@@ -526,6 +532,7 @@ export const data = [
     },
   },
   {
+    salesCount: 159,
     id: "BAG-LEA-001",
     sku: "BAG-BRN-01",
     gtin: {
@@ -611,6 +618,7 @@ export const data = [
     },
   },
   {
+    salesCount: 220,
     id: "WALLET-001",
     sku: "WAL-BLK-01",
     gtin: {
@@ -696,6 +704,7 @@ export const data = [
     },
   },
   {
+    salesCount: 453,
     id: "MENS-TS-004",
     sku: "MENS-BLU-M-004",
     gtin: {
@@ -783,6 +792,7 @@ export const data = [
     },
   },
   {
+    salesCount: 351,
     id: "SHOE-SNEAKER-001",
     sku: "SNEAKER-BLU-42",
     gtin: {
@@ -872,6 +882,7 @@ export const data = [
     },
   },
   {
+    salesCount: 109,
     id: "GLASS-UV-001",
     sku: "GLASS-BLK-01",
     gtin: {
@@ -957,6 +968,7 @@ export const data = [
     },
   },
   {
+    salesCount: 480,
     id: "WOMEN-TOP-001",
     sku: "TOP-WHT-M-001",
     gtin: {
@@ -1044,6 +1056,7 @@ export const data = [
     },
   },
   {
+    salesCount: 80,
     id: "BAG-TOTE-001",
     sku: "TOTE-BLK-01",
     gtin: {
@@ -1130,6 +1143,7 @@ export const data = [
     },
   },
   {
+    salesCount: 789,
     id: "WATCH-SPORT-001",
     sku: "WATCH-BLK-01",
     gtin: {
@@ -1216,6 +1230,7 @@ export const data = [
     },
   },
   {
+    salesCount: 873,
     id: "CHILD-COAT-001",
     sku: "COAT-BLU-3Y",
     gtin: {
@@ -1303,6 +1318,7 @@ export const data = [
     },
   },
   {
+    salesCount: 210,
     id: "SHOE-SNEAKER-001",
     sku: "SNEAKER-BLU-42",
     gtin: {
@@ -1393,6 +1409,7 @@ export const data = [
     },
   },
   {
+    salesCount: 873,
     id: "WALLET-LEATHER-001",
     sku: "WALLET-BRN-01",
     gtin: {
@@ -1479,6 +1496,7 @@ export const data = [
     },
   },
   {
+    salesCount: 541,
     id: "JWL-RING-001",
     sku: "RING-GLD-SM",
     gtin: {
@@ -1567,6 +1585,7 @@ export const data = [
     },
   },
   {
+    salesCount: 199,
     id: "BAG-TOTE-001",
     sku: "TOTE-BLK-M",
     gtin: {
@@ -1652,6 +1671,7 @@ export const data = [
     },
   },
   {
+    salesCount: 98,
     id: "WOMEN-DRESS-003",
     sku: "DRESS-BLUE-M",
     gtin: {
@@ -1741,6 +1761,7 @@ export const data = [
     },
   },
   {
+    salesCount: 45,
     id: "KIDS-TOY-004",
     sku: "TOY-PLUSH-XXL",
     gtin: {
@@ -1827,6 +1848,7 @@ export const data = [
     },
   },
   {
+    salesCount: 98,
     id: "SHOES-SPORT-005",
     sku: "SPORT-RED-10",
     gtin: {
@@ -1917,6 +1939,7 @@ export const data = [
     },
   },
   {
+    salesCount: 284,
     id: "WOMEN-WALLET-006",
     sku: "WALLET-BROWN-02",
     gtin: {
@@ -2003,6 +2026,7 @@ export const data = [
     },
   },
   {
+    salesCount: 990,
     id: "MEN-WATCH-007",
     sku: "WATCH-BLACK-02",
     gtin: {
@@ -2089,6 +2113,7 @@ export const data = [
     },
   },
   {
+    salesCount: 870,
     id: "WOMEN-GLASS-008",
     sku: "GLASS-RED-01",
     gtin: {
@@ -2175,6 +2200,7 @@ export const data = [
     },
   },
   {
+    salesCount: 810,
     id: "KIDS-TOY-009",
     sku: "TOY-DOLL-04",
     gtin: {
@@ -2261,6 +2287,7 @@ export const data = [
     },
   },
   {
+    salesCount: 720,
     id: "CLOTH-JACKET-010",
     sku: "JKT-BLK-M-01",
     gtin: {
@@ -2349,6 +2376,7 @@ export const data = [
     },
   },
   {
+    salesCount: 520,
     id: "MEN-SHOE-011",
     sku: "SHOE-BLK-42-01",
     gtin: {
@@ -2437,6 +2465,7 @@ export const data = [
     },
   },
   {
+    salesCount: 301,
     id: "WOMEN-BAG-012",
     sku: "BAG-RED-01",
     gtin: {
@@ -2523,6 +2552,7 @@ export const data = [
     },
   },
   {
+    salesCount: 791,
     id: "KIDS-TOY-013",
     sku: "TOY-PLUSH-02",
     gtin: {
@@ -2609,3 +2639,5 @@ export const data = [
     },
   },
 ];
+
+export const products = data.slice(0, 10);

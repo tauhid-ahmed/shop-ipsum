@@ -47,10 +47,7 @@ const STOCK_PENALTY_MULTIPLIER = 0.5;
 const calculateSalesVelocity = (salesCount: number, days: number): number =>
   salesCount / Math.max(days, DEFAULT_DAYS_SINCE_CREATION);
 
-const calculateTrendScore = (
-  product: Product,
-  timeFrameInDays: number
-): number => {
+const calculateTrendScore = (product: Product): number => {
   const daysSinceCreation = differenceInDays(new Date(), product.createdAt);
   const salesVelocity = calculateSalesVelocity(
     product.salesCount,
@@ -109,7 +106,7 @@ const getTrendingProducts = (
   return products
     .map((product) => ({
       ...product,
-      trendScore: calculateTrendScore(product, timeFrameInDays), // Uses timeFrameInDays here
+      trendScore: calculateTrendScore(product), // Uses timeFrameInDays here
     }))
     .filter(filterByTimeframe(timeFrameInDays)) // Ensures timeFrameInDays is used
     .filter((product) => product.salesCount > 0)
