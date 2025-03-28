@@ -1,21 +1,5 @@
 import { differenceInDays } from "date-fns";
-
-// Type Definitions
-type Product = {
-  id: string;
-  title: string;
-  price: number;
-  category: string;
-  salesCount: number;
-  revenue: number;
-  createdAt: Date;
-  ratings: {
-    average: number;
-  };
-  views: number;
-  discountPercentage?: number;
-  stockQuantity: number;
-};
+import { type ProductType } from "@/data/products";
 
 type UserPreferences = {
   budget?: {
@@ -49,7 +33,7 @@ const STOCK_PENALTY_MULTIPLIER = 0.5;
 const calculateSalesVelocity = (salesCount: number, days: number): number =>
   salesCount / Math.max(days, DEFAULT_DAYS_SINCE_CREATION);
 
-const calculateTrendScore = (product: Product): number => {
+const calculateTrendScore = (product: ProductType): number => {
   const daysSinceCreation = differenceInDays(new Date(), product.createdAt);
   const salesVelocity = calculateSalesVelocity(
     product.salesCount,
@@ -70,19 +54,19 @@ const calculateTrendScore = (product: Product): number => {
   );
 };
 
-const calculateValueScore = (product: Product): number => {
+const calculateValueScore = (product: ProductType): number => {
   const discountEffect =
-    (1 - Math.exp(-((product.discountPercentage || 0) / 10))) *
+    (1 - Math.exp(-((product.pricing.discount.value || 0) / 10))) *
     DISCOUNT_MULTIPLIER;
   const stockPenalty =
-    product.stockQuantity < STOCK_PENALTY_THRESHOLD
+    product.inventory.stockQuantity < STOCK_PENALTY_THRESHOLD
       ? STOCK_PENALTY_MULTIPLIER
       : 1;
   return (
     (product.ratings.average * RATING_MULTIPLIER +
       discountEffect +
       (product.salesCount / POPULARITY_DIVISOR) * 10 +
-      (1 / product.price) * PRICE_EFFICIENCY_MULTIPLIER) *
+      (1 / product.pricing.base.amount) * PRICE_EFFICIENCY_MULTIPLIER) *
     stockPenalty
   );
 };
@@ -90,14 +74,14 @@ const calculateValueScore = (product: Product): number => {
 // Ranking Functions
 const filterByTimeframe =
   (timeFrameInDays: number) =>
-  (product: Product): boolean => {
+  (product: ProductType): boolean => {
     return differenceInDays(new Date(), product.createdAt) <= timeFrameInDays;
   };
 
-const getBestSelling = (
-  products: Product[],
+export const getBestSelling = (
+  products: ProductType[],
   options: RankingOptions = {}
-): Product[] => {
+): ProductType[] => {
   const { timeFrameInDays = 30, limit = 10 } = options;
   return products
     .filter(filterByTimeframe(timeFrameInDays)) // Ensures timeFrameInDays is used
@@ -107,10 +91,10 @@ const getBestSelling = (
 };
 
 export const getTrendingProducts = (
-  products: Product[],
+  products: ProductType[],
   options: RankingOptions = {}
-): Product[] => {
-  const { timeFrameInDays = 7, limit = 10 } = options;
+): ProductType[] => {
+  const { timeFrameInDays = 30, limit = 10 } = options;
 
   return products
     .map((product) => ({
@@ -123,16 +107,22 @@ export const getTrendingProducts = (
     .slice(0, limit);
 };
 
-const getNewArrivals = (products: Product[], limit: number = 10): Product[] => {
+const getNewArrivals = (
+  products: ProductType[],
+  limit: number = 10
+): ProductType[] => {
   return products
-    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
     .slice(0, limit);
 };
 
 const getBestBuyProducts = (
-  products: Product[],
+  products: ProductType[],
   limit: number = 10
-): Product[] => {
+): ProductType[] => {
   return products
     .map((product) => ({
       ...product,
@@ -143,9 +133,9 @@ const getBestBuyProducts = (
 };
 
 const recommendProducts = (
-  products: Product[],
+  products: ProductType[],
   preferences: UserPreferences
-): Product[] => {
+): ProductType[] => {
   return products
     .map((product) => {
       const matchScore = calculateMatchScore(product, preferences);
@@ -157,17 +147,23 @@ const recommendProducts = (
 };
 
 const calculateMatchScore = (
-  product: Product,
+  product: ProductType,
   preferences: UserPreferences
 ): number => {
   let score = 0;
   if (preferences.budget) {
     const { min, max } = preferences.budget;
-    if (product.price >= min && product.price <= max) {
+    if (
+      product.pricing.base.amount >= min &&
+      product.pricing.base.amount <= max
+    ) {
       score += MATCH_SCORE_BUDGET;
     }
   }
-  if (preferences.category && product.category === preferences.category) {
+  if (
+    preferences.category &&
+    product.category.primary === preferences.category
+  ) {
     score += MATCH_SCORE_CATEGORY;
   }
   if (
@@ -180,29 +176,29 @@ const calculateMatchScore = (
 };
 
 // Example Usage
-const exampleProducts: Product[] = [
-  {
-    id: "PROD001",
-    title: "Wireless Headphones",
-    price: 199.99,
-    category: "Electronics",
-    salesCount: 500,
-    revenue: 99995,
-    createdAt: new Date(),
-    ratings: { average: 4.5 },
-    views: 2000,
-    discountPercentage: 15,
-    stockQuantity: 100,
-  },
-];
+// const exampleProducts: ProductType[] = [
+//   {
+//     id: "PROD001",
+//     title: "Wireless Headphones",
+//     price: 199.99,
+//     category: "Electronics",
+//     salesCount: 500,
+//     revenue: 99995,
+//     createdAt: new Date(),
+//     ratings: { average: 4.5 },
+//     views: 2000,
+//     discountPercentage: 15,
+//     stockQuantity: 100,
+//   },
+// ];
 
-// Example function calls
-const bestSellers = getBestSelling(exampleProducts);
-const trendingProducts = getTrendingProducts(exampleProducts);
-const newArrivals = getNewArrivals(exampleProducts);
-const bestBuyProducts = getBestBuyProducts(exampleProducts);
-const recommendedProducts = recommendProducts(exampleProducts, {
-  budget: { min: 100, max: 250 },
-  category: "Electronics",
-  minRating: 4,
-});
+// // Example function calls
+// const bestSellers = getBestSelling(exampleProducts);
+// const trendingProducts = getTrendingProducts(exampleProducts);
+// const newArrivals = getNewArrivals(exampleProducts);
+// const bestBuyProducts = getBestBuyProducts(exampleProducts);
+// const recommendedProducts = recommendProducts(exampleProducts, {
+//   budget: { min: 100, max: 250 },
+//   category: "Electronics",
+//   minRating: 4,
+// });

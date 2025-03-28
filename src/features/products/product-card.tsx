@@ -11,22 +11,13 @@ import { cn } from "@/lib/utils";
 import { productDetailsPath } from "@/constants/paths";
 import { QuickShop } from "./quick-shop";
 import UserRatings from "@/components/star-ratings";
-
-export type Product = {
-  id: string;
-  images: string[];
-  title: string;
-  description: string;
-  price: string;
-  averageRating: number;
-  totalReviews: number;
-};
+import { type ProductType } from "@/data/products";
 
 export default function ProductCard({
   data,
   quickShop = <QuickShop />,
 }: {
-  data: Product;
+  data: ProductType;
   quickShop?: ReactElement<{
     productId?: string;
     ref?: Ref<{ handleQuickShopOpen: () => void }>;
@@ -42,7 +33,10 @@ export default function ProductCard({
           className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
         >
           <div className="inline-block h-full rounded overflow-hidden p-2">
-            <ProductImage imagePath={data.image[0]} alt={data.title} />
+            <ProductImage
+              imagePath={data.media.primaryImage}
+              alt={data.productDetails.title}
+            />
           </div>
         </Link>
         {quickShop && (
@@ -59,17 +53,23 @@ export default function ProductCard({
           href={productDetailsPath(data.id)}
           className="flex flex-col items-center space-y-0.5 sm:space-y-1 mx-4 py-4 relative overflow-hidden"
         >
-          <Heading align="center" weight="medium" as="h3" size="sm">
-            {data.title}
+          <Heading
+            className="text-ellipsis whitespace-nowrap"
+            align="center"
+            weight="medium"
+            as="h3"
+            size="sm"
+          >
+            {data.brand.name}
           </Heading>
-          <p className="text-foreground/90 text-sm md:text-md lg:text-base text-ellipsis whitespace-nowrap">
-            {data.description.split(" ").slice(0, 5).join(" ")}
+          <p className="text-foreground/90 text-md lg:text-base text-ellipsis whitespace-nowrap">
+            {data.productDetails.title.split(" ").slice(0, 4).join(" ")}
           </p>
           <span className="font-semibold text-foreground/70">
-            <PrevPrice />
-            {data.price}
+            <PrevPrice price={data.pricing.original.amount} />$
+            {data.pricing.base.amount}
           </span>
-          <UserRatings averageRating={data.averageRating}>
+          <UserRatings averageRating={data.ratings.average}>
             <div className="flex items-center gap-1">
               <UserRatings.AverageRating />
               <UserRatings.StarList />
@@ -92,7 +92,7 @@ export default function ProductCard({
   );
 }
 
-function PrevPrice({ price = "55.99" }: { price?: string }) {
+function PrevPrice({ price }: { price: number }) {
   return (
     <span className="text-sm text-destructive px-1 relative before:absolute before:inset-x-0 before:h-px before:bg-destructive before:top-1/2 mr-0.5">
       {price}
