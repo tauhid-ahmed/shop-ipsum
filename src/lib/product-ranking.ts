@@ -41,11 +41,6 @@ const calculateTrendScore = (product: ProductType): number => {
   );
   const viewEngagement =
     product.views / Math.max(daysSinceCreation, DEFAULT_DAYS_SINCE_CREATION);
-  console.log({
-    viewEngagement,
-    salesVelocity,
-    ratings: product.ratings.average,
-  });
 
   return (
     salesVelocity * SALES_WEIGHT +
@@ -54,7 +49,7 @@ const calculateTrendScore = (product: ProductType): number => {
   );
 };
 
-const calculateValueScore = (product: ProductType): number => {
+export const calculateValueScore = (product: ProductType): number => {
   const discountEffect =
     (1 - Math.exp(-((product.pricing.discount.value || 0) / 10))) *
     DISCOUNT_MULTIPLIER;
@@ -107,7 +102,7 @@ export const getTrendingProducts = (
     .slice(0, limit);
 };
 
-const getNewArrivals = (
+export const getNewArrivals = (
   products: ProductType[],
   limit: number = 10
 ): ProductType[] => {
@@ -119,7 +114,7 @@ const getNewArrivals = (
     .slice(0, limit);
 };
 
-const getBestBuyProducts = (
+export const getBestBuyProducts = (
   products: ProductType[],
   limit: number = 10
 ): ProductType[] => {
@@ -132,7 +127,7 @@ const getBestBuyProducts = (
     .slice(0, limit);
 };
 
-const recommendProducts = (
+export const recommendProducts = (
   products: ProductType[],
   preferences: UserPreferences
 ): ProductType[] => {

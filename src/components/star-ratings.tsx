@@ -1,50 +1,34 @@
 "use client";
 import { LucideStar } from "lucide-react";
-import React, { useState, useContext, createContext, MouseEvent } from "react";
+import { useState, MouseEvent } from "react";
 import { cn } from "@/lib/utils";
 
-interface UserRatingsProps {
+interface StarRatingsProps {
   totalReviews?: number;
   averageRating?: number;
   isInteractive?: boolean;
   minAllowedRating?: number;
   maxStars?: number;
   size?: "sm" | "md" | "lg";
-  children: React.ReactNode;
 }
 
-interface RatingContextProps {
-  size: "sm" | "md" | "lg";
-  displayedRating: number;
-  maxStars: number;
+interface StarProps {
+  starIndex: number;
+  fillRatio: number;
+  onPartialClick: (fillRatio: number) => void;
+  onHover: (starIndex: number, fillRatio: number) => void;
+  onLeave: () => void;
   isInteractive: boolean;
-  handleRatingUpdate: (newRating: number) => void;
-  handleStarHover: (starIndex: number, fillRatio: number) => void;
-  setHoveredRating: React.Dispatch<React.SetStateAction<number | null>>;
-  totalReviews: number;
+  size: "sm" | "md" | "lg";
 }
 
-const RatingContext = createContext<RatingContextProps | null>(null);
-
-const useRatingContext = () => {
-  const context = useContext(RatingContext);
-  if (!context) {
-    throw new Error(
-      "useRatingContext must be used within a UserRatingsProvider"
-    );
-  }
-  return context;
-};
-
-export default function UserRatings({
-  totalReviews = 1000,
+export function StarRatings({
   averageRating = 4.8,
   isInteractive = false,
   minAllowedRating = 1,
   maxStars = 5,
   size = "md",
-  children,
-}: UserRatingsProps) {
+}: StarRatingsProps) {
   const [currentRating, setCurrentRating] = useState<number>(
     Math.max(averageRating, minAllowedRating)
   );
@@ -63,52 +47,6 @@ export default function UserRatings({
     if (isInteractive) setCurrentRating(Math.max(newRating, minAllowedRating));
   };
 
-  return (
-    <RatingContext.Provider
-      value={{
-        size,
-        displayedRating,
-        maxStars,
-        isInteractive,
-        handleRatingUpdate,
-        handleStarHover,
-        setHoveredRating,
-        totalReviews,
-      }}
-    >
-      {children}
-    </RatingContext.Provider>
-  );
-}
-
-function AverageRating({ className }: { className?: string }) {
-  const { displayedRating } = useRatingContext();
-  return (
-    <span className={cn("text-muted-foreground text-sm mt-0.5", className)}>
-      {displayedRating}
-    </span>
-  );
-}
-
-function UserReviewsCount({ className }: { className?: string }) {
-  const { totalReviews } = useRatingContext();
-  return (
-    <span className={cn("text-primary text-sm", className)}>
-      See all {totalReviews} reviews
-    </span>
-  );
-}
-
-function StarList() {
-  const {
-    size,
-    displayedRating,
-    maxStars,
-    isInteractive,
-    handleRatingUpdate,
-    handleStarHover,
-    setHoveredRating,
-  } = useRatingContext();
   return (
     <div
       className={cn(
@@ -134,19 +72,13 @@ function StarList() {
             }
             onHover={handleStarHover}
             onLeave={() => isInteractive && setHoveredRating(null)}
+            isInteractive={isInteractive}
+            size={size}
           />
         );
       })}
     </div>
   );
-}
-
-interface StarProps {
-  starIndex: number;
-  fillRatio: number;
-  onPartialClick: (fillRatio: number) => void;
-  onHover: (starIndex: number, fillRatio: number) => void;
-  onLeave: () => void;
 }
 
 function Star({
@@ -155,9 +87,9 @@ function Star({
   onPartialClick,
   onHover,
   onLeave,
+  isInteractive,
+  size,
 }: StarProps) {
-  const { size, isInteractive } = useRatingContext();
-
   const handleInteraction = (
     e: MouseEvent<HTMLDivElement>,
     callback: (fillRatio: number) => void
@@ -209,8 +141,3 @@ function Star({
     </div>
   );
 }
-
-UserRatings.displayName = "UserRatings";
-UserRatings.StarList = StarList;
-UserRatings.AverageRating = AverageRating;
-UserRatings.TotalReviews = UserReviewsCount;

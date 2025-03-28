@@ -10,7 +10,7 @@ import React, { ReactElement, useRef, Ref } from "react";
 import { cn } from "@/lib/utils";
 import { productDetailsPath } from "@/constants/paths";
 import { QuickShop } from "./quick-shop";
-import UserRatings from "@/components/star-ratings";
+import { StarRatings } from "@/components/star-ratings";
 import { type ProductType } from "@/data/products";
 
 export default function ProductCard({
@@ -69,12 +69,7 @@ export default function ProductCard({
             <PrevPrice price={data.pricing.original.amount} />$
             {data.pricing.base.amount}
           </span>
-          <UserRatings averageRating={data.ratings.average}>
-            <div className="flex items-center gap-1">
-              <UserRatings.AverageRating />
-              <UserRatings.StarList />
-            </div>
-          </UserRatings>
+          <StarRatings averageRating={data.ratings.average} />
         </Link>
       </div>
       <div className="absolute top-0 right-0 z-10">

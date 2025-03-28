@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dialog";
 
 import Image from "next/image";
-import UserRatings from "@/components/star-ratings";
 import { DotSeparator } from "@/components/dot-separator";
 import Embla, { useEmblaContext } from "@/components/embla";
 import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
@@ -21,6 +20,7 @@ import { productDetailsPath, signInPath } from "@/constants/paths";
 import { LucidePlus } from "lucide-react";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 import Link from "next/link";
+import { StarRatings } from "@/components/star-ratings";
 
 export const QuickShop = forwardRef(function QuickShop(
   { productId }: { productId?: string },
@@ -66,18 +66,11 @@ export const QuickShop = forwardRef(function QuickShop(
                 <span className="text-lg lg:text-xl">
                   {product.pricing.base.amount}
                 </span>
-                <UserRatings
+                <StarRatings
                   averageRating={product.ratings.average}
                   size="lg"
                   isInteractive={false}
-                >
-                  <div className="flex gap-1 items-center">
-                    <UserRatings.AverageRating className="lg:text-base" />
-                    <UserRatings.StarList />
-                    <DotSeparator />
-                    <UserRatings.TotalReviews className="lg:text-base" />
-                  </div>
-                </UserRatings>
+                />
               </DialogHeader>
               <DialogDescription className="sr-only">
                 Product variants section
