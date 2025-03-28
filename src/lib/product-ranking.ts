@@ -25,7 +25,7 @@ type UserPreferences = {
 };
 
 type RankingOptions = {
-  timeFrameInDays?: number;
+  timeFrameInDays?: number; // Optional time frame parameter
   limit?: number;
 };
 
@@ -41,34 +41,44 @@ const PRICE_EFFICIENCY_MULTIPLIER = 1000;
 const MATCH_SCORE_BUDGET = 30;
 const MATCH_SCORE_CATEGORY = 25;
 const MATCH_SCORE_RATING = 20;
+const STOCK_PENALTY_THRESHOLD = 5;
+const STOCK_PENALTY_MULTIPLIER = 0.5;
 
 const calculateSalesVelocity = (salesCount: number, days: number): number =>
-  salesCount / (days || DEFAULT_DAYS_SINCE_CREATION);
+  salesCount / Math.max(days, DEFAULT_DAYS_SINCE_CREATION);
 
-const calculateTrendScore =
-  (timeFrameInDays: number) =>
-  (product: Product): number => {
-    const daysSinceCreation = differenceInDays(new Date(), product.createdAt);
-    const salesVelocity = calculateSalesVelocity(
-      product.salesCount,
-      daysSinceCreation
-    );
-    const viewEngagement =
-      product.views / (daysSinceCreation || DEFAULT_DAYS_SINCE_CREATION);
-
-    return (
-      salesVelocity * SALES_WEIGHT +
-      product.rating * RATING_WEIGHT +
-      viewEngagement * VIEW_WEIGHT
-    );
-  };
+const calculateTrendScore = (
+  product: Product,
+  timeFrameInDays: number
+): number => {
+  const daysSinceCreation = differenceInDays(new Date(), product.createdAt);
+  const salesVelocity = calculateSalesVelocity(
+    product.salesCount,
+    daysSinceCreation
+  );
+  const viewEngagement =
+    product.views / Math.max(daysSinceCreation, DEFAULT_DAYS_SINCE_CREATION);
+  return (
+    salesVelocity * SALES_WEIGHT +
+    product.rating * RATING_WEIGHT +
+    viewEngagement * VIEW_WEIGHT
+  );
+};
 
 const calculateValueScore = (product: Product): number => {
+  const discountEffect =
+    (1 - Math.exp(-((product.discountPercentage || 0) / 10))) *
+    DISCOUNT_MULTIPLIER;
+  const stockPenalty =
+    product.stockQuantity < STOCK_PENALTY_THRESHOLD
+      ? STOCK_PENALTY_MULTIPLIER
+      : 1;
   return (
-    product.rating * RATING_MULTIPLIER +
-    (product.discountPercentage || 0) * DISCOUNT_MULTIPLIER +
-    (product.salesCount / POPULARITY_DIVISOR) * 10 +
-    (1 / product.price) * PRICE_EFFICIENCY_MULTIPLIER
+    (product.rating * RATING_MULTIPLIER +
+      discountEffect +
+      (product.salesCount / POPULARITY_DIVISOR) * 10 +
+      (1 / product.price) * PRICE_EFFICIENCY_MULTIPLIER) *
+    stockPenalty
   );
 };
 
@@ -84,9 +94,8 @@ const getBestSelling = (
   options: RankingOptions = {}
 ): Product[] => {
   const { timeFrameInDays = 30, limit = 10 } = options;
-
   return products
-    .filter(filterByTimeframe(timeFrameInDays))
+    .filter(filterByTimeframe(timeFrameInDays)) // Ensures timeFrameInDays is used
     .filter((product) => product.salesCount > 0)
     .sort((a, b) => b.salesCount - a.salesCount)
     .slice(0, limit);
@@ -97,24 +106,21 @@ const getTrendingProducts = (
   options: RankingOptions = {}
 ): Product[] => {
   const { timeFrameInDays = 7, limit = 10 } = options;
-  const trendScoreCalculator = calculateTrendScore(timeFrameInDays);
-
   return products
     .map((product) => ({
       ...product,
-      trendScore: trendScoreCalculator(product),
+      trendScore: calculateTrendScore(product, timeFrameInDays), // Uses timeFrameInDays here
     }))
-    .filter(filterByTimeframe(timeFrameInDays))
+    .filter(filterByTimeframe(timeFrameInDays)) // Ensures timeFrameInDays is used
     .filter((product) => product.salesCount > 0)
     .sort((a, b) => b.trendScore - a.trendScore)
     .slice(0, limit);
 };
 
-const getNewArrivals = (products: Product[], days: number = 30): Product[] => {
+const getNewArrivals = (products: Product[], limit: number = 10): Product[] => {
   return products
-    .filter(filterByTimeframe(days))
     .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
-    .slice(0, 10);
+    .slice(0, limit);
 };
 
 const getBestBuyProducts = (
@@ -149,22 +155,18 @@ const calculateMatchScore = (
   preferences: UserPreferences
 ): number => {
   let score = 0;
-
   if (preferences.budget) {
     const { min, max } = preferences.budget;
     if (product.price >= min && product.price <= max) {
       score += MATCH_SCORE_BUDGET;
     }
   }
-
   if (preferences.category && product.category === preferences.category) {
     score += MATCH_SCORE_CATEGORY;
   }
-
   if (preferences.minRating && product.rating >= preferences.minRating) {
     score += MATCH_SCORE_RATING;
   }
-
   return score;
 };
 

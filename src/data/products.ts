@@ -1,1609 +1,2611 @@
 export const data = [
   {
-    product: {
-      id: "CLOTH-TS-002",
-      sku: "CTS-BLK-S-002",
-      gtin: {
-        upc: "123456789012",
-        ean: "1234567890128",
-        isbn: null,
-      },
-      type: "clothing",
-      category: {
-        primary: "Apparel",
-        secondary: "T-Shirts",
-        tertiary: "Casual Wear",
-      },
-      brand: {
-        name: "Street Style",
-        manufacturer: "Global Apparel Inc.",
-        brandOrigin: "United States",
-      },
-      productDetails: {
-        title: "Urban Black Slim Fit Tee",
-        shortDescription: "Slim fit, soft touch, essential black tee.",
-        longDescription:
-          "The Urban Black Slim Fit Tee is designed for a modern, streamlined look. Crafted from a premium blend of cotton and modal, it offers exceptional softness and a flattering fit. Perfect for layering or wearing on its own, this tee is a versatile addition to any wardrobe. Durable and easy to care for, it maintains its shape and color wash after wash.",
-        features: [
-          "Cotton-Modal blend",
-          "Slim fit",
-          "Soft touch",
-          "Machine washable",
-        ],
-      },
-      media: {
-        primaryImage: "/assets/product/product-02.webp",
-        images: [
-          "/assets/product/product-02.webp",
-          "/assets/product/product-06.webp",
-          "/assets/product/product-10.webp",
-          "/assets/product/product-15.webp",
-          "/assets/product/product-18.webp",
-        ],
-        videoUrls: [],
-        "360DegreeImageUrl": null,
-      },
-      pricing: {
-        base: {
-          amount: 29.99,
-          currency: "USD",
-        },
-        original: {
-          amount: 34.99,
-          currency: "USD",
-        },
-        discount: {
-          type: "percentage",
-          value: 14,
-          startDate: null,
-          endDate: null,
-        },
-        taxInformation: {
-          taxRate: 0.08,
-          taxIncluded: false,
-          vatNumber: null,
-        },
-        wholesalePrice: 15.99,
-        costPrice: 12.5,
-      },
-      inventory: {
-        management: {
-          type: "standard",
-          trackInventory: true,
-          lowStockThreshold: 20,
-        },
-        variants: [
-          {
-            id: "CTS-BLK-S-002",
-            color: "Black",
-            sizes: ["S", "M", "L", "XL"],
-            inStock: true,
-            stockQuantity: 180,
-            warehouses: [
-              {
-                id: "WH-NY-01",
-                location: "New York Warehouse",
-                quantity: 100,
-              },
-              {
-                id: "WH-CA-02",
-                location: "California Warehouse",
-                quantity: 80,
-              },
-            ],
-          },
-        ],
-      },
-      specifications: {
-        dimensions: {
-          length: 75,
-          width: 55,
-          height: 1,
-          weight: 0.2,
-          units: {
-            length: "cm",
-            weight: "kg",
-          },
-        },
-        materialComposition: {
-          primary: {
-            material: "Cotton",
-            percentage: 60,
-          },
-          secondary: {
-            material: "Modal",
-            percentage: 40,
-          },
-        },
-        technicalSpecs: {
-          weight: "160 GSM",
-          neckline: "Round Neck",
-          sleeveLength: "Short Sleeve",
-          seasonality: ["Spring", "Summer", "Fall"],
-          careInstructions: [
-            "Machine wash cold",
-            "Tumble dry low",
-            "Do not iron",
-            "Do not dry clean",
-          ],
-        },
-      },
-      qualityAndCompliance: {
-        certifications: ["OEKO-TEX Standard 100", "GOTS Organic"],
-        complianceStandards: ["ISO 9001", "Fair Labor Association"],
-        sustainability: {
-          organic: false,
-          recycled: false,
-          fairTrade: false,
-          carbonFootprint: null,
-          sustainabilityScore: null,
-        },
-      },
-      marketingInformation: {
-        tags: ["slim-fit", "black", "casual", "soft", "urban", "trending"],
-        seasonalCollection: "Summer 2023",
-        targetAudience: ["Young Adults", "Urban Professionals"],
-      },
-      ratings: {
-        overall: {
-          average: 4.2,
-          totalReviews: 85,
-        },
-        breakdown: {
-          "5-star": 40,
-          "4-star": 25,
-          "3-star": 15,
-          "2-star": 3,
-          "1-star": 2,
-        },
-        recommendationRate: 87,
-      },
-      shipping: {
-        dimensions: {
-          packageLength: 30,
-          packageWidth: 25,
-          packageHeight: 5,
-          packageWeight: 0.3,
-          units: {
-            length: "cm",
-            weight: "kg",
-          },
-        },
-        shippingMethods: [
-          "Standard Shipping",
-          "Express Shipping",
-          "International Shipping",
-        ],
-        freeShippingEligible: true,
-        shippingRestrictions: {
-          internationalShipping: true,
-          excludedCountries: [],
-        },
-        estimatedDelivery: {
-          domestic: {
-            standard: "3-5 business days",
-            express: "1-2 business days",
-          },
-          international: {
-            standard: "7-14 business days",
-            express: "3-7 business days",
-          },
-        },
-      },
-      returnPolicy: {
-        eligible: true,
-        period: 30,
-        periodUnit: "days",
-        conditions: [
-          "Item must be unworn",
-          "Original tags attached",
-          "Original packaging intact",
-        ],
-        restockingFee: null,
-        returnShipping: {
-          paidBy: "Customer",
-          freeReturnEligibility: false,
-        },
-      },
-      metadata: {
-        createdAt: "2023-10-26T10:00:00Z",
-        updatedAt: "2023-10-27T14:30:00Z",
-        version: "1.2",
-        status: "active",
-      },
+    id: "WL-LEA-001",
+    sku: "WL-BRN-001",
+    gtin: {
+      upc: "123456789013",
+      ean: "1234567890131",
     },
-  },
-  {
-    marketingInformation: {
-      tags: ["slim-fit", "black", "casual", "soft", "urban", "new arrival"],
-      seasonalCollection: "Summer 2023",
-      targetAudience: ["Young Adults", "Urban Professionals"],
-    },
-    ratings: {
-      overall: {
-        average: 4.2,
-        totalReviews: 85,
-      },
-      breakdown: {
-        "5-star": 40,
-        "4-star": 25,
-        "3-star": 15,
-        "2-star": 3,
-        "1-star": 2,
-      },
-      recommendationRate: 87,
-    },
-    id: "CLOTH-SW-001",
-    sku: "CSW-GRY-M-001",
-    type: "clothing",
-    category: "Sweaters",
-    subCategory: "Knitted",
-    brand: "Cozy Knit",
-    title: "Classic Gray Wool Sweater",
-    shortDescription: "Warm wool sweater, perfect for chilly days.",
-    longDescription:
-      "The Classic Gray Wool Sweater is a must-have for your winter wardrobe. Made from 100% pure wool, it provides exceptional warmth and comfort. The ribbed cuffs and hem ensure a snug fit, while the timeless gray color complements any outfit. This sweater is designed to keep you cozy and stylish all season long.",
-    images: [
-      "/assets/product/product-03.webp",
-      "/assets/product/product-07.webp",
-      "/assets/product/product-11.webp",
-      "/assets/product/product-16.webp",
-    ],
-    price: {
-      base: 59.99,
-      currency: "USD",
-      originalPrice: 69.99,
-      discountPercentage: 14,
-    },
-    variants: [
-      {
-        color: "Gray",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 120,
-      },
-    ],
-    details: ["100% Wool", "Ribbed cuffs and hem", "Hand wash recommended"],
-    specifications: {
-      material: "100% Wool",
-      weight: "Heavy Knit",
-      neckline: "Crew Neck",
-      sleeveLength: "Long Sleeve",
-      careInstructions: "Hand wash only",
-    },
-    rating: {
-      average: 4.7,
-      totalReviews: 110,
-      breakdown: {
-        "5-star": 60,
-        "4-star": 35,
-        "3-star": 10,
-        "2-star": 3,
-        "1-star": 2,
-      },
-    },
-    tags: ["wool", "sweater", "warm", "knit", "classic", "best-selling"],
-    sustainability: { organic: false, recycled: false, fairTrade: true },
-    createdAt: "2023-10-25T12:00:00Z",
-    updatedAt: "2023-10-27T15:00:00Z",
-  },
-  {
-    marketingInformation: {
-      tags: ["slim-fit", "black", "casual", "soft", "urban", "trending"],
-      seasonalCollection: "Summer 2023",
-      targetAudience: ["Young Adults", "Urban Professionals"],
-    },
-    ratings: {
-      overall: {
-        average: 4.2,
-        totalReviews: 85,
-      },
-      breakdown: {
-        "5-star": 40,
-        "4-star": 25,
-        "3-star": 15,
-        "2-star": 3,
-        "1-star": 2,
-      },
-      recommendationRate: 87,
-    },
-    id: "ACC-SC-001",
-    sku: "ASC-RED-ONE-001",
     type: "accessories",
-    category: "Scarves",
-    subCategory: "Winter",
-    brand: "Winter Warmers",
-    title: "Red Wool Winter Scarf",
-    shortDescription: "Soft and warm red wool scarf for winter.",
-    longDescription:
-      "Stay cozy and stylish with our Red Wool Winter Scarf. Made from high-quality wool, this scarf provides excellent warmth and comfort during the coldest days. Its vibrant red color adds a pop of color to any winter outfit. The soft texture and generous length make it perfect for wrapping up in style.",
-    images: [
-      "/assets/product/product-04.webp",
-      "/assets/product/product-08.webp",
-      "/assets/product/product-12.webp",
-      "/assets/product/product-17.webp",
-      "/assets/product/product-20.webp",
-    ],
-    price: {
-      base: 22.99,
-      currency: "USD",
-      originalPrice: 27.99,
-      discountPercentage: 18,
+    category: {
+      primary: "Accessories",
+      secondary: "Wallets",
+      tertiary: "Leather",
     },
-    variants: [
-      { color: "Red", sizes: ["One Size"], inStock: true, stockQuantity: 150 },
-    ],
-    details: ["100% Wool", "Soft texture", "Hand wash recommended"],
-    specifications: {
-      material: "100% Wool",
-      weight: "Medium Knit",
-      careInstructions: "Hand wash only",
+    brand: {
+      name: "Urban Essentials",
+      manufacturer: "Luxe Leather Co.",
     },
-    rating: {
+    productDetails: {
+      title: "Classic Brown Leather Wallet",
+      shortDescription: "Sleek, minimalist leather wallet with ample storage.",
+      longDescription:
+        "Crafted from genuine leather, this classic brown wallet features multiple card slots, a coin pocket, and a secure billfold. Designed for functionality and style, it's a must-have accessory for everyday use.",
+      features: [
+        "Genuine leather construction",
+        "Multiple card and cash compartments",
+        "Durable and stylish",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-02.webp",
+      images: [
+        "/assets/product/product-02.webp",
+        "/assets/product/product-03.webp",
+        "/assets/product/product-04.webp",
+        "/assets/product/product-05.webp",
+        "/assets/product/product-06.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 49.99, currency: "USD" },
+      original: { amount: 59.99, currency: "USD" },
+      discount: { type: "percentage", value: 16 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 10,
+      variants: [
+        {
+          id: "WL-BRN-001",
+          color: "Brown",
+          inStock: true,
+          stockQuantity: 50,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+        {
+          id: "WL-BLK-001",
+          color: "Black",
+          inStock: false,
+          stockQuantity: 0,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": false,
+          },
+        },
+      ],
+    },
+    ratings: {
       average: 4.6,
-      totalReviews: 95,
-      breakdown: {
-        "5-star": 50,
-        "4-star": 30,
-        "3-star": 12,
-        "2-star": 2,
-        "1-star": 1,
+      totalReviews: 120,
+      ratingBreakdown: {
+        "5stars": 72,
+        "4stars": 30,
+        "3stars": 10,
+        "2stars": 5,
+        "1star": 3,
       },
     },
-    tags: ["scarf", "wool", "winter", "red", "warm", "new arrival"],
-    sustainability: { organic: false, recycled: false, fairTrade: false },
-    createdAt: "2023-10-24T14:00:00Z",
-    updatedAt: "2023-10-27T16:00:00Z",
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-01T10:00:00Z",
+      updatedAt: "2023-10-02T14:30:00Z",
+      status: "active",
+    },
   },
   {
-    id: "CLOTH-TS-003",
-    sku: "CTS-WHT-S-003",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Classic White Slim Fit Tee",
-    shortDescription: "Slim fit, soft touch, essential white tee.",
-    longDescription:
-      "The Classic White Slim Fit Tee is designed for a timeless, streamlined look. Crafted from a premium blend of cotton and modal, it offers exceptional softness and a flattering fit. Perfect for layering or wearing on its own, this tee is a versatile addition to any wardrobe. Durable and easy to care for, it maintains its shape and color wash after wash.",
-    images: [
-      "/assets/product/product-03.webp",
-      "/assets/product/product-07.webp",
-      "/assets/product/product-11.webp",
-      "/assets/product/product-16.webp",
-      "/assets/product/product-19.webp",
-    ],
-    price: {
-      base: 29.99,
-      currency: "USD",
-      originalPrice: 34.99,
-      discountPercentage: 14,
+    id: "W-JCKT-003",
+    sku: "W-DEN-003",
+    gtin: {
+      upc: "123456789014",
+      ean: "1234567890142",
     },
-    variants: [
-      {
-        color: "White",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 200,
+    type: "apparel",
+    category: {
+      primary: "Apparel",
+      secondary: "Jackets",
+      tertiary: "Casual",
+      gender: "Women",
+    },
+    brand: {
+      name: "City Chic",
+      manufacturer: "Denim Co.",
+    },
+    productDetails: {
+      title: "City Chic Women's Casual Denim Jacket",
+      shortDescription:
+        "A versatile, casual denim jacket perfect for layering.",
+      longDescription:
+        "This casual denim jacket combines style with comfort. Crafted from soft cotton denim, it features a classic button-up design with distressed detailing, making it a stylish addition to your wardrobe.",
+      features: [
+        "Soft cotton denim",
+        "Distressed detailing",
+        "Button-up front",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-06.webp",
+      images: [
+        "/assets/product/product-06.webp",
+        "/assets/product/product-07.webp",
+        "/assets/product/product-08.webp",
+        "/assets/product/product-09.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 59.99, currency: "USD" },
+      original: { amount: 69.99, currency: "USD" },
+      discount: { type: "percentage", value: 14 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 20,
+      variants: [
+        {
+          id: "W-DEN-003",
+          color: "Blue",
+          inStock: true,
+          stockQuantity: 150,
+          sizes: ["S", "M", "L", "XL"],
+          sizeStock: {
+            S: true,
+            M: true,
+            L: true,
+            XL: false,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.3,
+      totalReviews: 85,
+      ratingBreakdown: {
+        "5stars": 45,
+        "4stars": 25,
+        "3stars": 10,
+        "2stars": 3,
+        "1star": 2,
       },
-    ],
-    details: [
-      "Cotton-Modal blend",
-      "Slim fit",
-      "Soft touch",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "Cotton-Modal Blend",
-      weight: "160 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
     },
-    rating: {
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-10T10:00:00Z",
+      updatedAt: "2023-10-11T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "BAG-LEA-001",
+    sku: "BAG-BLK-001",
+    gtin: {
+      upc: "123456789015",
+      ean: "1234567890153",
+    },
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Bags",
+      tertiary: "Leather",
+    },
+    brand: {
+      name: "Eco Leather",
+      manufacturer: "Eco Co.",
+    },
+    productDetails: {
+      title: "Eco Leather Black Crossbody Bag",
+      shortDescription: "Stylish and eco-friendly leather crossbody bag.",
+      longDescription:
+        "This eco-friendly leather crossbody bag combines modern style with sustainability. Crafted from premium leather, it's compact and spacious with an adjustable strap for comfort. Perfect for everyday use.",
+      features: [
+        "Eco-friendly leather",
+        "Adjustable strap",
+        "Spacious interior",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-09.webp",
+      images: [
+        "/assets/product/product-09.webp",
+        "/assets/product/product-10.webp",
+        "/assets/product/product-11.webp",
+        "/assets/product/product-12.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 39.99, currency: "USD" },
+      original: { amount: 49.99, currency: "USD" },
+      discount: { type: "percentage", value: 20 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 15,
+      variants: [
+        {
+          id: "BAG-BLK-001",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 75,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.7,
+      totalReviews: 150,
+      ratingBreakdown: {
+        "5stars": 110,
+        "4stars": 25,
+        "3stars": 10,
+        "2stars": 3,
+        "1star": 2,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-15T10:00:00Z",
+      updatedAt: "2023-10-16T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "SHOE-001",
+    sku: "SHOE-BLK-01",
+    gtin: {
+      upc: "123456789016",
+      ean: "1234567890164",
+    },
+    type: "footwear",
+    category: {
+      primary: "Footwear",
+      secondary: "Shoes",
+      tertiary: "Casual",
+    },
+    brand: {
+      name: "Step In Style",
+      manufacturer: "Global Footwear Inc.",
+    },
+    productDetails: {
+      title: "Step In Style Black Sneakers",
+      shortDescription: "Stylish black sneakers for everyday wear.",
+      longDescription:
+        "These black sneakers are the perfect addition to any casual outfit. Featuring a comfortable fit, soft cushioning, and a sleek design, they are ideal for daily use and easy to pair with a variety of outfits.",
+      features: [
+        "Comfortable and breathable material",
+        "Sleek and modern design",
+        "Soft cushioning for all-day comfort",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-03.webp",
+      images: [
+        "/assets/product/product-03.webp",
+        "/assets/product/product-05.webp",
+        "/assets/product/product-07.webp",
+        "/assets/product/product-08.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 49.99, currency: "USD" },
+      original: { amount: 59.99, currency: "USD" },
+      discount: { type: "percentage", value: 17 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 10,
+      variants: [
+        {
+          id: "SHOE-BLK-01",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 80,
+          sizes: ["7", "8", "9", "10"],
+          sizeStock: {
+            "7": true,
+            "8": true,
+            "9": true,
+            "10": false,
+          },
+        },
+      ],
+    },
+    ratings: {
       average: 4.5,
-      totalReviews: 100,
-      breakdown: {
-        "5-star": 60,
-        "4-star": 25,
-        "3-star": 10,
-        "2-star": 3,
-        "1-star": 2,
+      totalReviews: 200,
+      ratingBreakdown: {
+        "5stars": 120,
+        "4stars": 50,
+        "3stars": 15,
+        "2stars": 10,
+        "1star": 5,
       },
     },
-    tags: ["slim-fit", "white", "casual", "soft", "classic", "trending"],
-    sustainability: {
-      organic: false,
-      recycled: false,
-      fairTrade: false,
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
     },
-    createdAt: "2023-10-28T10:00:00Z",
-    updatedAt: "2023-10-29T14:30:00Z",
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-09-15T10:00:00Z",
+      updatedAt: "2023-09-16T14:30:00Z",
+      status: "active",
+    },
   },
   {
-    id: "CLOTH-TS-004",
-    sku: "CTS-GRY-R-004",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Comfort Grey Relaxed Fit Tee",
-    shortDescription: "Relaxed fit, breathable, everyday grey tee.",
-    longDescription:
-      "The Comfort Grey Relaxed Fit Tee is perfect for those who prefer a looser, more comfortable fit. Made from 100% breathable cotton, it ensures all-day comfort. Ideal for casual outings or lounging at home, this tee is a staple for any relaxed wardrobe. Easy to care for and maintains its shape.",
-    images: [
-      "/assets/product/product-04.webp",
-      "/assets/product/product-08.webp",
-      "/assets/product/product-12.webp",
-      "/assets/product/product-17.webp",
-      "/assets/product/product-20.webp",
-    ],
-    price: {
-      base: 24.99,
-      currency: "USD",
-      originalPrice: 29.99,
-      discountPercentage: 16,
+    id: "JWL-SS-002",
+    sku: "JWL-SIL-01",
+    gtin: {
+      upc: "123456789017",
+      ean: "1234567890175",
     },
-    variants: [
-      {
-        color: "Grey",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 150,
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Jewelry",
+      tertiary: "Necklaces",
+    },
+    brand: {
+      name: "Elegant Gems",
+      manufacturer: "Jewelry Creations Ltd.",
+    },
+    productDetails: {
+      title: "Elegant Silver Necklace with Pendant",
+      shortDescription:
+        "Delicate silver necklace with a unique pendant design.",
+      longDescription:
+        "This elegant silver necklace features a timeless pendant design, making it a perfect gift or a stunning accessory for any occasion. Crafted with high-quality silver, it adds a touch of class to any outfit.",
+      features: [
+        "Made of high-quality silver",
+        "Unique pendant design",
+        "Perfect for any occasion",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-10.webp",
+      images: [
+        "/assets/product/product-10.webp",
+        "/assets/product/product-11.webp",
+        "/assets/product/product-12.webp",
+        "/assets/product/product-13.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 79.99, currency: "USD" },
+      original: { amount: 89.99, currency: "USD" },
+      discount: { type: "percentage", value: 11 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 5,
+      variants: [
+        {
+          id: "JWL-SIL-01",
+          color: "Silver",
+          inStock: true,
+          stockQuantity: 50,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.8,
+      totalReviews: 150,
+      ratingBreakdown: {
+        "5stars": 120,
+        "4stars": 20,
+        "3stars": 5,
+        "2stars": 3,
+        "1star": 2,
       },
-    ],
-    details: ["100% Cotton", "Relaxed fit", "Breathable", "Machine washable"],
-    specifications: {
-      material: "100% Cotton",
-      weight: "180 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
     },
-    rating: {
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-09-20T10:00:00Z",
+      updatedAt: "2023-09-21T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "CHILD-T-003",
+    sku: "CHILD-BLU-01",
+    gtin: {
+      upc: "123456789018",
+      ean: "1234567890186",
+    },
+    type: "apparel",
+    category: {
+      primary: "Apparel",
+      secondary: "Children's Wear",
+      tertiary: "T-Shirts",
+    },
+    brand: {
+      name: "Kids Corner",
+      manufacturer: "Childwear Ltd.",
+    },
+    productDetails: {
+      title: "Kids Corner Blue Dinosaur T-Shirt",
+      shortDescription: "Cute and comfy dinosaur-themed T-shirt for kids.",
+      longDescription:
+        "This playful dinosaur-themed T-shirt is perfect for kids who love animals and adventure. Made from soft cotton fabric, it provides all-day comfort while adding a fun touch to any casual outfit.",
+      features: [
+        "Soft cotton material",
+        "Fun dinosaur print",
+        "Ideal for everyday wear",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-14.webp",
+      images: [
+        "/assets/product/product-14.webp",
+        "/assets/product/product-15.webp",
+        "/assets/product/product-16.webp",
+        "/assets/product/product-17.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 19.99, currency: "USD" },
+      original: { amount: 24.99, currency: "USD" },
+      discount: { type: "percentage", value: 20 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 30,
+      variants: [
+        {
+          id: "CHILD-BLU-01",
+          color: "Blue",
+          inStock: true,
+          stockQuantity: 120,
+          sizes: ["S", "M", "L"],
+          sizeStock: {
+            S: true,
+            M: true,
+            L: true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.6,
+      totalReviews: 100,
+      ratingBreakdown: {
+        "5stars": 70,
+        "4stars": 20,
+        "3stars": 5,
+        "2stars": 3,
+        "1star": 2,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-09-25T10:00:00Z",
+      updatedAt: "2023-09-26T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "BAG-LEA-001",
+    sku: "BAG-BRN-01",
+    gtin: {
+      upc: "123456789019",
+      ean: "1234567890197",
+    },
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Bags",
+      tertiary: "Handbags",
+    },
+    brand: {
+      name: "Luxury Leather",
+      manufacturer: "Leatherworks Ltd.",
+    },
+    productDetails: {
+      title: "Luxury Brown Leather Handbag",
+      shortDescription:
+        "A premium brown leather handbag with ample storage space.",
+      longDescription:
+        "This luxurious brown leather handbag is the epitome of sophistication and style. Crafted from premium leather, it features a spacious interior and multiple compartments, making it the perfect accessory for everyday use or special occasions.",
+      features: [
+        "Made from high-quality brown leather",
+        "Spacious interior with multiple compartments",
+        "Classic and elegant design",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-18.webp",
+      images: [
+        "/assets/product/product-18.webp",
+        "/assets/product/product-19.webp",
+        "/assets/product/product-20.webp",
+        "/assets/product/product-21.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 149.99, currency: "USD" },
+      original: { amount: 179.99, currency: "USD" },
+      discount: { type: "percentage", value: 17 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 5,
+      variants: [
+        {
+          id: "BAG-BRN-01",
+          color: "Brown",
+          inStock: true,
+          stockQuantity: 30,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.9,
+      totalReviews: 250,
+      ratingBreakdown: {
+        "5stars": 220,
+        "4stars": 20,
+        "3stars": 5,
+        "2stars": 3,
+        "1star": 2,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-09-28T10:00:00Z",
+      updatedAt: "2023-09-29T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "WALLET-001",
+    sku: "WAL-BLK-01",
+    gtin: {
+      upc: "123456789020",
+      ean: "1234567890208",
+    },
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Wallets",
+      tertiary: "Men's Wallets",
+    },
+    brand: {
+      name: "Wallets Plus",
+      manufacturer: "Accessories Global Inc.",
+    },
+    productDetails: {
+      title: "Black Leather Wallet with Card Slots",
+      shortDescription:
+        "A stylish black leather wallet with multiple card slots.",
+      longDescription:
+        "This sleek black leather wallet is a must-have for men who prefer functionality with style. It features multiple card slots, a coin pocket, and a bill compartment, ensuring you have everything you need in one compact design.",
+      features: [
+        "Premium black leather construction",
+        "Multiple card slots and coin pocket",
+        "Compact and stylish design",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-22.webp",
+      images: [
+        "/assets/product/product-22.webp",
+        "/assets/product/product-23.webp",
+        "/assets/product/product-24.webp",
+        "/assets/product/product-25.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 29.99, currency: "USD" },
+      original: { amount: 39.99, currency: "USD" },
+      discount: { type: "percentage", value: 25 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 10,
+      variants: [
+        {
+          id: "WAL-BLK-01",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 100,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.4,
+      totalReviews: 120,
+      ratingBreakdown: {
+        "5stars": 80,
+        "4stars": 30,
+        "3stars": 7,
+        "2stars": 2,
+        "1star": 1,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-02T10:00:00Z",
+      updatedAt: "2023-10-03T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "MENS-TS-004",
+    sku: "MENS-BLU-M-004",
+    gtin: {
+      upc: "123456789021",
+      ean: "1234567890215",
+    },
+    type: "clothing",
+    category: {
+      primary: "Apparel",
+      secondary: "Men's Wear",
+      tertiary: "T-Shirts",
+    },
+    brand: {
+      name: "Urban Edge",
+      manufacturer: "Modern Apparel Co.",
+    },
+    productDetails: {
+      title: "Urban Edge Blue Graphic T-Shirt",
+      shortDescription: "A trendy blue T-shirt with a cool graphic print.",
+      longDescription:
+        "This blue graphic T-shirt is a perfect way to express your personality. With a bold design and comfortable fit, it's an ideal choice for casual outings or a day at the beach.",
+      features: [
+        "Premium cotton fabric",
+        "Unique graphic design",
+        "Comfortable and breathable",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-26.webp",
+      images: [
+        "/assets/product/product-26.webp",
+        "/assets/product/product-27.webp",
+        "/assets/product/product-28.webp",
+        "/assets/product/product-29.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 24.99, currency: "USD" },
+      original: { amount: 29.99, currency: "USD" },
+      discount: { type: "percentage", value: 17 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 20,
+      variants: [
+        {
+          id: "MENS-BLU-M-004",
+          color: "Blue",
+          inStock: true,
+          stockQuantity: 150,
+          sizes: ["S", "M", "L", "XL"],
+          sizeStock: {
+            S: true,
+            M: true,
+            L: false,
+            XL: true,
+          },
+        },
+      ],
+    },
+    ratings: {
       average: 4.3,
       totalReviews: 90,
-      breakdown: {
-        "5-star": 50,
-        "4-star": 20,
-        "3-star": 15,
-        "2-star": 3,
-        "1-star": 2,
+      ratingBreakdown: {
+        "5stars": 50,
+        "4stars": 30,
+        "3stars": 5,
+        "2stars": 3,
+        "1star": 2,
       },
     },
-    tags: ["relaxed-fit", "grey", "casual", "comfortable", "breathable"],
-    sustainability: {
-      organic: true,
-      recycled: false,
-      fairTrade: false,
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
     },
-    createdAt: "2023-10-30T10:00:00Z",
-    updatedAt: "2023-10-31T14:30:00Z",
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-05T10:00:00Z",
+      updatedAt: "2023-10-06T14:30:00Z",
+      status: "active",
+    },
   },
   {
-    id: "CLOTH-TS-005",
-    sku: "CTS-NVY-V-005",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Sleek Navy V-Neck Tee",
-    shortDescription: "V-neck, slim fit, stylish navy tee.",
-    longDescription:
-      "The Sleek Navy V-Neck Tee offers a modern twist with its V-neck design. Made from a soft cotton blend, it provides a comfortable yet stylish look. Perfect for both casual and semi-formal occasions, this tee is a versatile piece that can be dressed up or down.",
-    images: [
-      "/assets/product/product-05.webp",
-      "/assets/product/product-09.webp",
-      "/assets/product/product-13.webp",
-      "/assets/product/product-18.webp",
-      "/assets/product/product-21.webp",
-    ],
-    price: {
-      base: 32.99,
-      currency: "USD",
-      originalPrice: 39.99,
-      discountPercentage: 17,
+    id: "SHOE-SNEAKER-001",
+    sku: "SNEAKER-BLU-42",
+    gtin: {
+      upc: "123456789022",
+      ean: "1234567890229",
     },
-    variants: [
-      {
-        color: "Navy Blue",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 120,
-      },
-    ],
-    details: ["Cotton Blend", "Slim fit", "V-neck", "Machine washable"],
-    specifications: {
-      material: "Cotton Blend",
-      weight: "170 GSM",
-      neckline: "V-Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
+    type: "footwear",
+    category: {
+      primary: "Footwear",
+      secondary: "Sneakers",
+      tertiary: "Sports Shoes",
     },
-    rating: {
-      average: 4.4,
-      totalReviews: 75,
-      breakdown: {
-        "5-star": 45,
-        "4-star": 20,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
-      },
+    brand: {
+      name: "Urban Run",
+      manufacturer: "Sports Footwear Ltd.",
     },
-    tags: ["v-neck", "navy", "slim-fit", "stylish", "versatile"],
-    sustainability: {
-      organic: false,
-      recycled: true,
-      fairTrade: false,
+    productDetails: {
+      title: "Urban Run Blue Sports Sneakers",
+      shortDescription:
+        "Blue sports sneakers designed for comfort and durability during physical activity.",
+      longDescription:
+        "The Urban Run Blue Sports Sneakers offer the perfect combination of style and functionality. Whether you're running, working out, or just on the go, these sneakers provide maximum support and comfort. Crafted with a durable sole and breathable mesh upper, they are designed to enhance performance and comfort.",
+      features: [
+        "Breathable mesh upper for maximum ventilation",
+        "Durable rubber sole for traction",
+        "Padded collar for extra comfort",
+      ],
     },
-    createdAt: "2023-11-01T10:00:00Z",
-    updatedAt: "2023-11-02T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-006",
-    sku: "CTS-BLK-LS-006",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Essential Black Long-Sleeve Tee",
-    shortDescription: "Long sleeve, slim fit, classic black tee.",
-    longDescription:
-      "The Essential Black Long-Sleeve Tee is a must-have for cooler weather. Featuring a slim fit and made from a warm cotton blend, it provides both style and comfort. Perfect for layering under jackets or wearing on its own, this tee is a versatile addition to your wardrobe.",
-    images: [
-      "/assets/product/product-06.webp",
-      "/assets/product/product-10.webp",
-      "/assets/product/product-14.webp",
-      "/assets/product/product-19.webp",
-      "/assets/product/product-22.webp",
-    ],
-    price: {
-      base: 34.99,
-      currency: "USD",
-      originalPrice: 39.99,
-      discountPercentage: 12,
+    media: {
+      primaryImage: "/assets/product/product-03.webp",
+      images: [
+        "/assets/product/product-03.webp",
+        "/assets/product/product-04.webp",
+        "/assets/product/product-05.webp",
+        "/assets/product/product-06.webp",
+      ],
     },
-    variants: [
-      {
-        color: "Black",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 100,
-      },
-    ],
-    details: ["Cotton Blend", "Slim fit", "Long sleeve", "Machine washable"],
-    specifications: {
-      material: "Cotton Blend",
-      weight: "200 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Long Sleeve",
-      careInstructions: "Machine wash cold",
+    pricing: {
+      base: { amount: 69.99, currency: "USD" },
+      original: { amount: 89.99, currency: "USD" },
+      discount: { type: "percentage", value: 22 },
     },
-    rating: {
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 10,
+      variants: [
+        {
+          id: "SNEAKER-BLU-42",
+          color: "Blue",
+          inStock: true,
+          stockQuantity: 50,
+          sizes: ["40", "41", "42", "43", "44"],
+          sizeStock: {
+            "40": true,
+            "41": true,
+            "42": true,
+            "43": true,
+            "44": false,
+          },
+        },
+      ],
+    },
+    ratings: {
       average: 4.6,
-      totalReviews: 60,
-      breakdown: {
-        "5-star": 40,
-        "4-star": 15,
-        "3-star": 3,
-        "2-star": 1,
-        "1-star": 1,
+      totalReviews: 110,
+      ratingBreakdown: {
+        "5stars": 75,
+        "4stars": 30,
+        "3stars": 5,
+        "2stars": 2,
+        "1star": 0,
       },
     },
-    tags: ["long-sleeve", "black", "slim-fit", "warm", "layering"],
-    sustainability: {
-      organic: false,
-      recycled: false,
-      fairTrade: true,
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
     },
-    createdAt: "2023-11-03T10:00:00Z",
-    updatedAt: "2023-11-04T14:30:00Z",
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-10T10:00:00Z",
+      updatedAt: "2023-10-11T14:30:00Z",
+      status: "active",
+    },
   },
   {
-    id: "CLOTH-TS-007",
-    sku: "CTS-GRN-ST-007",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Vibrant Green Striped Tee",
-    shortDescription: "Striped pattern, regular fit, eye-catching green tee.",
-    longDescription:
-      "The Vibrant Green Striped Tee adds a pop of color to your wardrobe with its bold striped pattern. Made from soft, breathable cotton, it offers a comfortable regular fit. Perfect for casual outings, this tee is sure to make a statement.",
-    images: [
-      "/assets/product/product-07.webp",
-      "/assets/product/product-11.webp",
-      "/assets/product/product-15.webp",
-      "/assets/product/product-20.webp",
-      "/assets/product/product-23.webp",
-    ],
-    price: {
-      base: 27.99,
-      currency: "USD",
-      originalPrice: 32.99,
-      discountPercentage: 15,
+    id: "GLASS-UV-001",
+    sku: "GLASS-BLK-01",
+    gtin: {
+      upc: "123456789023",
+      ean: "1234567890230",
     },
-    variants: [
-      {
-        color: "Green",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 130,
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Sunglasses",
+      tertiary: "UV Protection",
+    },
+    brand: {
+      name: "Sunny Days",
+      manufacturer: "Visionary Eyewear Inc.",
+    },
+    productDetails: {
+      title: "Sunny Days UV Protection Black Sunglasses",
+      shortDescription:
+        "Stylish black sunglasses providing 100% UV protection.",
+      longDescription:
+        "These Sunny Days black sunglasses offer ultimate protection against harmful UV rays while keeping you stylish. Whether you're at the beach or strolling around the city, these sunglasses are the perfect accessory for any sunny day.",
+      features: [
+        "100% UV protection",
+        "Classic black frame",
+        "Durable and lightweight",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-07.webp",
+      images: [
+        "/assets/product/product-07.webp",
+        "/assets/product/product-08.webp",
+        "/assets/product/product-09.webp",
+        "/assets/product/product-10.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 19.99, currency: "USD" },
+      original: { amount: 25.99, currency: "USD" },
+      discount: { type: "percentage", value: 23 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 30,
+      variants: [
+        {
+          id: "GLASS-BLK-01",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 100,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.7,
+      totalReviews: 75,
+      ratingBreakdown: {
+        "5stars": 50,
+        "4stars": 20,
+        "3stars": 3,
+        "2stars": 2,
+        "1star": 0,
       },
-    ],
-    details: [
-      "100% Cotton",
-      "Regular fit",
-      "Striped pattern",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "100% Cotton",
-      weight: "160 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
     },
-    rating: {
-      average: 4.1,
-      totalReviews: 50,
-      breakdown: {
-        "5-star": 25,
-        "4-star": 15,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
-      },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
     },
-    tags: ["striped", "green", "regular-fit", "casual", "eye-catching"],
-    sustainability: {
-      organic: true,
-      recycled: true,
-      fairTrade: false,
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
     },
-    createdAt: "2023-11-05T10:00:00Z",
-    updatedAt: "2023-11-06T14:30:00Z",
+    metadata: {
+      createdAt: "2023-10-12T10:00:00Z",
+      updatedAt: "2023-10-13T14:30:00Z",
+      status: "active",
+    },
   },
   {
-    id: "CLOTH-TS-008",
-    sku: "CTS-BLU-ST-008",
+    id: "WOMEN-TOP-001",
+    sku: "TOP-WHT-M-001",
+    gtin: {
+      upc: "123456789024",
+      ean: "1234567890246",
+    },
     type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Ocean Blue Striped Tee",
-    shortDescription: "Striped pattern, regular fit, calming blue tee.",
-    longDescription:
-      "The Ocean Blue Striped Tee brings a fresh, calming vibe to your wardrobe with its cool blue stripes. Made from soft, breathable cotton, it offers a comfortable regular fit. Perfect for casual outings or a relaxed day at home, this tee is both stylish and versatile.",
-    images: [
-      "/assets/product/product-08.webp",
-      "/assets/product/product-12.webp",
-      "/assets/product/product-16.webp",
-      "/assets/product/product-21.webp",
-      "/assets/product/product-24.webp",
-    ],
-    price: {
-      base: 27.99,
-      currency: "USD",
-      originalPrice: 32.99,
-      discountPercentage: 15,
+    category: {
+      primary: "Apparel",
+      secondary: "Women's Wear",
+      tertiary: "Tops",
     },
-    variants: [
-      {
-        color: "Blue",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 140,
-      },
-    ],
-    details: [
-      "100% Cotton",
-      "Regular fit",
-      "Striped pattern",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "100% Cotton",
-      weight: "160 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
+    brand: {
+      name: "Chic Fashion",
+      manufacturer: "Chic Apparel Inc.",
     },
-    rating: {
-      average: 4.2,
-      totalReviews: 60,
-      breakdown: {
-        "5-star": 30,
-        "4-star": 18,
-        "3-star": 8,
-        "2-star": 3,
-        "1-star": 1,
-      },
+    productDetails: {
+      title: "Chic White Casual Top",
+      shortDescription:
+        "A casual white top that pairs well with almost anything.",
+      longDescription:
+        "This casual white top is a versatile piece that works for any occasion. Whether you're at the office, hanging out with friends, or enjoying a weekend outing, this top provides the perfect balance of style and comfort.",
+      features: [
+        "Soft and breathable fabric",
+        "Simple yet stylish design",
+        "Machine washable",
+      ],
     },
-    tags: ["striped", "blue", "regular-fit", "casual", "calming"],
-    sustainability: {
-      organic: true,
-      recycled: true,
-      fairTrade: false,
+    media: {
+      primaryImage: "/assets/product/product-11.webp",
+      images: [
+        "/assets/product/product-11.webp",
+        "/assets/product/product-12.webp",
+        "/assets/product/product-13.webp",
+        "/assets/product/product-14.webp",
+      ],
     },
-    createdAt: "2023-11-07T10:00:00Z",
-    updatedAt: "2023-11-08T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-009",
-    sku: "CTS-BW-CHK-009",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Classic Checkered Tee",
-    shortDescription:
-      "Checkered pattern, regular fit, timeless black and white tee.",
-    longDescription:
-      "The Classic Checkered Tee features a timeless black and white checkered pattern that adds a touch of retro flair to your wardrobe. Made from soft, breathable cotton, it offers a comfortable regular fit. Perfect for pairing with jeans or shorts for a casual, stylish look.",
-    images: [
-      "/assets/product/product-09.webp",
-      "/assets/product/product-13.webp",
-      "/assets/product/product-17.webp",
-      "/assets/product/product-22.webp",
-      "/assets/product/product-25.webp",
-    ],
-    price: {
-      base: 29.99,
-      currency: "USD",
-      originalPrice: 34.99,
-      discountPercentage: 14,
+    pricing: {
+      base: { amount: 29.99, currency: "USD" },
+      original: { amount: 35.99, currency: "USD" },
+      discount: { type: "percentage", value: 17 },
     },
-    variants: [
-      {
-        color: "Black and White",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 120,
-      },
-    ],
-    details: [
-      "100% Cotton",
-      "Regular fit",
-      "Checkered pattern",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "100% Cotton",
-      weight: "160 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 25,
+      variants: [
+        {
+          id: "TOP-WHT-M-001",
+          color: "White",
+          inStock: true,
+          stockQuantity: 60,
+          sizes: ["S", "M", "L"],
+          sizeStock: {
+            S: true,
+            M: false,
+            L: true,
+          },
+        },
+      ],
     },
-    rating: {
-      average: 4.3,
-      totalReviews: 55,
-      breakdown: {
-        "5-star": 28,
-        "4-star": 16,
-        "3-star": 7,
-        "2-star": 3,
-        "1-star": 1,
-      },
-    },
-    tags: ["checkered", "black-and-white", "regular-fit", "casual", "classic"],
-    sustainability: {
-      organic: true,
-      recycled: true,
-      fairTrade: false,
-    },
-    createdAt: "2023-11-09T10:00:00Z",
-    updatedAt: "2023-11-10T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-010",
-    sku: "CTS-NVY-SF-010",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Navy Slim Fit Tee",
-    shortDescription: "Solid color, slim fit, sleek navy tee.",
-    longDescription:
-      "The Navy Slim Fit Tee offers a modern, tailored look with its slim fit design. Made from soft, breathable cotton, it’s perfect for a polished casual outfit. Whether layered under a jacket or worn on its own, this tee is a versatile wardrobe staple.",
-    images: [
-      "/assets/product/product-10.webp",
-      "/assets/product/product-14.webp",
-      "/assets/product/product-18.webp",
-      "/assets/product/product-23.webp",
-      "/assets/product/product-26.webp",
-    ],
-    price: {
-      base: 26.99,
-      currency: "USD",
-      originalPrice: 31.99,
-      discountPercentage: 16,
-    },
-    variants: [
-      {
-        color: "Navy",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 150,
-      },
-    ],
-    details: ["100% Cotton", "Slim fit", "Solid color", "Machine washable"],
-    specifications: {
-      material: "100% Cotton",
-      weight: "160 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
-    },
-    rating: {
-      average: 4.0,
-      totalReviews: 45,
-      breakdown: {
-        "5-star": 20,
-        "4-star": 15,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
-      },
-    },
-    tags: ["slim-fit", "navy", "solid", "casual", "sleek"],
-    sustainability: {
-      organic: true,
-      recycled: true,
-      fairTrade: false,
-    },
-    createdAt: "2023-11-11T10:00:00Z",
-    updatedAt: "2023-11-12T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-011",
-    sku: "CTS-GRY-VN-011",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Heather Grey V-Neck Tee",
-    shortDescription: "V-neck, regular fit, soft grey tee.",
-    longDescription:
-      "The Heather Grey V-Neck Tee adds a touch of sophistication with its V-neck design. Made from a comfortable cotton blend, it offers a regular fit that’s perfect for layering or wearing on its own. Ideal for a casual yet polished look.",
-    images: [
-      "/assets/product/product-11.webp",
-      "/assets/product/product-15.webp",
-      "/assets/product/product-19.webp",
-      "/assets/product/product-24.webp",
-      "/assets/product/product-27.webp",
-    ],
-    price: {
-      base: 28.99,
-      currency: "USD",
-      originalPrice: 33.99,
-      discountPercentage: 15,
-    },
-    variants: [
-      {
-        color: "Heather Grey",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 110,
-      },
-    ],
-    details: ["Cotton Blend", "Regular fit", "V-neck", "Machine washable"],
-    specifications: {
-      material: "Cotton Blend",
-      weight: "160 GSM",
-      neckline: "V-Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
-    },
-    rating: {
-      average: 4.4,
-      totalReviews: 65,
-      breakdown: {
-        "5-star": 35,
-        "4-star": 20,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
-      },
-    },
-    tags: ["v-neck", "grey", "regular-fit", "casual", "soft"],
-    sustainability: {
-      organic: false,
-      recycled: false,
-      fairTrade: true,
-    },
-    createdAt: "2023-11-13T10:00:00Z",
-    updatedAt: "2023-11-14T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-012",
-    sku: "CTS-BRG-LS-012",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Burgundy Long Sleeve Tee",
-    shortDescription: "Long sleeve, regular fit, rich burgundy tee.",
-    longDescription:
-      "The Burgundy Long Sleeve Tee is perfect for cooler days. Made from warm, breathable cotton, it offers a comfortable regular fit and a deep, rich color that adds warmth to your wardrobe. Ideal for layering or wearing on its own.",
-    images: [
-      "/assets/product/product-12.webp",
-      "/assets/product/product-16.webp",
-      "/assets/product/product-20.webp",
-      "/assets/product/product-25.webp",
-      "/assets/product/product-28.webp",
-    ],
-    price: {
-      base: 32.99,
-      currency: "USD",
-      originalPrice: 37.99,
-      discountPercentage: 13,
-    },
-    variants: [
-      {
-        color: "Burgundy",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 90,
-      },
-    ],
-    details: ["100% Cotton", "Regular fit", "Long sleeve", "Machine washable"],
-    specifications: {
-      material: "100% Cotton",
-      weight: "180 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Long Sleeve",
-      careInstructions: "Machine wash cold",
-    },
-    rating: {
+    ratings: {
       average: 4.5,
+      totalReviews: 60,
+      ratingBreakdown: {
+        "5stars": 35,
+        "4stars": 15,
+        "3stars": 5,
+        "2stars": 3,
+        "1star": 2,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-15T10:00:00Z",
+      updatedAt: "2023-10-16T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "BAG-TOTE-001",
+    sku: "TOTE-BLK-01",
+    gtin: {
+      upc: "123456789025",
+      ean: "1234567890257",
+    },
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Bags",
+      tertiary: "Totes",
+    },
+    brand: {
+      name: "Urban Chic",
+      manufacturer: "Chic Accessories Ltd.",
+    },
+    productDetails: {
+      title: "Urban Chic Black Tote Bag",
+      shortDescription:
+        "A stylish and spacious black tote bag for everyday use.",
+      longDescription:
+        "The Urban Chic Black Tote Bag is a perfect blend of functionality and style. Made from durable fabric with reinforced stitching, this spacious tote is perfect for carrying your essentials. Its sleek black design complements any outfit, making it suitable for work, shopping, or casual outings.",
+      features: [
+        "Durable and lightweight fabric",
+        "Spacious interior with multiple compartments",
+        "Reinforced stitching for extra strength",
+        "Stylish and versatile design",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-15.webp",
+      images: [
+        "/assets/product/product-15.webp",
+        "/assets/product/product-16.webp",
+        "/assets/product/product-17.webp",
+        "/assets/product/product-18.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 39.99, currency: "USD" },
+      original: { amount: 49.99, currency: "USD" },
+      discount: { type: "percentage", value: 20 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 15,
+      variants: [
+        {
+          id: "TOTE-BLK-01",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 40,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.3,
+      totalReviews: 52,
+      ratingBreakdown: {
+        "5stars": 30,
+        "4stars": 15,
+        "3stars": 5,
+        "2stars": 2,
+        "1star": 0,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-17T10:00:00Z",
+      updatedAt: "2023-10-18T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "WATCH-SPORT-001",
+    sku: "WATCH-BLK-01",
+    gtin: {
+      upc: "123456789026",
+      ean: "1234567890268",
+    },
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Watches",
+      tertiary: "Sport Watches",
+    },
+    brand: {
+      name: "TimeMaster",
+      manufacturer: "Precision Watches Inc.",
+    },
+    productDetails: {
+      title: "TimeMaster Black Sport Watch",
+      shortDescription:
+        "Durable black sport watch with waterproof capabilities.",
+      longDescription:
+        "The TimeMaster Black Sport Watch is designed for active individuals who need a reliable timepiece. Featuring a rugged black design and waterproof functionality, it's perfect for outdoor activities, sports, or casual wear. Its clear display and durable construction make it a great companion for any adventure.",
+      features: [
+        "Waterproof up to 50 meters",
+        "Durable silicone strap",
+        "Rugged black design with clear display",
+        "Easy-to-read digital screen",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-19.webp",
+      images: [
+        "/assets/product/product-19.webp",
+        "/assets/product/product-20.webp",
+        "/assets/product/product-21.webp",
+        "/assets/product/product-22.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 79.99, currency: "USD" },
+      original: { amount: 99.99, currency: "USD" },
+      discount: { type: "percentage", value: 20 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 10,
+      variants: [
+        {
+          id: "WATCH-BLK-01",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 50,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.8,
+      totalReviews: 88,
+      ratingBreakdown: {
+        "5stars": 60,
+        "4stars": 25,
+        "3stars": 2,
+        "2stars": 1,
+        "1star": 0,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-20T10:00:00Z",
+      updatedAt: "2023-10-21T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "CHILD-COAT-001",
+    sku: "COAT-BLU-3Y",
+    gtin: {
+      upc: "123456789027",
+      ean: "1234567890279",
+    },
+    type: "clothing",
+    category: {
+      primary: "Apparel",
+      secondary: "Children's Wear",
+      tertiary: "Outerwear",
+    },
+    brand: {
+      name: "Kids World",
+      manufacturer: "Little Ones Apparel",
+    },
+    productDetails: {
+      title: "Kids World Blue Winter Coat",
+      shortDescription: "Warm and cozy winter coat for children.",
+      longDescription:
+        "The Kids World Blue Winter Coat is designed to keep children warm during the cold winter months. With its soft inner lining and durable outer fabric, this coat offers comfort and protection from the elements. The bright blue color and fun design make it a favorite for kids while parents appreciate its warmth and durability.",
+      features: [
+        "Soft inner lining for warmth",
+        "Durable water-resistant outer fabric",
+        "Bright and fun design",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-23.webp",
+      images: [
+        "/assets/product/product-23.webp",
+        "/assets/product/product-24.webp",
+        "/assets/product/product-25.webp",
+        "/assets/product/product-26.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 39.99, currency: "USD" },
+      original: { amount: 49.99, currency: "USD" },
+      discount: { type: "percentage", value: 20 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 20,
+      variants: [
+        {
+          id: "COAT-BLU-3Y",
+          color: "Blue",
+          inStock: true,
+          stockQuantity: 60,
+          sizes: ["2Y", "3Y", "4Y", "5Y"],
+          sizeStock: {
+            "2Y": true,
+            "3Y": true,
+            "4Y": false,
+            "5Y": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.6,
+      totalReviews: 40,
+      ratingBreakdown: {
+        "5stars": 25,
+        "4stars": 10,
+        "3stars": 3,
+        "2stars": 2,
+        "1star": 0,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-22T10:00:00Z",
+      updatedAt: "2023-10-23T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "SHOE-SNEAKER-001",
+    sku: "SNEAKER-BLU-42",
+    gtin: {
+      upc: "123456789028",
+      ean: "1234567890280",
+    },
+    type: "footwear",
+    category: {
+      primary: "Footwear",
+      secondary: "Sneakers",
+      tertiary: "Casual",
+    },
+    brand: {
+      name: "StridePro",
+      manufacturer: "StridePro Sportswear",
+    },
+    productDetails: {
+      title: "StridePro Blue Casual Sneakers",
+      shortDescription:
+        "Comfortable and stylish blue sneakers for everyday wear.",
+      longDescription:
+        "The StridePro Blue Casual Sneakers are perfect for everyday activities. Featuring a cushioned sole for maximum comfort and a stylish blue design, these sneakers are ideal for casual outings, sports, or running errands. The breathable material ensures that your feet stay fresh throughout the day.",
+      features: [
+        "Breathable material for comfort",
+        "Cushioned sole for extra support",
+        "Durable rubber outsole",
+        "Stylish blue color",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-27.webp",
+      images: [
+        "/assets/product/product-27.webp",
+        "/assets/product/product-28.webp",
+        "/assets/product/product-29.webp",
+        "/assets/product/product-30.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 59.99, currency: "USD" },
+      original: { amount: 79.99, currency: "USD" },
+      discount: { type: "percentage", value: 25 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 10,
+      variants: [
+        {
+          id: "SNEAKER-BLU-42",
+          color: "Blue",
+          inStock: true,
+          stockQuantity: 30,
+          sizes: ["40", "41", "42", "43", "44"],
+          sizeStock: {
+            "40": true,
+            "41": true,
+            "42": false,
+            "43": true,
+            "44": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.7,
+      totalReviews: 120,
+      ratingBreakdown: {
+        "5stars": 85,
+        "4stars": 25,
+        "3stars": 5,
+        "2stars": 3,
+        "1star": 2,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-24T10:00:00Z",
+      updatedAt: "2023-10-25T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "WALLET-LEATHER-001",
+    sku: "WALLET-BRN-01",
+    gtin: {
+      upc: "123456789029",
+      ean: "1234567890291",
+    },
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Wallets",
+      tertiary: "Leather",
+    },
+    brand: {
+      name: "Luxury Goods",
+      manufacturer: "HighEnd Leather Co.",
+    },
+    productDetails: {
+      title: "Luxury Goods Brown Leather Wallet",
+      shortDescription:
+        "Sleek brown leather wallet with multiple compartments.",
+      longDescription:
+        "The Luxury Goods Brown Leather Wallet is a timeless accessory made from high-quality leather. With a sleek and minimalist design, it offers ample storage for cash, cards, and IDs. This wallet exudes sophistication and durability, making it an essential accessory for both casual and formal settings.",
+      features: [
+        "Genuine leather construction",
+        "Multiple card slots and compartments",
+        "Slim and minimalist design",
+        "Durable and long-lasting",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-31.webp",
+      images: [
+        "/assets/product/product-31.webp",
+        "/assets/product/product-32.webp",
+        "/assets/product/product-33.webp",
+        "/assets/product/product-34.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 49.99, currency: "USD" },
+      original: { amount: 69.99, currency: "USD" },
+      discount: { type: "percentage", value: 28 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 5,
+      variants: [
+        {
+          id: "WALLET-BRN-01",
+          color: "Brown",
+          inStock: true,
+          stockQuantity: 12,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.9,
+      totalReviews: 55,
+      ratingBreakdown: {
+        "5stars": 50,
+        "4stars": 5,
+        "3stars": 0,
+        "2stars": 0,
+        "1star": 0,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-26T10:00:00Z",
+      updatedAt: "2023-10-27T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "JWL-RING-001",
+    sku: "RING-GLD-SM",
+    gtin: {
+      upc: "123456789030",
+      ean: "1234567890303",
+    },
+    type: "jewelry",
+    category: {
+      primary: "Jewelry",
+      secondary: "Rings",
+      tertiary: "Gold",
+    },
+    brand: {
+      name: "Glamour Jewelers",
+      manufacturer: "Glamour Jewelers Co.",
+    },
+    productDetails: {
+      title: "Glamour Jewelers Gold Ring",
+      shortDescription: "Elegant gold ring for special occasions.",
+      longDescription:
+        "The Glamour Jewelers Gold Ring is the perfect piece for adding a touch of luxury to any occasion. Made from high-quality 14k gold, it features a sleek and polished design. Whether you're attending a wedding, anniversary, or other special event, this ring is sure to complement your style.",
+      features: [
+        "14k gold construction",
+        "Sleek and elegant design",
+        "Perfect for special occasions",
+        "Hypoallergenic material",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-35.webp",
+      images: [
+        "/assets/product/product-35.webp",
+        "/assets/product/product-36.webp",
+        "/assets/product/product-37.webp",
+        "/assets/product/product-38.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 149.99, currency: "USD" },
+      original: { amount: 179.99, currency: "USD" },
+      discount: { type: "percentage", value: 17 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 3,
+      variants: [
+        {
+          id: "RING-GLD-SM",
+          color: "Gold",
+          inStock: true,
+          stockQuantity: 5,
+          sizes: ["6", "7", "8", "9"],
+          sizeStock: {
+            "6": true,
+            "7": true,
+            "8": false,
+            "9": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.8,
+      totalReviews: 75,
+      ratingBreakdown: {
+        "5stars": 60,
+        "4stars": 10,
+        "3stars": 4,
+        "2stars": 1,
+        "1star": 0,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-28T10:00:00Z",
+      updatedAt: "2023-10-29T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "BAG-TOTE-001",
+    sku: "TOTE-BLK-M",
+    gtin: {
+      upc: "123456789031",
+      ean: "1234567890314",
+    },
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Bags",
+      tertiary: "Tote",
+    },
+    brand: {
+      name: "Classic Styles",
+      manufacturer: "Bag Innovations Ltd.",
+    },
+    productDetails: {
+      title: "Classic Styles Black Tote Bag",
+      shortDescription: "A stylish black tote bag perfect for everyday use.",
+      longDescription:
+        "The Classic Styles Black Tote Bag offers a timeless and versatile design, ideal for both work and casual outings. Featuring a spacious interior and durable leather construction, it’s the perfect blend of fashion and functionality. The black color ensures it matches with any outfit, making it an essential accessory for any wardrobe.",
+      features: [
+        "High-quality leather construction",
+        "Spacious interior with multiple compartments",
+        "Versatile and durable design",
+        "Perfect for everyday use",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-39.webp",
+      images: [
+        "/assets/product/product-39.webp",
+        "/assets/product/product-40.webp",
+        "/assets/product/product-41.webp",
+        "/assets/product/product-42.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 69.99, currency: "USD" },
+      original: { amount: 89.99, currency: "USD" },
+      discount: { type: "percentage", value: 22 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 8,
+      variants: [
+        {
+          id: "TOTE-BLK-M",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 15,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.6,
+      totalReviews: 90,
+      ratingBreakdown: {
+        "5stars": 60,
+        "4stars": 25,
+        "3stars": 4,
+        "2stars": 1,
+        "1star": 0,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-29T10:00:00Z",
+      updatedAt: "2023-10-30T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "WOMEN-DRESS-003",
+    sku: "DRESS-BLUE-M",
+    gtin: {
+      upc: "123456789032",
+      ean: "1234567890325",
+    },
+    type: "clothing",
+    category: {
+      primary: "Apparel",
+      secondary: "Dresses",
+      tertiary: "Casual",
+    },
+    brand: {
+      name: "Elegant Trends",
+      manufacturer: "Trendy Apparel Co.",
+    },
+    productDetails: {
+      title: "Elegant Trends Casual Blue Dress",
+      shortDescription:
+        "A relaxed blue dress that offers both comfort and style.",
+      longDescription:
+        "The Elegant Trends Casual Blue Dress is designed to be both stylish and comfortable. Perfect for a casual day out, this dress offers a flattering fit and a light, breathable fabric. The simple yet elegant design makes it versatile for a variety of occasions. Dress it up with accessories or keep it casual with sandals for the ultimate easy-going look.",
+      features: [
+        "Lightweight and breathable fabric",
+        "Flattering fit for most body types",
+        "Easy to dress up or down",
+        "Machine washable",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-43.webp",
+      images: [
+        "/assets/product/product-43.webp",
+        "/assets/product/product-44.webp",
+        "/assets/product/product-45.webp",
+        "/assets/product/product-46.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 39.99, currency: "USD" },
+      original: { amount: 59.99, currency: "USD" },
+      discount: { type: "percentage", value: 33 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 10,
+      variants: [
+        {
+          id: "DRESS-BLUE-M",
+          color: "Blue",
+          inStock: true,
+          stockQuantity: 20,
+          sizes: ["S", "M", "L", "XL"],
+          sizeStock: {
+            S: true,
+            M: true,
+            L: false,
+            XL: true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.5,
+      totalReviews: 110,
+      ratingBreakdown: {
+        "5stars": 55,
+        "4stars": 40,
+        "3stars": 10,
+        "2stars": 3,
+        "1star": 2,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-11-01T10:00:00Z",
+      updatedAt: "2023-11-02T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "KIDS-TOY-004",
+    sku: "TOY-PLUSH-XXL",
+    gtin: {
+      upc: "123456789033",
+      ean: "1234567890336",
+    },
+    type: "toys",
+    category: {
+      primary: "Toys",
+      secondary: "Plush Toys",
+      tertiary: "Animals",
+    },
+    brand: {
+      name: "Cuddle Buddies",
+      manufacturer: "Toys & Co.",
+    },
+    productDetails: {
+      title: "Cuddle Buddies Giant Plush Bear",
+      shortDescription:
+        "A giant, huggable plush bear that is perfect for cuddles.",
+      longDescription:
+        "The Cuddle Buddies Giant Plush Bear is the ultimate cuddle companion for kids and adults alike. Made with soft, high-quality fabric, it’s perfect for hugging and snuggling. Its large size makes it a standout addition to any room. This plush bear is a great gift for birthdays, holidays, or simply to add a little extra comfort to your home.",
+      features: [
+        "Super soft, plush fabric",
+        "Giant size for ultimate cuddles",
+        "Machine washable for easy cleaning",
+        "Perfect for all ages",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-47.webp",
+      images: [
+        "/assets/product/product-47.webp",
+        "/assets/product/product-48.webp",
+        "/assets/product/product-49.webp",
+        "/assets/product/product-50.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 99.99, currency: "USD" },
+      original: { amount: 129.99, currency: "USD" },
+      discount: { type: "percentage", value: 23 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 5,
+      variants: [
+        {
+          id: "TOY-PLUSH-XXL",
+          color: "Brown",
+          inStock: true,
+          stockQuantity: 10,
+          sizes: ["XXL"],
+          sizeStock: {
+            XXL: true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.8,
       totalReviews: 70,
-      breakdown: {
-        "5-star": 40,
-        "4-star": 20,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
+      ratingBreakdown: {
+        "5stars": 60,
+        "4stars": 8,
+        "3stars": 2,
+        "2stars": 0,
+        "1star": 0,
       },
     },
-    tags: ["long-sleeve", "burgundy", "regular-fit", "casual", "warm"],
-    sustainability: {
-      organic: true,
-      recycled: false,
-      fairTrade: true,
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
     },
-    createdAt: "2023-11-15T10:00:00Z",
-    updatedAt: "2023-11-16T14:30:00Z",
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-10-30T10:00:00Z",
+      updatedAt: "2023-10-31T14:30:00Z",
+      status: "active",
+    },
   },
   {
-    id: "CLOTH-TS-018",
-    sku: "CTS-YLW-GR-018",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Sunny Yellow Graphic Tee",
-    shortDescription: "Graphic print, regular fit, bright yellow tee.",
-    longDescription:
-      "Brighten up your casual collection with the Sunny Yellow Graphic Tee. Featuring a bold graphic print on soft, breathable cotton, this regular fit T-shirt adds a cheerful pop of color and personality to your everyday style. Perfect for sunny days or standing out in a crowd.",
-    images: [
-      "/assets/product/product-18.webp",
-      "/assets/product/product-22.webp",
-      "/assets/product/product-26.webp",
-      "/assets/product/product-31.webp",
-      "/assets/product/product-34.webp",
-    ],
-    price: {
-      base: 29.99,
-      currency: "USD",
-      originalPrice: 34.99,
-      discountPercentage: 14,
+    id: "SHOES-SPORT-005",
+    sku: "SPORT-RED-10",
+    gtin: {
+      upc: "123456789034",
+      ean: "1234567890347",
     },
-    variants: [
-      {
-        color: "Yellow",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 115,
-      },
-    ],
-    details: [
-      "100% Cotton",
-      "Regular fit",
-      "Graphic print",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "100% Cotton",
-      weight: "160 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
+    type: "footwear",
+    category: {
+      primary: "Footwear",
+      secondary: "Sports Shoes",
+      tertiary: "Running",
     },
-    rating: {
-      average: 4.3,
-      totalReviews: 58,
-      breakdown: {
-        "5-star": 30,
-        "4-star": 17,
-        "3-star": 8,
-        "2-star": 2,
-        "1-star": 1,
-      },
+    brand: {
+      name: "ActivePro",
+      manufacturer: "Sporty Footwear Inc.",
     },
-    tags: ["graphic", "yellow", "regular-fit", "casual", "sunny"],
-    sustainability: {
-      organic: true,
-      recycled: false,
-      fairTrade: false,
+    productDetails: {
+      title: "ActivePro Red Running Shoes",
+      shortDescription:
+        "Lightweight and durable running shoes designed for maximum comfort.",
+      longDescription:
+        "The ActivePro Red Running Shoes provide superior comfort and durability for runners. Featuring a breathable mesh upper, cushioned sole, and durable outsole, these shoes are designed to withstand long runs and intense workouts. The bold red color adds a touch of style, making them perfect for athletes who want both performance and aesthetics.",
+      features: [
+        "Breathable mesh upper",
+        "Cushioned sole for comfort",
+        "Durable rubber outsole",
+        "Lightweight design for speed",
+      ],
     },
-    createdAt: "2023-11-27T10:00:00Z",
-    updatedAt: "2023-11-28T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-019",
-    sku: "CTS-NVY-OS-019",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Deep Navy Oversized Tee",
-    shortDescription: "Solid color, oversized fit, rich navy tee.",
-    longDescription:
-      "Embrace laid-back style with the Deep Navy Oversized Tee. Crafted from soft, breathable cotton, this rich navy T-shirt features an oversized fit for ultimate comfort and a modern silhouette. Ideal for lounging or pairing with slim jeans for a balanced look.",
-    images: [
-      "/assets/product/product-19.webp",
-      "/assets/product/product-23.webp",
-      "/assets/product/product-27.webp",
-      "/assets/product/product-32.webp",
-      "/assets/product/product-35.webp",
-    ],
-    price: {
-      base: 31.99,
-      currency: "USD",
-      originalPrice: 37.99,
-      discountPercentage: 16,
+    media: {
+      primaryImage: "/assets/product/product-51.webp",
+      images: [
+        "/assets/product/product-51.webp",
+        "/assets/product/product-52.webp",
+        "/assets/product/product-53.webp",
+        "/assets/product/product-54.webp",
+      ],
     },
-    variants: [
-      {
-        color: "Navy",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 140,
-      },
-    ],
-    details: [
-      "100% Cotton",
-      "Oversized fit",
-      "Solid color",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "100% Cotton",
-      weight: "180 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
+    pricing: {
+      base: { amount: 69.99, currency: "USD" },
+      original: { amount: 89.99, currency: "USD" },
+      discount: { type: "percentage", value: 22 },
     },
-    rating: {
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 12,
+      variants: [
+        {
+          id: "SPORT-RED-10",
+          color: "Red",
+          inStock: true,
+          stockQuantity: 15,
+          sizes: ["8", "9", "10", "11", "12"],
+          sizeStock: {
+            "8": true,
+            "9": true,
+            "10": true,
+            "11": false,
+            "12": true,
+          },
+        },
+      ],
+    },
+    ratings: {
       average: 4.4,
-      totalReviews: 62,
-      breakdown: {
-        "5-star": 33,
-        "4-star": 19,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
+      totalReviews: 85,
+      ratingBreakdown: {
+        "5stars": 45,
+        "4stars": 30,
+        "3stars": 7,
+        "2stars": 3,
+        "1star": 0,
       },
     },
-    tags: ["oversized", "navy", "solid", "casual", "relaxed"],
-    sustainability: {
-      organic: false,
-      recycled: true,
-      fairTrade: false,
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
     },
-    createdAt: "2023-11-29T10:00:00Z",
-    updatedAt: "2023-11-30T14:30:00Z",
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-11-02T10:00:00Z",
+      updatedAt: "2023-11-03T14:30:00Z",
+      status: "active",
+    },
   },
   {
-    id: "CLOTH-TS-020",
-    sku: "CTS-OLV-CN-020",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Olive Green Crew Neck Tee",
-    shortDescription: "Solid color, regular fit, earthy olive tee.",
-    longDescription:
-      "The Olive Green Crew Neck Tee brings an earthy tone to your casual wardrobe. Made from soft, breathable cotton with a regular fit, its crew neck design offers a subtle twist on the classic round neck. Perfect for a understated yet stylish look.",
-    images: [
-      "/assets/product/product-20.webp",
-      "/assets/product/product-24.webp",
-      "/assets/product/product-28.webp",
-      "/assets/product/product-33.webp",
-      "/assets/product/product-36.webp",
-    ],
-    price: {
-      base: 27.99,
-      currency: "USD",
-      originalPrice: 32.99,
-      discountPercentage: 15,
+    id: "WOMEN-WALLET-006",
+    sku: "WALLET-BROWN-02",
+    gtin: {
+      upc: "123456789035",
+      ean: "1234567890358",
     },
-    variants: [
-      {
-        color: "Olive Green",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 125,
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Wallets",
+      tertiary: "Clutch",
+    },
+    brand: {
+      name: "Lux Style",
+      manufacturer: "Lux Accessories Ltd.",
+    },
+    productDetails: {
+      title: "Lux Style Brown Clutch Wallet",
+      shortDescription:
+        "A stylish, sleek clutch wallet for women with multiple compartments.",
+      longDescription:
+        "The Lux Style Brown Clutch Wallet is perfect for women who prefer both style and functionality. Made from high-quality leather, this wallet features multiple card slots, a coin pocket, and a sleek zip-around closure. The minimalist design makes it a versatile accessory that pairs well with both casual and formal attire.",
+      features: [
+        "Premium leather construction",
+        "Multiple card slots and compartments",
+        "Zip-around closure",
+        "Slim and sleek design",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-55.webp",
+      images: [
+        "/assets/product/product-55.webp",
+        "/assets/product/product-56.webp",
+        "/assets/product/product-57.webp",
+        "/assets/product/product-58.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 39.99, currency: "USD" },
+      original: { amount: 49.99, currency: "USD" },
+      discount: { type: "percentage", value: 20 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 8,
+      variants: [
+        {
+          id: "WALLET-BROWN-02",
+          color: "Brown",
+          inStock: true,
+          stockQuantity: 18,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.7,
+      totalReviews: 75,
+      ratingBreakdown: {
+        "5stars": 55,
+        "4stars": 15,
+        "3stars": 3,
+        "2stars": 1,
+        "1star": 1,
       },
-    ],
-    details: ["100% Cotton", "Regular fit", "Crew neck", "Machine washable"],
-    specifications: {
-      material: "100% Cotton",
-      weight: "160 GSM",
-      neckline: "Crew Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
     },
-    rating: {
-      average: 4.2,
-      totalReviews: 53,
-      breakdown: {
-        "5-star": 27,
-        "4-star": 16,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
-      },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
     },
-    tags: ["crew-neck", "olive", "solid", "casual", "earthy"],
-    sustainability: {
-      organic: false,
-      recycled: false,
-      fairTrade: true,
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
     },
-    createdAt: "2023-12-01T10:00:00Z",
-    updatedAt: "2023-12-02T14:30:00Z",
+    metadata: {
+      createdAt: "2023-11-03T10:00:00Z",
+      updatedAt: "2023-11-04T14:30:00Z",
+      status: "active",
+    },
   },
   {
-    id: "CLOTH-TS-021",
-    sku: "CTS-CHR-LS-021",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Charcoal Striped Long-Sleeve Tee",
-    shortDescription: "Striped pattern, regular fit, sleek charcoal tee.",
-    longDescription:
-      "Stay stylish and cozy with the Charcoal Striped Long-Sleeve Tee. Featuring a subtle striped pattern in a sleek charcoal hue, this long-sleeve T-shirt is made from soft cotton for all-day comfort. The regular fit makes it a versatile choice for layering or solo wear.",
-    images: [
-      "/assets/product/product-21.webp",
-      "/assets/product/product-25.webp",
-      "/assets/product/product-29.webp",
-      "/assets/product/product-34.webp",
-      "/assets/product/product-37.webp",
-    ],
-    price: {
-      base: 32.99,
-      currency: "USD",
-      originalPrice: 38.99,
-      discountPercentage: 15,
+    id: "MEN-WATCH-007",
+    sku: "WATCH-BLACK-02",
+    gtin: {
+      upc: "123456789036",
+      ean: "1234567890369",
     },
-    variants: [
-      {
-        color: "Charcoal",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 105,
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Watches",
+      tertiary: "Men's Watches",
+    },
+    brand: {
+      name: "Elite Time",
+      manufacturer: "Elite Timepieces Ltd.",
+    },
+    productDetails: {
+      title: "Elite Time Black Leather Strap Watch",
+      shortDescription:
+        "A sleek, sophisticated men's watch with a black leather strap.",
+      longDescription:
+        "The Elite Time Black Leather Strap Watch is designed for men who appreciate timeless style. Featuring a classic analog display, the watch boasts a genuine leather strap and stainless steel casing. Whether for work or formal events, this watch adds an element of sophistication to any outfit.",
+      features: [
+        "Genuine leather strap",
+        "Stainless steel casing",
+        "Analog display",
+        "Water-resistant",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-59.webp",
+      images: [
+        "/assets/product/product-59.webp",
+        "/assets/product/product-60.webp",
+        "/assets/product/product-61.webp",
+        "/assets/product/product-62.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 129.99, currency: "USD" },
+      original: { amount: 159.99, currency: "USD" },
+      discount: { type: "percentage", value: 19 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 6,
+      variants: [
+        {
+          id: "WATCH-BLACK-02",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 10,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.8,
+      totalReviews: 120,
+      ratingBreakdown: {
+        "5stars": 95,
+        "4stars": 20,
+        "3stars": 3,
+        "2stars": 2,
+        "1star": 0,
       },
-    ],
-    details: [
-      "100% Cotton",
-      "Regular fit",
-      "Striped pattern",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "100% Cotton",
-      weight: "180 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Long Sleeve",
-      careInstructions: "Machine wash cold",
     },
-    rating: {
-      average: 4.5,
-      totalReviews: 68,
-      breakdown: {
-        "5-star": 38,
-        "4-star": 20,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
-      },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
     },
-    tags: ["striped", "charcoal", "long-sleeve", "casual", "sleek"],
-    sustainability: {
-      organic: true,
-      recycled: false,
-      fairTrade: true,
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
     },
-    createdAt: "2023-12-03T10:00:00Z",
-    updatedAt: "2023-12-04T14:30:00Z",
+    metadata: {
+      createdAt: "2023-11-05T10:00:00Z",
+      updatedAt: "2023-11-06T14:30:00Z",
+      status: "active",
+    },
   },
   {
-    id: "CLOTH-TS-022",
-    sku: "CTS-COR-VN-022",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Coral Slim V-Neck Tee",
-    shortDescription: "Solid color, slim fit, vibrant coral tee.",
-    longDescription:
-      "Make a statement with the Coral Slim V-Neck Tee. This vibrant coral T-shirt features a slim fit and V-neck design, crafted from soft cotton for a flattering, comfortable wear. Ideal for adding a splash of color to your casual outfits with a modern edge.",
-    images: [
-      "/assets/product/product-22.webp",
-      "/assets/product/product-26.webp",
-      "/assets/product/product-30.webp",
-      "/assets/product/product-35.webp",
-      "/assets/product/product-38.webp",
-    ],
-    price: {
-      base: 28.99,
-      currency: "USD",
-      originalPrice: 33.99,
-      discountPercentage: 15,
+    id: "WOMEN-GLASS-008",
+    sku: "GLASS-RED-01",
+    gtin: {
+      upc: "123456789037",
+      ean: "1234567890370",
     },
-    variants: [
-      {
-        color: "Coral",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 120,
-      },
-    ],
-    details: ["100% Cotton", "Slim fit", "V-neck", "Machine washable"],
-    specifications: {
-      material: "100% Cotton",
-      weight: "160 GSM",
-      neckline: "V-Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Eyewear",
+      tertiary: "Sunglasses",
     },
-    rating: {
-      average: 4.1,
-      totalReviews: 54,
-      breakdown: {
-        "5-star": 26,
-        "4-star": 17,
-        "3-star": 8,
-        "2-star": 2,
-        "1-star": 1,
-      },
+    brand: {
+      name: "Sunny Shades",
+      manufacturer: "Shady Eyewear Co.",
     },
-    tags: ["v-neck", "coral", "slim-fit", "casual", "vibrant"],
-    sustainability: {
-      organic: false,
-      recycled: true,
-      fairTrade: false,
+    productDetails: {
+      title: "Sunny Shades Red Cat-Eye Sunglasses",
+      shortDescription:
+        "Stylish red cat-eye sunglasses for women, offering UV protection.",
+      longDescription:
+        "The Sunny Shades Red Cat-Eye Sunglasses are a perfect blend of vintage charm and modern flair. With their bold red frames and high-quality lenses, they provide full UV protection while adding a stylish touch to any outfit. These sunglasses are the perfect accessory for sunny days, giving you both protection and style.",
+      features: [
+        "Red cat-eye frames for a retro look",
+        "UV400 protection against harmful rays",
+        "Durable and lightweight",
+        "Perfect for both casual and formal outfits",
+      ],
     },
-    createdAt: "2023-12-05T10:00:00Z",
-    updatedAt: "2023-12-06T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-013",
-    sku: "CTS-RED-PD-013",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Red Polka Dot Tee",
-    shortDescription: "Polka dot pattern, regular fit, playful red tee.",
-    longDescription:
-      "Add a touch of fun to your wardrobe with the Red Polka Dot Tee. Featuring a classic polka dot pattern in bold red and white, this regular fit T-shirt is made from soft, breathable cotton. Perfect for casual outings, this tee is both comfortable and stylish.",
-    images: [
-      "/assets/product/product-13.webp",
-      "/assets/product/product-17.webp",
-      "/assets/product/product-21.webp",
-      "/assets/product/product-26.webp",
-      "/assets/product/product-29.webp",
-    ],
-    price: {
-      base: 28.99,
-      currency: "USD",
-      originalPrice: 33.99,
-      discountPercentage: 15,
+    media: {
+      primaryImage: "/assets/product/product-63.webp",
+      images: [
+        "/assets/product/product-63.webp",
+        "/assets/product/product-64.webp",
+        "/assets/product/product-65.webp",
+        "/assets/product/product-66.webp",
+      ],
     },
-    variants: [
-      {
-        color: "Red",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 120,
-      },
-    ],
-    details: [
-      "100% Cotton",
-      "Regular fit",
-      "Polka dot pattern",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "100% Cotton",
-      weight: "160 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
+    pricing: {
+      base: { amount: 29.99, currency: "USD" },
+      original: { amount: 39.99, currency: "USD" },
+      discount: { type: "percentage", value: 25 },
     },
-    rating: {
-      average: 4.2,
-      totalReviews: 55,
-      breakdown: {
-        "5-star": 28,
-        "4-star": 16,
-        "3-star": 8,
-        "2-star": 2,
-        "1-star": 1,
-      },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 15,
+      variants: [
+        {
+          id: "GLASS-RED-01",
+          color: "Red",
+          inStock: true,
+          stockQuantity: 25,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
     },
-    tags: ["polka-dot", "red", "regular-fit", "casual", "playful"],
-    sustainability: {
-      organic: false,
-      recycled: false,
-      fairTrade: false,
-    },
-    createdAt: "2023-11-17T10:00:00Z",
-    updatedAt: "2023-11-18T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-014",
-    sku: "CTS-PUR-FL-014",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Purple Floral Tee",
-    shortDescription: "Floral print, slim fit, elegant purple tee.",
-    longDescription:
-      "The Purple Floral Tee combines elegance and comfort with its slim fit and beautiful floral print. Made from a soft cotton blend, this V-neck T-shirt is perfect for adding a feminine touch to your casual wardrobe. Ideal for both day and evening wear.",
-    images: [
-      "/assets/product/product-14.webp",
-      "/assets/product/product-18.webp",
-      "/assets/product/product-22.webp",
-      "/assets/product/product-27.webp",
-      "/assets/product/product-30.webp",
-    ],
-    price: {
-      base: 30.99,
-      currency: "USD",
-      originalPrice: 35.99,
-      discountPercentage: 14,
-    },
-    variants: [
-      {
-        color: "Purple",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 110,
-      },
-    ],
-    details: ["Cotton Blend", "Slim fit", "Floral print", "Machine washable"],
-    specifications: {
-      material: "Cotton Blend",
-      weight: "160 GSM",
-      neckline: "V-Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
-    },
-    rating: {
-      average: 4.3,
-      totalReviews: 60,
-      breakdown: {
-        "5-star": 32,
-        "4-star": 18,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
-      },
-    },
-    tags: ["floral", "purple", "slim-fit", "casual", "elegant"],
-    sustainability: {
-      organic: false,
-      recycled: false,
-      fairTrade: false,
-    },
-    createdAt: "2023-11-19T10:00:00Z",
-    updatedAt: "2023-11-20T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-015",
-    sku: "CTS-BGE-OS-015",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Beige Oversized Tee",
-    shortDescription: "Solid color, oversized fit, neutral beige tee.",
-    longDescription:
-      "The Beige Oversized Tee is perfect for a relaxed, effortless look. Made from soft, organic cotton, this T-shirt features an oversized fit that’s both comfortable and on-trend. Its neutral beige color makes it easy to pair with any outfit.",
-    images: [
-      "/assets/product/product-15.webp",
-      "/assets/product/product-19.webp",
-      "/assets/product/product-23.webp",
-      "/assets/product/product-28.webp",
-      "/assets/product/product-31.webp",
-    ],
-    price: {
-      base: 32.99,
-      currency: "USD",
-      originalPrice: 37.99,
-      discountPercentage: 13,
-    },
-    variants: [
-      {
-        color: "Beige",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 100,
-      },
-    ],
-    details: [
-      "Organic Cotton",
-      "Oversized fit",
-      "Solid color",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "Organic Cotton",
-      weight: "180 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
-    },
-    rating: {
-      average: 4.4,
-      totalReviews: 65,
-      breakdown: {
-        "5-star": 35,
-        "4-star": 20,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
-      },
-    },
-    tags: ["oversized", "beige", "solid", "casual", "neutral"],
-    sustainability: {
-      organic: true,
-      recycled: false,
-      fairTrade: false,
-    },
-    createdAt: "2023-11-21T10:00:00Z",
-    updatedAt: "2023-11-22T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-016",
-    sku: "CTS-GRN-GE-016",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Green Geometric Tee",
-    shortDescription: "Geometric pattern, regular fit, modern green tee.",
-    longDescription:
-      "The Green Geometric Tee offers a contemporary look with its unique geometric pattern. Made from soft, breathable cotton, this regular fit T-shirt features a scoop neck for added style. Perfect for those who want to stand out in a crowd.",
-    images: [
-      "/assets/product/product-16.webp",
-      "/assets/product/product-20.webp",
-      "/assets/product/product-24.webp",
-      "/assets/product/product-29.webp",
-      "/assets/product/product-32.webp",
-    ],
-    price: {
-      base: 29.99,
-      currency: "USD",
-      originalPrice: 34.99,
-      discountPercentage: 14,
-    },
-    variants: [
-      {
-        color: "Green",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 115,
-      },
-    ],
-    details: [
-      "100% Cotton",
-      "Regular fit",
-      "Geometric pattern",
-      "Machine washable",
-    ],
-    specifications: {
-      material: "100% Cotton",
-      weight: "160 GSM",
-      neckline: "Scoop Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
-    },
-    rating: {
-      average: 4.1,
-      totalReviews: 50,
-      breakdown: {
-        "5-star": 25,
-        "4-star": 15,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
-      },
-    },
-    tags: ["geometric", "green", "regular-fit", "casual", "modern"],
-    sustainability: {
-      organic: false,
-      recycled: false,
-      fairTrade: false,
-    },
-    createdAt: "2023-11-23T10:00:00Z",
-    updatedAt: "2023-11-24T14:30:00Z",
-  },
-  {
-    id: "CLOTH-TS-017",
-    sku: "CTS-BLU-LG-017",
-    type: "clothing",
-    category: "T-Shirts",
-    subCategory: "Casual Wear",
-    brand: "Street Style",
-    title: "Blue Logo Tee",
-    shortDescription: "Solid color with logo, slim fit, classic blue tee.",
-    longDescription:
-      "The Blue Logo Tee features a minimalist design with a small logo on the chest. Made from a soft cotton blend, this slim fit T-shirt is perfect for a clean, modern look. Ideal for casual outings or layering under a jacket.",
-    images: [
-      "/assets/product/product-17.webp",
-      "/assets/product/product-21.webp",
-      "/assets/product/product-25.webp",
-      "/assets/product/product-30.webp",
-      "/assets/product/product-33.webp",
-    ],
-    price: {
-      base: 27.99,
-      currency: "USD",
-      originalPrice: 32.99,
-      discountPercentage: 15,
-    },
-    variants: [
-      {
-        color: "Blue",
-        sizes: ["S", "M", "L", "XL"],
-        inStock: true,
-        stockQuantity: 130,
-      },
-    ],
-    details: ["Cotton Blend", "Slim fit", "Logo detail", "Machine washable"],
-    specifications: {
-      material: "Cotton Blend",
-      weight: "160 GSM",
-      neckline: "Round Neck",
-      sleeveLength: "Short Sleeve",
-      careInstructions: "Machine wash cold",
-    },
-    rating: {
-      average: 4.0,
+    ratings: {
+      average: 4.6,
       totalReviews: 45,
-      breakdown: {
-        "5-star": 20,
-        "4-star": 15,
-        "3-star": 7,
-        "2-star": 2,
-        "1-star": 1,
+      ratingBreakdown: {
+        "5stars": 25,
+        "4stars": 15,
+        "3stars": 5,
+        "2stars": 0,
+        "1star": 0,
       },
     },
-    tags: ["logo", "blue", "slim-fit", "casual", "classic"],
-    sustainability: {
-      organic: false,
-      recycled: false,
-      fairTrade: false,
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
     },
-    createdAt: "2023-11-25T10:00:00Z",
-    updatedAt: "2023-11-26T14:30:00Z",
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-11-06T10:00:00Z",
+      updatedAt: "2023-11-07T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "KIDS-TOY-009",
+    sku: "TOY-DOLL-04",
+    gtin: {
+      upc: "123456789038",
+      ean: "1234567890381",
+    },
+    type: "toys",
+    category: {
+      primary: "Toys",
+      secondary: "Dolls",
+      tertiary: "Fashion Dolls",
+    },
+    brand: {
+      name: "Kiddo Fun",
+      manufacturer: "Toy World Inc.",
+    },
+    productDetails: {
+      title: "Kiddo Fun Fashion Doll Set",
+      shortDescription:
+        "A set of fashion dolls with accessories, perfect for imaginative play.",
+      longDescription:
+        "The Kiddo Fun Fashion Doll Set includes three beautifully designed dolls, each with its own outfit and accessories. The dolls come with interchangeable outfits, shoes, and hairstyles, allowing kids to create their own fashion designs and play scenarios. These dolls are a great way to encourage creative and imaginative play, while also being a fun collectible item for any young fashion enthusiast.",
+      features: [
+        "Three dolls with unique outfits and accessories",
+        "Interchangeable outfits and hairstyles",
+        "Encourages imaginative play",
+        "Made from durable, safe materials",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-67.webp",
+      images: [
+        "/assets/product/product-67.webp",
+        "/assets/product/product-68.webp",
+        "/assets/product/product-69.webp",
+        "/assets/product/product-70.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 24.99, currency: "USD" },
+      original: { amount: 34.99, currency: "USD" },
+      discount: { type: "percentage", value: 29 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 10,
+      variants: [
+        {
+          id: "TOY-DOLL-04",
+          color: "Multicolor",
+          inStock: true,
+          stockQuantity: 20,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.8,
+      totalReviews: 60,
+      ratingBreakdown: {
+        "5stars": 50,
+        "4stars": 8,
+        "3stars": 2,
+        "2stars": 0,
+        "1star": 0,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unopened packaging", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-11-08T10:00:00Z",
+      updatedAt: "2023-11-09T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "CLOTH-JACKET-010",
+    sku: "JKT-BLK-M-01",
+    gtin: {
+      upc: "123456789039",
+      ean: "1234567890394",
+    },
+    type: "clothing",
+    category: {
+      primary: "Apparel",
+      secondary: "Jackets",
+      tertiary: "Winter Wear",
+    },
+    brand: {
+      name: "WinterWear",
+      manufacturer: "ColdShield Apparel",
+    },
+    productDetails: {
+      title: "WinterWear Black Puffer Jacket",
+      shortDescription:
+        "A warm, insulated puffer jacket perfect for cold weather.",
+      longDescription:
+        "The WinterWear Black Puffer Jacket is designed to keep you warm and stylish during the winter months. Made with insulated material, this jacket offers superior warmth while maintaining a sleek, modern look. The jacket features a zippered front, adjustable hood, and multiple pockets, making it both functional and fashionable for cold weather.",
+      features: [
+        "Insulated for warmth in cold weather",
+        "Adjustable hood for added protection",
+        "Multiple pockets for convenience",
+        "Water-resistant finish",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-71.webp",
+      images: [
+        "/assets/product/product-71.webp",
+        "/assets/product/product-72.webp",
+        "/assets/product/product-73.webp",
+        "/assets/product/product-74.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 99.99, currency: "USD" },
+      original: { amount: 129.99, currency: "USD" },
+      discount: { type: "percentage", value: 23 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 5,
+      variants: [
+        {
+          id: "JKT-BLK-M-01",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 12,
+          sizes: ["M", "L", "XL"],
+          sizeStock: {
+            M: true,
+            L: false,
+            XL: true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.5,
+      totalReviews: 45,
+      ratingBreakdown: {
+        "5stars": 28,
+        "4stars": 12,
+        "3stars": 3,
+        "2stars": 1,
+        "1star": 1,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-11-10T10:00:00Z",
+      updatedAt: "2023-11-11T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "MEN-SHOE-011",
+    sku: "SHOE-BLK-42-01",
+    gtin: {
+      upc: "123456789040",
+      ean: "1234567890402",
+    },
+    type: "footwear",
+    category: {
+      primary: "Footwear",
+      secondary: "Sneakers",
+      tertiary: "Casual Sneakers",
+    },
+    brand: {
+      name: "UrbanStride",
+      manufacturer: "Stride Footwear Co.",
+    },
+    productDetails: {
+      title: "UrbanStride Black Casual Sneakers",
+      shortDescription:
+        "Comfortable and stylish black sneakers perfect for everyday wear.",
+      longDescription:
+        "The UrbanStride Black Casual Sneakers are designed for comfort and style. Featuring a breathable mesh upper and cushioned sole, these sneakers are perfect for all-day wear. Whether you're out for a casual walk or meeting up with friends, these sneakers will keep you looking sharp while ensuring comfort.",
+      features: [
+        "Breathable mesh upper for ventilation",
+        "Cushioned sole for comfort",
+        "Stylish black design",
+        "Durable rubber outsole",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-75.webp",
+      images: [
+        "/assets/product/product-75.webp",
+        "/assets/product/product-76.webp",
+        "/assets/product/product-77.webp",
+        "/assets/product/product-78.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 49.99, currency: "USD" },
+      original: { amount: 69.99, currency: "USD" },
+      discount: { type: "percentage", value: 28 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 10,
+      variants: [
+        {
+          id: "SHOE-BLK-42-01",
+          color: "Black",
+          inStock: true,
+          stockQuantity: 15,
+          sizes: ["42", "43", "44"],
+          sizeStock: {
+            "42": true,
+            "43": false,
+            "44": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.4,
+      totalReviews: 60,
+      ratingBreakdown: {
+        "5stars": 30,
+        "4stars": 20,
+        "3stars": 5,
+        "2stars": 3,
+        "1star": 2,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-11-15T10:00:00Z",
+      updatedAt: "2023-11-16T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "WOMEN-BAG-012",
+    sku: "BAG-RED-01",
+    gtin: {
+      upc: "123456789041",
+      ean: "1234567890413",
+    },
+    type: "accessories",
+    category: {
+      primary: "Accessories",
+      secondary: "Bags",
+      tertiary: "Handbags",
+    },
+    brand: {
+      name: "LuxeTote",
+      manufacturer: "Luxe Accessories",
+    },
+    productDetails: {
+      title: "LuxeTote Red Leather Handbag",
+      shortDescription:
+        "A chic red leather handbag, perfect for everyday elegance.",
+      longDescription:
+        "The LuxeTote Red Leather Handbag is designed for the modern woman who values both style and functionality. Made from premium leather, this handbag offers both sophistication and practicality. With its spacious interior, multiple compartments, and luxurious red color, it can hold everything you need for your daily activities while adding a touch of elegance to your look.",
+      features: [
+        "Premium red leather for durability and style",
+        "Spacious interior with multiple compartments",
+        "Elegant design for everyday use",
+        "Gold-tone hardware for added luxury",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-79.webp",
+      images: [
+        "/assets/product/product-79.webp",
+        "/assets/product/product-80.webp",
+        "/assets/product/product-81.webp",
+        "/assets/product/product-82.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 129.99, currency: "USD" },
+      original: { amount: 159.99, currency: "USD" },
+      discount: { type: "percentage", value: 19 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 5,
+      variants: [
+        {
+          id: "BAG-RED-01",
+          color: "Red",
+          inStock: true,
+          stockQuantity: 12,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.7,
+      totalReviews: 40,
+      ratingBreakdown: {
+        "5stars": 30,
+        "4stars": 8,
+        "3stars": 2,
+        "2stars": 0,
+        "1star": 0,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-11-17T10:00:00Z",
+      updatedAt: "2023-11-18T14:30:00Z",
+      status: "active",
+    },
+  },
+  {
+    id: "KIDS-TOY-013",
+    sku: "TOY-PLUSH-02",
+    gtin: {
+      upc: "123456789042",
+      ean: "1234567890425",
+    },
+    type: "toys",
+    category: {
+      primary: "Toys",
+      secondary: "Plush Toys",
+      tertiary: "Stuffed Animals",
+    },
+    brand: {
+      name: "SoftCuddles",
+      manufacturer: "Plushie World",
+    },
+    productDetails: {
+      title: "SoftCuddles Plush Elephant Toy",
+      shortDescription:
+        "A soft and cuddly plush elephant, perfect for snuggling.",
+      longDescription:
+        "The SoftCuddles Plush Elephant Toy is made for those who love soft, huggable toys. With its detailed design, soft fabric, and friendly features, it’s the perfect companion for kids of all ages. Whether for playtime or bedtime, this elephant plush brings comfort and joy with every cuddle.",
+      features: [
+        "Super soft plush fabric",
+        "Adorable elephant design",
+        "Great for all ages",
+        "Perfect for cuddling or as a decorative piece",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-83.webp",
+      images: [
+        "/assets/product/product-83.webp",
+        "/assets/product/product-84.webp",
+        "/assets/product/product-85.webp",
+        "/assets/product/product-86.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 19.99, currency: "USD" },
+      original: { amount: 24.99, currency: "USD" },
+      discount: { type: "percentage", value: 20 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 20,
+      variants: [
+        {
+          id: "TOY-PLUSH-02",
+          color: "Gray",
+          inStock: true,
+          stockQuantity: 30,
+          sizes: ["One Size"],
+          sizeStock: {
+            "One Size": true,
+          },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.9,
+      totalReviews: 70,
+      ratingBreakdown: {
+        "5stars": 60,
+        "4stars": 8,
+        "3stars": 2,
+        "2stars": 0,
+        "1star": 0,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: { domestic: "3-5 days", international: "7-14 days" },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: ["Unworn item", "Original tags attached"],
+    },
+    metadata: {
+      createdAt: "2023-11-18T10:00:00Z",
+      updatedAt: "2023-11-19T14:30:00Z",
+      status: "active",
+    },
   },
 ];
