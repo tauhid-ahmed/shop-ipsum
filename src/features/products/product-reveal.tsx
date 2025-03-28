@@ -9,35 +9,36 @@ import { LucideMoveRight } from "lucide-react";
 import Embla, { useEmblaContext } from "@/components/embla";
 import ProductCard from "./product-card";
 import { productsPath } from "@/constants/paths";
-import { data } from "@/data/products";
+import { products } from "@/data/products";
+import { getTrendingProducts } from "@/lib/product-ranking";
 
 type ProductRevealProps = {
   category: string;
 };
 
 export default function ProductReveal({ category }: ProductRevealProps) {
-  const productsData = data.filter((data) =>
-    data.tags.includes(category.toLowerCase())
-  );
+  const productsData = getTrendingProducts(products);
 
-  const products =
-    productsData.length > 0
-      ? productsData.map((productData) => ({
-          id: productData.id,
-          title: productData.title,
-          brand: productData.brand,
-          description: productData.shortDescription,
-          image: [productData.images[0]],
-          price: productData.price.base,
-          averageRating: 4.5,
-          totalReviews: 512,
-        }))
-      : [];
+  // const productsByCategory = [];
+  // productsData.length > 0
+  //   ? productsData.map((productData) => ({
+  //       id: productData.id,
+  //       title: productData.title,
+  //       brand: productData.brand,
+  //       description: productData.shortDescription,
+  //       image: [productData.images[0]],
+  //       price: productData.price.base,
+  //       averageRating: 4.5,
+  //       totalReviews: 512,
+  //     }))
+  //   : [];
+
+  console.log(productsData);
 
   return (
     <>
       <Section padding="sm">
-        <Embla data={products} delay={6000} slidesPerView={4}>
+        {/* <Embla data={productsByCategory} delay={6000} slidesPerView={4}>
           <Container>
             <div className="space-y-4 group">
               <div className="flex justify-between items-baseline">
@@ -58,7 +59,7 @@ export default function ProductReveal({ category }: ProductRevealProps) {
               </div>
             </div>
           </Container>
-        </Embla>
+        </Embla> */}
       </Section>
     </>
   );

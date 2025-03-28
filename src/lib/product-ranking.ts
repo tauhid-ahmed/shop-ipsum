@@ -3,13 +3,15 @@ import { differenceInDays } from "date-fns";
 // Type Definitions
 type Product = {
   id: string;
-  name: string;
+  title: string;
   price: number;
   category: string;
   salesCount: number;
   revenue: number;
   createdAt: Date;
-  rating: number;
+  ratings: {
+    average: number;
+  };
   views: number;
   discountPercentage?: number;
   stockQuantity: number;
@@ -55,9 +57,15 @@ const calculateTrendScore = (product: Product): number => {
   );
   const viewEngagement =
     product.views / Math.max(daysSinceCreation, DEFAULT_DAYS_SINCE_CREATION);
+  console.log({
+    viewEngagement,
+    salesVelocity,
+    ratings: product.ratings.average,
+  });
+
   return (
     salesVelocity * SALES_WEIGHT +
-    product.rating * RATING_WEIGHT +
+    product.ratings.average * RATING_WEIGHT +
     viewEngagement * VIEW_WEIGHT
   );
 };
@@ -71,7 +79,7 @@ const calculateValueScore = (product: Product): number => {
       ? STOCK_PENALTY_MULTIPLIER
       : 1;
   return (
-    (product.rating * RATING_MULTIPLIER +
+    (product.ratings.average * RATING_MULTIPLIER +
       discountEffect +
       (product.salesCount / POPULARITY_DIVISOR) * 10 +
       (1 / product.price) * PRICE_EFFICIENCY_MULTIPLIER) *
@@ -98,11 +106,12 @@ const getBestSelling = (
     .slice(0, limit);
 };
 
-const getTrendingProducts = (
+export const getTrendingProducts = (
   products: Product[],
   options: RankingOptions = {}
 ): Product[] => {
   const { timeFrameInDays = 7, limit = 10 } = options;
+
   return products
     .map((product) => ({
       ...product,
@@ -161,7 +170,10 @@ const calculateMatchScore = (
   if (preferences.category && product.category === preferences.category) {
     score += MATCH_SCORE_CATEGORY;
   }
-  if (preferences.minRating && product.rating >= preferences.minRating) {
+  if (
+    preferences.minRating &&
+    product.ratings.average >= preferences.minRating
+  ) {
     score += MATCH_SCORE_RATING;
   }
   return score;
@@ -171,13 +183,13 @@ const calculateMatchScore = (
 const exampleProducts: Product[] = [
   {
     id: "PROD001",
-    name: "Wireless Headphones",
+    title: "Wireless Headphones",
     price: 199.99,
     category: "Electronics",
     salesCount: 500,
     revenue: 99995,
     createdAt: new Date(),
-    rating: 4.5,
+    ratings: { average: 4.5 },
     views: 2000,
     discountPercentage: 15,
     stockQuantity: 100,
