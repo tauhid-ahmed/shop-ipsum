@@ -6,6 +6,7 @@ import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Heading } from "@/components/heading";
 import { ProductImageGallery } from "./product-image-gallery";
 import { type ProductType } from "@/data/products";
+import { LucideStar } from "lucide-react";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   return (
@@ -19,22 +20,25 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                 alt={product.productDetails.title}
               />
             </div>
-            <div className="flex-1">
-              <div className="border-b border-border pb-4">
-                <Heading size="2xl" as="h2">
+            <div className="flex-1 space-y-4">
+              <div className="space-y-2 border-b-2 border-border border-dashed pb-4">
+                <Heading size="md" as="h2">
+                  {product.brand.name}
+                </Heading>
+                <Heading size="2xl" as="h3">
                   {product.productDetails.title}
                 </Heading>
-                <strong className="text-xl">
-                  {product.pricing.base.amount}
-                </strong>
-                <p>{product.productDetails.longDescription}</p>
-                <p className="text-sm">
-                  Pay in 4 interest-free installments for orders over $5000 with
-                  &nbsp;
-                  <strong>shop pay</strong>
-                  <Button variant="link">Learn more</Button>
-                </p>
+                <ProductMetadata
+                  originalPrice={product.pricing.original.amount}
+                  basePrice={product.pricing.base.amount}
+                  salesCount={product.salesCount}
+                  averageRating={product.ratings.average}
+                />
               </div>
+
+              <ProductDescription
+                description={product.productDetails.longDescription}
+              />
               <ProductColorVariants title="Select Color" />
               <ProductSizeVariants title="Select Size" />
               <div className="py-4 space-y-4">
@@ -50,5 +54,52 @@ export default function ProductDetails({ product }: { product: ProductType }) {
         </Container>
       </Section>
     </>
+  );
+}
+
+type ProductMetadataProps = {
+  basePrice: number;
+  originalPrice: number;
+  salesCount: number;
+  averageRating: number;
+};
+
+function ProductMetadata({
+  basePrice,
+  originalPrice,
+  salesCount,
+  averageRating,
+}: ProductMetadataProps) {
+  return (
+    <div className="flex gap-4 items-center">
+      <span>{originalPrice}</span>
+      <strong className="text-xl">{basePrice}</strong>
+      <span className="text-foreground/70 ml-auto">{salesCount} sold</span>
+      <span className="flex items-center">
+        <LucideStar className="fill-yellow-400 stroke-yellow-500" />
+        {averageRating}
+      </span>
+    </div>
+  );
+}
+
+function ProductDescription({ description }: { description: string }) {
+  return (
+    <div className="space-y-2">
+      <Heading as="h3" size="xl">
+        Description:
+      </Heading>
+      <p className="text-foreground/90">{description}</p>
+    </div>
+  );
+}
+
+function AdditionalInfo() {
+  return (
+    <p className="text-sm">
+      Pay in 4 interest-free installments for orders over $5000 with &nbsp;
+      <strong>shop pay</strong>
+      <Button variant="link">Learn more</Button>
+    </p>
   );
 }

@@ -36,15 +36,15 @@ export function Heading({
     xs: "text-xs",
     sm: "text-sm",
     md: "text-base",
-    lg: "text-base sm:text-lg",
-    xl: "text-lg sm:text-xl",
-    "2xl": "text-xl sm:text-2xl",
-    "3xl": "text-2xl sm:text-3xl",
-    "4xl": "text-3xl sm:text-4xl",
-    "5xl": "text-3xl sm:text-4xl md:text-5xl",
-    "6xl": "text-4xl sm:text-5xl md:text-6xl",
-    "7xl": "text-5xl sm:text-6xl md:text-7xl", // ~72px at largest size
-    "8xl": "text-5xl sm:text-6xl md:text-8xl", // For special cases
+    lg: "text-base md:text-lg",
+    xl: "text-lg md:text-xl",
+    "2xl": "text-xl md:text-2xl",
+    "3xl": "text-2xl md:text-3xl",
+    "4xl": "text-3xl md:text-4xl",
+    "5xl": "text-3xl md:text-4xl lg:text-5xl",
+    "6xl": "text-4xl md:text-5xl lg:text-6xl",
+    "7xl": "text-5xl md:text-6xl lg:text-7xl", // ~72px at largest size
+    "8xl": "text-5xl md:text-6xl lg:text-8xl", // For special cases
   } as const;
 
   const fontWeightClasses = {

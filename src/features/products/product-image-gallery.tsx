@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button";
 import {
   LucideShare,
   LucideHeart,
-  LucideChevronLeft,
-  LucideChevronRight,
+  // LucideChevronLeft,
+  // LucideChevronRight,
 } from "lucide-react";
 
 type ProductImageGalleryProps = {
@@ -117,15 +117,15 @@ function ProductMetadata() {
   );
 }
 
-function ImageNavigation() {
-  return (
-    <div className="flex flex-col gap-2 mt-auto">
-      <Button variant="ghost" size="icon">
-        <LucideChevronLeft />
-      </Button>
-      <Button variant="ghost" size="icon">
-        <LucideChevronRight />
-      </Button>
-    </div>
-  );
-}
+// function ImageNavigation() {
+//   return (
+//     <div className="flex flex-col gap-2 mt-auto">
+//       <Button variant="ghost" size="icon">
+//         <LucideChevronLeft />
+//       </Button>
+//       <Button variant="ghost" size="icon">
+//         <LucideChevronRight />
+//       </Button>
+//     </div>
+//   );
+// }
