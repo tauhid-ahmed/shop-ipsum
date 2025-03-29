@@ -35,11 +35,11 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
       <div className="overflow-hidden relative bg-secondary/20">
         <motion.div
           initial={{
-            opacity: 0.2,
+            opacity: 0.8,
           }}
           animate={{ opacity: 1 }}
           transition={{
-            duration: 0.3,
+            duration: 0.2,
             type: "tween",
             ease: "backInOut",
           }}
@@ -60,6 +60,7 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
             height="400"
             className="object-contain size-full group-hover:opacity-0 [.is-touched_&]:opacity-0"
             draggable="false"
+            priority
           />
           <div
             style={{

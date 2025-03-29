@@ -5,9 +5,21 @@ import { useEffect, useState } from "react";
 
 const defaultProduct = products[1];
 
+type AvailableAttribute<T extends string> = {
+  [K in T]: string;
+} & {
+  inStock: boolean;
+};
+
+type ColorAttribute = AvailableAttribute<"color">;
+type SizeAttribute = AvailableAttribute<"size">;
+
 export function useProductAttributes(product: ProductType = defaultProduct) {
-  const [availableColors, setAvailableColors] = useState<string[]>([]);
-  const [availableSizes, setAvailableSizes] = useState<string[]>([]);
+  const [allColors, setAllColors] = useState<string[]>([]);
+  const [allSizes, setAllSizes] = useState<string[]>([]);
+  const [availableColors, setAvailableColors] = useState<ColorAttribute[]>([]);
+  const [availableSizes, setAvailableSizes] = useState<SizeAttribute[]>([]);
+
   const { inventory } = product;
 
   useEffect(() => {
@@ -27,9 +39,9 @@ export function useProductAttributes(product: ProductType = defaultProduct) {
       }
     );
 
-    setAvailableColors(uniqueAttributes.colors);
-    setAvailableSizes(uniqueAttributes.sizes);
+    setAllColors(uniqueAttributes.colors);
+    setAllSizes(uniqueAttributes.sizes);
   }, [inventory.variants]);
 
-  return { availableColors, availableSizes };
+  return { allColors, allSizes };
 }
