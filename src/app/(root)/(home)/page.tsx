@@ -4,11 +4,13 @@ import ProductCategoryCard from "@/features/products/product-category-preview";
 import ProductPromo from "@/features/products/product-promo";
 import { products } from "@/data/products";
 import { getTrendingProducts } from "@/lib/product-ranking";
+import ProductSelector from "@/features/products/attributes";
 
 export default async function Home() {
   const trendingProducts = getTrendingProducts(products);
   return (
     <>
+      <ProductSelector />
       <IntroBanner />
       <ProductReveal title="Trending" products={trendingProducts} />
       <ProductCategoryCard />

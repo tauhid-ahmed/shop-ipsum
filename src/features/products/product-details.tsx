@@ -40,7 +40,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                 description={product.productDetails.longDescription}
               />
               <ProductColorVariants title="Select Color" />
-              <ProductSizeVariants title="Select Size" />
+              <ProductSizeVariants />
               <div className="py-4 space-y-4">
                 <Button className="w-full" size="lg">
                   Buy it Now

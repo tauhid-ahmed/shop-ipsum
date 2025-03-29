@@ -12,32 +12,24 @@ type ProductSizeVariantsProps = {
 
 const data = ["XXS", "XS", "S", "M", "L", "XL", "XXL"];
 
-export function ProductSizeVariants({
-  title = "Size",
-  className,
-}: ProductSizeVariantsProps) {
+export function ProductSizeVariants() {
   const [value, setValue] = React.useState("L");
   return (
-    <div className={cn("space-y-1", className)}>
-      <Heading size="md" as="h3">
-        {title}
-      </Heading>
-      <RadioGroupPrimitive.Root
-        value={value}
-        onValueChange={setValue}
-        className="flex flex-wrap gap-2 text-center"
-      >
-        {data.map((item) => (
-          <RadioGroupPrimitive.Item
-            className="rounded py-2 sm:py-2.5 text-xs w-10 lg:text-sm lg:w-12 border border-border data-[state=checked]:bg-primary data-[state=checked]:text-white data-[state=checked]:border-primary cursor-pointer font-medium"
-            key={item}
-            value={item}
-          >
-            {item}
-          </RadioGroupPrimitive.Item>
-        ))}
-      </RadioGroupPrimitive.Root>
-    </div>
+    <RadioGroupPrimitive.Root
+      value={value}
+      onValueChange={setValue}
+      className="flex flex-wrap gap-2 text-center"
+    >
+      {data.map((item) => (
+        <RadioGroupPrimitive.Item
+          className="rounded py-2 sm:py-2.5 text-xs w-10 lg:text-sm lg:w-12 border border-border data-[state=checked]:bg-primary data-[state=checked]:text-white data-[state=checked]:border-primary cursor-pointer font-medium"
+          key={item}
+          value={item}
+        >
+          {item}
+        </RadioGroupPrimitive.Item>
+      ))}
+    </RadioGroupPrimitive.Root>
   );
 }
 
