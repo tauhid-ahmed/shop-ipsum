@@ -32,7 +32,7 @@ export default function ProductCard({
           href={productDetailsPath(data.id)}
           className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
         >
-          <div className="inline-block h-full rounded overflow-hidden p-2">
+          <div className="inline-block h-full rounded overflow-hidden p-2 group-hover/card:scale-110 transition-transform duration-300">
             <ProductImage
               imagePath={data.media.primaryImage}
               alt={data.productDetails.title}
