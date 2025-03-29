@@ -44,6 +44,7 @@ const productVariants: ProductVariant[] = [
   { id: 7, color: "Green", size: "Small", inStock: true },
   { id: 8, color: "Green", size: "Medium", inStock: false },
   { id: 9, color: "Green", size: "Large", inStock: true },
+  { id: 9, color: "Green", size: "2XL", inStock: true },
 ];
 
 // Button component for individual attribute options
@@ -57,7 +58,7 @@ const AttributeButton: React.FC<AttributeButtonProps> = ({
     <Button
       variant={isSelected ? "default" : "outline"}
       size="sm"
-      className={`m-1 ${!isAvailable ? "opacity-50" : ""}`}
+      className={`m-1 ${!isAvailable ? "opacity-5" : ""}`}
       onClick={() => isAvailable && onSelect(option)}
       disabled={!isAvailable}
     >

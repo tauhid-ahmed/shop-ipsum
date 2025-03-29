@@ -2,13 +2,14 @@
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Heading } from "@/components/heading";
 import { ProductImageGallery } from "./product-image-gallery";
 import { type ProductType } from "@/data/products";
 import { LucideStar } from "lucide-react";
+import { useProductAttributes } from "@/hooks/useProductAttributes";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
+  const r = useProductAttributes();
   return (
     <>
       <Section>
@@ -39,8 +40,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
               <ProductDescription
                 description={product.productDetails.longDescription}
               />
-              <ProductColorVariants title="Select Color" />
-              <ProductSizeVariants />
+
               <div className="py-4 space-y-4">
                 <Button className="w-full" size="lg">
                   Buy it Now
