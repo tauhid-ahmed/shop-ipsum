@@ -32,7 +32,7 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
 
   return (
     <>
-      <div className="overflow-hidden relative bg-secondary/20">
+      <div className="overflow-hidden relative bg-secondary/20 select-none">
         <motion.div
           initial={{
             opacity: 0.8,
