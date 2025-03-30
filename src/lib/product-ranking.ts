@@ -16,7 +16,7 @@ type RankingOptions = {
 };
 
 // Utility Functions
-const DEFAULT_DAYS_SINCE_CREATION = 1;
+const DEFAULT_DAYS_SINCE_CREATION = 10;
 const SALES_WEIGHT = 0.4;
 const RATING_WEIGHT = 0.3;
 const VIEW_WEIGHT = 0.3;
@@ -169,31 +169,3 @@ const calculateMatchScore = (
   }
   return score;
 };
-
-// Example Usage
-// const exampleProducts: ProductType[] = [
-//   {
-//     id: "PROD001",
-//     title: "Wireless Headphones",
-//     price: 199.99,
-//     category: "Electronics",
-//     salesCount: 500,
-//     revenue: 99995,
-//     createdAt: new Date(),
-//     ratings: { average: 4.5 },
-//     views: 2000,
-//     discountPercentage: 15,
-//     stockQuantity: 100,
-//   },
-// ];
-
-// // Example function calls
-// const bestSellers = getBestSelling(exampleProducts);
-// const trendingProducts = getTrendingProducts(exampleProducts);
-// const newArrivals = getNewArrivals(exampleProducts);
-// const bestBuyProducts = getBestBuyProducts(exampleProducts);
-// const recommendedProducts = recommendProducts(exampleProducts, {
-//   budget: { min: 100, max: 250 },
-//   category: "Electronics",
-//   minRating: 4,
-// });

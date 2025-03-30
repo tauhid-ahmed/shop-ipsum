@@ -206,14 +206,6 @@ const ProductSelector: React.FC = () => {
     }
   };
 
-  // Handle adding to cart
-  const handleAddToCart = (): void => {
-    if (selectedVariant) {
-      console.log("Added to cart:", selectedVariant);
-      // Implement your cart logic here
-    }
-  };
-
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
@@ -251,9 +243,7 @@ const ProductSelector: React.FC = () => {
                 <span className="font-medium">{selectedVariant.size}</span>
               </p>
             </div>
-            <Button className="w-full" onClick={handleAddToCart}>
-              Add to Cart
-            </Button>
+            <Button className="w-full">Add to Cart</Button>
           </div>
         ) : (
           <div className="text-center w-full text-gray-500">
