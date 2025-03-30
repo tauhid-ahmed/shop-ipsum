@@ -9,7 +9,14 @@ import { LucideStar } from "lucide-react";
 import { useProductAttributes } from "@/hooks/useProductAttributes";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
-  const r = useProductAttributes();
+  const {
+    allColors,
+    availableColors,
+    allSizes,
+    availableSizes,
+    handleSelectColor,
+    handleSelectedSize,
+  } = useProductAttributes();
   return (
     <>
       <Section>
@@ -40,6 +47,27 @@ export default function ProductDetails({ product }: { product: ProductType }) {
               <ProductDescription
                 description={product.productDetails.longDescription}
               />
+
+              {allColors.map((color) => (
+                <button
+                  disabled={!availableColors.includes(color)}
+                  onClick={handleSelectColor(color)}
+                  className="text-xl p-1 disabled:bg-orange-500"
+                  key={color}
+                >
+                  {color}
+                </button>
+              ))}
+              {allSizes.map((color) => (
+                <button
+                  disabled={!availableSizes.includes(color)}
+                  className="text-lg p-2 border disabled:bg-red-500"
+                  key={color}
+                  onClick={handleSelectedSize(color)}
+                >
+                  {color}
+                </button>
+              ))}
 
               <div className="py-4 space-y-4">
                 <Button className="w-full" size="lg">

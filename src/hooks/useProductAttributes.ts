@@ -1,74 +1,129 @@
 "use client";
 
 import { type ProductType, products } from "@/data/products";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const defaultProduct = products[1];
+const DEFAULT_PRODUCT = products[1];
 
-export function useProductAttributes(product: ProductType = defaultProduct) {
+export function useProductAttributes(product: ProductType = DEFAULT_PRODUCT) {
   const [allColors, setAllColors] = useState<string[]>([]);
   const [allSizes, setAllSizes] = useState<string[]>([]);
   const [availableColors, setAvailableColors] = useState<string[]>([]);
   const [availableSizes, setAvailableSizes] = useState<string[]>([]);
-  const [selectedColor, setSelectedColor] = useState<string>("Blue");
+  const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
 
-  const { inventory } = product;
+  const { inventory } = useMemo(() => product, [product]);
 
-  // Initial select all colors.
+  // Extract all attributes on initial load
   useEffect(() => {
-    const allUniqueAttributes = inventory.variants.reduce(
-      (accumulatedAttributes, currentVariant) => {
-        accumulatedAttributes.colors = [
-          ...new Set([...accumulatedAttributes.colors, currentVariant.color]),
-        ];
-        accumulatedAttributes.sizes = [
-          ...new Set([...accumulatedAttributes.sizes, ...currentVariant.sizes]),
-        ];
-        return accumulatedAttributes;
-      },
-      {
-        colors: [] as string[],
-        sizes: [] as string[],
-      }
-    );
+    const uniqueAttrs = {
+      allColors: new Set<string>(),
+      allSizes: new Set<string>(),
+      availableColors: new Set<string>(),
+      availableSizes: new Set<string>(),
+    };
 
-    const availableUniqueAttributes = inventory.variants.reduce(
-      (accumulatedAttributes, currentVariant) => {
-        accumulatedAttributes.colors.push(
-          ...new Set([
-            ...accumulatedAttributes.colors,
-            currentVariant.inStock ? currentVariant.color : "",
-          ])
-        );
-        accumulatedAttributes.sizes.push(
-          ...new Set(
-            Object.entries(currentVariant.sizeStock)
-              .filter((item) => Boolean(item[1]))
-              .map((item) => item[0])
-          )
-        );
-        return accumulatedAttributes;
-      },
-      {
-        colors: [] as string[],
-        sizes: [] as string[],
-      }
-    );
+    inventory.variants.forEach((variant) => {
+      uniqueAttrs.allColors.add(variant.color);
+      variant.sizes.forEach((size) => uniqueAttrs.allSizes.add(size));
 
-    setAllColors(allUniqueAttributes.colors);
-    setAllSizes(allUniqueAttributes.sizes);
-    setAvailableColors(availableUniqueAttributes.colors);
-    setAvailableSizes(availableUniqueAttributes.sizes);
+      if (variant.inStock) {
+        uniqueAttrs.availableColors.add(variant.color);
+      }
+
+      Object.entries(variant.sizeStock)
+        .filter(([_, stock]) => Boolean(stock))
+        .forEach(([size]) => uniqueAttrs.availableSizes.add(size));
+    });
+
+    setAllColors(Array.from(uniqueAttrs.allColors));
+    setAllSizes(Array.from(uniqueAttrs.allSizes));
+    setAvailableColors(Array.from(uniqueAttrs.availableColors));
+    setAvailableSizes(Array.from(uniqueAttrs.availableSizes));
   }, [inventory.variants]);
 
+  // Update available sizes when color changes
   useEffect(() => {
-    const colors = inventory.variants.filter(
-      (variant) => variant.color === selectedColor && variant.inStock
-    );
-    console.log(colors);
-  }, [selectedColor]);
+    if (!selectedColor) {
+      const initialAvailableSizes = new Set<string>();
+      inventory.variants.forEach((variant) => {
+        if (variant.inStock) {
+          Object.entries(variant.sizeStock)
+            .filter(([_, stock]) => Boolean(stock))
+            .forEach(([size]) => initialAvailableSizes.add(size));
+        }
+      });
 
-  console.log({ allColors, allSizes, availableColors, availableSizes });
-  return { allColors, allSizes };
+      setAvailableSizes(Array.from(initialAvailableSizes));
+      return;
+    }
+
+    const colorVariant = inventory.variants.find(
+      (variant) => variant.color === selectedColor
+    );
+    if (colorVariant) {
+      const availableSizesForColor = Object.entries(colorVariant.sizeStock)
+        .filter(([_, stock]) => Boolean(stock))
+        .map(([size]) => size);
+
+      setAvailableSizes(availableSizesForColor);
+    }
+  }, [selectedColor, inventory.variants]);
+
+  // Update available colors when size changes
+  useEffect(() => {
+    if (!selectedSize) {
+      const initialAvailableColors = new Set<string>();
+      inventory.variants.forEach((variant) => {
+        if (variant.inStock) {
+          initialAvailableColors.add(variant.color);
+        }
+      });
+
+      setAvailableColors(Array.from(initialAvailableColors));
+      return;
+    }
+
+    const availableColorsForSize = new Set<string>();
+
+    inventory.variants.forEach((variant) => {
+      if (variant.inStock && variant.sizeStock[selectedSize]) {
+        availableColorsForSize.add(variant.color);
+      }
+    });
+
+    const availableColorsArray = Array.from(availableColorsForSize);
+    setAvailableColors(availableColorsArray);
+
+    // Reset color if it's not available for this size
+    if (selectedColor && !availableColorsForSize.has(selectedColor)) {
+      setSelectedColor("");
+    }
+  }, [selectedSize, inventory.variants, selectedColor]);
+
+  const toggleColorSelection = (color: string) => () => {
+    // Don't allow selection of unavailable colors
+    if (!availableColors.includes(color)) return;
+    setSelectedColor(color === selectedColor ? "" : color);
+  };
+
+  const toggleSizeSelection = (size: string) => () => {
+    // Don't allow selection of unavailable sizes
+    if (!availableSizes.includes(size)) return;
+    setSelectedSize(size === selectedSize ? "" : size);
+  };
+
+  return {
+    allColors,
+    allSizes,
+    availableColors,
+    availableSizes,
+    selectedColor,
+    selectedSize,
+    handleSelectColor: toggleColorSelection,
+    handleSelectedSize: toggleSizeSelection,
+    isColorDisabled: (color: string) => !availableColors.includes(color),
+    isSizeDisabled: (size: string) => !availableSizes.includes(size),
+  };
 }
