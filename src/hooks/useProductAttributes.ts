@@ -86,7 +86,6 @@ export function useProductAttributes(product: ProductType = DEFAULT_PRODUCT) {
     }
 
     const availableColorsForSize = new Set<string>();
-
     inventory.variants.forEach((variant) => {
       if (variant.inStock && variant.sizeStock[selectedSize]) {
         availableColorsForSize.add(variant.color);
@@ -102,13 +101,13 @@ export function useProductAttributes(product: ProductType = DEFAULT_PRODUCT) {
     }
   }, [selectedSize, inventory.variants, selectedColor]);
 
-  const toggleColorSelection = (color: string) => () => {
+  const toggleColorSelection = (color: string) => {
     // Don't allow selection of unavailable colors
     if (!availableColors.includes(color)) return;
     setSelectedColor(color === selectedColor ? "" : color);
   };
 
-  const toggleSizeSelection = (size: string) => () => {
+  const toggleSizeSelection = (size: string) => {
     // Don't allow selection of unavailable sizes
     if (!availableSizes.includes(size)) return;
     setSelectedSize(size === selectedSize ? "" : size);

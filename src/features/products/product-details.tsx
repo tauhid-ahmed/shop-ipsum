@@ -6,16 +6,19 @@ import { Heading } from "@/components/heading";
 import { ProductImageGallery } from "./product-image-gallery";
 import { type ProductType } from "@/data/products";
 import { LucideStar } from "lucide-react";
+import { ProductAttributes } from "./product-attributes";
 import { useProductAttributes } from "@/hooks/useProductAttributes";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   const {
-    allColors,
-    availableColors,
-    allSizes,
-    availableSizes,
+    selectedSize,
+    selectedColor,
     handleSelectColor,
     handleSelectedSize,
+    isSizeDisabled,
+    isColorDisabled,
+    availableSizes,
+    availableColors,
   } = useProductAttributes();
   return (
     <>
@@ -48,26 +51,20 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                 description={product.productDetails.longDescription}
               />
 
-              {allColors.map((color) => (
-                <button
-                  disabled={!availableColors.includes(color)}
-                  onClick={handleSelectColor(color)}
-                  className="text-xl p-1 disabled:bg-orange-500"
-                  key={color}
-                >
-                  {color}
-                </button>
-              ))}
-              {allSizes.map((color) => (
-                <button
-                  disabled={!availableSizes.includes(color)}
-                  className="text-lg p-2 border disabled:bg-red-500"
-                  key={color}
-                  onClick={handleSelectedSize(color)}
-                >
-                  {color}
-                </button>
-              ))}
+              {/* colors */}
+              <ProductAttributes
+                onAttributeChange={handleSelectColor}
+                attributes={availableColors}
+                selectedAttribute={selectedColor}
+                disabled={isColorDisabled}
+              />
+              {/* sizes */}
+              <ProductAttributes
+                onAttributeChange={handleSelectedSize}
+                attributes={availableSizes}
+                selectedAttribute={selectedSize}
+                disabled={isSizeDisabled}
+              />
 
               <div className="py-4 space-y-4">
                 <Button className="w-full" size="lg">
