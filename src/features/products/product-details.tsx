@@ -10,8 +10,8 @@ import { useProductAttributes } from "@/hooks/useProductAttributes";
 import { ProductAttributes } from "./product-attributes";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
-  const data = useProductAttributes(products[0]);
-  console.log(data);
+  const {allColors, allSizes, availableColors, availableSizes} = useProductAttributes(products[0]);
+  
   return (
     <>
       <Section>
@@ -42,6 +42,9 @@ export default function ProductDetails({ product }: { product: ProductType }) {
               <ProductDescription
                 description={product.productDetails.longDescription}
               />
+
+              <ProductAttributes attributes={allColors} availableAttributes={availableColors}/>
+              <ProductAttributes attributes={allSizes} availableAttributes={availableSizes}/>
 
               <div className="py-4 space-y-4">
                 <Button className="w-full" size="lg">
