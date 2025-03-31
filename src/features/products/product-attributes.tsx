@@ -1,22 +1,19 @@
-import { Heading } from "@/components/heading";
-import { cn } from "@/lib/utils";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import React from "react";
 
 type ProductAttributesProps = {
   attributes: string[];
-  availableAttributes: string[],
+  availableAttributes: string[];
   valueChange: (attribute: string) => void;
-  value: string
+  value: string;
 };
 
 export function ProductAttributes({
   attributes = [],
   availableAttributes,
   valueChange,
-  value
-}:
-ProductAttributesProps) {
+  value,
+}: ProductAttributesProps) {
   return (
     <RadioGroupPrimitive.Root
       value={value}
@@ -25,7 +22,7 @@ ProductAttributesProps) {
     >
       {attributes.map((attribute) => (
         <RadioGroupPrimitive.Item
-          className="rounded disabled:opacity-50 disabled:border-red-500 py-2 sm:py-2.5 text-xs w-10 lg:text-sm lg:w-12 border border-border data-[state=checked]:bg-primary data-[state=checked]:text-white data-[state=checked]:border-primary cursor-pointer font-medium"
+          className="disabled:pointer-events-none disabled:ring-1 disabled:ring-muted-foreground/50 border border-secondary/50 hover:ring-1 ring-primary transition-all px-2 py-1 bg-secondary/50 data-[state=checked]:ring-2 data-[state=checked]:text-foreground cursor-pointer rounded-full text-sm min-w-12 flex items-center justify-center relative disabled:before:absolute disabled:before:-inset-x-0.5 disabled:before:h-0.5 disabled:before:bg-foreground/50 disabled:before:rotate-[135deg] disabled:before:-z-10 overflow-hidden"
           key={attribute}
           value={attribute}
           disabled={!availableAttributes.includes(attribute)}
