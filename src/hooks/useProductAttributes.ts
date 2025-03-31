@@ -3,9 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { ProductType } from "../data/products";
 
 export const useProductAttributes = (
-  product: ProductType,
-  initialColor?: string,
-  initialSize?: string
+  product: ProductType
 ) => {
   const [allColors, setAllColors] = useState<string[]>([]);
   const [allSizes, setAllSizes] = useState<string[]>([]);
@@ -93,33 +91,24 @@ export const useProductAttributes = (
 
     if(selectedSize) {
       product.inventory.variants.forEach(variant => {
-        if(variant.sizeStock[selectedSize] > 0) {
+        if(variant.stockQuantity > 0 && variant.sizeStock[selectedSize] > 0) {
           allAttributes.availableColors.add(variant.color)
         }
       })
+
+      setAvailableColors(Array.from(allAttributes.availableColors))
+
     }
 
   }, [selectedSize])
 
 
-  const toggleColorChange = (color: string) => {
-    if(color === selectedColor) {
-      setSelectedColor('')
-    } else {
-      setSelectedColor(color)
-    }
-  };
-  const toggleSizeChange = (size: string) => {
-    if(size === selectedSize) {
-      setSelectedSize('');
-    } else {
-      setSelectedSize(size)
-    }
-  }
+  const handleColorChange = (color: string) => setSelectedColor(color);
+  const handleSizeChange = (size: string) => setSelectedSize(size);
   
 
   return {
-    allColors, allSizes, availableColors, availableSizes, toggleColorChange, toggleSizeChange,
+    allColors, allSizes, availableColors, availableSizes, handleColorChange, handleSizeChange,
     selectedColor, selectedSize
   }
 };

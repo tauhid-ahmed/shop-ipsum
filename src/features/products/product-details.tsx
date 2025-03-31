@@ -10,7 +10,7 @@ import { useProductAttributes } from "@/hooks/useProductAttributes";
 import { ProductAttributes } from "./product-attributes";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
-  const {allColors, allSizes, availableColors, availableSizes, toggleColorChange, toggleSizeChange, selectedColor, selectedSize} = useProductAttributes(products[0]);
+  const {allColors, allSizes, availableColors, availableSizes, handleColorChange, handleSizeChange, selectedColor, selectedSize} = useProductAttributes(products[0]);
   
   return (
     <>
@@ -45,8 +45,8 @@ export default function ProductDetails({ product }: { product: ProductType }) {
               <h2>{selectedColor}</h2>
               <h2>{selectedSize}</h2>
 
-              <ProductAttributes attributes={allColors} availableAttributes={availableColors} toggleChange={toggleColorChange} value={selectedColor}/>
-              <ProductAttributes attributes={allSizes} availableAttributes={availableSizes} toggleChange={toggleSizeChange} value={selectedSize}/>
+              <ProductAttributes attributes={allColors} availableAttributes={availableColors} valueChange={handleColorChange} value={selectedColor}/>
+              <ProductAttributes attributes={allSizes} availableAttributes={availableSizes} valueChange={handleSizeChange} value={selectedSize}/>
 
               <div className="py-4 space-y-4">
                 <Button className="w-full" size="lg">
