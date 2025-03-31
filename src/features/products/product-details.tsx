@@ -8,6 +8,7 @@ import { type ProductType, products } from "@/data/products";
 import { LucideStar } from "lucide-react";
 import { useProductAttributes } from "@/hooks/useProductAttributes";
 import { ProductAttributes } from "./product-attributes";
+import React from "react";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   const {
@@ -23,7 +24,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
 
   return (
     <>
-      <Section>
+      <Section padding="sm">
         <Container>
           <div className="flex max-w-md md:max-w-full mx-auto md:flex-row gap-10 lg:gap-16 flex-col">
             <div className="flex-1 shrink relative">
@@ -32,14 +33,16 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                 alt={product.productDetails.title}
               />
             </div>
-            <div className="flex-1 space-y-4">
-              <div className="space-y-2 border-b-2 border-border border-dashed pb-4">
-                <Heading size="md" as="h2">
-                  {product.brand.name}
-                </Heading>
-                <Heading size="2xl" as="h3">
-                  {product.productDetails.title}
-                </Heading>
+            <div className="flex-1 space-y-4 md:space-y-6 lg:space-y-8">
+              <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
+                <div className="space-y-2">
+                  <Heading size="md" as="h2">
+                    {product.brand.name}
+                  </Heading>
+                  <Heading size="2xl" as="h3">
+                    {product.productDetails.title}
+                  </Heading>
+                </div>
                 <ProductMetadata
                   originalPrice={product.pricing.original.amount}
                   basePrice={product.pricing.base.amount}
@@ -48,26 +51,30 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                 />
               </div>
 
-              <ProductDescription
-                description={product.productDetails.longDescription}
-              />
-              <h2>{selectedColor}</h2>
-              <h2>{selectedSize}</h2>
+              <ProductSection title="Description:">
+                <p className="text-foreground/90">
+                  {product.productDetails.longDescription}
+                </p>
+              </ProductSection>
 
-              <ProductAttributes
-                attributes={allColors}
-                availableAttributes={availableColors}
-                valueChange={handleColorChange}
-                value={selectedColor}
-              />
-              <ProductAttributes
-                attributes={allSizes}
-                availableAttributes={availableSizes}
-                valueChange={handleSizeChange}
-                value={selectedSize}
-              />
+              <ProductSection title="Select Color">
+                <ProductAttributes
+                  attributes={allColors}
+                  availableAttributes={availableColors}
+                  valueChange={handleColorChange}
+                  value={selectedColor}
+                />
+              </ProductSection>
+              <ProductSection title="Select Size">
+                <ProductAttributes
+                  attributes={allSizes}
+                  availableAttributes={availableSizes}
+                  valueChange={handleSizeChange}
+                  value={selectedSize}
+                />
+              </ProductSection>
 
-              <div className="py-4 space-y-4">
+              <div className="py-4 space-y-2 md:space-y-4">
                 <Button className="w-full" size="lg">
                   Buy it Now
                 </Button>
@@ -97,25 +104,20 @@ function ProductMetadata({
   averageRating,
 }: ProductMetadataProps) {
   return (
-    <div className="flex gap-4 items-center">
-      <span>{originalPrice}</span>
-      <strong className="text-xl">{basePrice}</strong>
-      <span className="text-foreground/70 ml-auto">{salesCount} sold</span>
-      <span className="flex items-center">
-        <LucideStar className="fill-yellow-400 stroke-yellow-500" />
+    <div className="flex gap-2 items-center">
+      <span className="relative line-through text-foreground/60">
+        &nbsp;${originalPrice}&nbsp;
+      </span>
+      <strong className="text-xl bg-primary/10 text-primary rounded-full px-2 py-1">
+        ${basePrice}
+      </strong>
+      <span className="text-foreground/80 ml-auto font-medium">
+        {salesCount} sold
+      </span>
+      <span className="flex items-center gap-1">
+        <LucideStar className="fill-yellow-400 stroke-yellow-500 size-5" />
         {averageRating}
       </span>
-    </div>
-  );
-}
-
-function ProductDescription({ description }: { description: string }) {
-  return (
-    <div className="space-y-2">
-      <Heading as="h3" size="xl">
-        Description:
-      </Heading>
-      <p className="text-foreground/90">{description}</p>
     </div>
   );
 }
@@ -127,5 +129,22 @@ function AdditionalInfo() {
       <strong>shop pay</strong>
       <Button variant="link">Learn more</Button>
     </p>
+  );
+}
+
+function ProductSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="space-y-2 md:space-y-4">
+      <Heading as="h3" size="lg">
+        {title}
+      </Heading>
+      {children}
+    </div>
   );
 }

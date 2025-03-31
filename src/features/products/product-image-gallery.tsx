@@ -88,7 +88,7 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
               onClick={() => setImageIndex(i)}
               key={i}
               className={cn(
-                "size-14 relative border border-border p-1 cursor-pointer rounded",
+                "size-14 relative border border-border p-1 cursor-pointer rounded shrink-0",
                 i === imageIndex &&
                   "border-primary focus-within:ring ring-primary"
               )}
