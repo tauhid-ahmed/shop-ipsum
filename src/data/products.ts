@@ -162,6 +162,18 @@ export const data: ProductType[] = [
             XL: 2,
           },
         },
+        {
+          id: "v78904",
+          color: "Orange",
+          stockQuantity: 0,
+          sizes: ["S", "M", "L", "XL"],
+          sizeStock: {
+            S: 0,
+            M: 0,
+            L: 0,
+            XL: 0,
+          },
+        },
       ],
     },
     ratings: {

@@ -4,25 +4,20 @@ import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/heading";
 import { ProductImageGallery } from "./product-image-gallery";
-import { type ProductType } from "@/data/products";
+import { type ProductType, products } from "@/data/products";
 import { LucideStar } from "lucide-react";
 import { useProductAttributes } from "@/hooks/useProductAttributes";
+import { ProductAttributes } from "./product-attributes";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
-  const {
-    allColors,
-    allSizes,
-    selectedSize,
-    selectedColor,
-    handleSelectColor,
-    handleSelectedSize,
-  } = useProductAttributes();
+  const data = useProductAttributes(products[0]);
+  console.log(data);
   return (
     <>
       <Section>
         <Container>
           <div className="flex max-w-md md:max-w-full mx-auto md:flex-row gap-10 lg:gap-16 flex-col">
-            <div className="flex-1 relative">
+            <div className="flex-1 shrink relative">
               <ProductImageGallery
                 images={product.media.images}
                 alt={product.productDetails.title}
@@ -47,8 +42,6 @@ export default function ProductDetails({ product }: { product: ProductType }) {
               <ProductDescription
                 description={product.productDetails.longDescription}
               />
-
-              {/* colors */}
 
               <div className="py-4 space-y-4">
                 <Button className="w-full" size="lg">
