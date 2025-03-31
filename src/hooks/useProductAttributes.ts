@@ -11,8 +11,8 @@ export const useProductAttributes = (
   const [allSizes, setAllSizes] = useState<string[]>([]);
   const [availableColors, setAvailableColors] = useState<string[]>([]);
   const [availableSizes, setAvailableSizes] = useState<string[]>([]);
-  const [selectedColor, setSelectedColor] = useState<string | null>('Red');
-  const [selectedSize, setSelectedSize] = useState<string | null>('S');
+  const [selectedColor, setSelectedColor] = useState<string>('');
+  const [selectedSize, setSelectedSize] = useState<string>('');
 
   useEffect(() => {
     const allAttributes = {
@@ -100,9 +100,26 @@ export const useProductAttributes = (
     }
 
   }, [selectedSize])
+
+
+  const toggleColorChange = (color: string) => {
+    if(color === selectedColor) {
+      setSelectedColor('')
+    } else {
+      setSelectedColor(color)
+    }
+  };
+  const toggleSizeChange = (size: string) => {
+    if(size === selectedSize) {
+      setSelectedSize('');
+    } else {
+      setSelectedSize(size)
+    }
+  }
   
 
   return {
-    allColors, allSizes, availableColors, availableSizes
+    allColors, allSizes, availableColors, availableSizes, toggleColorChange, toggleSizeChange,
+    selectedColor, selectedSize
   }
 };

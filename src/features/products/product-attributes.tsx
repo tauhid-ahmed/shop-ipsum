@@ -5,20 +5,23 @@ import React from "react";
 
 type ProductAttributesProps = {
   attributes: string[];
-  availableAttributes: string[]
+  availableAttributes: string[],
+  toggleChange: (attribute: string) => void;
+  value: string
 };
 
 export function ProductAttributes({
   attributes = [],
-  availableAttributes
-}: // stock,
+  availableAttributes,
+  toggleChange,
+  value
+}:
 ProductAttributesProps) {
   return (
     <RadioGroupPrimitive.Root
-      // value={selectedAttribute}
-      // onValueChange={onAttributeChange}
+      value={value}
+      onValueChange={toggleChange}
       className="flex flex-wrap gap-2 text-center"
-      // disabled={disabled}
     >
       {attributes.map((attribute) => (
         <RadioGroupPrimitive.Item
