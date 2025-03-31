@@ -32,7 +32,7 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
 
   return (
     <>
-      <div className="overflow-hidden relative bg-secondary/20 select-none">
+      <div className="overflow-hidden relative bg-secondary/20 select-none w-full">
         <motion.div
           initial={{
             opacity: 0.8,
@@ -78,24 +78,22 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
             />
           </div>
         </motion.div>
-        <div
-          className={cn(
-            "flex gap-4 justify-center rounded backdrop-blur py-2 px-10"
-          )}
-        >
-          {images.map((image, i) => (
-            <div
-              onClick={() => setImageIndex(i)}
-              key={i}
-              className={cn(
-                "size-14 relative border border-border p-1 cursor-pointer rounded shrink-0",
-                i === imageIndex &&
-                  "border-primary focus-within:ring ring-primary"
-              )}
-            >
-              <Image src={image} alt="product image" width="400" height="400" />
-            </div>
-          ))}
+        <div className={cn("relative h-20")}>
+          <div className="absolute flex gap-4 justify-center rounded backdrop-blur py-2 px-10 w-full">
+            {images.map((image, i) => (
+              <div
+                onClick={() => setImageIndex(i)}
+                key={i}
+                className={cn(
+                  "aspect-square relative border border-border p-1 cursor-pointer rounded shrink-0",
+                  i === imageIndex &&
+                    "border-primary focus-within:ring ring-primary"
+                )}
+              >
+                <Image src={image} alt="product image" width="60" height="60" />
+              </div>
+            ))}
+          </div>
         </div>
         <div className="absolute top-2 right-2 backdrop-blur rounded group-hover/image:opacity-10">
           <ProductMetadata />

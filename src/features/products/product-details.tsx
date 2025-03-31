@@ -27,13 +27,13 @@ export default function ProductDetails({ product }: { product: ProductType }) {
       <Section padding="sm">
         <Container>
           <div className="flex max-w-md md:max-w-full mx-auto md:flex-row gap-10 lg:gap-16 flex-col">
-            <div className="flex-1 shrink relative">
+            <div className="flex-1 basis-1/2 relative">
               <ProductImageGallery
                 images={product.media.images}
                 alt={product.productDetails.title}
               />
             </div>
-            <div className="flex-1 space-y-4 md:space-y-6 lg:space-y-8">
+            <div className="flex-1 basis-1/2 space-y-4 md:space-y-6 lg:space-y-8">
               <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
                 <div className="space-y-2">
                   <Heading size="md" as="h2">
