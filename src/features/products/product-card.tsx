@@ -66,7 +66,7 @@ export default function ProductCard({
           </CardHeader>
           <CardDescription className="flex flex-col items-center">
             <StarRatings size="md" averageRating={data.ratings.average} />
-            <span className="text-sm  text-foreground/70">
+            <span className="text-sm text-foreground/70 mt-0.5">
               {data.ratings.totalReviews} reviews
             </span>
             <div className="text-base font-medium text-foreground mt-1">

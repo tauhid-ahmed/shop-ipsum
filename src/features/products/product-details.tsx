@@ -108,7 +108,7 @@ function ProductDescription({ product }: { product: ProductType }) {
           .join(" ")
           .split("\n")
           .map((line, i) => (
-            <p className="inline-block" key={i}>
+            <p className="inline-block text-foreground/80" key={i}>
               {line}
 
               {i === lines.length - 1 && (
