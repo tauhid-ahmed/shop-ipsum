@@ -32,7 +32,7 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
 
   return (
     <>
-      <div className="overflow-hidden relative select-none w-full">
+      <div className="overflow-hidden select-none w-full">
         <div className="flex gap-2">
           <div className="flex flex-col gap-4 rounded backdrop-blur">
             {images.map((image, i) => (

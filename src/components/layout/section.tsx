@@ -14,7 +14,7 @@ export function Section({
   return (
     <section
       className={cn(
-        "relative overflow-x-hidden",
+        "relative",
         {
           "py-10": padding === "default",
           "py-12 md:py-16 lg:py-20": padding === "lg",

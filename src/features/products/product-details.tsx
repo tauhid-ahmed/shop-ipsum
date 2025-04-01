@@ -25,15 +25,16 @@ export default function ProductDetails({ product }: { product: ProductType }) {
 
   return (
     <>
-      <Section padding="sm">
+      <Section>
         <Container>
-          <div className="flex md:flex-row gap-10 lg:gap-16 flex-col">
-            <div className="flex-1 basis-1/2 relative">
+          <div className="flex md:flex-row gap-10 lg:gap-16 flex-col md:items-start">
+            <div className="flex-1 basis-1/2 md:sticky top-18">
               <ProductImageGallery
                 images={product.media.images}
                 alt={product.productDetails.title}
               />
             </div>
+
             <div className="flex-1 basis-1/2 space-y-4 md:space-y-6 lg:space-y-8">
               <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
                 <div className="space-y-2">
