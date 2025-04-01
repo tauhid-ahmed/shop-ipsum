@@ -62,7 +62,7 @@ export default function ProductCard({
           >
             {data.brand.name}
           </Heading>
-          <p className="text-foreground text-md text-ellipsis whitespace-nowrap">
+          <p className="text-foreground self-start text-md text-ellipsis whitespace-nowrap text-center">
             {data.productDetails.title.split(" ").slice(0, 4).join(" ")}
           </p>
           <span className="font-semibold text-foreground/70">
