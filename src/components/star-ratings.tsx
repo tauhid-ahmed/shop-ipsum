@@ -129,13 +129,13 @@ function Star({
       <div className="absolute inset-0 translate-x-4"></div>
       <div className="relative size-full z-10">
         {/* Empty star */}
-        <LucideStar className="absolute inset-0 stroke-1 stroke-yellow-500 dark:fill-yellow-500/60 fill-yellow-500/30 w-full h-full" />
+        <LucideStar className="absolute inset-0 stroke-1 stroke-amber-500 dark:fill-amber-500/60 fill-amber-500/30 w-full h-full" />
         {/* Filled Portion */}
         <div
           className="absolute inset-0 overflow-hidden"
           style={{ clipPath: `inset(0 ${100 - fillRatio * 100}% 0 0)` }}
         >
-          <LucideStar className="fill-amber-400 stroke-0 w-full h-full" />
+          <LucideStar className="fill-amber-500 stroke-0 w-full h-full" />
         </div>
       </div>
     </div>

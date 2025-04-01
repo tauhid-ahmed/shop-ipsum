@@ -9,6 +9,7 @@ import { LucideStar } from "lucide-react";
 import { useProductAttributes } from "@/hooks/useProductAttributes";
 import { ProductAttributes } from "./product-attributes";
 import React from "react";
+import { DotSeparator } from "@/components/dot-separator";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   const {
@@ -26,7 +27,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
     <>
       <Section padding="sm">
         <Container>
-          <div className="flex max-w-md md:max-w-full mx-auto md:flex-row gap-10 lg:gap-16 flex-col">
+          <div className="flex md:flex-row gap-10 lg:gap-16 flex-col">
             <div className="flex-1 basis-1/2 relative">
               <ProductImageGallery
                 images={product.media.images}
@@ -148,7 +149,8 @@ function ProductMetadata({
         {salesCount} sold
       </span>
       <span className="flex items-center gap-1">
-        <LucideStar className="fill-yellow-400 stroke-yellow-500 size-5" />
+        <LucideStar className="fill-yellow-400 stroke-amber-500 size-5" />
+        <DotSeparator />
         {averageRating}
       </span>
     </div>

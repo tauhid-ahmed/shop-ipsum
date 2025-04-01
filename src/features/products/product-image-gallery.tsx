@@ -32,7 +32,7 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
 
   return (
     <>
-      <div className="overflow-hidden relative bg-secondary/20 select-none w-full">
+      <div className="overflow-hidden relative bg-secondary/50 select-none w-full">
         <motion.div
           initial={{
             opacity: 0.8,
@@ -50,7 +50,7 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           onPointerLeave={handleLeave}
-          className="w-full aspect-square lg:aspect-auto lg:h-96 relative group"
+          className="w-full h-60 lg:aspect-auto lg:h-96 relative group"
         >
           {/* Original Image */}
           <Image
@@ -84,7 +84,7 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
               onClick={() => setImageIndex(i)}
               key={i}
               className={cn(
-                "aspect-square relative border border-border p-1 cursor-pointer rounded shrink-0",
+                "size-12 relative border border-border p-1 cursor-pointer rounded shrink-0",
                 i === imageIndex &&
                   "border-primary focus-within:ring ring-primary"
               )}

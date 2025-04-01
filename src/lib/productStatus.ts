@@ -20,7 +20,7 @@ export const productStatus = {
     } else if (count > 1) {
       return {
         message: `Only ${count} left in stock`,
-        className: "text-yellow-500 dark:text-yellow-400",
+        className: "text-amber-500 dark:text-yellow-400",
       };
     } else if (count === 1) {
       return {

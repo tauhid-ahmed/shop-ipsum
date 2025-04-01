@@ -25,7 +25,7 @@ export default function ProductReviewStats({
                 <ProgressCircle />
                 {product.ratings.average}
               </div>
-              <div className="">
+              <div className="whitespace-nowrap">
                 <div className="flex [&>svg]:fill-amber-500 [&>svg]:stroke-amber-500 [&>svg]:size-5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <LucideStar key={i} />

@@ -109,11 +109,11 @@ export const data: ProductType[] = [
       primaryImage: "/assets/product/product-01.webp",
       images: [
         "/assets/product/product-01.webp",
-        "/assets/product/product-02.webp",
-        "/assets/product/product-03.webp",
-        "/assets/product/product-04.webp",
-        "/assets/product/product-05.webp",
-        "/assets/product/product-06.webp",
+        "/assets/product/product-01.webp",
+        "/assets/product/product-01.webp",
+        "/assets/product/product-01.webp",
+        "/assets/product/product-01.webp",
+        "/assets/product/product-01.webp",
       ],
     },
     pricing: {
@@ -242,14 +242,14 @@ export const data: ProductType[] = [
       ],
     },
     media: {
-      primaryImage: "/assets/product/product-10.webp",
+      primaryImage: "/assets/product/product-02.webp",
       images: [
-        "/assets/product/product-11.webp",
-        "/assets/product/product-12.webp",
-        "/assets/product/product-13.webp",
-        "/assets/product/product-14.webp",
-        "/assets/product/product-15.webp",
-        "/assets/product/product-16.webp",
+        "/assets/product/product-02.webp",
+        "/assets/product/product-02.webp",
+        "/assets/product/product-02.webp",
+        "/assets/product/product-02.webp",
+        "/assets/product/product-02.webp",
+        "/assets/product/product-02.webp",
       ],
     },
     pricing: {
@@ -332,6 +332,209 @@ export const data: ProductType[] = [
     updatedAt: new Date("2025-02-25T09:15:00Z"),
     status: "active",
     views: 28754,
+  },
+  {
+    id: "p135792468",
+    sku: "MT-BT-TRK-003",
+    gtin: {
+      upc: "841259874512",
+      ean: "5901234987654",
+    },
+    type: "Footwear",
+    category: {
+      primary: "Outdoor",
+      secondary: "Hiking",
+      tertiary: "Boots",
+    },
+    brand: {
+      name: "MountainTrek",
+      manufacturer: "EverHike Gear Ltd.",
+    },
+    productDetails: {
+      title: "MountainTrek UltraGrip Hiking Boots",
+      shortDescription: "Durable waterproof hiking boots with superior grip.",
+      longDescription:
+        "Conquer rugged trails with the MountainTrek UltraGrip Hiking Boots. Designed with all-terrain durability and comfort, these boots feature a reinforced toe cap, breathable mesh lining, and our exclusive UltraGrip rubber sole for exceptional traction on wet and uneven surfaces. Whether you're trekking through forests or climbing rocky slopes, these boots provide all-day support and protection.",
+      features: [
+        "Waterproof and breathable membrane",
+        "UltraGrip rubber sole for superior traction",
+        "Reinforced toe cap for added protection",
+        "Cushioned insole for extra comfort",
+        "Ankle support for stability",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-03.webp",
+      images: [
+        "/assets/product/product-03.webp",
+        "/assets/product/product-03.webp",
+        "/assets/product/product-03.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 129.99, currency: "USD" },
+      original: { amount: 169.99, currency: "USD" },
+      discount: { type: "percentage", value: 23 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 5,
+      stockQuantity: 95,
+      variants: [
+        {
+          id: "v10231",
+          color: "Brown",
+          stockQuantity: 45,
+          sizes: ["8", "9", "10", "11"],
+          sizeStock: { "8": 10, "9": 15, "10": 12, "11": 8 },
+        },
+        {
+          id: "v10232",
+          color: "Black",
+          stockQuantity: 50,
+          sizes: ["8", "9", "10", "11"],
+          sizeStock: { "8": 12, "9": 14, "10": 14, "11": 10 },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.6,
+      totalReviews: 312,
+      ratingBreakdown: {
+        "5stars": 210,
+        "4stars": 78,
+        "3stars": 15,
+        "2stars": 6,
+        "1star": 3,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: {
+        domestic: "3-5 business days",
+        international: "7-12 business days",
+      },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 30,
+      conditions: [
+        "Unused condition with original tags",
+        "Original packaging required",
+        "Customer responsible for return shipping",
+      ],
+    },
+    salesCount: 1894,
+    createdAt: new Date("2025-03-10T09:00:00Z"),
+    updatedAt: new Date("2025-03-18T11:30:00Z"),
+    status: "active",
+    views: 17230,
+  },
+  {
+    id: "p864209753",
+    sku: "WT-SM-PRO-004",
+    gtin: {
+      upc: "754398756432",
+      ean: "4006398821123",
+    },
+    type: "Wearable",
+    category: {
+      primary: "Electronics",
+      secondary: "Smartwatches",
+      tertiary: "Fitness & Outdoor",
+    },
+    brand: {
+      name: "WristTech",
+      manufacturer: "Precision Gear Solutions",
+    },
+    productDetails: {
+      title: "WristTech FitPro Smartwatch",
+      shortDescription:
+        "Advanced fitness smartwatch with GPS and heart rate monitor.",
+      longDescription:
+        "The WristTech FitPro Smartwatch is the ultimate companion for fitness enthusiasts and outdoor adventurers. Featuring built-in GPS, real-time heart rate monitoring, and a vibrant AMOLED display, this smartwatch keeps you on top of your health and performance metrics. With a 10-day battery life, water resistance, and smart notifications, it seamlessly integrates into your lifestyle, whether you're running, hiking, or just staying connected.",
+      features: [
+        "Built-in GPS tracking",
+        "Heart rate and sleep monitoring",
+        "AMOLED touchscreen display",
+        "10-day battery life",
+        "Water-resistant up to 50m",
+        "Bluetooth connectivity for calls and notifications",
+      ],
+    },
+    media: {
+      primaryImage: "/assets/product/product-04.webp",
+      images: [
+        "/assets/product/product-04.webp",
+        "/assets/product/product-04.webp",
+        "/assets/product/product-04.webp",
+      ],
+    },
+    pricing: {
+      base: { amount: 199.99, currency: "USD" },
+      original: { amount: 249.99, currency: "USD" },
+      discount: { type: "fixed", value: 50 },
+    },
+    inventory: {
+      trackInventory: true,
+      lowStockThreshold: 15,
+      stockQuantity: 120,
+      variants: [
+        {
+          id: "v50891",
+          color: "Black",
+          stockQuantity: 50,
+          sizes: ["One Size"],
+          sizeStock: { "One Size": 50 },
+        },
+        {
+          id: "v50892",
+          color: "Silver",
+          stockQuantity: 40,
+          sizes: ["One Size"],
+          sizeStock: { "One Size": 40 },
+        },
+        {
+          id: "v50893",
+          color: "Rose Gold",
+          stockQuantity: 30,
+          sizes: ["One Size"],
+          sizeStock: { "One Size": 30 },
+        },
+      ],
+    },
+    ratings: {
+      average: 4.8,
+      totalReviews: 529,
+      ratingBreakdown: {
+        "5stars": 400,
+        "4stars": 90,
+        "3stars": 25,
+        "2stars": 10,
+        "1star": 4,
+      },
+    },
+    shipping: {
+      freeShippingEligible: true,
+      estimatedDelivery: {
+        domestic: "2-4 business days",
+        international: "5-10 business days",
+      },
+    },
+    returnPolicy: {
+      eligible: true,
+      period: 45,
+      conditions: [
+        "Must be returned with all original accessories",
+        "No visible signs of wear",
+        "Customer covers return shipping after 30 days",
+      ],
+    },
+    salesCount: 2764,
+    createdAt: new Date("2025-02-20T10:15:00Z"),
+    updatedAt: new Date("2025-03-14T12:45:00Z"),
+    status: "active",
+    views: 32478,
   },
 ];
 
