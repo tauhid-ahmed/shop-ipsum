@@ -131,7 +131,9 @@ function EmblaContainer({
   const { emblaRef } = useEmblaContext();
   return (
     <div className={cn("overflow-hidden h-full")} ref={emblaRef} {...props}>
-      <div className={cn("flex h-full -mx-2 cursor-grab", className)}>
+      <div
+        className={cn("flex h-full -mx-2 cursor-grab items-stretch", className)}
+      >
         {children}
       </div>
     </div>
@@ -143,7 +145,7 @@ function EmblaSlide({ children }: { children: ReactNode }) {
   const { slidesPerView } = useEmblaContext();
   return (
     <div
-      className={cn("shrink-0 grow-0 min-w-0 h-full px-2", {
+      className={cn("shrink-0 grow-0 min-w-0 px-2", {
         "basis-full": slidesPerView === 1,
         "basis-full sm:basis-1/2": slidesPerView === 2,
         "basis-full sm:basis-1/2 md:basis-1/3": slidesPerView === 3,

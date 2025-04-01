@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { LucideHeart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Heading } from "@/components/heading";
 import { Skeleton } from "@/components/ui/skeleton";
 import React, { ReactElement, useRef, Ref } from "react";
 import { cn } from "@/lib/utils";
@@ -12,6 +11,13 @@ import { productDetailsPath } from "@/constants/paths";
 import { QuickShop } from "./quick-shop";
 import { StarRatings } from "@/components/star-ratings";
 import { type ProductType } from "@/data/products";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function ProductCard({
   data,
@@ -26,57 +32,49 @@ export default function ProductCard({
   const quickShopRef = useRef<{ handleQuickShopOpen: () => void } | null>(null);
 
   return (
-    <div className="w-full flex flex-col relative overflow-hidden rounded border border-border shadow-sm group/card">
-      <div className="relative overflow-hidden bg-secondary/40">
-        <Link
-          href={productDetailsPath(data.id)}
-          className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
-        >
-          <div className="inline-block h-full rounded overflow-hidden p-2 group-hover/card:scale-125 transition-transform duration-300">
-            <ProductImage
-              imagePath={data.media.primaryImage}
-              alt={data.productDetails.title}
-            />
-          </div>
-        </Link>
-        {quickShop && (
-          <div className="absolute [@media(pointer:coarse)]:hidden bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4">
-            {React.cloneElement(quickShop, {
-              productId: data.id,
-              ref: quickShopRef,
-            })}
-          </div>
-        )}
-      </div>
-      <div className="bg-secondary/20 flex-1">
-        <Link
-          href={productDetailsPath(data.id)}
-          className="flex flex-col items-center mx-4 py-4 relative overflow-hidden"
-        >
-          <Heading
-            className="text-ellipsis whitespace-nowrap text-foreground/70"
-            align="center"
-            weight="semibold"
-            as="h3"
-            size="default"
+    <Card className="group/card h-full relative">
+      <CardContent className="relative px-2 h-full flex gap-4 flex-col">
+        <div className="relative overflow-hidden">
+          <Link
+            href={productDetailsPath(data.id)}
+            className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
           >
-            {data.brand.name}
-          </Heading>
-          <p className="text-center text-md text-foreground/90 mb-4 mt-2">
-            {data.productDetails.title.split(" ").slice(1).join(" ")}
-          </p>
-          <span className="font-semibold text-foreground/70">
-            <span className="text-sm line-through text-destructive/80">
-              &nbsp;{data.pricing.original.amount}&nbsp;
+            <div className="inline-block h-full rounded overflow-hidden group-hover/card:scale-150 transition-transform duration-300">
+              <ProductImage
+                imagePath={data.media.primaryImage}
+                alt={data.productDetails.title}
+              />
+            </div>
+          </Link>
+          {quickShop && (
+            <div className="absolute [@media(pointer:coarse)]:hidden bottom-0 inset-x-8 transition-transform duration-200 translate-y-full group-hover/card:-translate-y-4">
+              {React.cloneElement(quickShop, {
+                productId: data.id,
+                ref: quickShopRef,
+              })}
+            </div>
+          )}
+        </div>
+        <Link
+          className="flex flex-col justify-between flex-1 gap-3"
+          href={productDetailsPath(data.id)}
+        >
+          <CardHeader className="p-0 text-center">
+            <CardTitle className="font-normal text-sm">
+              {data.productDetails.title}
+            </CardTitle>
+          </CardHeader>
+          <CardDescription className="flex flex-col items-center">
+            <StarRatings size="md" averageRating={data.ratings.average} />
+            <span className="text-sm  text-foreground/70">
+              {data.ratings.totalReviews} reviews
             </span>
-            ${data.pricing.base.amount}
-          </span>
-          <div className="flex gap-1 text-foreground/70">
-            <span className="text-sm font-medium">{data.ratings.average}</span>
-            <StarRatings size="sm" averageRating={data.ratings.average} />
-          </div>
+            <div className="text-base font-medium text-foreground mt-1">
+              ${data.pricing.base.amount}
+            </div>
+          </CardDescription>
         </Link>
-      </div>
+      </CardContent>
       <div className="absolute top-0 right-0 z-10">
         <Button variant="ghost" size="icon">
           <LucideHeart />
@@ -88,7 +86,7 @@ export default function ProductCard({
           className="[@media(pointer:fine)]:hidden absolute size-full inset-0"
         />
       )}
-    </div>
+    </Card>
   );
 }
 
@@ -109,7 +107,7 @@ export function ProductImage({
         width={300}
         height={300}
         alt={alt}
-        className={cn("size-full object-contain", loading && "opacity-40")}
+        className={cn("size-full object-contain")}
         onLoad={() => setLoading(false)}
       />
     </>

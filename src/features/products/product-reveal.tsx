@@ -54,9 +54,10 @@ function Carousel() {
   const { data } = useEmblaContext();
   return data.map((item, index) => (
     <Embla.Slide key={index}>
-      <div className="w-full mx-auto">
-        <ProductCard key={index} data={item as ProductType} />
-      </div>
+      {/* <div className="w-full h-full mx-auto">
+       
+      </div> */}
+      <ProductCard key={index} data={item as ProductType} />
     </Embla.Slide>
   ));
 }
