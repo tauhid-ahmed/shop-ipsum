@@ -6,12 +6,7 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { usePointerEvent } from "@/hooks/usePointerEvent";
 import { Button } from "@/components/ui/button";
-import {
-  LucideShare,
-  LucideHeart,
-  // LucideChevronLeft,
-  // LucideChevronRight,
-} from "lucide-react";
+import { LucideShare, LucideHeart } from "lucide-react";
 
 type ProductImageGalleryProps = {
   images: string[];
@@ -82,7 +77,7 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
               style={{
                 transformOrigin: `var(--xOrigin, 50%) var(--yOrigin, 50%)`,
               }}
-              className="group-hover:scale-125 [.is-touched_&]:scale-125 absolute inset-0 size-full pointer-events-none transition-transform duration-100 ease-out"
+              className="group-hover:scale-200 [.is-touched_&]:scale-200 absolute inset-0 size-full pointer-events-none transition-transform duration-100 ease-out"
             >
               <Image
                 src={images[imageIndex]}
@@ -116,16 +111,3 @@ function ProductMetadata() {
     </div>
   );
 }
-
-// function ImageNavigation() {
-//   return (
-//     <div className="flex flex-col gap-2 mt-auto">
-//       <Button variant="ghost" size="icon">
-//         <LucideChevronLeft />
-//       </Button>
-//       <Button variant="ghost" size="icon">
-//         <LucideChevronRight />
-//       </Button>
-//     </div>
-//   );
-// }
