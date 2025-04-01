@@ -11,7 +11,6 @@ import {
 import Image from "next/image";
 import { DotSeparator } from "@/components/dot-separator";
 import Embla, { useEmblaContext } from "@/components/embla";
-import { ProductColorVariants, ProductSizeVariants } from "./product-variants";
 import { Button } from "@/components/ui/button";
 import { data } from "@/data/products";
 import { useAuth } from "@/hooks/useAuth";
@@ -21,6 +20,9 @@ import { LucidePlus } from "lucide-react";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 import Link from "next/link";
 import { StarRatings } from "@/components/star-ratings";
+import { ProductAttributes } from "./product-attributes";
+import { useProductAttributes } from "@/hooks/useProductAttributes";
+import { Heading } from "@/components/heading";
 
 export const QuickShop = forwardRef(function QuickShop(
   { productId }: { productId?: string },
@@ -34,6 +36,16 @@ export const QuickShop = forwardRef(function QuickShop(
   }));
 
   if (!product) return null; // Handle cases where product is undefined
+  const {
+    allColors,
+    allSizes,
+    availableColors,
+    availableSizes,
+    handleColorChange,
+    handleSizeChange,
+    selectedColor,
+    selectedSize,
+  } = useProductAttributes(product);
 
   return (
     <>
@@ -46,7 +58,7 @@ export const QuickShop = forwardRef(function QuickShop(
       </Button>
 
       <Dialog open={openQuickShop} onOpenChange={setOpenQuickShop}>
-        <DialogContent className="flex flex-col md:flex-row md:gap-10 max-w-md md:max-w-4xl overflow-y-scroll">
+        <DialogContent className="flex flex-col md:flex-row md:gap-10 max-w-md md:max-w-4xl sm:p-8">
           <div className="w-full md:w-84 relative cursor-grab">
             <Embla data={product.media.images}>
               <Embla.Container>
@@ -58,28 +70,50 @@ export const QuickShop = forwardRef(function QuickShop(
 
           {/* Right Column */}
           <div className="flex-1 items-center md:items-start md:justify-center flex flex-col">
-            <div className="space-y-4 md:space-y-8">
-              <DialogHeader className="text-left">
-                <DialogTitle className="text-xl lg:text-2xl text-foreground">
-                  {product.productDetails.title}
-                </DialogTitle>
-                <span className="text-lg lg:text-xl">
-                  {product.pricing.base.amount}
+            <div className="space-y-4 lg:space-y-8">
+              <DialogHeader className="text-left space-y-0.5">
+                <DialogTitle>{product.productDetails.title}</DialogTitle>
+                <span className="font-medium">
+                  ${product.pricing.base.amount}
                 </span>
-                <StarRatings
-                  averageRating={product.ratings.average}
-                  size="lg"
-                  isInteractive={false}
-                />
+                <div className="flex items-center gap-1 text-sm">
+                  <span className="text-sm">{product.ratings.average}</span>
+                  <StarRatings
+                    averageRating={product.ratings.average}
+                    size="md"
+                    isInteractive={false}
+                  />
+                  <DotSeparator />
+                  <Link
+                    href="#"
+                    className="flex items-center underline underline-offset-2 text-primary"
+                  >
+                    See all&nbsp;
+                    {product.ratings.totalReviews}
+                    &nbsp; reviews
+                  </Link>
+                </div>
               </DialogHeader>
               <DialogDescription className="sr-only">
                 Product variants section
               </DialogDescription>
-              <div className="flex flex-col gap-4 md:gap-8">
-                <ProductColorVariants />
-                <ProductSizeVariants />
-                <ADD_TO_CART productId={productId as string} />
-              </div>
+              <ProductSection title="Color">
+                <ProductAttributes
+                  attributes={allColors}
+                  availableAttributes={availableColors}
+                  value={selectedColor}
+                  valueChange={handleColorChange}
+                />
+              </ProductSection>
+              <ProductSection title="Size">
+                <ProductAttributes
+                  attributes={allSizes}
+                  availableAttributes={availableSizes}
+                  value={selectedSize}
+                  valueChange={handleSizeChange}
+                />
+              </ProductSection>
+              <ProductCTA productId={productId as string} />
             </div>
           </div>
         </DialogContent>
@@ -88,7 +122,24 @@ export const QuickShop = forwardRef(function QuickShop(
   );
 });
 
-function ADD_TO_CART({ productId }: { productId: string }) {
+function ProductSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="space-y-2">
+      <Heading as="h3" size="default">
+        {title}
+      </Heading>
+      {children}
+    </div>
+  );
+}
+
+function ProductCTA({ productId }: { productId: string }) {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
   const handleAddToCart = () => {
@@ -98,11 +149,11 @@ function ADD_TO_CART({ productId }: { productId: string }) {
     alert("To be implemented");
   };
   return (
-    <div className="flex flex-col gap-1 md:gap-2">
-      <Button onClick={handleAddToCart} size="lg">
+    <div className="flex flex-col gap-2">
+      <Button className="w-full" onClick={handleAddToCart} size="lg">
         Add to cart
       </Button>
-      <Button asChild size="lg" variant="link">
+      <Button className="w-full" asChild size="lg" variant="link">
         <Link href={productDetailsPath(productId)}>View Details</Link>
       </Button>
     </div>

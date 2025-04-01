@@ -95,7 +95,7 @@ export const data: ProductType[] = [
       shortDescription:
         "Lightweight waterproof shell for hiking and outdoor activities",
       longDescription:
-        "The TrekShell jacket is a premium 3-layer waterproof outer shell designed for serious hikers and outdoor enthusiasts. Featuring our proprietary HydroGuard technology, this jacket offers exceptional waterproofing while maintaining breathability. Reinforced stitching at stress points ensures durability in challenging conditions, while the adjustable hood and cuffs provide customizable protection against the elements.",
+        "The TrekShell Jacket is a premium 3-layer waterproof outer shell designed for dedicated hikers and outdoor enthusiasts who demand high performance. Engineered with our advanced HydroGuard technology, it provides exceptional waterproof protection while allowing for breathability, ensuring you stay dry and comfortable even during high-energy activities. The jacket features reinforced stitching at key stress points for added durability, making it tough enough to handle challenging environments and rough conditions.\n Designed for versatility, the TrekShell includes an adjustable hood and cuffs, offering a customizable fit to protect against wind, rain, and snow. Whether you're hiking through wet terrain, braving strong winds, or navigating snow-covered paths, this jacket provides reliable, all-weather protection. Lightweight yet durable, it’s an essential companion for any outdoor adventure, combining comfort, performance, and long-lasting reliability to keep you moving forward no matter the elements.",
       features: [
         "100% waterproof HydroGuard membrane",
         "Fully taped seams",

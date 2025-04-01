@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/heading";
 import { ProductImageGallery } from "./product-image-gallery";
 import { type ProductType, products } from "@/data/products";
-import { LucideStar } from "lucide-react";
+import { LucideEllipsis, LucideStar } from "lucide-react";
 import { useProductAttributes } from "@/hooks/useProductAttributes";
 import { ProductAttributes } from "./product-attributes";
 import React from "react";
@@ -51,11 +51,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                 />
               </div>
 
-              <ProductSection title="Description:">
-                <p className="text-foreground/90">
-                  {product.productDetails.longDescription}
-                </p>
-              </ProductSection>
+              <ProductDescription product={product} />
 
               <ProductSection title="Select Color">
                 <ProductAttributes
@@ -96,6 +92,43 @@ type ProductMetadataProps = {
   salesCount: number;
   averageRating: number;
 };
+
+function ProductDescription({ product }: { product: ProductType }) {
+  const [showMore, setShowMore] = React.useState(false);
+  const wordLength = product.productDetails.longDescription.split(" ").length;
+  const wordLimit = 101;
+  const lines = product.productDetails.longDescription.split("\n");
+  return (
+    <ProductSection title="Description:">
+      <div className="text-foreground/90 space-y-1">
+        {product.productDetails.longDescription
+          .split(" ")
+          .slice(0, showMore ? wordLength : wordLimit)
+          .join(" ")
+          .split("\n")
+          .map((line, i) => (
+            <p className="inline-block" key={i}>
+              {line}
+
+              {i === lines.length - 1 && (
+                <>
+                  {showMore ? " " : " ... "}
+                  <Button
+                    variant="link"
+                    size="sm"
+                    className="inline p-0"
+                    onClick={() => setShowMore(!showMore)}
+                  >
+                    {showMore ? "Show less" : "Show more"}
+                  </Button>
+                </>
+              )}
+            </p>
+          ))}
+      </div>
+    </ProductSection>
+  );
+}
 
 function ProductMetadata({
   basePrice,
