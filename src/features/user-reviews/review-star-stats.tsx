@@ -1,48 +1,20 @@
 import { LucideStar } from "lucide-react";
 
-// fakeData
-const fakeData = [
-  {
-    star: 5,
-    totalReviews: 1000,
-    givenReviews: 334,
-  },
-  {
-    star: 4,
-    totalReviews: 1000,
-    givenReviews: 382,
-  },
-  {
-    star: 3,
-    totalReviews: 1000,
-    givenReviews: 98,
-  },
-  {
-    star: 2,
-    totalReviews: 1000,
-    givenReviews: 176,
-  },
-  {
-    star: 1,
-    totalReviews: 1000,
-    givenReviews: 20,
-  },
-];
-
-export function ReviewStarStats() {
-  const starRatingsData = [5, 4, 3, 2, 1].map((star, index) => ({
-    star,
-    totalReviews: fakeData[index].totalReviews,
-    givenReviews: fakeData[index].givenReviews,
-  }));
+export function ReviewStarStats({
+  totalReviews,
+  stars,
+}: {
+  totalReviews: number;
+  stars: Record<string, number>;
+}) {
   return (
     <div className="w-full flex-2 space-y-2">
-      {starRatingsData.map((data, index) => (
+      {Object.entries(stars).map(([key, prop], index) => (
         <ReviewStarBar
           key={index}
-          star={data.star}
-          totalReviews={data.totalReviews}
-          givenReviews={data.givenReviews}
+          star={Number(key.slice(0, 1))}
+          totalReviews={totalReviews}
+          givenReviews={prop}
         />
       ))}
     </div>

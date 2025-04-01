@@ -231,7 +231,7 @@ export const data: ProductType[] = [
       shortDescription:
         "Premium wireless headphones with adaptive noise cancellation",
       longDescription:
-        "Experience audio like never before with the TechListen ProSound headphones. Our fourth-generation adaptive noise cancellation technology analyzes your environment 200 times per second to create the perfect sound profile for any situation. The premium memory foam ear cushions and lightweight design ensure comfort for extended listening sessions, while the 40-hour battery life keeps your music going all day and night. Compatible with all Bluetooth devices and featuring a built-in microphone array for crystal-clear calls.",
+        "Discover audio like never before with the TechListen ProSound headphones, where innovation meets unparalleled sound quality. Our state-of-the-art fourth-generation adaptive noise cancellation technology works tirelessly, analyzing your environment 200 times per second to perfectly tailor your listening experience. Whether you're commuting in a crowded city, working in a noisy office, or relaxing at home, the ProSound ensures you're fully immersed in rich, detailed sound with zero distractions.\n Designed for those who demand comfort, the ProSound features luxurious memory foam ear cushions that gently mold to the shape of your ears, providing an ultra-soft, secure fit for hours of non-stop listening pleasure. The lightweight, ergonomic design ensures that you can wear them all day without feeling weighed down or uncomfortable.",
       features: [
         "Adaptive noise cancellation technology",
         "40-hour battery life",

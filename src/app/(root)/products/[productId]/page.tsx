@@ -20,7 +20,7 @@ export default async function ProductDetailsPage({
   return (
     <>
       <ProductDetails product={product} />
-      <ProductReviewStats />
+      <ProductReviewStats product={product} />
     </>
   );
 }

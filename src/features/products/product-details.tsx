@@ -4,8 +4,8 @@ import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/heading";
 import { ProductImageGallery } from "./product-image-gallery";
-import { type ProductType, products } from "@/data/products";
-import { LucideEllipsis, LucideStar } from "lucide-react";
+import { type ProductType } from "@/data/products";
+import { LucideStar } from "lucide-react";
 import { useProductAttributes } from "@/hooks/useProductAttributes";
 import { ProductAttributes } from "./product-attributes";
 import React from "react";
@@ -20,7 +20,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
     handleSizeChange,
     selectedColor,
     selectedSize,
-  } = useProductAttributes(products[0]);
+  } = useProductAttributes(product);
 
   return (
     <>
@@ -119,7 +119,7 @@ function ProductDescription({ product }: { product: ProductType }) {
                     className="inline p-0"
                     onClick={() => setShowMore(!showMore)}
                   >
-                    {showMore ? "Show less" : "Show more"}
+                    {showMore ? "Show less" : "Read more"}
                   </Button>
                 </>
               )}

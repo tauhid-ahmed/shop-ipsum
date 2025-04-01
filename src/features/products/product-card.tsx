@@ -32,7 +32,7 @@ export default function ProductCard({
           href={productDetailsPath(data.id)}
           className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
         >
-          <div className="inline-block h-full rounded overflow-hidden p-2 group-hover/card:scale-110 transition-transform duration-300">
+          <div className="inline-block h-full rounded overflow-hidden p-2 group-hover/card:scale-125 transition-transform duration-300">
             <ProductImage
               imagePath={data.media.primaryImage}
               alt={data.productDetails.title}
@@ -54,7 +54,7 @@ export default function ProductCard({
           className="flex flex-col items-center space-y-0.5 sm:space-y-1 mx-4 py-4 relative overflow-hidden"
         >
           <Heading
-            className="text-ellipsis whitespace-nowrap"
+            className="text-ellipsis whitespace-nowrap text-foreground/80"
             align="center"
             weight="medium"
             as="h3"
@@ -62,7 +62,7 @@ export default function ProductCard({
           >
             {data.brand.name}
           </Heading>
-          <p className="text-foreground/90 text-md lg:text-base text-ellipsis whitespace-nowrap">
+          <p className="text-foreground text-md text-ellipsis whitespace-nowrap">
             {data.productDetails.title.split(" ").slice(0, 4).join(" ")}
           </p>
           <span className="font-semibold text-foreground/70">
