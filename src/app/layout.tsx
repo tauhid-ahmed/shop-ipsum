@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html data-color-mode="blue" lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="icon"

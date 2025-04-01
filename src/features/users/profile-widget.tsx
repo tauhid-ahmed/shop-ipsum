@@ -22,6 +22,7 @@ import { useAuth } from "@/hooks/useAuth";
 import ProfileImage from "@/components/profile-image";
 import { signOut } from "next-auth/react";
 import * as paths from "@/constants/paths";
+import { cn } from "@/lib/utils";
 
 const menuItems = [
   {
@@ -84,6 +85,7 @@ export default function ProfileWidget() {
             <span>Appearance</span>
             <ThemeSwitch />
           </div>
+          <ThemesMode />
         </div>
       </PopoverContent>
     </Popover>
@@ -129,5 +131,51 @@ function ProfileHeader() {
         </div>
       </div>
     </>
+  );
+}
+
+function ThemesMode() {
+  const colors = ["red", "yellow", "orange", "green", "rose", "violet", "blue"];
+  const colorClasses = {
+    red: "bg-red-500",
+    yellow: "bg-yellow-500",
+    orange: "bg-orange-500",
+    green: "bg-green-500",
+    rose: "bg-rose-500",
+    violet: "bg-violet-500",
+    blue: "bg-blue-500",
+  };
+
+  const [currentTheme, setCurrentTheme] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      const preferredTheme = localStorage.getItem("theme");
+      if (preferredTheme) {
+        return preferredTheme;
+      }
+    }
+    return "blue";
+  });
+
+  React.useEffect(() => {
+    document.documentElement.setAttribute("data-color-mode", currentTheme);
+    localStorage.setItem("theme", currentTheme);
+  }, [currentTheme]);
+
+  return (
+    <div className="flex items-center justify-between gap-1">
+      <span className="text-sm font-medium inline-block">Theme:</span>
+      <div className="flex items-center gap-0.5">
+        {colors.map((theme) => (
+          <button
+            onClick={() => setCurrentTheme(theme)}
+            key={theme}
+            className={cn(
+              "size-6 border border-border rounded-full cursor-pointer hover:scale-110",
+              `${colorClasses[theme as keyof typeof colorClasses]}`
+            )}
+          ></button>
+        ))}
+      </div>
+    </div>
   );
 }
