@@ -74,7 +74,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                 />
               </ProductSection>
 
-              <div className="py-4 space-y-2 md:space-y-4">
+              <div className="space-y-4 md:space-y-6">
                 <Button className="w-full" size="lg">
                   Buy it Now
                 </Button>
