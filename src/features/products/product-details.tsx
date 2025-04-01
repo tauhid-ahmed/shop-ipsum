@@ -10,6 +10,7 @@ import { useProductAttributes } from "@/hooks/useProductAttributes";
 import { ProductAttributes } from "./product-attributes";
 import React from "react";
 import { DotSeparator } from "@/components/dot-separator";
+import Breadcrumbs from "@/components/breadcrumbs";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   const {
@@ -37,6 +38,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
 
             <div className="flex-1 basis-1/2 space-y-4 md:space-y-6 lg:space-y-8">
               <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
+                <Breadcrumbs product={product} />
                 <div className="space-y-2">
                   <Heading size="md" as="h2">
                     {product.brand.name}

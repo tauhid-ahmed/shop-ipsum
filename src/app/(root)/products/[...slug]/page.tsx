@@ -4,7 +4,7 @@ import ProductDetails from "@/features/products/product-details";
 import ProductReviewDetails from "@/features/products/product-review-details";
 
 type Params = {
-  productId: string;
+  slug: string;
 };
 
 export default async function ProductDetailsPage({
@@ -12,8 +12,9 @@ export default async function ProductDetailsPage({
 }: {
   params: Promise<Params>;
 }) {
-  const { productId } = await params;
-  const product = data.find((prod) => prod.id === productId);
+  const { slug } = await params;
+  const product = data.find((prod) => prod.slug === slug[slug.length - 1]);
+  console.log(product);
 
   if (!product) return notFound();
 

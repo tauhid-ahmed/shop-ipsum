@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 
 export default function ProductCard({
   data,
@@ -36,7 +37,7 @@ export default function ProductCard({
       <CardContent className="relative px-2 h-full flex gap-4 flex-col">
         <div className="relative overflow-hidden">
           <Link
-            href={productDetailsPath(data.id)}
+            href={`/products/${useBreadcrumbs(data)}`}
             className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
           >
             <div className="inline-block h-full rounded overflow-hidden group-hover/card:scale-150 transition-transform duration-300">

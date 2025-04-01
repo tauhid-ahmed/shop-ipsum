@@ -65,6 +65,28 @@ export type ProductType = {
     period: number;
     conditions: string[];
   };
+  slug: string;
+  targetAudience: (
+    | "men"
+    | "women"
+    | "unisex"
+    | "kid"
+    | "adult"
+    | "teen"
+    | "youth"
+    | "accessories"
+    | "general"
+    | "sports"
+    | "accessories"
+    | "outdoor"
+    | "hiking"
+    | "jackets"
+    | "clothing"
+    | "shoes"
+    | "smartwatches"
+    | "footware"
+    | "headphones"
+  )[];
   salesCount: number;
   createdAt: Date;
   updatedAt: Date;
@@ -90,6 +112,7 @@ export const data: ProductType[] = [
       name: "AlpineCore",
       manufacturer: "Alpine Outdoor Gear Co.",
     },
+    slug: "alpine-core-trek-shell-waterproof-jacket",
     productDetails: {
       title: "AlpineCore TrekShell Waterproof Jacket",
       shortDescription:
@@ -203,6 +226,7 @@ export const data: ProductType[] = [
         "Return shipping paid by customer",
       ],
     },
+    targetAudience: ["men"],
     salesCount: 1278,
     createdAt: new Date("2025-03-15T08:30:00Z"),
     updatedAt: new Date("2025-03-12T14:45:00Z"),
@@ -226,6 +250,8 @@ export const data: ProductType[] = [
       name: "TechListen",
       manufacturer: "Advanced Audio Technologies Ltd.",
     },
+    slug: "techlisten-pro-sound-noise-cancelling-headphones",
+
     productDetails: {
       title: "TechListen ProSound Noise-Cancelling Headphones",
       shortDescription:
@@ -327,6 +353,7 @@ export const data: ProductType[] = [
         "Free return shipping within 14 days of delivery",
       ],
     },
+    targetAudience: ["headphones"],
     salesCount: 3542,
     createdAt: new Date("2025-02-08T11:20:00Z"),
     updatedAt: new Date("2025-02-25T09:15:00Z"),
@@ -350,6 +377,7 @@ export const data: ProductType[] = [
       name: "MountainTrek",
       manufacturer: "EverHike Gear Ltd.",
     },
+    slug: "mountain-trek-ultra-grip-hiking-boots",
     productDetails: {
       title: "MountainTrek UltraGrip Hiking Boots",
       shortDescription: "Durable waterproof hiking boots with superior grip.",
@@ -424,6 +452,8 @@ export const data: ProductType[] = [
         "Customer responsible for return shipping",
       ],
     },
+    targetAudience: ["footware"],
+
     salesCount: 1894,
     createdAt: new Date("2025-03-10T09:00:00Z"),
     updatedAt: new Date("2025-03-18T11:30:00Z"),
@@ -441,12 +471,13 @@ export const data: ProductType[] = [
     category: {
       primary: "Electronics",
       secondary: "Smartwatches",
-      tertiary: "Fitness & Outdoor",
+      tertiary: "Fitness",
     },
     brand: {
       name: "WristTech",
       manufacturer: "Precision Gear Solutions",
     },
+    slug: "wristtech-fit-pro-smartwatch",
     productDetails: {
       title: "WristTech FitPro Smartwatch",
       shortDescription:
@@ -503,6 +534,8 @@ export const data: ProductType[] = [
         },
       ],
     },
+    targetAudience: ["smartwatches"],
+
     ratings: {
       average: 4.8,
       totalReviews: 529,
