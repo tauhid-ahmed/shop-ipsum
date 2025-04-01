@@ -12,7 +12,7 @@ import Image from "next/image";
 import { DotSeparator } from "@/components/dot-separator";
 import Embla, { useEmblaContext } from "@/components/embla";
 import { Button } from "@/components/ui/button";
-import { data } from "@/data/products";
+import { data, ProductType } from "@/data/products";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { productDetailsPath, signInPath } from "@/constants/paths";
@@ -29,13 +29,14 @@ export const QuickShop = forwardRef(function QuickShop(
   ref: React.Ref<{ handleQuickShopOpen: () => void }>
 ) {
   const [openQuickShop, setOpenQuickShop] = useState(false);
-  const product = data.find((product) => product.id === productId);
+  const product = data.find(
+    (product) => product.id === productId
+  ) as ProductType;
 
   useImperativeHandle(ref, () => ({
     handleQuickShopOpen: () => setOpenQuickShop(true),
   }));
 
-  if (!product) return null; // Handle cases where product is undefined
   const {
     allColors,
     allSizes,

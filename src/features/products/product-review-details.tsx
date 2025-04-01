@@ -23,11 +23,11 @@ export default function ProductReviewDetails({
             <WriteReview />
           </div>
           <div className="basis-8/12 flex flex-col min-w-sm shrink-1 [&>div:not(:last-child)]:border-b [&>div:not(:last-child)]:border-border md:pl-10 lg:pl-20">
-            <Comments product={product} />
-            <Comments product={product} />
-            <Comments product={product} />
-            <Comments product={product} />
-            <Comments product={product} />
+            <Comments />
+            <Comments />
+            <Comments />
+            <Comments />
+            <Comments />
           </div>
         </div>
       </Container>
@@ -54,7 +54,7 @@ function WriteReview() {
   );
 }
 
-function Comments({ product }: { product: ProductType }) {
+function Comments() {
   return (
     <div className="flex flex-col py-8 gap-4">
       <div className="flex items-center gap-4 shrink-0">

@@ -108,7 +108,7 @@ function ProductDescription({ product }: { product: ProductType }) {
           .join(" ")
           .split("\n")
           .map((line, i) => (
-            <p className="inline-block text-foreground/80" key={i}>
+            <p className="inline-block text-foreground/90" key={i}>
               {line}
 
               {i === lines.length - 1 && (
@@ -157,15 +157,15 @@ function ProductMetadata({
   );
 }
 
-function AdditionalInfo() {
-  return (
-    <p className="text-sm">
-      Pay in 4 interest-free installments for orders over $5000 with &nbsp;
-      <strong>shop pay</strong>
-      <Button variant="link">Learn more</Button>
-    </p>
-  );
-}
+// function AdditionalInfo() {
+//   return (
+//     <p className="text-sm">
+//       Pay in 4 interest-free installments for orders over $5000 with &nbsp;
+//       <strong>shop pay</strong>
+//       <Button variant="link">Learn more</Button>
+//     </p>
+//   );
+// }
 
 function ProductSection({
   title,
@@ -176,7 +176,7 @@ function ProductSection({
 }) {
   return (
     <div className="space-y-2 md:space-y-4">
-      <Heading as="h3" size="lg">
+      <Heading as="h3" size="xl">
         {title}
       </Heading>
       {children}
