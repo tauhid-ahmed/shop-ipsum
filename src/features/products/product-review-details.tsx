@@ -15,19 +15,42 @@ export default function ProductReviewDetails({
     <Section padding="none">
       <Container>
         <div className="flex">
-          <div className="flex-1 border border-border border-dashed p-6 rounded">
-            <div className="space-y-4">
-              <div className="pb-4 border-b border-dashed border-border">
-                <Heading as="h3" size="lg">
-                  Review Filter
-                </Heading>
-              </div>
-              <ReviewFilterByStarRating ratings={product.ratings} />
-            </div>
+          <div className="border border-border border-dashed p-4 rounded">
+            <ProductReviewDetailsSection title={"Review Filter"}>
+              <ReviewFilterByStarRating
+                title={"Rating"}
+                ratings={product.ratings}
+              />
+            </ProductReviewDetailsSection>
+            <ProductReviewDetailsSection title={"Review Filter"}>
+              <ReviewFilterByStarRating
+                title={"Rating"}
+                ratings={product.ratings}
+              />
+            </ProductReviewDetailsSection>
           </div>
           <div className="flex-1"></div>
         </div>
       </Container>
     </Section>
+  );
+}
+
+function ProductReviewDetailsSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="space-y-4">
+      <div className="py-6 border-b border-dashed border-border">
+        <Heading as="h3" size="lg">
+          {title}
+        </Heading>
+      </div>
+      {children}
+    </div>
   );
 }

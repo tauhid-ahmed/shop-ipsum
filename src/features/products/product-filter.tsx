@@ -3,8 +3,10 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { LucideSquare, LucideStar } from "lucide-react";
 import { Label } from "@radix-ui/react-label";
 import React from "react";
+import { Heading } from "@/components/heading";
 
 type ReviewFilterByStarRatingProps = {
+  title: string;
   ratings: {
     average: number;
     totalReviews: number;
@@ -13,10 +15,12 @@ type ReviewFilterByStarRatingProps = {
 };
 
 export function ReviewFilterByStarRating({
+  title,
   ratings,
 }: ReviewFilterByStarRatingProps) {
   return (
-    <>
+    <div>
+      <Heading>{title}</Heading>
       <RadioGroupPrimitive.Root>
         {Object.entries(ratings.ratingBreakdown).map(([star, value]) => (
           <div className="flex items-center gap-2 my-1" key={star}>
@@ -37,6 +41,6 @@ export function ReviewFilterByStarRating({
           </div>
         ))}
       </RadioGroupPrimitive.Root>
-    </>
+    </div>
   );
 }

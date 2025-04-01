@@ -26,7 +26,7 @@ export default function ProductCard({
   const quickShopRef = useRef<{ handleQuickShopOpen: () => void } | null>(null);
 
   return (
-    <div className="w-full relative overflow-hidden rounded border border-border shadow-sm group/card">
+    <div className="w-full flex flex-col relative overflow-hidden rounded border border-border shadow-sm group/card">
       <div className="relative overflow-hidden bg-secondary/40">
         <Link
           href={productDetailsPath(data.id)}
@@ -48,28 +48,33 @@ export default function ProductCard({
           </div>
         )}
       </div>
-      <div className="bg-secondary/20">
+      <div className="bg-secondary/20 flex-1">
         <Link
           href={productDetailsPath(data.id)}
-          className="flex flex-col items-center space-y-0.5 sm:space-y-1 mx-4 py-4 relative overflow-hidden"
+          className="flex flex-col items-center mx-4 py-4 relative overflow-hidden"
         >
           <Heading
-            className="text-ellipsis whitespace-nowrap text-foreground/80"
+            className="text-ellipsis whitespace-nowrap text-foreground/70"
             align="center"
-            weight="medium"
+            weight="semibold"
             as="h3"
-            size="sm"
+            size="default"
           >
             {data.brand.name}
           </Heading>
-          <p className="text-foreground self-start text-md text-ellipsis whitespace-nowrap text-center">
-            {data.productDetails.title.split(" ").slice(0, 4).join(" ")}
+          <p className="text-center text-md text-foreground/90 mb-4 mt-2">
+            {data.productDetails.title.split(" ").slice(1).join(" ")}
           </p>
           <span className="font-semibold text-foreground/70">
-            <PrevPrice price={data.pricing.original.amount} />$
-            {data.pricing.base.amount}
+            <span className="text-sm line-through text-destructive/80">
+              &nbsp;{data.pricing.original.amount}&nbsp;
+            </span>
+            ${data.pricing.base.amount}
           </span>
-          <StarRatings averageRating={data.ratings.average} />
+          <div className="flex gap-1 text-foreground/70">
+            <span className="text-sm font-medium">{data.ratings.average}</span>
+            <StarRatings size="sm" averageRating={data.ratings.average} />
+          </div>
         </Link>
       </div>
       <div className="absolute top-0 right-0 z-10">
@@ -84,14 +89,6 @@ export default function ProductCard({
         />
       )}
     </div>
-  );
-}
-
-function PrevPrice({ price }: { price: number }) {
-  return (
-    <span className="text-sm text-destructive px-1 relative before:absolute before:inset-x-0 before:h-px before:bg-destructive before:top-1/2 mr-0.5">
-      {price}
-    </span>
   );
 }
 

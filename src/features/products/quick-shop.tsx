@@ -72,8 +72,10 @@ export const QuickShop = forwardRef(function QuickShop(
           <div className="flex-1 items-center md:items-start md:justify-center flex flex-col">
             <div className="space-y-4 lg:space-y-8">
               <DialogHeader className="text-left space-y-0.5">
-                <DialogTitle>{product.productDetails.title}</DialogTitle>
-                <span className="font-medium">
+                <DialogTitle className="text-xl lg:text-2xl">
+                  {product.productDetails.title}
+                </DialogTitle>
+                <span className="font-medium text-xl lg:text-2xl">
                   ${product.pricing.base.amount}
                 </span>
                 <div className="flex items-center gap-1 text-sm">
@@ -130,8 +132,8 @@ function ProductSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="space-y-2">
-      <Heading as="h3" size="default">
+    <div className="space-y-3">
+      <Heading as="h3" size="lg">
         {title}
       </Heading>
       {children}

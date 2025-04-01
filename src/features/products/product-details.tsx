@@ -101,7 +101,7 @@ function ProductDescription({ product }: { product: ProductType }) {
   const lines = product.productDetails.longDescription.split("\n");
   return (
     <ProductSection title="Description:">
-      <div className="text-foreground/90 space-y-1">
+      <div className="text-foreground/90 space-y-3">
         {product.productDetails.longDescription
           .split(" ")
           .slice(0, showMore ? wordLength : wordLimit)
