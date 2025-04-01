@@ -32,10 +32,12 @@ function ReviewStarBar({
 }) {
   const reviewPercentage = (givenReviews / totalReviews) * 100 + "%";
   return (
-    <div className="flex items-center gap-1">
-      {star.toFixed(1)}
-      <LucideStar className="fill-amber-500 size-5 stroke-transparent" />
-      <div className="flex-1 ml-auto px-4">
+    <div className="grid grid-cols-[32px_auto_50px] gap-2 items-center">
+      <div className="flex">
+        {star}
+        <LucideStar className="fill-amber-500 size-5 stroke-transparent" />
+      </div>
+      <div className="flex-1 shrink-0">
         <div className="rounded-full bg-secondary h-3 flex-1 relative overflow-hidden">
           <div
             className="absolute inset-0 bg-amber-500/80 rounded-full"

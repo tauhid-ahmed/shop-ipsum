@@ -32,67 +32,70 @@ export function ProductImageGallery({ images, alt }: ProductImageGalleryProps) {
 
   return (
     <>
-      <div className="overflow-hidden relative bg-secondary/50 select-none w-full">
-        <motion.div
-          initial={{
-            opacity: 0.8,
-          }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.2,
-            type: "tween",
-            ease: "backInOut",
-          }}
-          key={imageIndex}
-          ref={containerRef}
-          onPointerMove={handlePointerMove}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          onPointerLeave={handleLeave}
-          className="w-full h-60 lg:aspect-auto lg:h-96 relative group"
-        >
-          {/* Original Image */}
-          <Image
-            src={images[imageIndex]}
-            alt={alt}
-            width="400"
-            height="400"
-            className="object-contain size-full group-hover:opacity-0 [.is-touched_&]:opacity-0"
-            draggable="false"
-            priority
-          />
-          <div
-            style={{
-              transformOrigin: `var(--xOrigin, 50%) var(--yOrigin, 50%)`,
+      <div className="overflow-hidden relative select-none w-full">
+        <div className="flex gap-2">
+          <div className="flex flex-col gap-4 rounded backdrop-blur">
+            {images.map((image, i) => (
+              <div
+                onClick={() => setImageIndex(i)}
+                key={i}
+                className={cn(
+                  "size-12 relative border border-border p-1 cursor-pointer rounded shrink-0",
+                  i === imageIndex &&
+                    "border-primary focus-within:ring ring-primary"
+                )}
+              >
+                <Image src={image} alt="product image" width="60" height="60" />
+              </div>
+            ))}
+          </div>
+          <motion.div
+            initial={{
+              opacity: 0.8,
             }}
-            className="group-hover:scale-150 [.is-touched_&]:scale-150 absolute inset-0 size-full pointer-events-none transition-transform duration-100 ease-out"
+            animate={{ opacity: 1 }}
+            transition={{
+              duration: 0.2,
+              type: "tween",
+              ease: "backInOut",
+            }}
+            key={imageIndex}
+            ref={containerRef}
+            onPointerMove={handlePointerMove}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onPointerLeave={handleLeave}
+            className="w-full h-84 md:h-96 lg:h-auto relative group bg-secondary/50 rounded"
           >
+            {/* Original Image */}
             <Image
               src={images[imageIndex]}
               alt={alt}
-              width="400"
-              height="400"
-              className="object-contain size-full"
+              width="600"
+              height="600"
+              className="object-contain size-full group-hover:opacity-0 [.is-touched_&]:opacity-0"
               draggable="false"
+              priority
             />
-          </div>
-        </motion.div>
-        <div className="flex gap-4 justify-center rounded backdrop-blur py-2 px-10 w-full">
-          {images.map((image, i) => (
             <div
-              onClick={() => setImageIndex(i)}
-              key={i}
-              className={cn(
-                "size-12 relative border border-border p-1 cursor-pointer rounded shrink-0",
-                i === imageIndex &&
-                  "border-primary focus-within:ring ring-primary"
-              )}
+              style={{
+                transformOrigin: `var(--xOrigin, 50%) var(--yOrigin, 50%)`,
+              }}
+              className="group-hover:scale-125 [.is-touched_&]:scale-125 absolute inset-0 size-full pointer-events-none transition-transform duration-100 ease-out"
             >
-              <Image src={image} alt="product image" width="60" height="60" />
+              <Image
+                src={images[imageIndex]}
+                alt={alt}
+                width="600"
+                height="600"
+                className="object-contain size-full"
+                draggable="false"
+              />
             </div>
-          ))}
+          </motion.div>
         </div>
+
         <div className="absolute top-2 right-2 backdrop-blur rounded group-hover/image:opacity-10">
           <ProductMetadata />
         </div>
