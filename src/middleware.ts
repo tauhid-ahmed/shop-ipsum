@@ -3,7 +3,6 @@ import { auth } from "./auth.config";
 import * as paths from "@/constants/paths";
 
 export default async function middleware(req: NextRequest) {
-  return NextResponse.next();
   const session = await auth();
   const { nextUrl } = req;
   const isLoggedIn = !!session?.user;
