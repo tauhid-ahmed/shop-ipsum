@@ -148,7 +148,7 @@ function ThemesMode() {
 
   const [currentTheme, setCurrentTheme] = React.useState(() => {
     if (typeof window !== "undefined") {
-      const preferredTheme = localStorage.getItem("theme");
+      const preferredTheme = localStorage.getItem("preferredTheme");
       if (preferredTheme) {
         return preferredTheme;
       }
@@ -157,8 +157,8 @@ function ThemesMode() {
   });
 
   React.useEffect(() => {
-    document.documentElement.setAttribute("data-color-mode", currentTheme);
-    localStorage.setItem("theme", currentTheme);
+    document.documentElement.setAttribute("data-theme-color", currentTheme);
+    localStorage.setItem("preferredTheme", currentTheme);
   }, [currentTheme]);
 
   return (

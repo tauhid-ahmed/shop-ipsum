@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import SessionProvider from "@/providers/session-provider";
+
 const inter = Inter({
   variable: "--font-primary",
   subsets: ["latin"],
@@ -27,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html data-color-mode="blue" lang="en" suppressHydrationWarning>
+    <html data-theme-color="blue" lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="icon"
