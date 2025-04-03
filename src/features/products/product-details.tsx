@@ -11,6 +11,9 @@ import { ProductAttributes } from "./product-attributes";
 import React from "react";
 import { DotSeparator } from "@/components/dot-separator";
 import Breadcrumbs from "@/components/breadcrumbs";
+import { useAuth } from "@/hooks/useAuth";
+import { redirect } from "next/navigation";
+import { signInPath } from "@/constants/paths";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   const {
@@ -54,9 +57,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                   averageRating={product.ratings.average}
                 />
               </div>
-
               <ProductDescription product={product} />
-
               <ProductSection title="Select Color">
                 <ProductAttributes
                   attributes={allColors}
@@ -73,15 +74,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
                   value={selectedSize}
                 />
               </ProductSection>
-
-              <div className="space-y-4 md:space-y-6">
-                <Button className="w-full" size="lg">
-                  Buy it Now
-                </Button>
-                <Button className="w-full" variant="outline" size="lg">
-                  Add to cart
-                </Button>
-              </div>
+              <CTAAction />
             </div>
           </div>
         </Container>
@@ -183,6 +176,29 @@ function ProductSection({
         {title}
       </Heading>
       {children}
+    </div>
+  );
+}
+
+function CTAAction() {
+  const { user } = useAuth();
+
+  return (
+    <div className="space-y-4 md:space-y-6">
+      <Button
+        onClick={() => {
+          if (!user.id) {
+            redirect(signInPath());
+          }
+        }}
+        className="w-full"
+        size="lg"
+      >
+        Add to cart
+      </Button>
+      <Button className="w-full" variant="outline" size="lg">
+        Add to cart
+      </Button>
     </div>
   );
 }

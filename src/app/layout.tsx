@@ -7,6 +7,8 @@ import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import SessionProvider from "@/providers/session-provider";
 
+import { cookies } from "next/headers";
+
 const inter = Inter({
   variable: "--font-primary",
   subsets: ["latin"],
@@ -22,13 +24,20 @@ export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("preference")?.value;
+
   return (
-    <html data-theme-color="blue" lang="en" suppressHydrationWarning>
+    <html
+      data-theme-color={`${theme || "orange"}`}
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <link
           rel="icon"

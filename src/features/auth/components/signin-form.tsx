@@ -45,6 +45,8 @@ export default function SignInForm() {
   };
   const searchParams = useSearchParams();
 
+  console.log({ callbackUrl: searchParams.get("callbackUrl") });
+
   React.useEffect(() => {
     if (searchParams.get("error")) {
       setNotify({
@@ -74,6 +76,11 @@ export default function SignInForm() {
       <AuthCardBody>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
+            <input
+              type="hidden"
+              name="callbackUrl"
+              value={searchParams.get("callbackUrl") || "/hello"}
+            />
             <fieldset>
               <TextField label="Email" name="email" />
               <TextField label="Password" name="password" type="password" />

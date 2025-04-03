@@ -1,4 +1,3 @@
-"use client";
 import { Container } from "./container";
 import { SearchWidget } from "@/features/products/search-widget";
 import ProfileWidget from "@/features/users/profile-widget";
@@ -12,8 +11,11 @@ import {
   PopoverContent,
 } from "@radix-ui/react-popover";
 import { Button } from "../ui/button";
+import { auth } from "@/auth";
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
+  console.log(session?.user);
   return (
     <header className="border-b border-border py-4 z-50 relative backdrop-blur bg-background/90 text-base">
       <Container size="fluid">
@@ -34,7 +36,7 @@ export default function Header() {
                 <SearchWidget />
               </div>
               <ProfileWidget />
-              <CartWidget />
+              {session?.user && <CartWidget />}
             </div>
           </div>
         </nav>

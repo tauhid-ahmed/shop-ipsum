@@ -23,30 +23,25 @@ export function CartWidget() {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <SignedIn>
-      <Popover defaultOpen={open} open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <div className="flex items-center">
-            <Button size="icon" shape="pill" variant="ghost">
-              <LucideShoppingBag />
-            </Button>
-            <span className="text-sm">0</span>
+    <Popover defaultOpen={open} open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <div className="flex items-center">
+          <Button size="icon" shape="pill" variant="ghost">
+            <LucideShoppingBag />
+          </Button>
+          <span className="text-sm">0</span>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent sideOffset={16} className="w-80 h-[calc(100vh-8rem)] p-0">
+        <div className="flex flex-col h-full [&>*]:p-4">
+          <CartHeader onClick={() => setOpen(false)} />
+          <div className="flex-1 overflow-y-scroll bg-accent/20">
+            <CartBody />
           </div>
-        </PopoverTrigger>
-        <PopoverContent
-          sideOffset={16}
-          className="w-80 h-[calc(100vh-8rem)] p-0"
-        >
-          <div className="flex flex-col h-full [&>*]:p-4">
-            <CartHeader onClick={() => setOpen(false)} />
-            <div className="flex-1 overflow-y-scroll bg-accent/20">
-              <CartBody />
-            </div>
-            <CartFooter />
-          </div>
-        </PopoverContent>
-      </Popover>
-    </SignedIn>
+          <CartFooter />
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }
 

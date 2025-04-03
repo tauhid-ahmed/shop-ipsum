@@ -16,13 +16,15 @@ import { Heading } from "@/components/heading";
 import Link from "next/link";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import ProfileImage from "@/components/profile-image";
 import { signOut } from "next-auth/react";
 import * as paths from "@/constants/paths";
 import { cn } from "@/lib/utils";
+import { setThemePreference } from "@/actions/theme-preference.action";
+import { debounce } from "@/lib/debounce";
 
 const menuItems = [
   {
@@ -145,21 +147,7 @@ function ThemesMode() {
     violet: "bg-violet-500",
     blue: "bg-blue-500",
   };
-
-  const [currentTheme, setCurrentTheme] = React.useState(() => {
-    if (typeof window !== "undefined") {
-      const preferredTheme = localStorage.getItem("preferredTheme");
-      if (preferredTheme) {
-        return preferredTheme;
-      }
-    }
-    return "blue";
-  });
-
-  React.useEffect(() => {
-    document.documentElement.setAttribute("data-theme-color", currentTheme);
-    localStorage.setItem("preferredTheme", currentTheme);
-  }, [currentTheme]);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   return (
     <div className="flex items-center justify-between gap-1">
@@ -167,7 +155,7 @@ function ThemesMode() {
       <div className="flex items-center gap-0.5">
         {colors.map((theme) => (
           <button
-            onClick={() => setCurrentTheme(theme)}
+            onClick={debounce(setThemePreference.bind(null, theme), 500)}
             key={theme}
             className={cn(
               "size-6 border border-border rounded-full cursor-pointer hover:scale-110",

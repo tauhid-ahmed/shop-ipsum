@@ -5,6 +5,6 @@ export const metadata: Metadata = {
   title: "Sign in",
 };
 
-export default function LoginPage() {
+export default async function LoginPage() {
   return <LoginForm />;
 }
