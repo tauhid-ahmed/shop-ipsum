@@ -39,7 +39,7 @@ export default function ProductDetails({ product }: { product: ProductType }) {
               />
             </div>
 
-            <div className="flex-1 basis-1/2 space-y-4 md:space-y-6 lg:space-y-8">
+            <div className="flex-1 basis-1/2 space-y-6 lg:space-y-8">
               <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
                 <Breadcrumbs product={product} />
                 <div className="space-y-2">
@@ -93,8 +93,7 @@ type ProductMetadataProps = {
 function ProductDescription({ product }: { product: ProductType }) {
   const [showMore, setShowMore] = React.useState(false);
   const wordLength = product.productDetails.longDescription.split(" ").length;
-  const wordLimit = 101;
-  const lines = product.productDetails.longDescription.split("\n");
+  const wordLimit = 20;
   return (
     <ProductSection title="Description:">
       <div className="text-foreground/90 space-y-3">
@@ -104,25 +103,19 @@ function ProductDescription({ product }: { product: ProductType }) {
           .join(" ")
           .split("\n")
           .map((line, i) => (
-            <p className="inline-block text-foreground/90" key={i}>
+            <p className="inline-block text-foreground/90 float-left" key={i}>
               {line}
-
-              {i === lines.length - 1 && (
-                <>
-                  {showMore ? " " : " ... "}
-                  <Button
-                    variant="link"
-                    size="sm"
-                    className="inline p-0"
-                    onClick={() => setShowMore(!showMore)}
-                  >
-                    {showMore ? "Show less" : "Read more"}
-                  </Button>
-                </>
-              )}
             </p>
           ))}
       </div>
+      <Button
+        variant="link"
+        size="sm"
+        className="inline-block p-0"
+        onClick={() => setShowMore(!showMore)}
+      >
+        {showMore && wordLength > wordLimit ? "Show less" : "Read more"}
+      </Button>
     </ProductSection>
   );
 }
