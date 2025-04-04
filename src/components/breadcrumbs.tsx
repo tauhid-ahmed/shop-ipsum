@@ -11,7 +11,7 @@ export default function Breadcrumbs({ product }: { product: ProductType }) {
     const paths = ["Home"];
     paths.push(product.targetAudience[0]);
 
-    Object.entries(product.category).forEach(([_, value]) => {
+    Object.entries(product.category).forEach(([, value]) => {
       paths.push(value);
     });
 
