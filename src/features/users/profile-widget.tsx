@@ -16,7 +16,7 @@ import { Heading } from "@/components/heading";
 import Link from "next/link";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
-import React, { useRef } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import ProfileImage from "@/components/profile-image";
@@ -147,7 +147,6 @@ function ThemesMode() {
     violet: "bg-violet-500",
     blue: "bg-blue-500",
   };
-  const abortControllerRef = useRef<AbortController | null>(null);
 
   return (
     <div className="flex items-center justify-between gap-1">

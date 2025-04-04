@@ -1,6 +1,6 @@
 "use client";
 
-import { products, type ProductType } from "@/data/products";
+import { type ProductType } from "@/data/products";
 import { LucideChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 

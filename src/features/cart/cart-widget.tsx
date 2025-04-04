@@ -17,7 +17,6 @@ import React from "react";
 import { productStatus } from "@/lib/productStatus";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
-import SignedIn from "@/components/signed-in";
 
 export function CartWidget() {
   const [open, setOpen] = React.useState(false);

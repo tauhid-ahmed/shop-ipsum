@@ -1,6 +1,3 @@
-import { Container } from "./container";
-import { Section } from "./section";
-
 export function ProductsGrid({ children }: { children: React.ReactNode }) {
   return <Layout>{children}</Layout>;
 }

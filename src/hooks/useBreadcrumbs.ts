@@ -8,7 +8,7 @@ export function useBreadcrumbs(product: ProductType) {
     const paths = [];
     paths.push(product.targetAudience[0]);
 
-    Object.entries(product.category).forEach(([_, value]) => {
+    Object.entries(product.category).forEach(([, value]) => {
       paths.push(value);
     });
 
