@@ -1,4 +1,3 @@
-"use client";
 import {
   LucideChevronLeft,
   LucideMinus,
@@ -11,6 +10,7 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
+  PopoverAnchor,
 } from "@/components/ui/popover";
 import { Heading } from "@/components/heading";
 import React from "react";
@@ -19,10 +19,8 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 
 export function CartWidget() {
-  const [open, setOpen] = React.useState(false);
-
   return (
-    <Popover defaultOpen={open} open={open} onOpenChange={setOpen}>
+    <Popover>
       <PopoverTrigger asChild>
         <div className="flex items-center">
           <Button size="icon" shape="pill" variant="ghost">
@@ -31,26 +29,31 @@ export function CartWidget() {
           <span className="text-sm">0</span>
         </div>
       </PopoverTrigger>
-      <PopoverContent sideOffset={16} className="w-80 h-[calc(100vh-8rem)] p-0">
-        <div className="flex flex-col h-full [&>*]:p-4">
-          <CartHeader onClick={() => setOpen(false)} />
-          <div className="flex-1 overflow-y-scroll bg-accent/20">
-            <CartBody />
+      <PopoverAnchor>
+        <PopoverContent
+          sideOffset={16}
+          className="w-80 h-[calc(100vh-8rem)] p-0"
+        >
+          <CartHeader />
+          <div className="flex flex-col h-full [&>*]:p-4">
+            <div className="flex-1 overflow-y-scroll bg-accent/20">
+              <CartBody />
+            </div>
+            <CartFooter />
           </div>
-          <CartFooter />
-        </div>
-      </PopoverContent>
+        </PopoverContent>
+      </PopoverAnchor>
     </Popover>
   );
 }
 
-function CartHeader({ onClick }: { onClick: () => void }) {
+function CartHeader() {
   return (
     <div className="border-b border-double border-border bg-accent/40 flex gap-1 items-center">
-      <Button onClick={onClick} shape="pill" size="icon" variant="ghost">
-        <LucideChevronLeft />
-      </Button>
-      <strong>Continue Shopping</strong>
+      <PopoverTrigger className="flex items-center cursor-pointer font-normal py-4 text-sm">
+        <LucideChevronLeft size={20} />
+        <span>Continue Shopping</span>
+      </PopoverTrigger>
     </div>
   );
 }
