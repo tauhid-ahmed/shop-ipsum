@@ -1,6 +1,18 @@
 // Home
 export const homePath = () => "/";
 
+// Shop Routes
+export const menPath = () => "/men";
+export const womenPath = () => "/women";
+export const childrenPath = () => "/children";
+export const giftPath = () => "/gift";
+
+// Contact Routes
+export const contactPath = () => "/contact";
+
+// About Routes
+export const aboutPath = () => "/about";
+
 // Auth Routes
 export const signInPath = () => "/auth/sign-in";
 export const registerPath = () => "/auth/register";
