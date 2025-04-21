@@ -3,14 +3,14 @@ import IntroBanner from "@/components/banner/intro.banner";
 import ProductCategoryCard from "@/features/products/product-category-preview";
 import ProductPromo from "@/features/products/product-promo";
 import { products } from "@/data/products";
-import { getTrendingProducts } from "@/lib/product-ranking";
+// import { getTrendingProducts } from "@/lib/product-ranking";
 
 export default async function Home() {
-  const trendingProducts = getTrendingProducts(products);
+  // const trendingProducts = getTrendingProducts(products);
   return (
     <>
       <IntroBanner />
-      <ProductReveal title="Trending" products={trendingProducts} />
+      <ProductReveal title="Trending" products={products} />
       <ProductCategoryCard />
       {/* <ProductReveal category="New Arrivals" /> */}
       <ProductPromo
