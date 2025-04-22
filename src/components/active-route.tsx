@@ -13,7 +13,6 @@ type ActiveRouteProps = {
 
 export function ActiveRoute({ children, href, className }: ActiveRouteProps) {
   const pathname = usePathname();
-
   const isActive = href === "/" ? pathname === "/" : pathname.includes(href);
 
   return (
@@ -24,7 +23,7 @@ export function ActiveRoute({ children, href, className }: ActiveRouteProps) {
           className="absolute inset-x-0 h-0.5 bg-primary -bottom-0.5"
         />
       )}
-      <motion.span className="absolute inset-x-0 h-px bg-primary -bottom-px group-hover:opacity-100 opacity-0" />
+      <motion.span className="absolute inset-x-0 h-0.5 bg-primary -bottom-0.5 group-hover:scale-y-100 scale-y-0 duration-200" />
       {children}
     </Link>
   );
