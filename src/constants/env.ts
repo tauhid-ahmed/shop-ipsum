@@ -20,6 +20,7 @@ export const env = createEnv({
       .string()
       .min(10, "App description is required"),
     NEXT_PUBLIC_APP_URL: z.string().url(),
+    NEXT_PUBLIC_NODE_ENV: z.enum(["development", "production"]),
   },
 
   runtimeEnv: {
@@ -33,5 +34,6 @@ export const env = createEnv({
     AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
     AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    NEXT_PUBLIC_NODE_ENV: process.env.NEXT_PUBLIC_NODE_ENV,
   },
 });

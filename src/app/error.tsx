@@ -1,11 +1,24 @@
 "use client";
 
-export default function RootErrorPage({ error }: { error: Error }) {
+import Error from "@/components/error";
+import { env } from "@/constants/env";
+
+export default function RootErrorPage({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
+  const extendedMessage =
+    env.NEXT_PUBLIC_NODE_ENV === "development" ? error.stack : undefined;
+
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <p>{error.name}</p>
-      <p>{error.message}</p>
-    </div>
+    <Error
+      title={error.name}
+      message={error.message}
+      extendedMessage={extendedMessage}
+      reset={reset}
+    />
   );
 }
