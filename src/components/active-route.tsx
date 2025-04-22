@@ -21,7 +21,7 @@ export function ActiveRoute({ children, href, className }: ActiveRouteProps) {
       {isActive && (
         <motion.span
           layoutId="active-route-indicator"
-          className="absolute inset-x-0 h-px bg-primary -bottom-px"
+          className="absolute inset-x-0 h-0.5 bg-primary -bottom-0.5"
         />
       )}
       <motion.span className="absolute inset-x-0 h-px bg-primary -bottom-px group-hover:opacity-100 opacity-0" />
