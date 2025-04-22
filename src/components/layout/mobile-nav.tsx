@@ -44,21 +44,21 @@ export default function Navigation() {
             <MotionConfig
               transition={{ duration: 0.3, type: "tween", ease: "easeInOut" }}
             >
-              <motion.nav
+              <motion.div
                 key={open ? "open" : "closed"}
                 initial={{ x: "-100%" }}
                 animate={{ x: open ? 0 : "-100%" }}
                 exit={{ x: "-100%" }}
                 className="absolute inset-0 bg-popover text-popover-foreground shadow-lg border-r border-border"
               >
-                <ul className="space-y-2 text-white/80">
+                <ul className="space-y-2 ml-3">
                   {navItems.map((item) => (
                     <li key={item.href}>
                       <ActiveRoute href={item.href}>{item.name}</ActiveRoute>
                     </li>
                   ))}
                 </ul>
-              </motion.nav>
+              </motion.div>
               <motion.div
                 initial={{ x: "-100%" }}
                 animate={{ x: subMenuOpen ? 0 : "-100%" }}

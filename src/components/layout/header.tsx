@@ -6,18 +6,19 @@ import { Logo } from "../logo";
 import Navigation from "./mobile-nav";
 import { auth } from "@/auth";
 import { DesktopNav } from "./desktop-nav";
+import WishlistOverview from "@/features/wishlist/wishlist-overview";
 
 export default async function Header() {
   const session = await auth();
   return (
-    <header className="border-b border-border py-4 z-50 relative backdrop-blur bg-background/90 text-base">
+    <header className="border-b border-border py-4 z-50 relative backdrop-blur bg-background/90 text-base -mx-3 lg:mx-0">
       <Container size="fluid">
-        <nav className="flex items-center">
+        <nav className="flex items-center text-foreground/90">
           <div className="flex flex-1 gap-1 lg:hidden">
             <Navigation />
             <SearchWidget />
           </div>
-          <div className="flex-1 lg:flex gap-4 hidden text-secondary-foreground">
+          <div className="flex-1 lg:flex gap-4 hidden">
             <DesktopNav />
           </div>
           <Logo />
@@ -26,6 +27,7 @@ export default async function Header() {
               <div className="hidden lg:block">
                 <SearchWidget />
               </div>
+              <WishlistOverview />
               <ProfileWidget />
               {session?.user && <CartWidget />}
             </div>
