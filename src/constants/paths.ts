@@ -2,9 +2,9 @@
 export const homePath = () => "/";
 
 // Shop Routes
-export const menPath = () => "/men";
-export const womenPath = () => "/women";
-export const childrenPath = () => "/children";
+export const menPath = () => "/catalogue/men";
+export const womenPath = () => "/catalogue/women";
+export const childrenPath = () => "/catalogue/children";
 export const giftPath = () => "/gift";
 
 // Contact Routes
