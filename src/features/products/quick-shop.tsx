@@ -70,13 +70,13 @@ export const QuickShop = forwardRef(function QuickShop(
           </div>
 
           {/* Right Column */}
-          <div className="flex-1 items-center md:items-start md:justify-center flex flex-col">
+          <div className="flex-1 flex flex-col">
             <div className="space-y-4 lg:space-y-8">
               <DialogHeader className="text-left space-y-0.5">
-                <DialogTitle className="text-xl lg:text-2xl">
+                <DialogTitle className="text-lg lg:text-xl text-foreground/80">
                   {product.productDetails.title}
                 </DialogTitle>
-                <span className="font-medium text-xl lg:text-2xl">
+                <span className="font-semibold text-xl lg:text-2xl">
                   ${product.pricing.base.amount}
                 </span>
                 <div className="flex items-center gap-1 text-sm">
