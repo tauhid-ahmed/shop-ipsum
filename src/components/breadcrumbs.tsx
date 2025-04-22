@@ -1,6 +1,6 @@
 "use client";
 
-import { cataloguePath, homePath } from "@/constants/paths";
+import { categoryPath, homePath } from "@/constants/paths";
 import { type ProductType } from "@/data/products";
 import { LucideChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -32,7 +32,7 @@ export default function Breadcrumbs({ product }: { product: ProductType }) {
       </Link>
       {[...path.slice(0, path.length - 1)].map((p, i) => (
         <Link
-          href={cataloguePath(p)}
+          href={categoryPath(p)}
           className="flex items-center gap-0.5 hover:text-primary hover:underline hover:underline-offset-4"
           key={i}
         >

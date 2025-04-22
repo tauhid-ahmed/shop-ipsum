@@ -5,7 +5,7 @@ import { Section } from "../layout/section";
 import Embla, { useEmblaContext } from "../embla";
 import Image from "next/image";
 import Link from "next/link";
-import { cataloguePath } from "@/constants/paths";
+import { categoryPath } from "@/constants/paths";
 
 type DataType = {
   id: string;
@@ -44,7 +44,7 @@ function Carousel() {
   return product.map((item, index) => (
     <Embla.Slide key={index}>
       <div className="h-60 md:h-72 lg:h-80 relative rounded overflow-hidden">
-        <Link href={cataloguePath(item.category)}>
+        <Link href={categoryPath(item.category)}>
           <Image
             src={item.image}
             fill

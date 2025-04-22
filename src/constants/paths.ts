@@ -28,8 +28,8 @@ export const createProductPath = () => "/admin/products/create";
 export const updateProductPath = (id: string) => `/admin/products/update/${id}`;
 export const deleteProductPath = (id: string) => `/admin/products/delete/${id}`;
 
-// Catalogue Routes
-export const cataloguePath = (catalogue: string) => `/catalogue/${catalogue}`;
+// Category Routes
+export const categoryPath = (category: string) => `/category/${category}`;
 
 // Cart Routes
 export const cartPath = () => "/cart";
