@@ -22,10 +22,14 @@ export const resetPasswordPath = () => "/auth/reset-password";
 
 // Products Routes
 export const productsPath = () => "/products";
-export const productDetailsPath = (id: string) => `/products/${id}`;
+export const productDetailsPath = (slug: string, id: string) =>
+  `/${slug}/p/${id}`;
 export const createProductPath = () => "/admin/products/create";
 export const updateProductPath = (id: string) => `/admin/products/update/${id}`;
 export const deleteProductPath = (id: string) => `/admin/products/delete/${id}`;
+
+// Catalogue Routes
+export const cataloguePath = (catalogue: string) => `/catalogue/${catalogue}`;
 
 // Cart Routes
 export const cartPath = () => "/cart";

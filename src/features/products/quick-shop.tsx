@@ -116,7 +116,7 @@ export const QuickShop = forwardRef(function QuickShop(
                   valueChange={handleSizeChange}
                 />
               </ProductSection>
-              <ProductCTA productId={productId as string} />
+              <ProductCTA slug={product.slug} productId={productId as string} />
             </div>
           </div>
         </DialogContent>
@@ -142,7 +142,7 @@ function ProductSection({
   );
 }
 
-function ProductCTA({ productId }: { productId: string }) {
+function ProductCTA({ slug, productId }: { slug: string; productId: string }) {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
   const handleAddToCart = () => {
@@ -157,7 +157,7 @@ function ProductCTA({ productId }: { productId: string }) {
         Add to cart
       </Button>
       <Button className="w-full" asChild size="lg" variant="link">
-        <Link href={productDetailsPath(productId)}>View Details</Link>
+        <Link href={productDetailsPath(slug, productId)}>View Details</Link>
       </Button>
     </div>
   );

@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 type SectionProps = {
   children: React.ReactNode;
   className?: string;
-  padding?: "default" | "sm" | "md" | "lg" | "none";
+  padding?: "default" | "sm" | "md" | "lg" | "none" | "xs";
 };
 
 export function Section({
@@ -20,6 +20,7 @@ export function Section({
           "py-12 md:py-16 lg:py-20": padding === "lg",
           "py-8 lg:py-14": padding === "md",
           "py-8": padding === "sm",
+          "py-4": padding === "xs",
           "py-0": padding === "none",
         },
         className

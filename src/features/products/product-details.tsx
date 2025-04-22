@@ -29,52 +29,54 @@ export default function ProductDetails({ product }: { product: ProductType }) {
 
   return (
     <>
-      <Section>
+      <Section padding="xs">
         <Container>
-          <div className="flex md:flex-row gap-10 lg:gap-16 flex-col md:items-start">
-            <div className="flex-1 basis-1/2 md:sticky top-18">
-              <ProductImageGallery
-                images={product.media.images}
-                alt={product.productDetails.title}
-              />
-            </div>
-
-            <div className="flex-1 basis-1/2 space-y-6 lg:space-y-8">
-              <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
-                <Breadcrumbs product={product} />
-                <div className="space-y-2">
-                  <Heading size="md" as="h2">
-                    {product.brand.name}
-                  </Heading>
-                  <Heading size="2xl" as="h3">
-                    {product.productDetails.title}
-                  </Heading>
-                </div>
-                <ProductMetadata
-                  originalPrice={product.pricing.original.amount}
-                  basePrice={product.pricing.base.amount}
-                  salesCount={product.salesCount}
-                  averageRating={product.ratings.average}
+          <div className="space-y-4">
+            <div className="flex md:flex-row gap-10 lg:gap-16 flex-col md:items-start">
+              <div className="flex-1 basis-1/2 md:sticky top-18">
+                <ProductImageGallery
+                  images={product.media.images}
+                  alt={product.productDetails.title}
                 />
               </div>
-              <ProductDescription product={product} />
-              <ProductSection title="Select Color">
-                <ProductAttributes
-                  attributes={allColors}
-                  availableAttributes={availableColors}
-                  valueChange={handleColorChange}
-                  value={selectedColor}
-                />
-              </ProductSection>
-              <ProductSection title="Select Size">
-                <ProductAttributes
-                  attributes={allSizes}
-                  availableAttributes={availableSizes}
-                  valueChange={handleSizeChange}
-                  value={selectedSize}
-                />
-              </ProductSection>
-              <CTAAction />
+
+              <div className="flex-1 basis-1/2 space-y-6 lg:space-y-8">
+                <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
+                  <Breadcrumbs product={product} />
+                  <div className="space-y-2">
+                    <Heading className="text-foreground/80" size="md" as="h2">
+                      {product.brand.name}
+                    </Heading>
+                    <Heading size="2xl" as="h3">
+                      {product.productDetails.title}
+                    </Heading>
+                  </div>
+                  <ProductMetadata
+                    originalPrice={product.pricing.original.amount}
+                    basePrice={product.pricing.base.amount}
+                    salesCount={product.salesCount}
+                    averageRating={product.ratings.average}
+                  />
+                </div>
+                <ProductDescription product={product} />
+                <ProductSection title="Select Color">
+                  <ProductAttributes
+                    attributes={allColors}
+                    availableAttributes={availableColors}
+                    valueChange={handleColorChange}
+                    value={selectedColor}
+                  />
+                </ProductSection>
+                <ProductSection title="Select Size">
+                  <ProductAttributes
+                    attributes={allSizes}
+                    availableAttributes={availableSizes}
+                    valueChange={handleSizeChange}
+                    value={selectedSize}
+                  />
+                </ProductSection>
+                <CTAAction />
+              </div>
             </div>
           </div>
         </Container>

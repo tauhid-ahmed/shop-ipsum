@@ -7,5 +7,5 @@ type Props = {
 export default async function ProductsSearch({ searchParams }: Props) {
   const { q } = await searchParams;
 
-  return <div>ProductsSearch</div>;
+  return <div>ProductsSearch {q}</div>;
 }
