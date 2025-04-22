@@ -4,18 +4,21 @@ import { Container } from "../layout/container";
 import { Section } from "../layout/section";
 import Embla, { useEmblaContext } from "../embla";
 import Image from "next/image";
+import Link from "next/link";
+import { cataloguePath } from "@/constants/paths";
 
 type DataType = {
   id: string;
   image: string;
+  category: string;
 };
 
 const data: DataType[] = [
-  { id: "1", image: "/assets/banner/banner-01.webp" },
-  { id: "2", image: "/assets/banner/banner-02.webp" },
-  { id: "3", image: "/assets/banner/banner-03.webp" },
-  { id: "4", image: "/assets/banner/banner-04.webp" },
-  { id: "5", image: "/assets/banner/banner-05.webp" },
+  { id: "1", image: "/assets/banner/banner-01.webp", category: "kid-fashion" },
+  { id: "2", image: "/assets/banner/banner-02.webp", category: "shoes" },
+  { id: "3", image: "/assets/banner/banner-03.webp", category: "women" },
+  { id: "4", image: "/assets/banner/banner-04.webp", category: "jewellery" },
+  { id: "5", image: "/assets/banner/banner-05.webp", category: "men" },
 ];
 
 export default function IntroBanner() {
@@ -41,13 +44,15 @@ function Carousel() {
   return product.map((item, index) => (
     <Embla.Slide key={index}>
       <div className="h-60 md:h-72 lg:h-80 relative rounded overflow-hidden">
-        <Image
-          src={item.image}
-          fill
-          alt={item.id}
-          className="size-full object-cover"
-          priority
-        />
+        <Link href={cataloguePath(item.category)}>
+          <Image
+            src={item.image}
+            fill
+            alt={item.id}
+            className="size-full object-cover"
+            priority
+          />
+        </Link>
       </div>
     </Embla.Slide>
   ));

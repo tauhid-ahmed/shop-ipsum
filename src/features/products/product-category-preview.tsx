@@ -1,6 +1,7 @@
 import { Heading } from "@/components/heading";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { cataloguePath } from "@/constants/paths";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,28 +18,36 @@ export default function ProductCategoryPreview() {
             <div className="col-span-8 md:col-span-3 md:row-span-2 h-full">
               <PreviewCard
                 badge="Eid ul fitr fashion"
-                href="#"
+                category="eid-ul-fitr-fashion"
                 image="eid-ul-fitor-fashion"
                 className="md:h-full"
               />
             </div>
             <div className="col-span-8 md:col-span-2">
-              <PreviewCard badge="Men fashion" href="#" image="men-fashion" />
+              <PreviewCard
+                badge="Men fashion"
+                category="men-fashion"
+                image="men-fashion"
+              />
             </div>
             <div className="col-span-4 md:col-span-3">
-              <PreviewCard badge="Kid fashion" href="#" image="kid-fashion" />
+              <PreviewCard
+                badge="Kid fashion"
+                category="kid-fashion"
+                image="kid-fashion"
+              />
             </div>
             <div className="col-span-4 md:col-span-3">
               <PreviewCard
                 badge="Winter fashion"
-                href="#"
+                category="winter-fashion"
                 image="winter-fashion"
               />
             </div>
             <div className="col-span-8 md:col-span-2">
               <PreviewCard
                 badge="Summer fashion"
-                href="#"
+                category="summer-fashion"
                 image="summer-fashion"
               />
             </div>
@@ -53,13 +62,13 @@ type PreviewCardProps = {
   image: string;
   className?: string;
   badge: string;
-  href: string;
+  category: string;
 };
 
-function PreviewCard({ image, className, href, badge }: PreviewCardProps) {
+function PreviewCard({ image, className, category, badge }: PreviewCardProps) {
   return (
     <Link
-      href={href}
+      href={cataloguePath(category)}
       className={cn("relative block h-full hover:opacity-75", className)}
     >
       <Image
