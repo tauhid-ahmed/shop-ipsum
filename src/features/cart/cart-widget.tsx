@@ -31,11 +31,13 @@ export function CartWidget() {
       </PopoverTrigger>
       <PopoverAnchor>
         <PopoverContent
-          sideOffset={16}
-          className="w-80 h-[calc(100vh-8rem)] p-0"
+          side="top"
+          align="end"
+          sideOffset={34}
+          className="w-80 flex flex-col h-[calc(100vh-8rem)] p-0 right-0"
         >
           <CartHeader />
-          <div className="flex flex-col h-full [&>*]:p-4">
+          <div className="flex flex-col flex-1 [&>*]:p-4 overflow-hidden">
             <div className="flex-1 overflow-y-scroll bg-accent/20">
               <CartBody />
             </div>
@@ -121,15 +123,15 @@ function CartBody() {
 
 function CartFooter() {
   return (
-    <div className="border-t border-border bg-accent/40 flex flex-col gap-3">
-      <div className="flex items-center gap-4 pb-4">
+    <div className="border-t border-border bg-accent/90 flex flex-col gap-3">
+      <div className="flex items-center gap-4 pb-4 text-sm">
         <strong>Subtotal</strong>
         <Separator orientation="vertical" />
         <span>6&nbsp;items</span>
         <Separator orientation="vertical" />
         <span className="ml-auto space-x-2">
           <span className="text-muted-foreground text-sm">USD$</span>
-          <strong>24523.00</strong>
+          <strong>2453.00</strong>
         </span>
       </div>
       <Button className="w-full">Proceed to checkout</Button>
