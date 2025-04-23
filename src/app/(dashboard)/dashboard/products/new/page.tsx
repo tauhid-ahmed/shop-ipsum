@@ -1,3 +1,9 @@
+import { AddProduct } from "@/features/dashboard/add-product";
+
 export default function CreateNewProduct() {
-  return <div>CreateNewProduct</div>;
+  return (
+    <section>
+      <AddProduct />
+    </section>
+  );
 }
