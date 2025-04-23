@@ -1,6 +1,6 @@
 "use client";
 
-import { cloneElement, useState } from "react";
+import { cloneElement, useEffect, useState } from "react";
 import {
   LucideHome,
   LucideBox,
@@ -158,13 +158,14 @@ export function DashboardNavigation({
 function Nav({ data, expanded }: { data: NavItem[]; expanded: boolean }) {
   const [openNav, setOpenNav] = useState("");
   const pathname = usePathname();
+
   return (
     <ul className="space-y-6">
       {data.map((item) => (
         <li className="flex items-center gap-8" key={item.name}>
           {item.subnav ? (
             <div className="flex flex-col">
-              <button
+              <div
                 onClick={() =>
                   setOpenNav(openNav === item.name ? "" : item.name)
                 }
@@ -188,7 +189,7 @@ function Nav({ data, expanded }: { data: NavItem[]; expanded: boolean }) {
                     </motion.span>
                   </motion.span>
                 )}
-              </button>
+              </div>
               <HeightAnimation
                 isOpen={item.name === openNav}
                 className={`pl-4 overflow-hidden ${
