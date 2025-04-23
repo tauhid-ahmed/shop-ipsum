@@ -20,7 +20,7 @@ import { HeightAnimation } from "./animations";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-// import * as paths from "@/constants/paths";
+import { usePathname } from "next/navigation";
 
 type NavItem = {
   name: string;
@@ -157,6 +157,7 @@ export function DashboardNavigation({
 
 function Nav({ data, expanded }: { data: NavItem[]; expanded: boolean }) {
   const [openNav, setOpenNav] = useState("");
+  const pathname = usePathname();
   return (
     <ul className="space-y-6">
       {data.map((item) => (
@@ -198,7 +199,14 @@ function Nav({ data, expanded }: { data: NavItem[]; expanded: boolean }) {
               </HeightAnimation>
             </div>
           ) : (
-            <Link className="flex gap-6 items-center" href={item.href}>
+            <Link
+              className={cn(
+                "flex gap-6 items-center hover:underline hover:underline-offset-4 hover:text-primary",
+                pathname === item.href &&
+                  "text-primary underline underline-offset-4"
+              )}
+              href={item.href}
+            >
               {cloneElement(item.icon, {
                 className: "size-6",
               } as React.HTMLAttributes<SVGElement>)}
