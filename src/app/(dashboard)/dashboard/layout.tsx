@@ -1,5 +1,6 @@
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { DashboardContainer } from "@/features/dashboard/dashboard-container";
 import { DashboardNavigation } from "@/features/dashboard/navigation";
 
 export default function DashboardLayout({
@@ -9,11 +10,10 @@ export default function DashboardLayout({
 }) {
   return (
     <Section>
-      <Container size="fluid">
-        <div className="grid grid-cols-[300px_1fr]">
-          <DashboardNavigation />
-          <div className="">{children}</div>
-        </div>
+      <Container size="fluid" flush>
+        <DashboardContainer>
+          <div className="px-6 bg-background">{children}</div>
+        </DashboardContainer>
       </Container>
     </Section>
   );

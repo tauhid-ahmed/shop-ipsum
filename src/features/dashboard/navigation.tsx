@@ -13,12 +13,13 @@ import {
   LucideShoppingCart,
   LucideWarehouse,
   LucideChevronRight,
+  LucideChevronsRight,
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { HeightAnimation } from "./animations";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import { Button } from "@/components/ui/button";
 // import * as paths from "@/constants/paths";
 
 type NavItem = {
@@ -26,9 +27,6 @@ type NavItem = {
   icon: React.ReactElement;
   href: string;
   subnav?: NavItem[];
-};
-type NavProps = {
-  data: NavItem[];
 };
 
 export const paths = {
@@ -53,7 +51,7 @@ export const paths = {
 
 export const navItems: NavItem[] = [
   {
-    name: "Home",
+    name: "Dashboard",
     icon: <LucideHome />,
     href: paths.dashboard.home,
   },
@@ -126,18 +124,41 @@ export const navItems: NavItem[] = [
   },
 ];
 
-export function DashboardNavigation() {
+export function DashboardNavigation({
+  expanded,
+  onClick,
+}: {
+  expanded: boolean;
+  onClick: () => void;
+}) {
   return (
-    <nav>
-      <Nav data={navItems} />
-    </nav>
+    <motion.nav
+      initial={false}
+      animate={{
+        width: expanded ? "240px" : "90px",
+      }}
+      className="whitespace-nowrap p-8 border-r border-input overflow-hidden relative"
+    >
+      <Button
+        size="icon"
+        variant="transparent"
+        onClick={onClick}
+        className={cn(
+          "absolute top-0 right-0 cursor-pointer",
+          expanded ? "rotate-180" : "rotate-0"
+        )}
+      >
+        <LucideChevronsRight />
+      </Button>
+      <Nav expanded={expanded} data={navItems} />
+    </motion.nav>
   );
 }
 
-function Nav({ data }: { data: NavItem[] }) {
+function Nav({ data, expanded }: { data: NavItem[]; expanded: boolean }) {
   const [openNav, setOpenNav] = useState("");
   return (
-    <ul className="space-y-2">
+    <ul className="space-y-6">
       {data.map((item) => (
         <li className="flex items-center gap-8" key={item.name}>
           {item.subnav ? (
@@ -146,12 +167,14 @@ function Nav({ data }: { data: NavItem[] }) {
                 onClick={() =>
                   setOpenNav(openNav === item.name ? "" : item.name)
                 }
-                className="flex gap-2 items-center cursor-pointer"
+                className="flex gap-6 items-center cursor-pointer"
               >
                 {cloneElement(item.icon, {
-                  className: "size-4",
+                  className: "size-6",
                 } as React.SVGProps<SVGSVGElement>)}
-                {item.name}
+                <motion.span animate={{ opacity: expanded ? 1 : 0 }}>
+                  {expanded && item.name}
+                </motion.span>
                 {item.subnav && (
                   <motion.span
                     className="inline-block"
@@ -159,25 +182,29 @@ function Nav({ data }: { data: NavItem[] }) {
                       rotate: openNav === item.name ? 90 : 0,
                     }}
                   >
-                    <LucideChevronRight className={cn("size-4")} />
+                    <motion.span animate={{ opacity: expanded ? 1 : 0 }}>
+                      <LucideChevronRight className={cn("size-5")} />
+                    </motion.span>
                   </motion.span>
                 )}
               </button>
               <HeightAnimation
                 isOpen={item.name === openNav}
                 className={`pl-4 overflow-hidden ${
-                  item.name === openNav && "mt-2"
+                  item.name === openNav && "mt-4"
                 }`}
               >
-                <Nav data={item.subnav} />
+                <Nav data={item.subnav} expanded={expanded} />
               </HeightAnimation>
             </div>
           ) : (
-            <Link className="flex gap-2 items-center" href={item.href}>
+            <Link className="flex gap-6 items-center" href={item.href}>
               {cloneElement(item.icon, {
-                className: "size-4",
+                className: "size-6",
               } as React.HTMLAttributes<SVGElement>)}
-              {item.name}
+              <motion.span animate={{ opacity: expanded ? 1 : 0 }}>
+                {expanded && item.name}
+              </motion.span>
             </Link>
           )}
         </li>
