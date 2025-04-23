@@ -41,16 +41,11 @@ export const ordersPath = () => "/orders";
 export const orderDetailsPath = (id: string) => `/orders/${id}`;
 export const createOrderPath = () => "/orders/create";
 
-// Admin Routes (Superadmin and Admin roles)
-export const adminDashboardPath = () => "/admin/dashboard";
-export const manageUsersPath = () => "/admin/users";
-export const manageOrdersPath = () => "/admin/orders";
-export const manageProductsPath = () => "/admin/products";
-
-// Superadmin Routes
-export const superadminDashboardPath = () => "/superadmin/dashboard";
-export const manageRolesPath = () => "/superadmin/roles";
-export const manageSettingsPath = () => "/superadmin/settings";
+// Admin Routes (Admin roles)
+export const dashboardPath = () => "/dashboard";
+export const manageUsersPath = () => "/users";
+export const manageOrdersPath = () => "/orders";
+export const manageProductsPath = () => "/products";
 
 // Account Routes (User)
 export const userProfilePath = () => "/user/profile";
@@ -107,14 +102,3 @@ export const authRoutes = [
   verifyEmailPath(),
 ];
 export const userRoutes = [userProfilePath(), orderHistoryPath()];
-export const adminRoutes = [
-  adminDashboardPath(),
-  manageUsersPath(),
-  manageOrdersPath(),
-  manageProductsPath(),
-];
-export const superadminRoutes = [
-  superadminDashboardPath(),
-  manageRolesPath(),
-  manageSettingsPath(),
-];
