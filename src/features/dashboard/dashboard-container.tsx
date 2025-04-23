@@ -1,5 +1,4 @@
 "use client";
-import { LucideFastForward } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { DashboardNavigation } from "./navigation";
