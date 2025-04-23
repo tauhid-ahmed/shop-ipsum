@@ -68,7 +68,9 @@ export default function ProfileWidget() {
         <ProfileImage />
       </PopoverTrigger>
       <PopoverContent
-        sideOffset={16}
+        side="top"
+        sideOffset={20}
+        align="center"
         className="relative p-0 text-sm rounded text-muted-foreground"
       >
         <ProfileHeader />
