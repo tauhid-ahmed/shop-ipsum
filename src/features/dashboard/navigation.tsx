@@ -1,6 +1,6 @@
 "use client";
 
-import { cloneElement, useEffect, useState } from "react";
+import { cloneElement, useState } from "react";
 import {
   LucideHome,
   LucideBox,
@@ -162,14 +162,19 @@ function Nav({ data, expanded }: { data: NavItem[]; expanded: boolean }) {
   return (
     <ul className="space-y-6">
       {data.map((item) => (
-        <li className="flex items-center gap-8" key={item.name}>
+        <li
+          onClick={() => setOpenNav(openNav === item.name ? "" : item.name)}
+          className="flex items-center gap-8"
+          key={item.name}
+        >
           {item.subnav ? (
             <div className="flex flex-col">
               <div
-                onClick={() =>
-                  setOpenNav(openNav === item.name ? "" : item.name)
-                }
-                className="flex gap-6 items-center cursor-pointer"
+                className={cn(
+                  "flex gap-6 items-center cursor-pointer hover:text-primary hover:underline hover:underline-offset-4",
+                  item.subnav.some((item) => item.href === pathname) &&
+                    "text-primary underline underline-offset-4"
+                )}
               >
                 {cloneElement(item.icon, {
                   className: "size-6",
@@ -193,7 +198,7 @@ function Nav({ data, expanded }: { data: NavItem[]; expanded: boolean }) {
               <HeightAnimation
                 isOpen={item.name === openNav}
                 className={`pl-4 overflow-hidden ${
-                  item.name === openNav && "mt-4"
+                  item.name === openNav && "mt-6"
                 }`}
               >
                 <Nav data={item.subnav} expanded={expanded} />
