@@ -43,7 +43,8 @@ export default function EmailVerificationForm({ notify }: { notify: Notify }) {
 
   return (
     <AuthCard>
-      <AuthCardHeader title="Please verify your email" />
+      <AuthCardHeader title="Please verify your email" />A code sent to{" "}
+      {sessionStorage.getItem("masked-email")}
       <AuthCardContent>
         <form onSubmit={handleSubmit}>
           <div className="w-fit mx-auto space-y-4">

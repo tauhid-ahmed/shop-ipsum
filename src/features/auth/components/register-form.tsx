@@ -37,13 +37,17 @@ export default function RegisterForm() {
     defaultValues,
   });
   const termsAndCondition = form.watch("terms_and_condition");
+  const router = useRouter();
   const onSubmit = async (formData: RegisterFormSchema) => {
     setNotify(null);
     const data = await registerAction(formData);
     setNotify(data.notify as Notify);
+    console.log(data);
+    if (data?.notify?.type === "success") {
+      sessionStorage.setItem("masked-email", formData.email);
+      return router.push(`/auth/verify-email`);
+    }
   };
-
-  const router = useRouter();
 
   return (
     <AuthCard>
@@ -61,7 +65,7 @@ export default function RegisterForm() {
                 type="password"
               />
               <div className="flex flex-col gap-4">
-                <AuthCardNotify notify={notify} />
+                <AuthCardNotify notify={notify?.notify as Notify} />
                 <div className="flex items-center text-sm gap-3 font-medium">
                   <CheckboxField name="terms_and_condition" />
                   <span className="hover:underline cursor-pointer hover:text-blue-500">

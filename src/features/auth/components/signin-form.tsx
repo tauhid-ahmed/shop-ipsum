@@ -1,4 +1,18 @@
 "use client";
+import { CheckboxField } from "@/components/checkbox-field";
+import { TextField } from "@/components/text-field";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
+import * as paths from "@/constants/paths";
+import { Notify } from "@/utils/api-responses";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { signInAction } from "../actions/signin.action";
+import { signInFormSchema, type SignInFormSchema } from "../schema";
 import {
   AuthCard,
   AuthCardContent,
@@ -6,23 +20,7 @@ import {
   AuthCardNotify,
   AuthCardRedirectFooter,
 } from "./auth-card";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { signInAction } from "../actions/signin.action";
-import * as paths from "@/constants/paths";
-import React from "react";
-import { TextField } from "@/components/text-field";
-import { CheckboxField } from "@/components/checkbox-field";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signInFormSchema, type SignInFormSchema } from "../schema";
-import { useForm } from "react-hook-form";
-import { Form } from "@/components/ui/form";
-import { NotifyType } from "../types";
 import { SocialForm } from "./social-form";
-import { useSearchParams } from "next/navigation";
-import { VALIDATION_MESSAGES } from "../validation-messages";
-import { useRouter } from "next/navigation";
 
 const defaultValues = {
   email: "",
@@ -31,7 +29,7 @@ const defaultValues = {
 };
 
 export default function SignInForm() {
-  const [notify, setNotify] = React.useState<NotifyType | null>(null);
+  const [notify, setNotify] = React.useState<Notify | null>(null);
   const form = useForm<SignInFormSchema>({
     mode: "all",
     resolver: zodResolver(signInFormSchema),
@@ -41,34 +39,9 @@ export default function SignInForm() {
   // const rememberMe = form.watch("remember_me");
   const onSubmit = async (formData: SignInFormSchema) => {
     const data = await signInAction(formData);
-    setNotify(data?.notify as NotifyType);
+    setNotify(data?.notify as Notify);
   };
   const searchParams = useSearchParams();
-
-  console.log({ callbackUrl: searchParams.get("callbackUrl") });
-
-  React.useEffect(() => {
-    if (searchParams.get("error")) {
-      setNotify({
-        type: "error",
-        message:
-          VALIDATION_MESSAGES.ACCOUNT_VERIFICATION
-            .ACCOUNT_EXISTS_WITH_DIFFERENT_PROVIDER,
-      });
-    }
-  }, [searchParams]);
-
-  React.useEffect(() => {
-    if (
-      notify?.message === VALIDATION_MESSAGES.ACCOUNT_VERIFICATION.EMAIL_SENT
-    ) {
-      const timeoutId = setTimeout(() => {
-        router.push(paths.verifyEmailPath());
-      }, 1000);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [notify]);
 
   return (
     <AuthCard>
@@ -85,7 +58,7 @@ export default function SignInForm() {
               <TextField label="Email" name="email" />
               <TextField label="Password" name="password" type="password" />
               <div className="flex flex-col gap-6">
-                <AuthCardNotify notify={notify} />
+                <AuthCardNotify notify={notify?.notify as Notify} />
                 <div className="flex items-center gap-3">
                   <RememberMe />
                   <ForgotPasswordRedirect />

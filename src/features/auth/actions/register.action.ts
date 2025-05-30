@@ -13,7 +13,8 @@ import {
   validationErrorResponse,
   type ApiResponse,
 } from "@/utils/api-responses";
-import { ApiError } from "next/dist/server/api-utils";
+import { AppError } from "@/lib/error/app-error";
+import { cookies } from "next/headers";
 
 export const registerAction = withErrorHandler(
   async (formData: RegisterFormSchema): Promise<ApiResponse> => {
@@ -30,7 +31,9 @@ export const registerAction = withErrorHandler(
     // Checking if user with the email address is already exits;
     const existingUser = await getUserByEmail(data.email);
     if (existingUser)
-      throw new ApiError(409, MSG.REGISTRATION.EMAIL_ALREADY_REGISTERED);
+      throw new AppError(MSG.REGISTRATION.EMAIL_ALREADY_REGISTERED, {
+        code: "EMAIL_EXISTS",
+      });
 
     // Encrypt user password
     const encryptedPassword = await encryptPassword(data.password);
@@ -46,13 +49,19 @@ export const registerAction = withErrorHandler(
     // Create new user in the database
     const [newUser] = await createUser(newUserData);
 
-    // Verify email
-    if (!newUser.emailVerified) {
-      await createVerificationToken(newUser.email);
-      return successResponse({}, "Email verification code sent");
-    }
+    // Account creation successful &&  Verify email
+    await createVerificationToken(newUser.email);
+    const cookieStore = await cookies();
+    cookieStore.set({
+      name: "userId",
+      value: newUser.id,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 15,
+      sameSite: "strict",
+    });
 
-    // Account creation successful
-    return successResponse(MSG.REGISTRATION.ACCOUNT_CREATED);
+    return successResponse({}, "Email verification code sent");
   }
 );

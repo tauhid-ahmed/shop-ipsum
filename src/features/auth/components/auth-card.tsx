@@ -1,12 +1,10 @@
 import { Heading } from "@/components/heading";
-
-import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
-
-import { AlertCircle } from "lucide-react";
-
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Logo } from "@/components/logo";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Card, CardContent } from "@/components/ui/card";
+import { Notify } from "@/utils/api-responses";
+import { AlertCircle } from "lucide-react";
+import Link from "next/link";
 
 export function AuthCard({ children }: { children: React.ReactNode }) {
   return <div className="space-y-10">{children}</div>;
@@ -73,7 +71,7 @@ export function AuthCardEmailVerifyFooter() {
   );
 }
 
-export function AuthCardNotify({ notify }: { notify: NotifyType | null }) {
+export function AuthCardNotify({ notify }: { notify: Notify }) {
   if (!notify?.message) return null;
   return (
     <Alert variant={notify.type === "error" ? "destructive" : "success"}>
