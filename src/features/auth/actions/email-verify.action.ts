@@ -6,7 +6,7 @@ import {
   deleteVerificationToken,
 } from "@/db/mutations/email-verify";
 import { signIn } from "@/auth";
-import { VALIDATION_MESSAGES } from "../data";
+import { VALIDATION_MESSAGES } from "../validation-messages";
 
 export const tokenVerifyAction = async (token: string): Promise<NotifyType> => {
   const tokenData = await getVerificationTokenByToken(token);

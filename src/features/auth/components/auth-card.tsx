@@ -6,7 +6,6 @@ import Link from "next/link";
 import { AlertCircle } from "lucide-react";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { NotifyType } from "../types";
 import { Logo } from "@/components/logo";
 
 export function AuthCard({ children }: { children: React.ReactNode }) {
@@ -31,7 +30,7 @@ export function AuthCardHeader({
   );
 }
 
-export function AuthCardBody({ children }: { children: React.ReactNode }) {
+export function AuthCardContent({ children }: { children: React.ReactNode }) {
   return (
     <Card className="px-6 sm:p-12 py-12">
       <CardContent className="p-0 space-y-6 [&_fieldset]:space-y-6">

@@ -1,17 +1,19 @@
 "use server";
-import { getUserByEmail } from "@/db/queries";
-import { registerFormSchema, RegisterFormSchema } from "../schema";
-import { AuthResponseType } from "../types";
-import { VALIDATION_MESSAGES as MSG } from "../data";
-import { encryptPassword } from "@/lib/utils";
-import { createUser } from "@/db/mutations/users";
+
 import { createVerificationToken } from "@/db/mutations/email-verify";
+import { createUser } from "@/db/mutations/users";
+import { getUserByEmail } from "@/db/queries";
+import { encryptPassword } from "@/lib/utils";
+import { registerFormSchema, RegisterFormSchema } from "../schema";
+import { type AuthResponse } from "../types";
+import { VALIDATION_MESSAGES as MSG } from "../validation-messages";
 
 export const registerAction = async (
   formData: RegisterFormSchema
-): Promise<AuthResponseType> => {
+): Promise<AuthResponse> => {
+  // Form data validation with zod
   const safeParsedData = await registerFormSchema.safeParseAsync(formData);
-  if (!safeParsedData.success)
+  if (!safeParsedData.success) {
     return {
       ...safeParsedData.error.flatten().fieldErrors,
       notify: {
@@ -19,28 +21,36 @@ export const registerAction = async (
         message: MSG.SIGNIN.INVALID_CREDENTIALS,
       },
     };
+  }
 
-  const user = await getUserByEmail(safeParsedData.data.email);
+  const data = safeParsedData.data;
 
-  if (user)
+  // Checking if user with the email address is already exits;
+  const existingUser = await getUserByEmail(data.email);
+  if (existingUser) {
     return {
       notify: {
         type: "error",
         message: MSG.REGISTRATION.EMAIL_ALREADY_REGISTERED,
       },
     };
+  }
 
-  const encryptedPassword = await encryptPassword(safeParsedData.data.password);
+  // Encrypt user password
+  const encryptedPassword = await encryptPassword(data.password);
 
-  const data = {
-    name: safeParsedData.data.name,
-    email: safeParsedData.data.email.toLowerCase(),
+  // Create new user data;
+  const newUserData = {
+    name: data.name,
+    email: data.email.toLowerCase(),
     password: encryptedPassword,
-    terms_accepted: safeParsedData.data.terms_and_condition,
+    terms_accepted: data.terms_and_condition,
   };
 
-  const [newUser] = await createUser(data);
+  // ইউজার তৈরি
+  const [newUser] = await createUser(newUserData);
 
+  // ইমেইল ভেরিফাই করা হয় নি, টোকেন তৈরি ও মেইল সেন্ড করা
   if (!newUser.emailVerified) {
     await createVerificationToken(newUser.email);
     return {
@@ -51,14 +61,7 @@ export const registerAction = async (
     };
   }
 
-  if (!newUser.emailVerified)
-    return {
-      notify: {
-        type: "success",
-        message: MSG.ACCOUNT_VERIFICATION.EMAIL_SENT,
-      },
-    };
-
+  // সব ঠিক থাকলে সফলতার মেসেজ রিটার্ন করা
   return {
     notify: {
       type: "success",

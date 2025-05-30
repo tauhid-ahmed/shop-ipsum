@@ -1,29 +1,21 @@
-import { NewUserType } from "@/features/auth/types";
-import { db } from "..";
-import { users } from "../schemas";
-import { eq } from "drizzle-orm";
+import { db } from "@/db";
+import { type UserType, users } from "@/db/schemas";
+import { AppError } from "@/utils/app-error";
 
-export const createUser = async (data: NewUserType) => {
+export const createUser = async (data: UserType) => {
   try {
-    return await db.insert(users).values(data).returning();
-  } catch {
-    return [];
-  }
-};
+    const createdUser = await db.insert(users).values(data).returning();
 
-export const updateUserEmailVerification = async (id: string) => {
-  try {
-    return await db
-      .update(users)
-      .set({
-        emailVerified: new Date(),
-        terms_accepted: true,
-        terms_accepted_at: new Date(),
-      })
-      .where(eq(users.id, id))
-      .returning();
-  } catch (error) {
-    console.error("Error updating user:", error);
-    return null;
+    if (!createdUser.length) {
+      // Insert didn't throw, but no data returned
+      throw new AppError("User insertion returned empty result.");
+    }
+    return createdUser;
+  } catch (error: unknown) {
+    // Log error for debugging (only in dev or with logger)
+    console.error("Failed to create user:", error);
+
+    // Throw a clear custom error for the caller
+    throw new AppError("Failed to create user. Please try again.");
   }
 };

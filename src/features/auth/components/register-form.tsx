@@ -1,26 +1,24 @@
 "use client";
+import { CheckboxField } from "@/components/checkbox-field";
+import { TextField } from "@/components/text-field";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import * as paths from "@/constants/paths";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { registerAction } from "../actions/register.action";
+import { registerFormSchema, type RegisterFormSchema } from "../schema";
 import {
   AuthCard,
-  AuthCardBody,
+  AuthCardContent,
   AuthCardHeader,
   AuthCardNotify,
   AuthCardRedirectFooter,
 } from "./auth-card";
-import { Button } from "@/components/ui/button";
-import { registerAction } from "../actions/register.action";
-import * as paths from "@/constants/paths";
-import React from "react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { registerFormSchema, type RegisterFormSchema } from "../schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
-import { TextField } from "@/components/text-field";
-import { CheckboxField } from "@/components/checkbox-field";
-import { NotifyType } from "../types";
 import { SocialForm } from "./social-form";
-import { VALIDATION_MESSAGES } from "../data";
-import { useRouter } from "next/navigation";
 
 const defaultValues = {
   name: "",
@@ -31,7 +29,7 @@ const defaultValues = {
 };
 
 export default function RegisterForm() {
-  const [notify, setNotify] = React.useState<NotifyType | null>(null);
+  const [notify, setNotify] = React.useState(null);
   const form = useForm<RegisterFormSchema>({
     mode: "all",
     resolver: zodResolver(registerFormSchema),
@@ -41,27 +39,15 @@ export default function RegisterForm() {
   const onSubmit = async (formData: RegisterFormSchema) => {
     setNotify(null);
     const data = await registerAction(formData);
-    setNotify(data?.notify as NotifyType);
+    setNotify(data?.notify);
   };
 
   const router = useRouter();
 
-  React.useEffect(() => {
-    if (
-      notify?.message === VALIDATION_MESSAGES.ACCOUNT_VERIFICATION.EMAIL_SENT
-    ) {
-      const timeoutId = setTimeout(() => {
-        router.push(paths.verifyEmailPath());
-      }, 1000);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [notify]);
-
   return (
     <AuthCard>
       <AuthCardHeader title="Create an account" />
-      <AuthCardBody>
+      <AuthCardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <fieldset>
@@ -97,7 +83,7 @@ export default function RegisterForm() {
           </form>
         </Form>
         <SocialForm />
-      </AuthCardBody>
+      </AuthCardContent>
       <AuthCardRedirectFooter
         message="Already have an account?"
         redirectName="Sign in"

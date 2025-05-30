@@ -1,7 +1,7 @@
 "use client";
 import {
   AuthCard,
-  AuthCardBody,
+  AuthCardContent,
   AuthCardHeader,
   AuthCardNotify,
   AuthCardRedirectFooter,
@@ -21,7 +21,7 @@ import { Form } from "@/components/ui/form";
 import { NotifyType } from "../types";
 import { SocialForm } from "./social-form";
 import { useSearchParams } from "next/navigation";
-import { VALIDATION_MESSAGES } from "../data";
+import { VALIDATION_MESSAGES } from "../validation-messages";
 import { useRouter } from "next/navigation";
 
 const defaultValues = {
@@ -73,7 +73,7 @@ export default function SignInForm() {
   return (
     <AuthCard>
       <AuthCardHeader title="Sign in to your account" />
-      <AuthCardBody>
+      <AuthCardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <input
@@ -104,7 +104,7 @@ export default function SignInForm() {
           </form>
         </Form>
         <SocialForm />
-      </AuthCardBody>
+      </AuthCardContent>
       <AuthCardRedirectFooter
         message="Don't have an account yet?"
         redirectName="Create an account"

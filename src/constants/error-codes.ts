@@ -1,0 +1,11 @@
+// constants/error-codes.ts
+
+export const ERROR_CODES = {
+  INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
+  USER_EXISTS: "USER_EXISTS",
+  VALIDATION_ERROR: "VALIDATION_ERROR",
+  EMAIL_UNVERIFIED: "EMAIL_UNVERIFIED",
+  UNKNOWN_ERROR: "UNKNOWN_ERROR",
+} as const;
+
+export type ErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES];

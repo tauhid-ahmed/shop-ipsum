@@ -1,5 +1,5 @@
 import z from "zod";
-import { VALIDATION_MESSAGES as MSG } from "./data";
+import { VALIDATION_MESSAGES as MSG } from "./validation-messages";
 
 export const signInFormSchema = z.object({
   email: z

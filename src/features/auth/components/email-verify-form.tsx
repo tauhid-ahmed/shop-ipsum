@@ -2,7 +2,7 @@
 
 import {
   AuthCard,
-  AuthCardBody,
+  AuthCardContent,
   AuthCardHeader,
   AuthCardNotify,
 } from "./auth-card";
@@ -17,7 +17,7 @@ import {
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { tokenVerifyAction } from "../actions/email-verify.action";
 import { type NotifyType } from "../types";
-import { VALIDATION_MESSAGES } from "../data";
+import { VALIDATION_MESSAGES } from "../validation-messages";
 
 export type Notify = {
   type: "error" | "success" | "";
@@ -44,7 +44,7 @@ export default function EmailVerificationForm({ notify }: { notify: Notify }) {
   return (
     <AuthCard>
       <AuthCardHeader title="Please verify your email" />
-      <AuthCardBody>
+      <AuthCardContent>
         <form onSubmit={handleSubmit}>
           <div className="w-fit mx-auto space-y-4">
             <InputOTP
@@ -75,7 +75,7 @@ export default function EmailVerificationForm({ notify }: { notify: Notify }) {
             </Button>
           </div>
         </form>
-      </AuthCardBody>
+      </AuthCardContent>
       <div className="text-center p-2 text-sm font-medium text-white bg-rose-500 dark:bg-rose-800 rounded border border-border">
         Verification code is unavailable on the free tier. Use{" "}
         <strong className="underline">Google</strong> or{" "}

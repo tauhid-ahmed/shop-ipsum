@@ -64,8 +64,8 @@ export default function ProfileWidget() {
       defaultOpen={popoverOpen}
       onOpenChange={setPopoverOpen}
     >
-      <PopoverTrigger className="cursor-pointer">
-        <ProfileImage />
+      <PopoverTrigger className="cursor-pointer" asChild>
+        <Button size="sm">Login</Button>
       </PopoverTrigger>
       <PopoverContent
         side="top"

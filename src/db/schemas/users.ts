@@ -9,6 +9,7 @@ import {
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 import { createId } from "@paralleldrive/cuid2";
+import { InferInsertModel } from "drizzle-orm";
 
 export const userRoleEnum = pgEnum("user_role", [
   "user",
@@ -109,3 +110,5 @@ export const authenticators = pgTable(
     },
   ]
 );
+
+export type UserType = InferInsertModel<typeof users>;

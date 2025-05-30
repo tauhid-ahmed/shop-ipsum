@@ -1,59 +1,47 @@
-// Notification Type
-export type NotifyType = {
-  type: "error" | "success";
-  message: string;
-};
-
-// Auth Response Type
-export type AuthResponseType =
-  | Record<string, string[] | undefined>
-  | undefined
-  | {
-      notify: NotifyType;
-    };
+// Role Type
+export type UserRole = "user" | "admin" | "superadmin";
 
 // New User Type
-export type NewUserType = {
-  name: string;
-  email: string;
-  password: string;
-  terms_accepted: boolean;
-};
+export interface NewUser {
+  readonly name: string;
+  readonly email: string;
+  readonly password: string;
+  readonly termsAccepted: boolean;
+}
 
-// User Type
-export type UserType = {
-  id: string;
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  emailVerified: Date;
-  image: string;
-  created_at: Date;
-  updated_at: Date;
-  terms_accepted: boolean;
-  terms_accepted_at: Date;
-};
+// User Type (omit password for security)
+export interface User {
+  readonly id: string;
+  readonly name: string;
+  readonly username: string;
+  readonly email: string;
+  readonly emailVerified: string | null; // ISO date string or null if not verified
+  readonly image: string;
+  readonly createdAt: string; // ISO date string
+  readonly updatedAt: string; // ISO date string
+  readonly termsAccepted: boolean;
+  readonly termsAcceptedAt: string | null;
+}
 
-// Authenticated User Type
-export type AuthUserType = {
-  id: string;
-  email: string;
-  name: string;
-  role: "user" | "admin" | "superadmin";
-  image: string;
-};
+// Authenticated User Type (for sessions, JWT etc)
+export interface AuthUser {
+  readonly id: string;
+  readonly email: string;
+  readonly name: string;
+  readonly role: UserRole;
+  readonly image: string;
+}
 
-// Auth Token Type
-export type AuthTokenType = {
-  sub: string;
-  email: string;
-  image?: string | null;
-  name: string;
-  role: "user" | "admin" | "superadmin";
-  iat?: number;
-  exp?: number;
-  id: string;
-  jti?: string;
-  callbackUrl?: string;
-};
+// Auth Token Type (JWT payload)
+export interface AuthToken {
+  readonly sub: string;
+  readonly id: string;
+  readonly email: string;
+  readonly name: string;
+  readonly role: UserRole;
+  readonly image?: string | null;
+  readonly iat?: number;
+  readonly exp?: number;
+  readonly jti?: string;
+  readonly callbackUrl?: string;
+}

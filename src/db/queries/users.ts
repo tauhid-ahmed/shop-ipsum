@@ -1,12 +1,23 @@
+import { AppError } from "@/utils/app-error";
 import { db } from "..";
 
 export const getUserByEmail = async (email: string) => {
   try {
-    return await db.query.users.findFirst({
-      where: (user, { eq }) => eq(user.email, email.toLowerCase()),
+    const normalizedEmail = email.toLowerCase().trim();
+
+    const user = await db.query.users.findFirst({
+      where: (user, { eq }) => eq(user.email, normalizedEmail),
     });
-  } catch {
-    return null;
+
+    return user;
+  } catch (error: unknown) {
+    console.error("Failed to get user by email:", error);
+
+    throw new AppError("Failed to retrieve user by email.", {
+      code: "USER_FETCH_FAILED",
+      details: { email },
+      cause: error,
+    });
   }
 };
 

@@ -1,18 +1,16 @@
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import Google from "next-auth/providers/google";
 import Github from "next-auth/providers/github";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import Google from "next-auth/providers/google";
 import { db } from "./db";
-import { AuthTokenType } from "./features/auth/types";
 import { getUserByEmail, getUserByEmailWithAccount } from "./db/queries";
-import { updateUserEmailVerification } from "./db/mutations/users";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
   events: {
     linkAccount: async ({ user }) => {
-      await updateUserEmailVerification(user.id as string);
+      // await updateUserEmailVerification(user.id as string);
     },
   },
   providers: [
@@ -48,8 +46,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         ...session,
         user: {
           ...session.user,
-          role: (token as AuthTokenType).role,
-          id: (token as AuthTokenType).id,
+          role: token.role,
+          id: token.id,
         },
       };
     },
