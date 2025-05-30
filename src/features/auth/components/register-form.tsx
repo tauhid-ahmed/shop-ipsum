@@ -4,6 +4,7 @@ import { TextField } from "@/components/text-field";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import * as paths from "@/constants/paths";
+import { type Notify } from "@/utils/api-responses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -29,7 +30,7 @@ const defaultValues = {
 };
 
 export default function RegisterForm() {
-  const [notify, setNotify] = React.useState(null);
+  const [notify, setNotify] = React.useState<Notify | null>();
   const form = useForm<RegisterFormSchema>({
     mode: "all",
     resolver: zodResolver(registerFormSchema),
@@ -39,7 +40,7 @@ export default function RegisterForm() {
   const onSubmit = async (formData: RegisterFormSchema) => {
     setNotify(null);
     const data = await registerAction(formData);
-    setNotify(data?.notify);
+    setNotify(data.notify as Notify);
   };
 
   const router = useRouter();

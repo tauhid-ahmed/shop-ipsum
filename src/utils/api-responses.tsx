@@ -1,16 +1,20 @@
-export interface ApiResponse<T = unknown> {
-  success: boolean;
-  data?: T;
-  errorCode?: string;
-  statusCode?: number;
-  errors?: Record<string, string[]>;
+export interface Notify {
   notify?: {
     type: "success" | "error" | "info" | "warning";
     message: string;
   };
 }
 
+export interface ApiResponse<T = unknown> extends Notify {
+  success: boolean;
+  data?: T;
+  errorCode?: string;
+  statusCode?: number;
+  errors?: Record<string, string[]>;
+}
+
 export function successResponse<T>(data: T, message?: string): ApiResponse<T> {
+  console.log({ data, message });
   return {
     success: true,
     statusCode: 200,

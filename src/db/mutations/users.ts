@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { type UserType, users } from "@/db/schemas";
-import { AppError } from "@/utils/app-error";
+import { AppError } from "@/lib/error/app-error";
 
 export const createUser = async (data: UserType) => {
   try {

@@ -1,4 +1,4 @@
-import { AppError } from "@/utils/app-error";
+import { AppError } from "@/lib/error/app-error";
 import { db } from "..";
 
 export const getUserByEmail = async (email: string) => {

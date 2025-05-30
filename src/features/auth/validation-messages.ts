@@ -56,6 +56,8 @@ export const VALIDATION_MESSAGES = {
     ACCOUNT_CREATED: "Account created successfully. Please verify your email.",
     ACCOUNT_CREATION_FAILED: "Account creation failed. Try again later.",
     EMAIL_ALREADY_REGISTERED: "This email is already in use.",
+    EMAIL_VERIFICATION_REQUIRED: "Verify your email before signing in.",
+    EMAIL_VERIFICATION_CODE_SENT: "",
   },
 
   MISC: {
