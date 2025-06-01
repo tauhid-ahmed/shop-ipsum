@@ -12,7 +12,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { signInAction } from "../actions/signin.action";
-import { signInFormSchema, type SignInFormSchema } from "../schema";
+import { signInFormSchema, type SignInFormSchema } from "../validators-schema";
 import {
   AuthCard,
   AuthCardContent,

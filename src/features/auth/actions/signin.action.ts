@@ -10,7 +10,7 @@ import {
   successResponse,
   validationErrorResponse,
 } from "@/utils/api-responses";
-import { signInFormSchema, SignInFormSchema } from "../schema";
+import { signInFormSchema, SignInFormSchema } from "../validators-schema";
 import { withErrorHandler } from "@/lib/error/with-error-handler";
 
 export const signInAction = withErrorHandler(

@@ -11,7 +11,10 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { registerAction } from "../actions/register.action";
-import { registerFormSchema, type RegisterFormSchema } from "../schema";
+import {
+  registerFormSchema,
+  type RegisterFormSchema,
+} from "../validators-schema";
 import {
   AuthCard,
   AuthCardContent,

@@ -4,7 +4,7 @@ import { createVerificationToken } from "@/db/mutations/verification";
 import { createUser } from "@/db/mutations/users";
 import { getUserByEmail } from "@/db/queries/users";
 import { encryptPassword } from "@/lib/utils";
-import { registerFormSchema, RegisterFormSchema } from "../schema";
+import { registerFormSchema, RegisterFormSchema } from "../validators-schema";
 import { VALIDATION_MESSAGES as MSG } from "../validation-messages";
 
 import { withErrorHandler } from "@/lib/error/with-error-handler";
