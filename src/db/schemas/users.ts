@@ -35,10 +35,12 @@ export const paymentMethodTypeEnum = pgEnum("payment_method_type", [
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: text("name"),
-  email: text("email").unique(),
+    .$defaultFn(() => crypto.randomUUID())
+    .notNull(),
+  name: text("name").notNull(),
+  email: text("email").unique().notNull(),
   username: text("username").unique(),
+  password: text("password"),
   role: userRoleEnum("role").default("user").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
@@ -157,3 +159,4 @@ export const authenticators = pgTable(
 );
 
 export type UserType = InferInsertModel<typeof users>;
+export type AccountType = InferInsertModel<typeof accounts>;

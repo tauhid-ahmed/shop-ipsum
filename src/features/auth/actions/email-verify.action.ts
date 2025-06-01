@@ -7,7 +7,7 @@ import {
 import { signIn } from "@/auth";
 import { VALIDATION_MESSAGES } from "../validation-messages";
 import { type Notify } from "@/utils/api-responses";
-import { getUserByEmailWithAccounts } from "@/db/queries";
+import { getUserByEmailWithAccount } from "@/db/queries";
 
 export const tokenVerifyAction = async (token: string): Promise<Notify> => {
   const tokenData = await getVerificationTokenByToken(token);
@@ -22,7 +22,7 @@ export const tokenVerifyAction = async (token: string): Promise<Notify> => {
       type: "error",
     };
 
-  const user = await getUserByEmailWithAccounts(tokenData.identifier);
+  const user = await getUserByEmailWithAccount(tokenData.identifier);
 
   if (!user?.name) {
     return {

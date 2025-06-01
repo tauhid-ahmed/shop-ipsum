@@ -15,6 +15,7 @@ import {
 } from "@/utils/api-responses";
 import { AppError } from "@/lib/error/app-error";
 import { cookies } from "next/headers";
+import { signIn } from "@/auth";
 
 export const registerAction = withErrorHandler(
   async (formData: RegisterFormSchema): Promise<ApiResponse> => {
@@ -60,6 +61,10 @@ export const registerAction = withErrorHandler(
       path: "/",
       maxAge: 60 * 15,
       sameSite: "strict",
+    });
+
+    await signIn("credentials", {
+      email: newUser.email,
     });
 
     return successResponse({}, "Email verification code sent");

@@ -62,9 +62,10 @@ CREATE TABLE "session" (
 --> statement-breakpoint
 CREATE TABLE "user" (
 	"id" text PRIMARY KEY NOT NULL,
-	"name" text,
-	"email" text,
+	"name" text NOT NULL,
+	"email" text NOT NULL,
 	"username" text,
+	"password" text,
 	"role" "user_role" DEFAULT 'user' NOT NULL,
 	"emailVerified" timestamp,
 	"image" text,

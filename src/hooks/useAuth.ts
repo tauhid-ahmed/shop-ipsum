@@ -10,6 +10,7 @@ type User = {
 
 export function useAuth() {
   const { data: session, status } = useSession();
+  console.log({ session });
 
   const isLoading = status === "loading";
   const isAuthenticated = status === "authenticated";

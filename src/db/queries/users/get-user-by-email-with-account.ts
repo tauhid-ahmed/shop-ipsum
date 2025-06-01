@@ -1,7 +1,7 @@
 import { db, eq } from "@/db";
 import { users, accounts } from "@/db/schemas";
 
-export const getUserByEmailWithAccounts = async (email: string) => {
+export const getUserByEmailWithAccount = async (email: string) => {
   const normalizedEmail = email.toLowerCase().trim();
 
   const result = await db
@@ -16,7 +16,7 @@ export const getUserByEmailWithAccounts = async (email: string) => {
   if (result.length === 0) return null;
 
   const user = result[0].user;
-  const accountsList = result
+  const [accountsList] = result
     .filter((row) => row.account !== null)
     .map((row) => row.account);
 

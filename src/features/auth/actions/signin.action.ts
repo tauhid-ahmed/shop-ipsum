@@ -1,84 +1,50 @@
 "use server";
-import { getUserByEmail } from "@/db/queries/users";
-import { VALIDATION_MESSAGES as MSG } from "../validation-messages";
-
-import { signInFormSchema, SignInFormSchema } from "../schema";
-import { decryptPassword } from "@/lib/utils";
 import { signIn } from "@/auth";
-import { defaultRedirectPath } from "@/lib/constants/paths";
 import { createVerificationToken } from "@/db/mutations/verification";
+import { getUserByEmail } from "@/db/queries/users";
+import { defaultRedirectPath } from "@/lib/constants/paths";
+import { AppError } from "@/lib/error/app-error";
+import { decryptPassword } from "@/lib/utils";
+import {
+  ApiResponse,
+  successResponse,
+  validationErrorResponse,
+} from "@/utils/api-responses";
+import { signInFormSchema, SignInFormSchema } from "../schema";
+import { withErrorHandler } from "@/lib/error/with-error-handler";
 
-import { ERROR_CODES } from "@/lib/constants/error-codes";
-import { ApiResponse } from "@/utils/api-responses";
+export const signInAction = withErrorHandler(
+  async (formData: SignInFormSchema): Promise<ApiResponse> => {
+    const safeParsedData = await signInFormSchema.safeParseAsync(formData);
+    if (!safeParsedData.success)
+      return validationErrorResponse(
+        safeParsedData.error?.flatten().fieldErrors
+      );
 
-export const signInAction = async (
-  formData: SignInFormSchema
-): Promise<ApiResponse> => {
-  const parsed = await signInFormSchema.safeParseAsync(formData);
+    const user = await getUserByEmail(safeParsedData.data.email);
+    if (!user || !user.password)
+      throw new AppError("Invalid credentials", { code: "" });
 
-  if (!parsed.success) {
-    return {
-      success: false,
-      errorCode: ERROR_CODES.VALIDATION_ERROR,
-      statusCode: 400,
-      errors: parsed.error.flatten().fieldErrors,
-      notify: {
-        type: "error",
-        message: MSG.SIGNIN.INVALID_CREDENTIALS,
-      },
-    };
+    console.log({ user });
+
+    const matchedPassword = await decryptPassword(
+      safeParsedData.data.password,
+      user.password
+    );
+    if (!matchedPassword)
+      throw new AppError("Invalid credentials!", { code: "" });
+
+    if (!user.emailVerified) {
+      if (!user.email) throw new AppError("Email is required");
+      await createVerificationToken(user.email);
+      return successResponse("");
+    }
+
+    await signIn("credentials", {
+      email: user.email,
+      redirectTo: defaultRedirectPath(),
+    });
+
+    return successResponse("Logged in successful!");
   }
-
-  const user = await getUserByEmail(parsed.data.email);
-  if (!user || !user.password) {
-    return {
-      success: false,
-      errorCode: ERROR_CODES.INVALID_CREDENTIALS,
-      statusCode: 401,
-      notify: {
-        type: "error",
-        message: MSG.SIGNIN.INVALID_CREDENTIALS,
-      },
-    };
-  }
-
-  const matched = await decryptPassword(parsed.data.password, user.password);
-  if (!matched) {
-    return {
-      success: false,
-      errorCode: ERROR_CODES.INVALID_CREDENTIALS,
-      statusCode: 401,
-      notify: {
-        type: "error",
-        message: MSG.SIGNIN.INVALID_CREDENTIALS,
-      },
-    };
-  }
-
-  if (!user.emailVerified) {
-    await createVerificationToken(user.email);
-    return {
-      success: false,
-      errorCode: ERROR_CODES.EMAIL_UNVERIFIED,
-      statusCode: 403,
-      notify: {
-        type: "success",
-        message: MSG.ACCOUNT_VERIFICATION.EMAIL_SENT,
-      },
-    };
-  }
-
-  await signIn("credentials", {
-    email: user.email,
-    redirectTo: defaultRedirectPath(),
-  });
-
-  return {
-    success: true,
-    data: null,
-    notify: {
-      type: "success",
-      message: MSG.SIGNIN.SUCCESS,
-    },
-  };
-};
+);

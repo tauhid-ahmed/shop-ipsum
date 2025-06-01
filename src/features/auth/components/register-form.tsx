@@ -42,7 +42,6 @@ export default function RegisterForm() {
     setNotify(null);
     const data = await registerAction(formData);
     setNotify(data.notify as Notify);
-    console.log(data);
     if (data?.notify?.type === "success") {
       sessionStorage.setItem("masked-email", formData.email);
       return router.push(`/auth/verify-email`);

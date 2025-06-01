@@ -36,7 +36,7 @@ export default function SignInForm() {
     defaultValues,
   });
   const router = useRouter();
-  // const rememberMe = form.watch("remember_me");
+  const rememberMe = form.watch("remember_me");
   const onSubmit = async (formData: SignInFormSchema) => {
     const data = await signInAction(formData);
     setNotify(data?.notify as Notify);
