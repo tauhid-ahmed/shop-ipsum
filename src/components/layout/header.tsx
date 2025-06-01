@@ -1,17 +1,17 @@
 import { Container } from "./container";
 import { SearchWidget } from "@/features/products/search-widget";
-import ProfileWidget from "@/features/users/profile-widget";
 import { CartWidget } from "@/features/cart/cart-widget";
 import { Logo } from "@/components";
 import Navigation from "./mobile-nav";
-import { auth } from "@/auth";
 import { DesktopNav } from "./desktop-nav";
 import WishlistOverview from "@/features/wishlist/wishlist-overview";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import { getServerSession } from "@/lib/get-server-session";
+import { UserWidget } from "@/features/users/user-widget";
+import { UserButton } from "@/features/users/user-button";
 
 export default async function Header() {
-  const session = await auth();
+  const user = await getServerSession();
+
   return (
     <header className="border-b border-border py-4 z-50 relative backdrop-blur bg-background/90 text-base lg:mx-0">
       <Container>
@@ -30,11 +30,17 @@ export default async function Header() {
                 <SearchWidget />
               </div>
               <WishlistOverview />
-              {/* <ProfileWidget /> */}
-              <Button asChild>
-                <Link href={"/auth/sign-in"}>Sign in</Link>
-              </Button>
-              {session?.user && <CartWidget />}
+              {!user ? (
+                <UserButton />
+              ) : (
+                <UserWidget
+                  user={{
+                    name: user.name ?? "",
+                    email: user.email ?? "",
+                    image: user?.image ?? "",
+                  }}
+                />
+              )}
             </div>
           </div>
         </nav>

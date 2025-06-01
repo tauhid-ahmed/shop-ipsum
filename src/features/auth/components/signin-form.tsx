@@ -28,7 +28,7 @@ const defaultValues = {
   remember_me: false,
 };
 
-export default function SignInForm() {
+export function SignInForm() {
   const [notify, setNotify] = React.useState<Notify | null>(null);
   const form = useForm<SignInFormSchema>({
     mode: "all",
@@ -49,11 +49,6 @@ export default function SignInForm() {
       <AuthCardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <input
-              type="hidden"
-              name="callbackUrl"
-              value={searchParams.get("callbackUrl") || "/hello"}
-            />
             <fieldset>
               <TextField label="Email" name="email" />
               <TextField label="Password" name="password" type="password" />

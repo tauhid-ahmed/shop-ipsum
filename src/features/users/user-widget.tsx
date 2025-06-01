@@ -1,30 +1,24 @@
 "use client";
-
-import {
-  LucideHeart,
-  LucideGift,
-  LucideListOrdered,
-  LucideShoppingBag,
-  LucideUser,
-} from "lucide-react";
+import { Heading } from "@/components";
+import { ThemeSwitch } from "@/components/theme-switch";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Heading } from "@/components";
-import Link from "next/link";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { Button } from "@/components/ui/button";
-import React from "react";
-import { usePathname } from "next/navigation";
-import { useAuth } from "@/hooks/useAuth";
-import ProfileImage from "@/components/profile-image";
+import {
+  LucideGift,
+  LucideHeart,
+  LucideListOrdered,
+  LucideShoppingBag,
+  LucideUser,
+} from "lucide-react";
 import { signOut } from "next-auth/react";
-import * as paths from "@/lib/constants/paths";
-import { cn } from "@/lib/utils";
-import { setThemePreference } from "@/actions/theme-preference.action";
-import { debounce } from "@/lib/debounce";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { UserImage } from "./user-image";
 
 const menuItems = [
   {
@@ -50,12 +44,18 @@ const menuItems = [
   { name: "Gift cards", icon: <LucideGift />, href: "#" },
 ];
 
-export default function ProfileWidget() {
-  const { user, isAuthenticated } = useAuth();
-  const [popoverOpen, setPopoverOpen] = React.useState(false);
+type ProfileWidgetProps = {
+  user: {
+    name: string;
+    email: string;
+    image?: string;
+  };
+};
+export function UserWidget({ user }: ProfileWidgetProps) {
+  const [popoverOpen, setPopoverOpen] = useState(false);
   const pathname = usePathname();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setPopoverOpen(false);
   }, [pathname]);
 
@@ -68,7 +68,9 @@ export default function ProfileWidget() {
       onOpenChange={setPopoverOpen}
     >
       <PopoverTrigger className="cursor-pointer" asChild>
-        <Button size="sm">Login</Button>
+        <Button size="icon" variant="ghost">
+          <UserImage size="md" name={user.name} image={user.image} />
+        </Button>
       </PopoverTrigger>
       <PopoverContent
         side="top"
@@ -77,9 +79,9 @@ export default function ProfileWidget() {
         className="relative p-0 text-sm rounded text-muted-foreground"
       >
         <ProfileHeader
-          name={user.name as string}
-          email={user.email as string}
-          image={user.image as string}
+          name={user.name}
+          email={user.email}
+          image={user.image ?? ""}
         />
         <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-4 text-sm font-medium divide-y divide-border bg-accent/20">
           {menuItems.map((item) => (
@@ -96,7 +98,6 @@ export default function ProfileWidget() {
             <span>Appearance</span>
             <ThemeSwitch />
           </div>
-          <ThemesMode />
         </div>
       </PopoverContent>
     </Popover>
@@ -115,7 +116,7 @@ function ProfileHeader({
   return (
     <>
       <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/60 items-center">
-        <ProfileImage name={name} image={image} />
+        <UserImage size="lg" name={name} image={image} />
         <Heading
           as="h3"
           size="lg"
@@ -131,36 +132,5 @@ function ProfileHeader({
         </Button>
       </div>
     </>
-  );
-}
-
-function ThemesMode() {
-  const colors = ["red", "yellow", "orange", "green", "rose", "violet", "blue"];
-  const colorClasses = {
-    red: "bg-red-500",
-    yellow: "bg-yellow-500",
-    orange: "bg-orange-500",
-    green: "bg-green-500",
-    rose: "bg-rose-500",
-    violet: "bg-violet-500",
-    blue: "bg-blue-500",
-  };
-
-  return (
-    <div className="flex items-center justify-between gap-1">
-      <span className="text-sm font-medium inline-block">Theme:</span>
-      <div className="flex items-center gap-0.5">
-        {colors.map((theme) => (
-          <button
-            onClick={debounce(setThemePreference.bind(null, theme), 500)}
-            key={theme}
-            className={cn(
-              "size-6 border border-border rounded-full cursor-pointer hover:scale-110",
-              `${colorClasses[theme as keyof typeof colorClasses]}`
-            )}
-          ></button>
-        ))}
-      </div>
-    </div>
   );
 }

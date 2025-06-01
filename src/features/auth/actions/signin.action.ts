@@ -25,8 +25,6 @@ export const signInAction = withErrorHandler(
     if (!user || !user.password)
       throw new AppError("Invalid credentials", { code: "" });
 
-    console.log({ user });
-
     const matchedPassword = await decryptPassword(
       safeParsedData.data.password,
       user.password
@@ -34,17 +32,17 @@ export const signInAction = withErrorHandler(
     if (!matchedPassword)
       throw new AppError("Invalid credentials!", { code: "" });
 
-    if (!user.emailVerified) {
-      if (!user.email) throw new AppError("Email is required");
-      await createVerificationToken(user.email);
-      return successResponse("");
-    }
+    // if (!user.emailVerified) {
+    //   if (!user.email) throw new AppError("Email is required");
+    //   await createVerificationToken(user.email);
+    //   return successResponse("");
+    // }
 
     await signIn("credentials", {
       email: user.email,
       redirectTo: defaultRedirectPath(),
     });
 
-    return successResponse("Logged in successful!");
+    return successResponse("Signed in successful!");
   }
 );

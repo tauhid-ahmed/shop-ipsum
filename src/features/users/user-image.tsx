@@ -3,14 +3,21 @@ import Image from "next/image";
 
 type ProfileImageProps = {
   name: string;
-  image: string;
+  image?: string | null;
+  size: "md" | "lg";
 } & React.ComponentProps<"div">;
 
-export default function ProfileImage({ name, image }: ProfileImageProps) {
+const classnames = {
+  md: "size-6 text-sm",
+  lg: "size-8 lg:size-12 text-xl lg:text-2xl",
+} as const;
+
+export function UserImage({ name, image, size }: ProfileImageProps) {
   return (
     <div
       className={cn(
-        `rounded-full overflow-hidden p-1.5 flex items-center justify-center relative size-8 lg:size-12 border border-primary/50 mx-auto`
+        classnames[size],
+        `rounded-full overflow-hidden p-1.5 flex items-center justify-center relative border border-primary/50 mx-auto`
       )}
     >
       {image ? (
@@ -25,7 +32,7 @@ export default function ProfileImage({ name, image }: ProfileImageProps) {
       ) : (
         <span
           className={cn(
-            "bg-primary/30 text-primary absolute inset-0 uppercase bold text-2xl flex items-center justify-center"
+            "bg-primary/30 text-primary absolute inset-0 uppercase bold flex items-center justify-center"
           )}
         >
           {name[0]}
