@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { LucideMoveRight } from "lucide-react";
 import Embla, { useEmblaContext } from "@/components/embla";
 import ProductCard from "./product-card";
-import { productsPath } from "@/constants/paths";
+import { productsPath } from "@/lib/constants/paths";
 import { type ProductType } from "@/data/products";
 
 type ProductRevealProps = {
@@ -23,28 +23,28 @@ export default function ProductReveal({
   return (
     <>
       <Section padding="sm">
-        <Embla data={products} delay={6000} slidesPerView={4}>
-          <Container>
-            <div className="space-y-4 group">
-              <div className="flex justify-between items-baseline">
-                <Heading as="h2" size="2xl" align="left" weight="bold">
-                  {title}
-                </Heading>
-                <Button asChild variant="link">
-                  <Link href={productsPath()}>
-                    See more <LucideMoveRight />
-                  </Link>
-                </Button>
-              </div>
+        <Container>
+          <div className="space-y-4">
+            <div className="flex justify-between items-baseline">
+              <Heading as="h2" size="2xl" align="left" weight="bold">
+                {title}
+              </Heading>
+              <Button asChild variant="link">
+                <Link href={productsPath()}>
+                  See more <LucideMoveRight />
+                </Link>
+              </Button>
+            </div>
+            <Embla data={products} delay={6000} slidesPerView={4}>
               <div className="relative group/embla">
                 <Embla.Container>
                   <Carousel />
                 </Embla.Container>
                 <Embla.NavigationControls className="-mt-10" />
               </div>
-            </div>
-          </Container>
-        </Embla>
+            </Embla>
+          </div>
+        </Container>
       </Section>
     </>
   );

@@ -1,14 +1,15 @@
 "use server";
 import { getVerificationTokenByToken } from "@/db/queries/email-verify";
-import { NotifyType } from "../types";
 import {
-  createEmailVerification,
+  createEmailVerificationToken,
   deleteVerificationToken,
 } from "@/db/mutations/email-verify";
 import { signIn } from "@/auth";
 import { VALIDATION_MESSAGES } from "../validation-messages";
+import { type Notify } from "@/utils/api-responses";
+import { getUserByEmailWithAccounts } from "@/db/queries";
 
-export const tokenVerifyAction = async (token: string): Promise<NotifyType> => {
+export const tokenVerifyAction = async (token: string): Promise<Notify> => {
   const tokenData = await getVerificationTokenByToken(token);
   if (!tokenData)
     return { message: VALIDATION_MESSAGES.TOKEN.INVALID, type: "error" };
@@ -21,7 +22,7 @@ export const tokenVerifyAction = async (token: string): Promise<NotifyType> => {
       type: "error",
     };
 
-  const user = await createEmailVerification(tokenData.identifier);
+  const user = await getUserByEmailWithAccounts(tokenData.identifier);
 
   if (!user?.name) {
     return {

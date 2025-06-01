@@ -1,4 +1,4 @@
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";

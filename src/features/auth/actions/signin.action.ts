@@ -5,15 +5,15 @@ import { VALIDATION_MESSAGES as MSG } from "../validation-messages";
 import { signInFormSchema, SignInFormSchema } from "../schema";
 import { decryptPassword } from "@/lib/utils";
 import { signIn } from "@/auth";
-import { defaultRedirectPath } from "@/constants/paths";
+import { defaultRedirectPath } from "@/lib/constants/paths";
 import { createVerificationToken } from "@/db/mutations/email-verify";
 
-import { ERROR_CODES } from "@/constants/error-codes";
-import { AuthResponse } from "../types";
+import { ERROR_CODES } from "@/lib/constants/error-codes";
+import { ApiResponse } from "@/utils/api-responses";
 
 export const signInAction = async (
   formData: SignInFormSchema
-): Promise<AuthResponse> => {
+): Promise<ApiResponse> => {
   const parsed = await signInFormSchema.safeParseAsync(formData);
 
   if (!parsed.success) {

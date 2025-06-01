@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Heading } from "./heading";
+import { Heading } from "@/components";
 import { Container } from "./layout/container";
 import { Section } from "./layout/section";
 import { Button } from "./ui/button";
-import { homePath } from "@/constants/paths";
+import { homePath } from "@/lib/constants/paths";
 
 type ErrorProps = {
   code?: number;

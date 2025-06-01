@@ -6,10 +6,12 @@ import { products } from "@/data/products";
 // import { getTrendingProducts } from "@/lib/product-ranking";
 
 export default async function Home() {
+  // await new Promise((resolve) => setTimeout(resolve, 40000));
   // const trendingProducts = getTrendingProducts(products);
   return (
     <>
       <IntroBanner />
+      <ProductReveal title="Trending" products={products} />
       <ProductReveal title="Trending" products={products} />
       <ProductCategoryCard />
       {/* <ProductReveal category="New Arrivals" /> */}

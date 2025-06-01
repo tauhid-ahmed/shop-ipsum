@@ -1,49 +1,33 @@
-import { AppError } from "@/lib/error/app-error";
 import { db } from "..";
+import { eq } from "drizzle-orm";
+import { users, accounts } from "../schemas/users";
 
-export const getUserByEmail = async (email: string) => {
-  try {
-    const normalizedEmail = email.toLowerCase().trim();
+export const getUserByEmail = async (email: string) =>
+  await db.query.users.findFirst({
+    where: (user, { eq }) => eq(user.email, email.toLowerCase().trim()),
+  });
 
-    const user = await db.query.users.findFirst({
-      where: (user, { eq }) => eq(user.email, normalizedEmail),
-    });
+export const getUserByEmailWithAccounts = async (email: string) => {
+  const normalizedEmail = email.toLowerCase().trim();
 
-    return user;
-  } catch (error: unknown) {
-    console.error("Failed to get user by email:", error);
+  const result = await db
+    .select({
+      user: users,
+      account: accounts,
+    })
+    .from(users)
+    .leftJoin(accounts, eq(users.id, accounts.userId))
+    .where(eq(users.email, normalizedEmail));
 
-    throw new AppError("Failed to retrieve user by email.", {
-      code: "USER_FETCH_FAILED",
-      details: { email },
-      cause: error,
-    });
-  }
-};
+  if (result.length === 0) return null;
 
-export const getUserByEmailWithAccount = async (email: string) => {
-  try {
-    console.log("Fetching user with email:", email); // Debugging log
+  const user = result[0].user;
+  const accountsList = result
+    .filter((row) => row.account !== null)
+    .map((row) => row.account);
 
-    // Fetch the user by email
-    const user = await db.query.users.findFirst({
-      where: (user, { eq }) => eq(user.email, email),
-    });
-
-    if (!user) {
-      console.log("User not found.");
-      return null; // If no user is found, return null
-    }
-
-    // Fetch accounts related to the user (simulating LEFT JOIN)
-    const [accounts] = await db.query.accounts.findMany({
-      where: (account, { eq }) => eq(account.userId, user.id),
-    });
-
-    // Simulate LEFT JOIN by attaching accounts to the user
-    return { ...user, ...accounts };
-  } catch (error) {
-    console.error("Error fetching user by email:", error); // Detailed error log
-    return null;
-  }
+  return {
+    ...user,
+    accounts: accountsList,
+  };
 };

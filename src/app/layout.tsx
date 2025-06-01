@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { APP_NAME, APP_DESCRIPTION, APP_URL } from "@/constants/app.config";
+import { APP_NAME, APP_DESCRIPTION, APP_URL } from "@/lib/constants/app.config";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     template: `%s | ${APP_NAME}`,
     default: APP_NAME,
   },
+  applicationName: APP_NAME,
   description: APP_DESCRIPTION,
   metadataBase: new URL(APP_URL),
 };

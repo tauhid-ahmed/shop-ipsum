@@ -15,14 +15,14 @@ import { Button } from "@/components/ui/button";
 import { data, ProductType } from "@/data/products";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { productDetailsPath, signInPath } from "@/constants/paths";
+import { productDetailsPath, signInPath } from "@/lib/constants/paths";
 import { LucidePlus } from "lucide-react";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 import Link from "next/link";
 import { StarRatings } from "@/components/star-ratings";
 import { ProductAttributes } from "./product-attributes";
 import { useProductAttributes } from "@/hooks/useProductAttributes";
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 
 export const QuickShop = forwardRef(function QuickShop(
   { productId }: { productId?: string },

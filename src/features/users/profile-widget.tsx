@@ -12,7 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 import Link from "next/link";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import ProfileImage from "@/components/profile-image";
 import { signOut } from "next-auth/react";
-import * as paths from "@/constants/paths";
+import * as paths from "@/lib/constants/paths";
 import { cn } from "@/lib/utils";
 import { setThemePreference } from "@/actions/theme-preference.action";
 import { debounce } from "@/lib/debounce";
@@ -51,12 +51,15 @@ const menuItems = [
 ];
 
 export default function ProfileWidget() {
+  const { user, isAuthenticated } = useAuth();
   const [popoverOpen, setPopoverOpen] = React.useState(false);
   const pathname = usePathname();
 
   React.useEffect(() => {
     setPopoverOpen(false);
   }, [pathname]);
+
+  if (!user) return;
 
   return (
     <Popover
@@ -73,7 +76,11 @@ export default function ProfileWidget() {
         align="center"
         className="relative p-0 text-sm rounded text-muted-foreground"
       >
-        <ProfileHeader />
+        <ProfileHeader
+          name={user.name as string}
+          email={user.email as string}
+          image={user.image as string}
+        />
         <div className="[&>*]:px-4 [&>*]:py-3 [&_svg]:size-4 text-sm font-medium divide-y divide-border bg-accent/20">
           {menuItems.map((item) => (
             <Link
@@ -96,43 +103,32 @@ export default function ProfileWidget() {
   );
 }
 
-function ProfileHeader() {
-  const { user } = useAuth();
+function ProfileHeader({
+  name,
+  email,
+  image,
+}: {
+  name: string;
+  email: string;
+  image: string;
+}) {
   return (
     <>
-      <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/60">
-        <ProfileImage align="center" size="lg" border />
-        <div className="text-center">
-          <Heading
-            as="h3"
-            size="lg"
-            weight="bold"
-            className="text-secondary-foreground capitalize"
-            align="center"
-          >
-            {user.name}
-          </Heading>
-          <p className="text-muted-foreground text-sm font-medium">
-            {user.email}
-          </p>
-          <div className="flex gap-2 justify-center mt-2">
-            {user.id && (
-              <Button size="sm" variant="outline" onClick={() => signOut()}>
-                Sign Out
-              </Button>
-            )}
-            {!user.id && (
-              <>
-                <Button size="sm" asChild>
-                  <Link href={paths.signInPath()}>Sign in</Link>
-                </Button>
-                <Button size="sm" variant="outline">
-                  <Link href={paths.registerPath()}> Register</Link>
-                </Button>
-              </>
-            )}
-          </div>
-        </div>
+      <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/60 items-center">
+        <ProfileImage name={name} image={image} />
+        <Heading
+          as="h3"
+          size="lg"
+          weight="bold"
+          className="text-secondary-foreground capitalize"
+          align="center"
+        >
+          {name}
+        </Heading>
+        <p className="text-muted-foreground text-sm font-medium">{email}</p>
+        <Button size="sm" variant="destructive" onClick={() => signOut()}>
+          Sign Out
+        </Button>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { env } from "@/constants/env";
+import { env } from "@/lib/env";
 import { Container } from "./container";
 
 export default function Footer() {

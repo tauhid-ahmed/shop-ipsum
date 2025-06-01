@@ -6,13 +6,11 @@ import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { useState } from "react";
 
-type ActiveRouteProps = {
-  href: string;
-  children: React.ReactNode;
-  className?: string;
-};
-
-export function ActiveRoute({ children, href, className }: ActiveRouteProps) {
+export function ActiveRoute({
+  children,
+  href = "",
+  className,
+}: React.ComponentProps<"a">) {
   const [hovering, setHovering] = useState(false);
   const pathname = usePathname();
   const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);

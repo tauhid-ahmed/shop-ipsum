@@ -2,7 +2,7 @@
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 import { ProductImageGallery } from "./product-image-gallery";
 import { type ProductType } from "@/data/products";
 import { LucideStar } from "lucide-react";
@@ -13,7 +13,7 @@ import { DotSeparator } from "@/components/dot-separator";
 import Breadcrumbs from "@/components/breadcrumbs";
 import { useAuth } from "@/hooks/useAuth";
 import { redirect } from "next/navigation";
-import { signInPath } from "@/constants/paths";
+import { signInPath } from "@/lib/constants/paths";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   const {

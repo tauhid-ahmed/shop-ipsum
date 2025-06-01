@@ -13,45 +13,29 @@ export const createVerificationToken = async (email: string) => {
     await deleteVerificationToken(email);
   }
 
-  try {
-    const data = await db
-      .insert(verificationTokens)
-      .values({
-        identifier: email,
-        token,
-        expires,
-      })
-      .returning();
+  const [data] = await db
+    .insert(verificationTokens)
+    .values({
+      identifier: email,
+      token,
+      expires,
+    })
+    .returning();
 
-    return data[0];
-  } catch {
-    return null;
-  }
+  return data;
 };
 
-export const createEmailVerification = async (email: string) => {
-  try {
-    const user = await db
-      .update(users)
-      .set({
-        emailVerified: new Date(),
-      })
-      .where(eq(users.email, email))
-      .returning();
+export const createEmailVerificationToken = async (email: string) =>
+  await db
+    .update(users)
+    .set({
+      emailVerified: new Date(),
+    })
+    .where(eq(users.email, email))
+    .returning();
 
-    return user[0];
-  } catch {
-    return null;
-  }
-};
-
-export const deleteVerificationToken = async (email: string) => {
-  try {
-    return await db
-      .delete(verificationTokens)
-      .where(eq(verificationTokens.identifier, email))
-      .returning();
-  } catch {
-    return null;
-  }
-};
+export const deleteVerificationToken = async (email: string) =>
+  await db
+    .delete(verificationTokens)
+    .where(eq(verificationTokens.identifier, email))
+    .returning();

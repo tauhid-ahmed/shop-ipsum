@@ -1,6 +1,6 @@
 "use client";
 import { ProgressCircle } from "@/components/progress-circle";
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 import { ReviewStarStats } from "../user-reviews/review-star-stats";
 import { type ProductType } from "@/data/products";
 import { LucideStar } from "lucide-react";

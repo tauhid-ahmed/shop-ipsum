@@ -1,7 +1,7 @@
 "use client";
 
 import Error from "@/components/error";
-import { env } from "@/constants/env";
+import { env } from "@/lib/env";
 
 export default function RootErrorPage({
   error,

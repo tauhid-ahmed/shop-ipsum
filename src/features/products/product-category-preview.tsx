@@ -1,7 +1,7 @@
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { categoryPath } from "@/constants/paths";
+import { categoryPath } from "@/lib/constants/paths";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";

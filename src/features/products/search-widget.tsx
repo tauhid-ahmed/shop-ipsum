@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/sheet";
 import { Container } from "@/components/layout/container";
 import { Input } from "@/components/ui/input";
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 import Link from "next/link";
 import React from "react";
 

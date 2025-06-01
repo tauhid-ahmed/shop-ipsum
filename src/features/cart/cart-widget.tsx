@@ -12,7 +12,7 @@ import {
   PopoverContent,
   PopoverAnchor,
 } from "@/components/ui/popover";
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 import React from "react";
 import { productStatus } from "@/lib/productStatus";
 import { cn } from "@/lib/utils";

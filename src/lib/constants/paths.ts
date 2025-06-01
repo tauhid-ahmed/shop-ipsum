@@ -98,7 +98,7 @@ export const publicRoutes = [
   signInPath(),
   registerPath(),
   productsPath(),
-  "/products/:pid",
+  "/products/:pid+",
 ];
 export const authRoutes = [
   signInPath(),

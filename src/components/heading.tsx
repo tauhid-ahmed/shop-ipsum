@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils";
 
 type HeadingProps = {
-  children: React.ReactNode;
-  className?: string;
   size?:
     | "xs"
     | "sm"
@@ -18,9 +16,9 @@ type HeadingProps = {
   weight?: "light" | "normal" | "medium" | "semibold" | "bold";
   align?: "left" | "center" | "right";
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-};
+} & React.HTMLAttributes<HTMLHeadingElement>;
 
-export function Heading({
+export default function Heading({
   children,
   className,
   size = "default",

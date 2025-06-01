@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import React, { ReactElement, useRef, Ref } from "react";
 import { cn } from "@/lib/utils";
-import { productDetailsPath } from "@/constants/paths";
+import { productDetailsPath } from "@/lib/constants/paths";
 import { QuickShop } from "./quick-shop";
 import { StarRatings } from "@/components/star-ratings";
 import { type ProductType } from "@/data/products";

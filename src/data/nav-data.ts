@@ -1,4 +1,4 @@
-import * as paths from "@/constants/paths";
+import * as paths from "@/lib/constants/paths";
 
 export const navItems = [
   {

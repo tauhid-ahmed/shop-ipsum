@@ -3,7 +3,7 @@
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { ProductType } from "@/data/products";
-import { Heading } from "@/components/heading";
+import { Heading } from "@/components";
 import ProductReviewStats from "./product-review-stats";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";

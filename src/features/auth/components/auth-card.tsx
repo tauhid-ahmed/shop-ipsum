@@ -1,5 +1,5 @@
-import { Heading } from "@/components/heading";
-import { Logo } from "@/components/logo";
+import { Heading } from "@/components";
+import { Logo } from "@/components";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
 import { Notify } from "@/utils/api-responses";

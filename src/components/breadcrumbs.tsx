@@ -1,6 +1,6 @@
 "use client";
 
-import { categoryPath, homePath } from "@/constants/paths";
+import { categoryPath, homePath } from "@/lib/constants/paths";
 import { type ProductType } from "@/data/products";
 import { LucideChevronRight } from "lucide-react";
 import Link from "next/link";

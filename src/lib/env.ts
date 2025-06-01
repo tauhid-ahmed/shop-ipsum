@@ -19,7 +19,7 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_DESCRIPTION: z
       .string()
       .min(10, "App description is required"),
-    NEXT_PUBLIC_APP_URL: z.string().url(),
+    NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
     NEXT_PUBLIC_NODE_ENV: z.enum(["development", "production"]),
   },
 

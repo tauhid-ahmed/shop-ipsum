@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 // import { auth } from "./auth.config";
-// import * as paths from "@/constants/paths";
+// import * as paths from "@/lib/constants/paths";
 
 export default async function middleware() {
   // const session = await auth();

@@ -2,21 +2,23 @@
 
 import { useSession, signIn, signOut } from "next-auth/react";
 
-const defaultUser = {
-  id: "",
-  name: "Guest User",
-  email: "Please sign in or create an account",
-  image: "",
+type User = {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
 };
 
 export function useAuth() {
   const { data: session, status } = useSession();
-  const user = session?.user ?? defaultUser;
+
+  const isLoading = status === "loading";
+  const isAuthenticated = status === "authenticated";
+  const user: User | null = isAuthenticated ? session?.user ?? null : null;
 
   return {
     user,
-    isAuthenticated: !!session,
-    isLoading: status === "loading",
+    isLoading,
+    isAuthenticated,
     signIn,
     signOut,
   };

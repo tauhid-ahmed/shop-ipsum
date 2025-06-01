@@ -2,7 +2,7 @@
 import Link from "next/link";
 import * as React from "react";
 
-export function Logo(props: React.SVGProps<SVGSVGElement>) {
+export default function Logo(props: React.SVGProps<SVGSVGElement>) {
   return (
     <Link href="/">
       <svg

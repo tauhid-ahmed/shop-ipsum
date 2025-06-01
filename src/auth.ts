@@ -4,7 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import { db } from "./db";
-import { getUserByEmail, getUserByEmailWithAccount } from "./db/queries";
+import { getUserByEmail, getUserByEmailWithAccounts } from "./db/queries";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
@@ -34,7 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === "credentials") return true;
-      const userWithAccount = await getUserByEmailWithAccount(
+      const userWithAccount = await getUserByEmailWithAccounts(
         user.email as string
       );
       if (!userWithAccount || !userWithAccount.provider) return true;
