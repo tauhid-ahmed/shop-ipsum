@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1741983175297,
-      "tag": "0000_supreme_stryfe",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1741983650569,
-      "tag": "0001_vengeful_omega_flight",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1742027527109,
-      "tag": "0002_far_warlock",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1742030541367,
-      "tag": "0003_good_boom_boom",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1742030561163,
-      "tag": "0004_broad_silver_centurion",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1742037900752,
-      "tag": "0005_parched_mathemanic",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1742038026665,
-      "tag": "0006_empty_clint_barton",
+      "when": 1748789196321,
+      "tag": "0000_windy_terror",
       "breakpoints": true
     }
   ]

@@ -1,14 +1,14 @@
+import { InferInsertModel } from "drizzle-orm";
 import {
   boolean,
-  timestamp,
-  text,
-  primaryKey,
   integer,
   pgEnum,
   pgTable,
+  primaryKey,
+  text,
+  timestamp,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
-import { InferInsertModel } from "drizzle-orm";
 
 export const userRoleEnum = pgEnum("user_role", [
   "user",
@@ -22,6 +22,14 @@ export const addressTypeEnum = pgEnum("address_type", [
   "work",
   "billing",
   "shipping",
+]);
+
+export const paymentMethodTypeEnum = pgEnum("payment_method_type", [
+  "card", // Credit/Debit
+  "bkash",
+  "nagad",
+  "rocket",
+  "cod", // Cash on Delivery
 ]);
 
 export const users = pgTable("user", {
@@ -57,6 +65,19 @@ export const addresses = pgTable("addresses", {
   postal_code: text("postal_code").notNull(),
   street_address: text("street_address").notNull(),
   type: addressTypeEnum("type").default("shipping").notNull(),
+  is_default: boolean("is_default").default(false).notNull(),
+  created_at: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+  updated_at: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
+});
+
+export const paymentMethods = pgTable("payment_methods", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  user_id: text("user_id").notNull(),
+  type: paymentMethodTypeEnum("type").notNull(),
+  provider: text("provider"), // 'Visa', 'Mastercard', 'Bkash Personal', etc.
+  account_number: text("account_number"), // partially masked (e.g., ****7788)
   is_default: boolean("is_default").default(false).notNull(),
   created_at: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
   updated_at: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
