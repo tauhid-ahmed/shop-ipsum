@@ -192,7 +192,7 @@ function CTAAction() {
         Add to cart
       </Button>
       <Button className="w-full" variant="outline" size="lg">
-        Add to cart
+        Proceed to checkout
       </Button>
     </div>
   );

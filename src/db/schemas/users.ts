@@ -8,25 +8,31 @@ import {
   pgTable,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
-import { createId } from "@paralleldrive/cuid2";
 import { InferInsertModel } from "drizzle-orm";
 
 export const userRoleEnum = pgEnum("user_role", [
   "user",
   "admin",
+  "seller",
   "superadmin",
+]);
+
+export const addressTypeEnum = pgEnum("address_type", [
+  "home",
+  "work",
+  "billing",
+  "shipping",
 ]);
 
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => createId()),
-  name: text("name").notNull(),
+    .$defaultFn(() => crypto.randomUUID()),
+  name: text("name"),
+  email: text("email").unique(),
   username: text("username").unique(),
-  email: text("email").unique().notNull(),
-  password: text("password"),
-  emailVerified: timestamp("emailVerified", { mode: "date" }),
   role: userRoleEnum("role").default("user").notNull(),
+  emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
   created_at: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
   updated_at: timestamp("updatedAt", { mode: "date" }).defaultNow().notNull(),
@@ -36,6 +42,24 @@ export const users = pgTable("user", {
   })
     .defaultNow()
     .notNull(),
+});
+
+export const addresses = pgTable("addresses", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  user_id: text("user_id").notNull(),
+  full_name: text("full_name").notNull(),
+  phone: text("phone").notNull(),
+  country: text("country").notNull(),
+  state: text("state").notNull(),
+  city: text("city").notNull(),
+  postal_code: text("postal_code").notNull(),
+  street_address: text("street_address").notNull(),
+  type: addressTypeEnum("type").default("shipping").notNull(),
+  is_default: boolean("is_default").default(false).notNull(),
+  created_at: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+  updated_at: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
 });
 
 export const accounts = pgTable(

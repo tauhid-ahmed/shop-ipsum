@@ -4,7 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import { db } from "./db";
-import { getUserByEmail, getUserByEmailWithAccounts } from "./db/queries";
+import { getUserByEmail, getUserByEmailWithAccounts } from "@/db/queries/users";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),

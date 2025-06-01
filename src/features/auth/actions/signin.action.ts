@@ -1,12 +1,12 @@
 "use server";
-import { getUserByEmail } from "@/db/queries";
+import { getUserByEmail } from "@/db/queries/users";
 import { VALIDATION_MESSAGES as MSG } from "../validation-messages";
 
 import { signInFormSchema, SignInFormSchema } from "../schema";
 import { decryptPassword } from "@/lib/utils";
 import { signIn } from "@/auth";
 import { defaultRedirectPath } from "@/lib/constants/paths";
-import { createVerificationToken } from "@/db/mutations/email-verify";
+import { createVerificationToken } from "@/db/mutations/verification";
 
 import { ERROR_CODES } from "@/lib/constants/error-codes";
 import { ApiResponse } from "@/utils/api-responses";

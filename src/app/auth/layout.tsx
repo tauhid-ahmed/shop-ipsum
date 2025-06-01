@@ -7,10 +7,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Section padding="lg">
-      <Container size="xs" flush>
-        {children}
-      </Container>
+    <Section center>
+      <Container size="sm">{children}</Container>
     </Section>
   );
 }

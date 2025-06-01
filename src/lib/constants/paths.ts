@@ -23,7 +23,7 @@ export const resetPasswordPath = () => "/auth/reset-password";
 // Products Routes
 export const productsPath = () => "/products";
 export const productDetailsPath = (slug: string, id: string) =>
-  `/${slug}/p/${id}`;
+  `/product/${slug}`;
 export const createProductPath = () => "/admin/products/create";
 export const updateProductPath = (id: string) => `/admin/products/update/${id}`;
 export const deleteProductPath = (id: string) => `/admin/products/delete/${id}`;

@@ -13,7 +13,7 @@ import Link from "next/link";
 export default async function Header() {
   const session = await auth();
   return (
-    <header className="border-b border-border py-4 z-50 relative backdrop-blur bg-background/90 text-base -mx-3 lg:mx-0">
+    <header className="border-b border-border py-4 z-50 relative backdrop-blur bg-background/90 text-base lg:mx-0">
       <Container>
         <nav className="flex items-center text-foreground/90">
           <div className="flex flex-1 gap-1 lg:hidden">

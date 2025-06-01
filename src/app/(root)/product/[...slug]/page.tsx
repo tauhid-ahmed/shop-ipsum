@@ -13,10 +13,8 @@ export default async function ProductDetailsPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const [productSlug, , productId] = slug;
-  const product = data.find(
-    (prod) => prod.slug === productSlug && prod.id === productId
-  );
+  const [productSlug] = slug;
+  const product = data.find((prod) => prod.slug === productSlug);
 
   if (!product) return notFound();
 
