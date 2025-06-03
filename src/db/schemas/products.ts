@@ -1,848 +1,811 @@
-/**
- * PROFESSIONAL E-COMMERCE DATABASE SCHEMA
- * Built with Drizzle ORM v0.29+ and PostgreSQL
- *
- * @description Comprehensive e-commerce platform schema with advanced features
- * @version 2.0.0
- * @author Senior Engineering Team
- * @license MIT
- *
- * Features:
- * - Multi-tenant architecture ready
- * - Advanced product catalog with variants
- * - Flexible attribute system
- * - Order management with state machine
- * - Inventory tracking with reservations
- * - Advanced pricing with rules engine
- * - Customer segmentation
- * - Analytics and reporting optimized
- */
-
 import {
   pgTable,
-  pgSchema,
-  text,
-  integer,
-  timestamp,
-  boolean,
-  numeric,
-  jsonb,
   uuid,
-  serial,
-  primaryKey,
-  pgEnum,
-  index,
-  uniqueIndex,
-  foreignKey,
-  check,
   varchar,
-  real,
-  bigint,
-  date,
-  time,
-  interval,
-  pgView,
+  text,
+  jsonb,
+  timestamp,
+  decimal,
+  integer,
+  boolean,
+  primaryKey,
+  AnyPgColumn,
 } from "drizzle-orm/pg-core";
-import { relations, sql } from "drizzle-orm";
-import { createId } from "@paralleldrive/cuid2";
+import {
+  audienceEnum,
+  discountTypeEnum,
+  currencyEnum,
+  productStatusEnum,
+  sizeTypeEnum,
+  visibilityEnum,
+  orderStatusEnum,
+  paymentStatusEnum,
+  transactionStatusEnum,
+} from "./enums";
 
-// ============================================================================
-// SCHEMA ORGANIZATION
-// ============================================================================
+// Brands table (referenced by products)
+export const brands = pgTable("brands", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  name: varchar("name", { length: 100 }).notNull().unique(),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  logo_url: varchar("logo_url", { length: 255 }),
+  description: text("description"),
+  website_url: varchar("website_url", { length: 255 }),
+  is_active: boolean("is_active").default(true),
+  created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  updated_at: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+});
 
-// Create schemas for better organization
-export const ecommerceSchema = pgSchema("ecommerce");
-export const analyticsSchema = pgSchema("analytics");
-export const auditSchema = pgSchema("audit");
+// Categories with hierarchical structure
+export const categories = pgTable("categories", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  name: varchar("name", { length: 100 }).notNull(),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  description: text("description"),
+  parent_id: uuid("parent_id").references((): AnyPgColumn => categories.id, {
+    onDelete: "set null",
+  }),
+  image_url: varchar("image_url", { length: 255 }),
+  is_active: boolean("is_active").default(true),
+  sort_order: integer("sort_order").default(0),
+  created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  updated_at: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+});
 
-// ============================================================================
-// ENUMS - Centralized type definitions
-// ============================================================================
+// Colors for product variants
+export const colors = pgTable("colors", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  name: varchar("name", { length: 64 }).notNull().unique(),
+  hex_code: varchar("hex_code", { length: 7 }), // #FFFFFF format
+  is_active: boolean("is_active").default(true),
+  created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
 
-export const userRoleEnum = pgEnum("user_role", [
-  "customer",
-  "admin",
-  "manager",
-  "support",
-  "vendor",
-]);
+// Sizes for product variants
+export const sizes = pgTable("sizes", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  type: sizeTypeEnum("type").notNull(),
+  value: varchar("value", { length: 16 }).notNull(),
+  display_order: integer("display_order").default(0),
+  is_active: boolean("is_active").default(true),
+  created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
 
-export const userStatusEnum = pgEnum("user_status", [
-  "active",
-  "inactive",
-  "suspended",
-  "pending_verification",
-]);
+// Tags for product categorization
+export const tags = pgTable("tags", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  name: varchar("name", { length: 100 }).unique().notNull(),
+  slug: varchar("slug", { length: 100 }).unique().notNull(),
+  description: text("description"),
+  is_active: boolean("is_active").default(true),
+  created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
 
-export const productStatusEnum = pgEnum("product_status", [
-  "draft",
-  "active",
-  "inactive",
-  "out_of_stock",
-  "discontinued",
-  "archived",
-]);
+// =============================================
+// PRODUCT MANAGEMENT
+// =============================================
 
-export const productTypeEnum = pgEnum("product_type", [
-  "simple",
-  "configurable",
-  "grouped",
-  "virtual",
-  "downloadable",
-  "bundle",
-]);
+// Main products table
+export const products = pgTable("products", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  brand_id: uuid("brand_id")
+    .references(() => brands.id, { onDelete: "restrict" })
+    .notNull(),
+  category_id: uuid("category_id").references(() => categories.id, {
+    onDelete: "set null",
+  }),
 
-export const genderEnum = pgEnum("gender", [
-  "men",
-  "women",
-  "unisex",
-  "boys",
-  "girls",
-  "kids",
-]);
+  // Product identifiers
+  sku: varchar("sku", { length: 64 }).unique().notNull(),
+  upc: varchar("upc", { length: 20 }),
+  ean: varchar("ean", { length: 20 }),
+  slug: varchar("slug", { length: 255 }).unique().notNull(),
 
-export const discountTypeEnum = pgEnum("discount_type", [
-  "percentage",
-  "fixed_amount",
-  "buy_x_get_y",
-  "free_shipping",
-]);
+  // Product information
+  title: varchar("title", { length: 255 }).notNull(),
+  short_description: text("short_description"),
+  long_description: text("long_description"),
+  features: jsonb("features").$type<string[]>().default([]),
 
-export const orderStatusEnum = pgEnum("order_status", [
-  "draft",
-  "pending",
-  "confirmed",
-  "processing",
-  "shipped",
-  "delivered",
-  "cancelled",
-  "returned",
-  "refunded",
-  "partial_refund",
-]);
+  // Product configuration
+  target_audience: audienceEnum("target_audience").array().notNull(),
+  status: productStatusEnum("status").default("draft").notNull(),
+  visibility: visibilityEnum("visibility").default("public").notNull(),
 
-export const paymentStatusEnum = pgEnum("payment_status", [
-  "pending",
-  "authorized",
-  "captured",
-  "failed",
-  "cancelled",
-  "refunded",
-  "partial_refund",
-]);
+  // SEO fields
+  seo_meta_title: varchar("seo_meta_title", { length: 255 }),
+  seo_meta_description: text("seo_meta_description"),
+  seo_keywords: varchar("seo_keywords", { length: 500 }),
 
-export const inventoryEventTypeEnum = pgEnum("inventory_event_type", [
-  "restock",
-  "sale",
-  "return",
-  "adjustment",
-  "reserved",
-  "unreserved",
-  "damaged",
-  "transfer",
-]);
+  // Analytics
+  sales_count: integer("sales_count").default(0).notNull(),
+  views: integer("views").default(0).notNull(),
 
-export const attributeTypeEnum = pgEnum("attribute_type", [
-  "text",
-  "number",
-  "boolean",
-  "select",
-  "multiselect",
-  "color",
-  "image",
-  "date",
-  "textarea",
-]);
+  // Timestamps
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
 
-export const mediaTypeEnum = pgEnum("media_type", [
-  "image",
-  "video",
-  "audio",
-  "document",
-  "model_3d",
-]);
+export const audiences = pgTable("audiences", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  name: varchar("name", { length: 100 }).notNull().unique(),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  description: text("description"),
+  display_order: integer("display_order").default(0),
+  is_active: boolean("is_active").default(true),
+  created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
 
-export const addressTypeEnum = pgEnum("address_type", [
-  "billing",
-  "shipping",
-  "both",
-]);
-
-export const currencyEnum = pgEnum("currency", [
-  "USD",
-  "EUR",
-  "GBP",
-  "CAD",
-  "AUD",
-  "JPY",
-  "CNY",
-  "INR",
-]);
-
-// ============================================================================
-// CORE SYSTEM TABLES
-// ============================================================================
-
-/**
- * TENANTS - Multi-tenant support
- */
-export const tenants = pgTable(
-  "tenants",
+// Then use a junction table for many-to-many relationship
+export const productAudiences = pgTable(
+  "product_audiences",
   {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    name: varchar("name", { length: 255 }).notNull(),
-    slug: varchar("slug", { length: 100 }).notNull(),
-    domain: varchar("domain", { length: 255 }),
-    subdomain: varchar("subdomain", { length: 100 }),
-    isActive: boolean("is_active").notNull().default(true),
-    settings: jsonb("settings").$type<{
-      theme?: Record<string, any>;
-      features?: string[];
-      limits?: Record<string, number>;
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    product_id: uuid("product_id")
+      .references(() => products.id, { onDelete: "cascade" })
+      .notNull(),
+    audience_id: uuid("audience_id")
+      .references(() => audiences.id, { onDelete: "cascade" })
+      .notNull(),
+    created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
   },
   (table) => ({
-    slugIdx: uniqueIndex("tenants_slug_idx").on(table.slug),
-    domainIdx: uniqueIndex("tenants_domain_idx").on(table.domain),
-    subdomainIdx: uniqueIndex("tenants_subdomain_idx").on(table.subdomain),
+    pk: primaryKey({ columns: [table.product_id, table.audience_id] }),
   })
 );
 
-/**
- * USERS - Enhanced user management
- */
-export const users = pgTable(
-  "users",
+// =============================================
+// PRODUCT VARIANTS
+// =============================================
+
+// Product variants (color variations)
+export const variants = pgTable("variants", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  product_id: uuid("product_id")
+    .references(() => products.id, { onDelete: "cascade" })
+    .notNull(),
+  color_id: uuid("color_id").references(() => colors.id, {
+    onDelete: "set null",
+  }),
+  sku: varchar("sku", { length: 64 }).unique(),
+  upc: varchar("upc", { length: 20 }),
+  ean: varchar("ean", { length: 20 }),
+  is_active: boolean("is_active").default(true).notNull(),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// Variant sizes (many-to-many: variant can have multiple sizes)
+export const variantSizes = pgTable(
+  "variant_sizes",
   {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    tenantId: text("tenant_id").references(() => tenants.id, {
-      onDelete: "cascade",
-    }),
-    email: varchar("email", { length: 320 }).notNull(),
-    emailVerifiedAt: timestamp("email_verified_at"),
-    passwordHash: varchar("password_hash", { length: 255 }),
-    firstName: varchar("first_name", { length: 100 }),
-    lastName: varchar("last_name", { length: 100 }),
-    phone: varchar("phone", { length: 20 }),
-    dateOfBirth: date("date_of_birth"),
-    gender: genderEnum("gender"),
-    role: userRoleEnum("role").notNull().default("customer"),
-    status: userStatusEnum("status").notNull().default("active"),
-    lastLoginAt: timestamp("last_login_at"),
-    metadata: jsonb("metadata").$type<{
-      preferences?: Record<string, any>;
-      segments?: string[];
-      tags?: string[];
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    variant_id: uuid("variant_id")
+      .references(() => variants.id, { onDelete: "cascade" })
+      .notNull(),
+    size_id: uuid("size_id")
+      .references(() => sizes.id, { onDelete: "cascade" })
+      .notNull(),
+    stock_quantity: integer("stock_quantity").default(0).notNull(),
+    created_at: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => ({
-    emailIdx: uniqueIndex("users_email_idx").on(table.email),
-    tenantEmailIdx: uniqueIndex("users_tenant_email_idx").on(
-      table.tenantId,
-      table.email
-    ),
-    roleIdx: index("users_role_idx").on(table.role),
-    statusIdx: index("users_status_idx").on(table.status),
+    pk: primaryKey({ columns: [table.variant_id, table.size_id] }),
   })
 );
 
-/**
- * USER ADDRESSES - Comprehensive address management
- */
-export const userAddresses = pgTable(
-  "user_addresses",
+// Product translations for multi-language support
+export const productTranslations = pgTable("product_translations", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  product_id: uuid("product_id")
+    .references(() => products.id, { onDelete: "cascade" })
+    .notNull(),
+  locale: varchar("locale", { length: 10 }).notNull(), // ISO language codes
+  title: varchar("title", { length: 255 }).notNull(),
+  short_description: text("short_description"),
+  long_description: text("long_description"),
+  features: jsonb("features").$type<string[]>().default([]),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// Product-tag relationship (many-to-many)
+export const productTags = pgTable(
+  "product_tags",
   {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    type: addressTypeEnum("type").notNull().default("both"),
-    firstName: varchar("first_name", { length: 100 }).notNull(),
-    lastName: varchar("last_name", { length: 100 }).notNull(),
-    company: varchar("company", { length: 255 }),
-    addressLine1: varchar("address_line_1", { length: 255 }).notNull(),
-    addressLine2: varchar("address_line_2", { length: 255 }),
-    city: varchar("city", { length: 100 }).notNull(),
-    state: varchar("state", { length: 100 }),
-    postalCode: varchar("postal_code", { length: 20 }).notNull(),
-    country: varchar("country", { length: 2 }).notNull(), // ISO 3166-1 alpha-2
-    phone: varchar("phone", { length: 20 }),
-    isDefault: boolean("is_default").notNull().default(false),
-    metadata: jsonb("metadata").$type<{
-      instructions?: string;
-      coordinates?: { lat: number; lng: number };
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    product_id: uuid("product_id")
+      .references(() => products.id, { onDelete: "cascade" })
+      .notNull(),
+    tag_id: uuid("tag_id")
+      .references(() => tags.id, { onDelete: "cascade" })
+      .notNull(),
+    created_at: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => ({
-    userIdx: index("user_addresses_user_idx").on(table.userId),
-    typeIdx: index("user_addresses_type_idx").on(table.type),
-    defaultIdx: index("user_addresses_default_idx").on(table.isDefault),
+    pk: primaryKey({ columns: [table.product_id, table.tag_id] }),
   })
 );
 
-// ============================================================================
-// CATALOG MANAGEMENT
-// ============================================================================
+// Product media (images, videos)
+export const productMedia = pgTable("product_media", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  product_id: uuid("product_id")
+    .references(() => products.id, { onDelete: "cascade" })
+    .notNull(),
+  type: varchar("type", { length: 20 }).default("image").notNull(), // image, video
+  url: varchar("url", { length: 500 }).notNull(),
+  alt_text: varchar("alt_text", { length: 255 }),
+  is_primary: boolean("is_primary").default(false).notNull(),
+  sort_order: integer("sort_order").default(0).notNull(),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
 
-/**
- * BRANDS - Enhanced brand management
- */
-export const brands = pgTable(
-  "brands",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    tenantId: text("tenant_id").references(() => tenants.id, {
-      onDelete: "cascade",
-    }),
-    name: varchar("name", { length: 255 }).notNull(),
-    slug: varchar("slug", { length: 255 }).notNull(),
-    description: text("description"),
-    logo: text("logo"),
-    website: varchar("website", { length: 500 }),
-    email: varchar("email", { length: 320 }),
-    phone: varchar("phone", { length: 20 }),
-    isActive: boolean("is_active").notNull().default(true),
-    metadata: jsonb("metadata").$type<{
-      socialMedia?: Record<string, string>;
-      certifications?: string[];
-      story?: string;
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    tenantSlugIdx: uniqueIndex("brands_tenant_slug_idx").on(
-      table.tenantId,
-      table.slug
-    ),
-    nameIdx: index("brands_name_idx").on(table.name),
-    activeIdx: index("brands_active_idx").on(table.isActive),
+// =============================================
+// PRICING & INVENTORY
+// =============================================
+
+// Product pricing information
+export const productPricing = pgTable("product_pricing", {
+  product_id: uuid("product_id")
+    .primaryKey()
+    .references(() => products.id, { onDelete: "cascade" }),
+  base_amount: decimal("base_amount", { precision: 10, scale: 2 }).notNull(),
+  original_amount: decimal("original_amount", { precision: 10, scale: 2 }),
+  currency: currencyEnum("currency").notNull(),
+  discount_type: discountTypeEnum("discount_type"),
+  discount_value: integer("discount_value"),
+  is_on_sale: boolean("is_on_sale").default(false).notNull(),
+  sale_start_date: timestamp("sale_start_date", { withTimezone: true }),
+  sale_end_date: timestamp("sale_end_date", { withTimezone: true }),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// Price history for analytics
+export const priceHistory = pgTable("price_history", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  product_id: uuid("product_id")
+    .references(() => products.id, { onDelete: "cascade" })
+    .notNull(),
+  base_amount: decimal("base_amount", { precision: 10, scale: 2 }).notNull(),
+  original_amount: decimal("original_amount", { precision: 10, scale: 2 }),
+  currency: currencyEnum("currency").notNull(),
+  discount_type: discountTypeEnum("discount_type"),
+  discount_value: integer("discount_value"),
+  start_date: timestamp("start_date", { withTimezone: true }).notNull(),
+  end_date: timestamp("end_date", { withTimezone: true }),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// Inventory management
+export const inventory = pgTable("inventory", {
+  product_id: uuid("product_id")
+    .primaryKey()
+    .references(() => products.id, { onDelete: "cascade" }),
+  track_inventory: boolean("track_inventory").default(true).notNull(),
+  stock_quantity: integer("stock_quantity").default(0).notNull(),
+  low_stock_threshold: integer("low_stock_threshold").default(5).notNull(),
+  allow_backorder: boolean("allow_backorder").default(false).notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// =============================================
+// REVIEWS & RATINGS
+// =============================================
+
+// Aggregated product ratings
+export const productRatings = pgTable("product_ratings", {
+  product_id: uuid("product_id")
+    .primaryKey()
+    .references(() => products.id, { onDelete: "cascade" }),
+  average_rating: decimal("average_rating", { precision: 3, scale: 2 })
+    .default("0")
+    .notNull(),
+  total_reviews: integer("total_reviews").default(0).notNull(),
+  rating_breakdown: jsonb("rating_breakdown")
+    .$type<Record<string, number>>()
+    .default({}),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// Individual product reviews
+export const reviews = pgTable("reviews", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  product_id: uuid("product_id")
+    .references(() => products.id, { onDelete: "cascade" })
+    .notNull(),
+  user_id: uuid("user_id").notNull(), // References users table (not defined here)
+  rating: integer("rating").notNull(), // 1-5 stars
+  title: varchar("title", { length: 255 }),
+  comment: text("comment"),
+  is_verified_purchase: boolean("is_verified_purchase")
+    .default(false)
+    .notNull(),
+  is_approved: boolean("is_approved").default(false).notNull(),
+  helpful_count: integer("helpful_count").default(0).notNull(),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// =============================================
+// SHIPPING & RETURNS
+// =============================================
+
+// Product shipping information
+export const productShipping = pgTable("product_shipping", {
+  product_id: uuid("product_id")
+    .primaryKey()
+    .references(() => products.id, { onDelete: "cascade" }),
+  is_free_shipping: boolean("is_free_shipping").default(false).notNull(),
+  is_international_eligible: boolean("is_international_eligible")
+    .default(true)
+    .notNull(),
+
+  // Dimensions and weight
+  weight_grams: integer("weight_grams"),
+  length_cm: decimal("length_cm", { precision: 8, scale: 2 }),
+  width_cm: decimal("width_cm", { precision: 8, scale: 2 }),
+  height_cm: decimal("height_cm", { precision: 8, scale: 2 }),
+
+  // Estimated delivery times (in days)
+  estimated_domestic_days: integer("estimated_domestic_days"),
+  estimated_international_days: integer("estimated_international_days"),
+
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// Product returns policy
+export const returnsPolicy = pgTable("returns_policy", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  product_id: uuid("product_id")
+    .references(() => products.id, { onDelete: "cascade" })
+    .notNull(),
+  can_return: boolean("can_return").default(true).notNull(),
+  return_window_days: integer("return_window_days").default(30).notNull(),
+  restocking_fee_percent: decimal("restocking_fee_percent", {
+    precision: 5,
+    scale: 2,
   })
-);
+    .default("0")
+    .notNull(),
+  return_conditions: text("return_conditions"),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
 
-/**
- * CATEGORIES - Hierarchical category structure with enhanced features
- */
-export const categories = pgTable(
-  "categories",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    tenantId: text("tenant_id").references(() => tenants.id, {
-      onDelete: "cascade",
-    }),
-    parentId: text("parent_id"),
-    name: varchar("name", { length: 255 }).notNull(),
-    slug: varchar("slug", { length: 255 }).notNull(),
-    description: text("description"),
-    image: text("image"),
-    level: integer("level").notNull().default(0),
-    sortOrder: integer("sort_order").notNull().default(0),
-    isActive: boolean("is_active").notNull().default(true),
-    seoTitle: varchar("seo_title", { length: 255 }),
-    seoDescription: varchar("seo_description", { length: 500 }),
-    seoKeywords: varchar("seo_keywords", { length: 500 }),
-    metadata: jsonb("metadata").$type<{
-      filters?: string[];
-      banners?: Array<{ image: string; link?: string; alt?: string }>;
-      featured?: boolean;
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    parentFk: foreignKey({
-      columns: [table.parentId],
-      foreignColumns: [table.id],
-    }),
-    tenantSlugIdx: uniqueIndex("categories_tenant_slug_idx").on(
-      table.tenantId,
-      table.slug
-    ),
-    parentIdx: index("categories_parent_idx").on(table.parentId),
-    levelIdx: index("categories_level_idx").on(table.level),
-    activeIdx: index("categories_active_idx").on(table.isActive),
-  })
-);
+// =============================================
+// USER ADDRESSES
+// =============================================
 
-/**
- * ATTRIBUTES - Flexible attribute system
- */
-export const attributes = pgTable(
-  "attributes",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    tenantId: text("tenant_id").references(() => tenants.id, {
-      onDelete: "cascade",
-    }),
-    name: varchar("name", { length: 255 }).notNull(),
-    slug: varchar("slug", { length: 255 }).notNull(),
-    type: attributeTypeEnum("type").notNull(),
-    isRequired: boolean("is_required").notNull().default(false),
-    isFilterable: boolean("is_filterable").notNull().default(false),
-    isVariantLevel: boolean("is_variant_level").notNull().default(true),
-    sortOrder: integer("sort_order").notNull().default(0),
-    validation: jsonb("validation").$type<{
-      min?: number;
-      max?: number;
-      pattern?: string;
-      options?: Array<{ value: string; label: string; color?: string }>;
-    }>(),
-    metadata: jsonb("metadata").$type<{
-      unit?: string;
-      helpText?: string;
-      placeholder?: string;
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    tenantSlugIdx: uniqueIndex("attributes_tenant_slug_idx").on(
-      table.tenantId,
-      table.slug
-    ),
-    typeIdx: index("attributes_type_idx").on(table.type),
-    filterableIdx: index("attributes_filterable_idx").on(table.isFilterable),
-  })
-);
+// User addresses for shipping and billing
+export const addresses = pgTable("addresses", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  user_id: uuid("user_id").notNull(), // References users table
+  type: varchar("type", { length: 20 }).default("shipping").notNull(), // shipping, billing, both
 
-/**
- * PRODUCTS - Enhanced product management
- */
-export const products = pgTable(
-  "products",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    tenantId: text("tenant_id").references(() => tenants.id, {
-      onDelete: "cascade",
-    }),
-    brandId: text("brand_id").references(() => brands.id, {
+  // Contact information
+  full_name: varchar("full_name", { length: 255 }).notNull(),
+  phone: varchar("phone", { length: 20 }),
+  email: varchar("email", { length: 255 }),
+
+  // Address details
+  street_address: varchar("street_address", { length: 500 }).notNull(),
+  apartment: varchar("apartment", { length: 100 }),
+  city: varchar("city", { length: 100 }).notNull(),
+  state_province: varchar("state_province", { length: 100 }),
+  postal_code: varchar("postal_code", { length: 20 }),
+  country: varchar("country", { length: 100 }).notNull(),
+
+  // Flags
+  is_default: boolean("is_default").default(false).notNull(),
+  is_active: boolean("is_active").default(true).notNull(),
+
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// =============================================
+// SHOPPING CART
+// =============================================
+
+// Shopping carts (supports both logged-in users and guests)
+export const carts = pgTable("carts", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  user_id: uuid("user_id"), // null for guest carts
+  session_id: varchar("session_id", { length: 255 }), // for guest identification
+
+  // Cart totals (calculated fields)
+  items_count: integer("items_count").default(0).notNull(),
+  subtotal: decimal("subtotal", { precision: 10, scale: 2 })
+    .default("0")
+    .notNull(),
+
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// Cart items
+export const cartItems = pgTable("cart_items", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  cart_id: uuid("cart_id")
+    .references(() => carts.id, { onDelete: "cascade" })
+    .notNull(),
+  product_id: uuid("product_id")
+    .references(() => products.id, { onDelete: "restrict" })
+    .notNull(),
+  variant_id: uuid("variant_id").references(() => variants.id, {
+    onDelete: "set null",
+  }),
+  size_id: uuid("size_id").references(() => sizes.id, { onDelete: "set null" }),
+
+  quantity: integer("quantity").notNull().default(1),
+  unit_price: decimal("unit_price", { precision: 10, scale: 2 }).notNull(),
+  total_price: decimal("total_price", { precision: 10, scale: 2 }).notNull(),
+
+  added_at: timestamp("added_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// =============================================
+// WISHLIST
+// =============================================
+
+// User wishlists
+export const wishlists = pgTable("wishlists", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  user_id: uuid("user_id"), // null for guest wishlists
+  session_id: varchar("session_id", { length: 255 }), // for guest identification
+  name: varchar("name", { length: 100 }).default("My Wishlist").notNull(),
+  is_default: boolean("is_default").default(true).notNull(),
+  is_public: boolean("is_public").default(false).notNull(),
+
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// Wishlist items
+export const wishlistItems = pgTable("wishlist_items", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  wishlist_id: uuid("wishlist_id")
+    .references(() => wishlists.id, { onDelete: "cascade" })
+    .notNull(),
+  product_id: uuid("product_id")
+    .references(() => products.id, { onDelete: "restrict" })
+    .notNull(),
+  variant_id: uuid("variant_id").references(() => variants.id, {
+    onDelete: "set null",
+  }),
+
+  notes: text("notes"),
+  added_at: timestamp("added_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// =============================================
+// ORDERS & PAYMENTS
+// =============================================
+
+// Customer orders
+export const orders = pgTable("orders", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  user_id: uuid("user_id").notNull(), // References users table
+  order_number: varchar("order_number", { length: 50 }).unique().notNull(),
+
+  // Order status and financial info
+  status: orderStatusEnum("status").default("pending").notNull(),
+  payment_status: paymentStatusEnum("payment_status")
+    .default("pending")
+    .notNull(),
+
+  // Amounts
+  subtotal: decimal("subtotal", { precision: 12, scale: 2 }).notNull(),
+  tax_amount: decimal("tax_amount", { precision: 12, scale: 2 })
+    .default("0")
+    .notNull(),
+  shipping_amount: decimal("shipping_amount", { precision: 12, scale: 2 })
+    .default("0")
+    .notNull(),
+  discount_amount: decimal("discount_amount", { precision: 12, scale: 2 })
+    .default("0")
+    .notNull(),
+  total_amount: decimal("total_amount", { precision: 12, scale: 2 }).notNull(),
+  currency: currencyEnum("currency").notNull(),
+
+  // Payment info
+  payment_method: varchar("payment_method", { length: 50 }),
+
+  // Addresses
+  shipping_address_id: uuid("shipping_address_id").references(
+    () => addresses.id,
+    {
       onDelete: "set null",
-    }),
-    createdBy: text("created_by")
-      .notNull()
-      .references(() => users.id, { onDelete: "restrict" }),
-    sku: varchar("sku", { length: 100 }).notNull(),
-    title: varchar("title", { length: 500 }).notNull(),
-    slug: varchar("slug", { length: 500 }).notNull(),
-    description: text("description"),
-    shortDescription: varchar("short_description", { length: 1000 }),
-    type: productTypeEnum("type").notNull().default("simple"),
-    status: productStatusEnum("status").notNull().default("draft"),
-    gender: genderEnum("gender").notNull().default("unisex"),
-
-    // Pricing
-    basePrice: numeric("base_price", { precision: 12, scale: 2 }).notNull(),
-    compareAtPrice: numeric("compare_at_price", { precision: 12, scale: 2 }),
-    costPrice: numeric("cost_price", { precision: 12, scale: 2 }),
-    currency: currencyEnum("currency").notNull().default("USD"),
-
-    // Inventory
-    trackInventory: boolean("track_inventory").notNull().default(true),
-    inventoryQuantity: integer("inventory_quantity").notNull().default(0),
-    lowStockThreshold: integer("low_stock_threshold").default(10),
-
-    // Physical properties
-    weight: numeric("weight", { precision: 8, scale: 3 }),
-    dimensions: jsonb("dimensions").$type<{
-      length?: number;
-      width?: number;
-      height?: number;
-      unit?: string;
-    }>(),
-    requiresShipping: boolean("requires_shipping").notNull().default(true),
-
-    // SEO
-    seoTitle: varchar("seo_title", { length: 255 }),
-    seoDescription: varchar("seo_description", { length: 500 }),
-    seoKeywords: varchar("seo_keywords", { length: 500 }),
-
-    // Business logic
-    isFeatured: boolean("is_featured").notNull().default(false),
-    tags: jsonb("tags").$type<string[]>(),
-    metadata: jsonb("metadata").$type<{
-      warranty?: string;
-      returnPolicy?: string;
-      shippingClass?: string;
-      customFields?: Record<string, any>;
-    }>(),
-
-    // Timestamps
-    publishedAt: timestamp("published_at"),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    tenantSkuIdx: uniqueIndex("products_tenant_sku_idx").on(
-      table.tenantId,
-      table.sku
-    ),
-    tenantSlugIdx: uniqueIndex("products_tenant_slug_idx").on(
-      table.tenantId,
-      table.slug
-    ),
-    statusIdx: index("products_status_idx").on(table.status),
-    typeIdx: index("products_type_idx").on(table.type),
-    brandIdx: index("products_brand_idx").on(table.brandId),
-    priceIdx: index("products_price_idx").on(table.basePrice),
-    featuredIdx: index("products_featured_idx").on(table.isFeatured),
-    inventoryIdx: index("products_inventory_idx").on(table.inventoryQuantity),
-  })
-);
-
-/**
- * PRODUCT VARIANTS - Multi-variant product support
- */
-export const productVariants = pgTable(
-  "product_variants",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    productId: text("product_id")
-      .notNull()
-      .references(() => products.id, { onDelete: "cascade" }),
-    sku: varchar("sku", { length: 100 }),
-    title: varchar("title", { length: 500 }).notNull(),
-
-    // Pricing overrides
-    price: numeric("price", { precision: 12, scale: 2 }),
-    compareAtPrice: numeric("compare_at_price", { precision: 12, scale: 2 }),
-    costPrice: numeric("cost_price", { precision: 12, scale: 2 }),
-
-    // Inventory
-    inventoryQuantity: integer("inventory_quantity").notNull().default(0),
-    reservedQuantity: integer("reserved_quantity").notNull().default(0),
-
-    // Physical properties
-    weight: numeric("weight", { precision: 8, scale: 3 }),
-    dimensions: jsonb("dimensions").$type<{
-      length?: number;
-      width?: number;
-      height?: number;
-      unit?: string;
-    }>(),
-
-    // Status
-    isActive: boolean("is_active").notNull().default(true),
-    sortOrder: integer("sort_order").notNull().default(0),
-
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    productIdx: index("product_variants_product_idx").on(table.productId),
-    skuIdx: uniqueIndex("product_variants_sku_idx").on(table.sku),
-    activeIdx: index("product_variants_active_idx").on(table.isActive),
-    inventoryIdx: index("product_variants_inventory_idx").on(
-      table.inventoryQuantity
-    ),
-  })
-);
-
-/**
- * VARIANT ATTRIBUTE VALUES - Links variants to their attribute values
- */
-export const variantAttributeValues = pgTable(
-  "variant_attribute_values",
-  {
-    variantId: text("variant_id")
-      .notNull()
-      .references(() => productVariants.id, { onDelete: "cascade" }),
-    attributeId: text("attribute_id")
-      .notNull()
-      .references(() => attributes.id, { onDelete: "cascade" }),
-    value: text("value").notNull(),
-    displayValue: varchar("display_value", { length: 255 }),
-    sortOrder: integer("sort_order").notNull().default(0),
-  },
-  (table) => ({
-    pk: primaryKey({ columns: [table.variantId, table.attributeId] }),
-    variantIdx: index("variant_attribute_values_variant_idx").on(
-      table.variantId
-    ),
-    attributeIdx: index("variant_attribute_values_attribute_idx").on(
-      table.attributeId
-    ),
-  })
-);
-
-/**
- * PRODUCT CATEGORIES - Product-category relationships
- */
-export const productCategories = pgTable(
-  "product_categories",
-  {
-    productId: text("product_id")
-      .notNull()
-      .references(() => products.id, { onDelete: "cascade" }),
-    categoryId: text("category_id")
-      .notNull()
-      .references(() => categories.id, { onDelete: "cascade" }),
-    isPrimary: boolean("is_primary").notNull().default(false),
-    sortOrder: integer("sort_order").notNull().default(0),
-  },
-  (table) => ({
-    pk: primaryKey({ columns: [table.productId, table.categoryId] }),
-    productIdx: index("product_categories_product_idx").on(table.productId),
-    categoryIdx: index("product_categories_category_idx").on(table.categoryId),
-    primaryIdx: index("product_categories_primary_idx").on(table.isPrimary),
-  })
-);
-
-/**
- * PRODUCT MEDIA - Enhanced media management
- */
-export const productMedia = pgTable(
-  "product_media",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    productId: text("product_id")
-      .notNull()
-      .references(() => products.id, { onDelete: "cascade" }),
-    variantId: text("variant_id").references(() => productVariants.id, {
-      onDelete: "cascade",
-    }),
-    type: mediaTypeEnum("type").notNull().default("image"),
-    url: text("url").notNull(),
-    altText: varchar("alt_text", { length: 255 }),
-    title: varchar("title", { length: 255 }),
-    sortOrder: integer("sort_order").notNull().default(0),
-    isPrimary: boolean("is_primary").notNull().default(false),
-    metadata: jsonb("metadata").$type<{
-      width?: number;
-      height?: number;
-      size?: number;
-      format?: string;
-      duration?: number; // for videos
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    productIdx: index("product_media_product_idx").on(table.productId),
-    variantIdx: index("product_media_variant_idx").on(table.variantId),
-    typeIdx: index("product_media_type_idx").on(table.type),
-    primaryIdx: index("product_media_primary_idx").on(table.isPrimary),
-  })
-);
-
-// ============================================================================
-// INVENTORY MANAGEMENT
-// ============================================================================
-
-/**
- * INVENTORY TRANSACTIONS - Comprehensive inventory tracking
- */
-export const inventoryTransactions = pgTable(
-  "inventory_transactions",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    productId: text("product_id")
-      .notNull()
-      .references(() => products.id, { onDelete: "cascade" }),
-    variantId: text("variant_id").references(() => productVariants.id, {
-      onDelete: "cascade",
-    }),
-    type: inventoryEventTypeEnum("type").notNull(),
-    quantity: integer("quantity").notNull(),
-    previousQuantity: integer("previous_quantity").notNull(),
-    newQuantity: integer("new_quantity").notNull(),
-    reference: varchar("reference", { length: 255 }), // Order ID, etc.
-    reason: text("reason"),
-    userId: text("user_id").references(() => users.id, {
+    }
+  ),
+  billing_address_id: uuid("billing_address_id").references(
+    () => addresses.id,
+    {
       onDelete: "set null",
-    }),
-    metadata: jsonb("metadata").$type<{
-      orderId?: string;
-      supplierId?: string;
-      locationId?: string;
-      cost?: number;
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    productIdx: index("inventory_transactions_product_idx").on(table.productId),
-    variantIdx: index("inventory_transactions_variant_idx").on(table.variantId),
-    typeIdx: index("inventory_transactions_type_idx").on(table.type),
-    referenceIdx: index("inventory_transactions_reference_idx").on(
-      table.reference
-    ),
-    createdAtIdx: index("inventory_transactions_created_at_idx").on(
-      table.createdAt
-    ),
-  })
-);
+    }
+  ),
 
-// ============================================================================
-// SHOPPING & CUSTOMER INTERACTION
-// ============================================================================
+  // Additional info
+  notes: text("notes"),
 
-/**
- * SHOPPING CARTS - Enhanced cart management
- */
-export const carts = pgTable(
-  "carts",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    tenantId: text("tenant_id").references(() => tenants.id, {
-      onDelete: "cascade",
-    }),
-    userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
-    sessionId: varchar("session_id", { length: 255 }),
-    currency: currencyEnum("currency").notNull().default("USD"),
-    expiresAt: timestamp("expires_at"),
-    metadata: jsonb("metadata").$type<{
-      utm?: Record<string, string>;
-      referrer?: string;
-      device?: string;
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    userIdx: index("carts_user_idx").on(table.userId),
-    sessionIdx: index("carts_session_idx").on(table.sessionId),
-    expiresIdx: index("carts_expires_idx").on(table.expiresAt),
-  })
-);
+  // Timestamps
+  placed_at: timestamp("placed_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  shipped_at: timestamp("shipped_at", { withTimezone: true }),
+  delivered_at: timestamp("delivered_at", { withTimezone: true }),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
 
-/**
- * CART ITEMS - Enhanced cart item management
- */
-export const cartItems = pgTable(
-  "cart_items",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    cartId: text("cart_id")
-      .notNull()
-      .references(() => carts.id, { onDelete: "cascade" }),
-    productId: text("product_id")
-      .notNull()
-      .references(() => products.id, { onDelete: "cascade" }),
-    variantId: text("variant_id").references(() => productVariants.id, {
-      onDelete: "cascade",
-    }),
-    quantity: integer("quantity").notNull().default(1),
-    unitPrice: numeric("unit_price", { precision: 12, scale: 2 }).notNull(),
-    totalPrice: numeric("total_price", { precision: 12, scale: 2 }).notNull(),
-    customizations:
-      jsonb("customizations").$type<
-        Record<string, string | number | boolean>
-      >(),
-    metadata: jsonb("metadata").$type<{
-      addedFrom?: string;
-      recommendationId?: string;
-    }>(),
-    addedAt: timestamp("added_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    cartIdx: index("cart_items_cart_idx").on(table.cartId),
-    productIdx: index("cart_items_product_idx").on(table.productId),
-    variantIdx: index("cart_items_variant_idx").on(table.variantId),
-    quantityCheck: check("quantity_positive", sql`${table.quantity} > 0`),
-  })
-);
+// Order items
+export const orderItems = pgTable("order_items", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  order_id: uuid("order_id")
+    .references(() => orders.id, { onDelete: "cascade" })
+    .notNull(),
+  product_id: uuid("product_id")
+    .references(() => products.id, { onDelete: "restrict" })
+    .notNull(),
+  variant_id: uuid("variant_id").references(() => variants.id, {
+    onDelete: "set null",
+  }),
+  size_id: uuid("size_id").references(() => sizes.id, { onDelete: "set null" }),
 
-/**
- * WISHLISTS - Enhanced wishlist management
- */
-export const wishlists = pgTable(
-  "wishlists",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    name: varchar("name", { length: 255 }).notNull().default("My Wishlist"),
-    description: text("description"),
-    isDefault: boolean("is_default").notNull().default(false),
-    isPublic: boolean("is_public").notNull().default(false),
-    shareToken: varchar("share_token", { length: 100 }),
-    metadata: jsonb("metadata").$type<{
-      occasion?: string;
-      targetDate?: string;
-      notes?: string;
-    }>(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    userIdx: index("wishlists_user_idx").on(table.userId),
-    shareTokenIdx: uniqueIndex("wishlists_share_token_idx").on(
-      table.shareToken
-    ),
-    publicIdx: index("wishlists_public_idx").on(table.isPublic),
-  })
-);
+  // Product info at time of purchase (for historical accuracy)
+  product_title: varchar("product_title", { length: 255 }).notNull(),
+  product_sku: varchar("product_sku", { length: 64 }).notNull(),
 
-/**
- * WISHLIST ITEMS
- */
-export const wishlistItems = pgTable(
-  "wishlist_items",
-  {
-    id: text("id")
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    wishlistId: text("wishlist_id")
-      .notNull()
-      .references(() => wishlists.id, { onDelete: "cascade" }),
-    productId: text("product_id")
-      .notNull()
-      .references(() => products.id, { onDelete: "cascade" }),
-    variantId: text("variant_id").references(() => productVariants.id, {
-      onDelete: "cascade",
-    }),
-    priority: integer("priority").notNull().default(0),
-    notes: text("notes"),
-    metadata: jsonb("metadata").$type<{
-      targetPrice?: number;
-      notifyWhenAvailable?: boolean;
-      notifyWhenOnSale?: boolean;
-    }>(),
-    addedAt: timestamp("added_at").notNull().defaultNow(),
-  },
-  (table) => ({
-    wishlistIdx: index("wishlist_items_wishlist_idx").on(table.wishlistId),
-    productIdx: index("wishlist_items_product_idx").on(table.productId),
-    variantIdx: index("wishlist_items_variant_idx").on(table.variantId),
-    // Prevent duplicate items in same wishlist
-    uniqueItemIdx: uniqueIndex("wishlist_items_unique_idx").on(
-      table.wishlistId,
-      table.productId,
-      table.variantId
-    ),
-  })
-);
+  quantity: integer("quantity").notNull(),
+  unit_price: decimal("unit_price", { precision: 10, scale: 2 }).notNull(),
+  total_price: decimal("total_price", { precision: 12, scale: 2 }).notNull(),
 
-// ============================================================================
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// Payment transactions
+export const paymentTransactions = pgTable("payment_transactions", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  order_id: uuid("order_id")
+    .references(() => orders.id, { onDelete: "cascade" })
+    .notNull(),
+
+  // Transaction details
+  transaction_id: varchar("transaction_id", { length: 255 }).unique().notNull(),
+  payment_gateway: varchar("payment_gateway", { length: 100 }).notNull(),
+  payment_method: varchar("payment_method", { length: 50 }),
+
+  // Amount and currency
+  amount: decimal("amount", { precision: 12, scale: 2 }).notNull(),
+  currency: currencyEnum("currency").notNull(),
+
+  // Status and timing
+  status: transactionStatusEnum("status").default("pending").notNull(),
+  gateway_response: jsonb("gateway_response")
+    .$type<Record<string, any>>()
+    .default({}),
+
+  // Timestamps
+  processed_at: timestamp("processed_at", { withTimezone: true }),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+// =============================================
+// TYPE EXPORTS FOR BETTER TYPE SAFETY
+// =============================================
+
+// Inferred types from schemas
+export type Brand = typeof brands.$inferSelect;
+export type NewBrand = typeof brands.$inferInsert;
+
+export type Category = typeof categories.$inferSelect;
+export type NewCategory = typeof categories.$inferInsert;
+
+export type Product = typeof products.$inferSelect;
+export type NewProduct = typeof products.$inferInsert;
+
+export type ProductTranslation = typeof productTranslations.$inferSelect;
+export type NewProductTranslation = typeof productTranslations.$inferInsert;
+
+export type ProductMedia = typeof productMedia.$inferSelect;
+export type NewProductMedia = typeof productMedia.$inferInsert;
+
+export type ProductPricing = typeof productPricing.$inferSelect;
+export type NewProductPricing = typeof productPricing.$inferInsert;
+
+export type Variant = typeof variants.$inferSelect;
+export type NewVariant = typeof variants.$inferInsert;
+
+export type Color = typeof colors.$inferSelect;
+export type NewColor = typeof colors.$inferInsert;
+
+export type Size = typeof sizes.$inferSelect;
+export type NewSize = typeof sizes.$inferInsert;
+
+export type Tag = typeof tags.$inferSelect;
+export type NewTag = typeof tags.$inferInsert;
+
+export type Inventory = typeof inventory.$inferSelect;
+export type NewInventory = typeof inventory.$inferInsert;
+
+export type Review = typeof reviews.$inferSelect;
+export type NewReview = typeof reviews.$inferInsert;
+
+export type ProductRating = typeof productRatings.$inferSelect;
+export type NewProductRating = typeof productRatings.$inferInsert;
+
+export type Cart = typeof carts.$inferSelect;
+export type NewCart = typeof carts.$inferInsert;
+
+export type CartItem = typeof cartItems.$inferSelect;
+export type NewCartItem = typeof cartItems.$inferInsert;
+
+export type Wishlist = typeof wishlists.$inferSelect;
+export type NewWishlist = typeof wishlists.$inferInsert;
+
+export type WishlistItem = typeof wishlistItems.$inferSelect;
+export type NewWishlistItem = typeof wishlistItems.$inferInsert;
+
+export type Order = typeof orders.$inferSelect;
+export type NewOrder = typeof orders.$inferInsert;
+
+export type OrderItem = typeof orderItems.$inferSelect;
+export type NewOrderItem = typeof orderItems.$inferInsert;
+
+export type Address = typeof addresses.$inferSelect;
+export type NewAddress = typeof addresses.$inferInsert;
+
+export type PaymentTransaction = typeof paymentTransactions.$inferSelect;
+export type NewPaymentTransaction = typeof paymentTransactions.$inferInsert;
+
+// =============================================
+// RELATIONSHIP TYPES
+// =============================================
+
+export type ProductWithDetails = Product & {
+  brand?: Brand;
+  category?: Category;
+  media?: ProductMedia[];
+  pricing?: ProductPricing;
+  inventory?: Inventory;
+  ratings?: ProductRating;
+  variants?: (Variant & {
+    color?: Color;
+    sizes?: (typeof variantSizes.$inferSelect & { size: Size })[];
+  })[];
+  tags?: (typeof productTags.$inferSelect & { tag: Tag })[];
+  translations?: ProductTranslation[];
+  shipping?: typeof productShipping.$inferSelect;
+  returnsPolicy?: typeof returnsPolicy.$inferSelect;
+};
+
+export type CartWithItems = Cart & {
+  items: (CartItem & {
+    product: Product & { media?: ProductMedia[] };
+    variant?: Variant & { color?: Color };
+    size?: Size;
+  })[];
+};
+
+export type OrderWithDetails = Order & {
+  items: (OrderItem & {
+    product?: Product;
+    variant?: Variant & { color?: Color };
+    size?: Size;
+  })[];
+  shippingAddress?: Address;
+  billingAddress?: Address;
+  transactions?: PaymentTransaction[];
+};
+
+// =============================================
+// UTILITY TYPES
+// =============================================
+
+// =============================================
+// INDEX FILE (src/db/schema/index.ts)
+// =============================================
+
+// =============================================
+// DATABASE CONFIGURATION (src/db/index.ts)
+// =============================================

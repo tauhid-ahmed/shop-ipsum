@@ -6,7 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
-import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
 type TextFieldProps = {
   label?: string;
@@ -15,12 +15,7 @@ type TextFieldProps = {
   type?: string;
 };
 
-export function TextField({
-  label,
-  name,
-  placeholder,
-  type = "text",
-}: TextFieldProps) {
+export function TextArea({ label, name, placeholder }: TextFieldProps) {
   const form = useFormContext();
   return (
     <FormField
@@ -30,7 +25,7 @@ export function TextField({
         <FormItem className="space-y-1">
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input {...field} placeholder={placeholder} type={type} />
+            <Textarea {...field} placeholder={placeholder} />
           </FormControl>
           <FormMessage />
         </FormItem>
