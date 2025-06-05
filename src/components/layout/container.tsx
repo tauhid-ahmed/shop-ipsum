@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 type ContainerProps = {
-  size?: "sm" | "md" | "lg" | "xl" | "fluid";
+  size?: "sm" | "md" | "lg" | "xl";
 } & React.ComponentProps<"div">;
 
 export function Container({
@@ -12,13 +12,12 @@ export function Container({
   return (
     <div
       className={cn(
-        "mx-auto px-6",
+        "mx-auto w-full px-6",
         {
-          "max-w-[30rem] w-full": size === "sm",
-          "max-w-4xl w-full": size === "md",
-          "max-w-5xl w-full": size === "lg",
-          "max-w-7xl w-full": size === "xl",
-          "w-full": size === "fluid",
+          "max-w-[30rem]": size === "sm",
+          "max-w-4xl": size === "md",
+          "max-w-5xl": size === "lg",
+          "max-w-7xl": size === "xl",
         },
         className
       )}

@@ -2,7 +2,7 @@
 import { signIn } from "@/auth";
 import { createVerificationToken } from "@/db/mutations/verification";
 import { getUserByEmail } from "@/db/queries/users";
-import { defaultRedirectPath } from "@/lib/constants/paths";
+import { defaultRedirectPath } from "@/constants/paths";
 import { AppError } from "@/lib/error/app-error";
 import { decryptPassword } from "@/lib/utils";
 import {

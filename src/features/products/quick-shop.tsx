@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { data, ProductType } from "@/data/products";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { productDetailsPath, signInPath } from "@/lib/constants/paths";
+import { productDetailsPath, signInPath } from "@/constants/paths";
 import { LucidePlus } from "lucide-react";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 import Link from "next/link";

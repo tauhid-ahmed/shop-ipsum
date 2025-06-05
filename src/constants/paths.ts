@@ -14,11 +14,11 @@ export const contactPath = () => "/contact";
 export const aboutPath = () => "/about";
 
 // Auth Routes
-export const signInPath = () => "/auth/sign-in";
-export const registerPath = () => "/auth/register";
-export const verifyEmailPath = () => "/auth/verify-email";
-export const forgotPasswordPath = () => "/auth/forgot-password";
-export const resetPasswordPath = () => "/auth/reset-password";
+export const signInPath = () => "/sign-in";
+export const registerPath = () => "/register";
+export const verifyEmailPath = () => "/verify-email";
+export const forgotPasswordPath = () => "/forgot-password";
+export const resetPasswordPath = () => "/reset-password";
 
 // Products Routes
 export const productsPath = () => "/products";

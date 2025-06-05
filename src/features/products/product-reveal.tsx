@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { LucideMoveRight } from "lucide-react";
 import Embla, { useEmblaContext } from "@/components/embla";
 import ProductCard from "./product-card";
-import { productsPath } from "@/lib/constants/paths";
+import { productsPath } from "@/constants/paths";
 import { type ProductType } from "@/data/products";
 
 type ProductRevealProps = {

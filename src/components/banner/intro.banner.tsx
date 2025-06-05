@@ -5,7 +5,7 @@ import { Section } from "../layout/section";
 import Embla, { useEmblaContext } from "../embla";
 import Image from "next/image";
 import Link from "next/link";
-import { categoryPath } from "@/lib/constants/paths";
+import { categoryPath } from "@/constants/paths";
 
 type DataType = {
   id: string;

@@ -3,7 +3,7 @@ import { Heading } from "@/components";
 import { Container } from "./layout/container";
 import { Section } from "./layout/section";
 import { Button } from "./ui/button";
-import { homePath } from "@/lib/constants/paths";
+import { homePath } from "@/constants/paths";
 
 type ErrorProps = {
   code?: number;
