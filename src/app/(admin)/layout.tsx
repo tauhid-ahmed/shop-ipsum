@@ -3,7 +3,7 @@ import {
   AdminHeader,
   Sidebar,
   SidebarProvider,
-} from "./_components/";
+} from "./_components";
 
 export default function AdminDashboardLayout({
   children,

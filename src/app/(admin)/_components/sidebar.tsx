@@ -5,12 +5,10 @@ export default function Sidebar() {
   const { isOpen, onPointerEnter, onPointerLeave, toggleCollapsed } =
     useSidebar();
   return (
-    <div
-      className="h-screen border"
+    <nav
+      className="h-screen border overflow-y-scroll"
       onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}
-    >
-      Sidebar
-    </div>
+    ></nav>
   );
 }
