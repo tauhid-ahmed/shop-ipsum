@@ -1,21 +1,20 @@
 "use client";
 
-import { useEffect, createElement } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { motion } from "motion/react";
 import { LucideChevronRight, LucidePackage, LucideUser } from "lucide-react";
+import { motion } from "motion/react";
+import { usePathname } from "next/navigation";
+import { createElement, useEffect } from "react";
 
 import { ActiveLink, Heading } from "@/components";
-import { cn } from "@/lib/utils";
 import { env } from "@/env";
+import { cn } from "@/lib/utils";
 
-import { useSidebar } from "./sidebar-provider";
 import {
   navigationData,
   type NavItemType,
   type SidebarSectionType,
 } from "../data/sidebar-data";
+import { useSidebar } from "./sidebar-provider";
 
 type SidebarSectionProps = {
   sectionName: string;
@@ -27,7 +26,7 @@ export default function Sidebar() {
 
   return (
     <nav
-      className="h-screen flex flex-col border overflow-y-scroll"
+      className="h-screen flex flex-col overflow-y-scroll border-r border-border"
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
     >
@@ -51,32 +50,33 @@ export default function Sidebar() {
 function SidebarSection({ sectionName, sections }: SidebarSectionProps) {
   return (
     <div className="px-4 space-y-1">
-      <Heading as="h4" size="sm" className="text-muted-foreground capitalize">
-        <AnimatedLabel>{sectionName}</AnimatedLabel>
-      </Heading>
-
-      <ul>
-        {sections.map((section) => (
-          <li key={section.title}>
-            {section.url ? (
-              <ActiveLink
-                href={section.url}
-                className={cn(
-                  "flex flex-nowrap gap-2 items-center relative before:absolute before:-inset-x-4 before:h-full before:block before:-z-10 hover:before:bg-muted"
-                )}
-              >
-                <SidebarIcon icon={section.icon} />
-                <AnimatedLabel>{section.title}</AnimatedLabel>
-              </ActiveLink>
-            ) : (
-              <CollapsibleSection
-                section={section}
-                sectionName={section.title}
-              />
-            )}
-          </li>
-        ))}
-      </ul>
+      <div className="border-b border-double border-border pb-2">
+        <Heading as="h4" size="sm" className="text-muted-foreground capitalize">
+          <AnimatedLabel>{sectionName}</AnimatedLabel>
+        </Heading>
+        <ul>
+          {sections.map((section) => (
+            <li key={section.title}>
+              {section.url ? (
+                <ActiveLink
+                  href={section.url}
+                  className={cn(
+                    "flex flex-nowrap gap-2 items-center relative before:absolute before:-inset-x-4 before:h-full before:block before:-z-10 hover:before:bg-muted"
+                  )}
+                >
+                  <SidebarIcon icon={section.icon} />
+                  <AnimatedLabel>{section.title}</AnimatedLabel>
+                </ActiveLink>
+              ) : (
+                <CollapsibleSection
+                  section={section}
+                  sectionName={section.title}
+                />
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -146,9 +146,9 @@ function NestedLinks({
   if (!isExpanded || activeSection !== sectionName) return null;
 
   return (
-    <ul className="border-l ml-2 mt-px border-border space-y-0.5">
+    <ul className="border-l ml-2 mt-3 border-border space-y-0.5">
       {navItems.map((item, i) => (
-        <li key={i} className="hover:bg-muted pl-3 py-1">
+        <li key={i} className="hover:bg-muted pl-3 py-1.5">
           <ActiveLink href={item.url}>{item.title}</ActiveLink>
         </li>
       ))}
@@ -160,7 +160,7 @@ function SidebarHeader() {
   const { isExpanded } = useSidebar();
 
   return (
-    <div className="p-4 flex gap-2 items-center">
+    <div className="p-4 flex gap-2 items-start relative">
       <span className="bg-primary/20 text-primary rounded">
         <SidebarIcon icon={LucidePackage} size={32} />
       </span>
@@ -183,7 +183,7 @@ function SidebarFooter() {
   const { isExpanded } = useSidebar();
 
   return (
-    <div className="p-4 flex gap-2 items-center">
+    <div className="p-4 flex gap-2 items-start">
       <span className="bg-primary/20 text-primary rounded p-0.5">
         <SidebarIcon icon={LucideUser} size={32} />
       </span>
@@ -218,7 +218,7 @@ function AnimatedLabel({ children }: React.PropsWithChildren) {
 
 function SidebarIcon({
   icon,
-  size = 20,
+  size = 16,
 }: {
   icon: React.ComponentType<{ size: number }>;
   size?: number;
