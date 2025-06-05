@@ -3,12 +3,13 @@ import { useSidebar } from "./sidebar-provider";
 import { cn } from "@/lib/utils";
 
 export default function AdminContainer({ children }: React.PropsWithChildren) {
-  const { isExpanded } = useSidebar();
+  const { isCollapsedSidebar } = useSidebar();
   return (
     <div
       className={cn(
         "grid grid-cols-[4.5rem_1fr] transition-[grid] duration-300",
-        isExpanded && "grid-cols-[16.25rem_1fr]"
+        !isCollapsedSidebar && "grid-cols-[16.25rem_1fr]",
+        isCollapsedSidebar && "pl-[4.5rem]"
       )}
     >
       {children}

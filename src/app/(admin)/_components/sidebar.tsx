@@ -22,11 +22,20 @@ type SidebarSectionProps = {
 };
 
 export default function Sidebar() {
-  const { handlePointerEnter, handlePointerLeave } = useSidebar();
+  const {
+    handlePointerEnter,
+    handlePointerLeave,
+    isMouseHovering,
+    isCollapsedSidebar,
+  } = useSidebar();
 
   return (
     <nav
-      className="h-screen flex flex-col overflow-y-scroll border-r border-border"
+      className={cn(
+        "h-screen flex flex-col overflow-y-scroll border-r border-border bg-card",
+        isMouseHovering && "w-[16.25rem]",
+        isCollapsedSidebar && "fixed left-0"
+      )}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
     >
@@ -146,7 +155,7 @@ function NestedLinks({
   if (!isExpanded || activeSection !== sectionName) return null;
 
   return (
-    <ul className="border-l ml-2 mt-3 border-border space-y-0.5">
+    <ul className="border-l ml-4 mt-3 border-border space-y-0.5">
       {navItems.map((item, i) => (
         <li key={i} className="hover:bg-muted pl-3 py-1.5">
           <ActiveLink href={item.url}>{item.title}</ActiveLink>

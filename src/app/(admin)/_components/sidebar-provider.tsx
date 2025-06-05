@@ -13,6 +13,8 @@ type SidebarContextType = {
   handlePointerEnter: () => void;
   handlePointerLeave: () => void;
   activeSection: string;
+  isCollapsedSidebar: boolean;
+  isMouseHovering: boolean;
   handleActiveSection: (incomingItemData: ActiveSectionData) => void;
 };
 
@@ -48,6 +50,8 @@ export default function SidebarProvider({ children }: { children: ReactNode }) {
     handlePointerLeave,
     handleActiveSection,
     activeSection,
+    isCollapsedSidebar,
+    isMouseHovering,
   };
 
   return (
