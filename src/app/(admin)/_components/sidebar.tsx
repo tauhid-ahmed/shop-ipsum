@@ -32,7 +32,7 @@ export default function Sidebar() {
   return (
     <nav
       className={cn(
-        "h-screen flex flex-col overflow-y-scroll border-r border-border bg-card",
+        "h-screen flex flex-col border-r border-border bg-popover gap-4 z-50 sticky top-0",
         isMouseHovering && "w-[16.25rem]",
         isCollapsedSidebar && "fixed left-0"
       )}
@@ -60,7 +60,11 @@ function SidebarSection({ sectionName, sections }: SidebarSectionProps) {
   return (
     <div className="px-4 space-y-1">
       <div className="border-b border-double border-border pb-2">
-        <Heading as="h4" size="sm" className="text-muted-foreground capitalize">
+        <Heading
+          as="h4"
+          size="sm"
+          className="text-muted-foreground capitalize px-3"
+        >
           <AnimatedLabel>{sectionName}</AnimatedLabel>
         </Heading>
         <ul>
@@ -169,7 +173,7 @@ function SidebarHeader() {
   const { isExpanded } = useSidebar();
 
   return (
-    <div className="p-4 flex gap-2 items-start relative">
+    <div className="p-4 flex gap-2 items-start relative border-b border-border">
       <span className="bg-primary/20 text-primary rounded">
         <SidebarIcon icon={LucidePackage} size={32} />
       </span>

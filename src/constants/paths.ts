@@ -68,7 +68,7 @@ export const ordersAbandonedCartsPath = () =>
 
 export const adminProductsPath = () => `${ADMIN_PREFIX}/products`;
 export const productsAllProductsPath = () => `${ADMIN_PREFIX}/products/all`;
-export const productsAddProductPath = () => `${ADMIN_PREFIX}/products/new`;
+export const productsAddProductPath = () => `${ADMIN_PREFIX}/products/add`;
 export const productsCategoriesPath = () =>
   `${ADMIN_PREFIX}/products/categories`;
 export const productsCollectionsPath = () =>

@@ -5,7 +5,7 @@ import { useSidebar } from "./sidebar-provider";
 
 export default function Header() {
   return (
-    <div className="py-4 flex items-center gap-6">
+    <div className="p-4 sticky top-0 flex items-center gap-6 w-full bg-popover border-b border-border min-h-[4.55rem]">
       <SidebarActionButton /> <div className="h-6 w-px bg-secondary"></div>
     </div>
   );

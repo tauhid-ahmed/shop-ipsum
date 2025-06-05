@@ -7,9 +7,9 @@ export default function AdminContainer({ children }: React.PropsWithChildren) {
   return (
     <div
       className={cn(
-        "grid grid-cols-[4.5rem_1fr] transition-[grid] duration-300",
+        "grid grid-cols-[4.75rem_1fr] transition-[grid] duration-300",
         !isCollapsedSidebar && "grid-cols-[16.25rem_1fr]",
-        isCollapsedSidebar && "pl-[4.5rem]"
+        isCollapsedSidebar && "pl-[4.75rem] grid-cols-[1fr]"
       )}
     >
       {children}

@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 
 type ActiveSectionData = {
   value: string;
@@ -26,10 +32,20 @@ export default function SidebarProvider({ children }: { children: ReactNode }) {
   const [activeSection, setActiveSection] = useState("");
 
   const toggleSidebarCollapse = () => setIsCollapsedSidebar((prev) => !prev);
-
   const handlePointerEnter = () => setIsMouseHovering(true);
-
   const handlePointerLeave = () => setIsMouseHovering(false);
+
+  useEffect(() => {
+    const appConfig = JSON.parse(localStorage.getItem("appConfig") || "{}");
+    const sidebarCollapsed = appConfig.sidebarCollapsed;
+    setIsCollapsedSidebar(sidebarCollapsed || false);
+  }, []);
+
+  useEffect(() => {
+    const appConfig = JSON.parse(localStorage.getItem("appConfig") || "{}");
+    appConfig.sidebarCollapsed = isCollapsedSidebar;
+    localStorage.setItem("appConfig", JSON.stringify(appConfig));
+  }, [isCollapsedSidebar]);
 
   const handleActiveSection = (incomingItemData: ActiveSectionData) => {
     if (incomingItemData.type === "accordion") {
