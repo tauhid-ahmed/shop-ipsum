@@ -8,7 +8,7 @@ export default function AdminContainer({ children }: React.PropsWithChildren) {
     <div
       className={cn(
         "grid grid-cols-[80px_1fr] transition-[grid] duration-300",
-        isExpanded && "grid-cols-[400px_1fr]"
+        isExpanded && "grid-cols-[260px_1fr]"
       )}
     >
       {children}

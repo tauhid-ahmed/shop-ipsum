@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-type ActiveNavItemData = {
+type ActiveSectionData = {
   value: string;
   type: "accordion" | "link" | "";
 };
@@ -12,8 +12,8 @@ type SidebarContextType = {
   toggleSidebarCollapse: () => void;
   handlePointerEnter: () => void;
   handlePointerLeave: () => void;
-  activeNavItem: ActiveNavItemData;
-  setActiveNavItem: (itemData: ActiveNavItemData) => void;
+  activeSection: string;
+  handleActiveSection: (incomingItemData: ActiveSectionData) => void;
 };
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
@@ -21,11 +21,7 @@ const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 export default function SidebarProvider({ children }: { children: ReactNode }) {
   const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(false);
   const [isMouseHovering, setIsMouseHovering] = useState(false);
-  const [currentActiveSection, setCurrentActiveSection] =
-    useState<ActiveNavItemData>({
-      value: "",
-      type: "",
-    });
+  const [activeSection, setActiveSection] = useState("");
 
   const toggleSidebarCollapse = () => setIsCollapsedSidebar((prev) => !prev);
 
@@ -33,15 +29,13 @@ export default function SidebarProvider({ children }: { children: ReactNode }) {
 
   const handlePointerLeave = () => setIsMouseHovering(false);
 
-  const setActiveNavItem = (incomingItemData: ActiveNavItemData) => {
+  const handleActiveSection = (incomingItemData: ActiveSectionData) => {
     if (incomingItemData.type === "accordion") {
-      setCurrentActiveSection((prevActiveItem) =>
-        prevActiveItem.value === incomingItemData.value
-          ? { value: "", type: "" }
-          : incomingItemData
+      setActiveSection((prevActiveItem) =>
+        prevActiveItem === incomingItemData.value ? "" : incomingItemData.value
       );
     } else {
-      setCurrentActiveSection(incomingItemData);
+      setActiveSection(incomingItemData.value);
     }
   };
 
@@ -52,8 +46,8 @@ export default function SidebarProvider({ children }: { children: ReactNode }) {
     toggleSidebarCollapse,
     handlePointerEnter,
     handlePointerLeave,
-    activeNavItem: currentActiveSection,
-    setActiveNavItem,
+    handleActiveSection,
+    activeSection,
   };
 
   return (
