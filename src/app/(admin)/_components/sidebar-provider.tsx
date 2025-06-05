@@ -1,34 +1,71 @@
 "use client";
+
 import { createContext, useContext, useState, ReactNode } from "react";
 
+type ActiveNavItemData = {
+  value: string;
+  type: "accordion" | "link" | "";
+};
+
 type SidebarContextType = {
-  isOpen: boolean;
-  toggleCollapsed: () => void;
-  onPointerEnter: () => void;
-  onPointerLeave: () => void;
+  isExpanded: boolean;
+  toggleSidebarCollapse: () => void;
+  handlePointerEnter: () => void;
+  handlePointerLeave: () => void;
+  activeNavItem: ActiveNavItemData;
+  setActiveNavItem: (itemData: ActiveNavItemData) => void;
 };
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 export default function SidebarProvider({ children }: { children: ReactNode }) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(false);
+  const [isMouseHovering, setIsMouseHovering] = useState(false);
+  const [currentActiveSection, setCurrentActiveSection] =
+    useState<ActiveNavItemData>({
+      value: "",
+      type: "",
+    });
 
-  const toggleCollapsed = () => setIsCollapsed(!isCollapsed);
-  const onPointerEnter = () => setIsHovered(true);
-  const onPointerLeave = () => setIsHovered(false);
-  const isOpen = !isCollapsed || isHovered;
+  const toggleSidebarCollapse = () => setIsCollapsedSidebar((prev) => !prev);
 
-  const value = { isOpen, toggleCollapsed, onPointerEnter, onPointerLeave };
+  const handlePointerEnter = () => setIsMouseHovering(true);
+
+  const handlePointerLeave = () => setIsMouseHovering(false);
+
+  const setActiveNavItem = (incomingItemData: ActiveNavItemData) => {
+    if (incomingItemData.type === "accordion") {
+      setCurrentActiveSection((prevActiveItem) =>
+        prevActiveItem.value === incomingItemData.value
+          ? { value: "", type: "" }
+          : incomingItemData
+      );
+    } else {
+      setCurrentActiveSection(incomingItemData);
+    }
+  };
+
+  const isExpanded = !isCollapsedSidebar || isMouseHovering;
+
+  const contextValue: SidebarContextType = {
+    isExpanded,
+    toggleSidebarCollapse,
+    handlePointerEnter,
+    handlePointerLeave,
+    activeNavItem: currentActiveSection,
+    setActiveNavItem,
+  };
 
   return (
-    <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>
+    <SidebarContext.Provider value={contextValue}>
+      {children}
+    </SidebarContext.Provider>
   );
 }
 
 export function useSidebar() {
   const context = useContext(SidebarContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error("useSidebar must be used within a SidebarProvider");
   }
   return context;

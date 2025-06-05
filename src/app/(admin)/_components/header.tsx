@@ -4,11 +4,11 @@ import { LucidePanelRightOpen, LucidePanelRightClose } from "lucide-react";
 import { useSidebar } from "./sidebar-provider";
 
 export default function Header() {
-  const { isOpen, toggleCollapsed } = useSidebar();
+  const { isExpanded, toggleSidebarCollapse } = useSidebar();
   return (
     <div>
-      <Button onClick={toggleCollapsed}>
-        {isOpen ? <LucidePanelRightOpen /> : <LucidePanelRightClose />}
+      <Button onClick={toggleSidebarCollapse}>
+        {isExpanded ? <LucidePanelRightOpen /> : <LucidePanelRightClose />}
       </Button>
       Header
     </div>

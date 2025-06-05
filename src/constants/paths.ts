@@ -34,100 +34,235 @@ export const cartPath = () => "/cart";
 export const addToCartPath = () => "/cart/add";
 export const removeFromCartPath = () => "/cart/remove";
 
-// ---------------------------
-// Admin Routes (prefixed)
-// ---------------------------
+// --- Overview Paths ---
 export const dashboardPath = () => `${ADMIN_PREFIX}/dashboard`;
-
-// Products Admin
-export const adminProductsPath = () => `${ADMIN_PREFIX}/products`;
-export const addProductPath = () => `${ADMIN_PREFIX}/products/create`;
-export const updateProductPath = (id: string) =>
-  `${ADMIN_PREFIX}/products/update/${id}`;
-export const deleteProductPath = (id: string) =>
-  `${ADMIN_PREFIX}/products/delete/${id}`;
-
-// Orders Admin
-export const ordersPath = () => `${ADMIN_PREFIX}/orders`;
-export const allOrdersPath = () => `${ADMIN_PREFIX}/orders/all`;
-export const pendingOrdersPath = () => `${ADMIN_PREFIX}/orders/pending`;
-export const processingOrdersPath = () => `${ADMIN_PREFIX}/orders/processing`;
-export const shippedOrdersPath = () => `${ADMIN_PREFIX}/orders/shipped`;
-export const deliveredOrdersPath = () => `${ADMIN_PREFIX}/orders/delivered`;
-export const cancelledOrdersPath = () => `${ADMIN_PREFIX}/orders/cancelled`;
-export const returnsOrdersPath = () => `${ADMIN_PREFIX}/orders/returns`;
-
-// Inventory Admin
-export const inventoryPath = () => `${ADMIN_PREFIX}/inventory`;
-export const stockLevelsPath = () => `${ADMIN_PREFIX}/inventory/stock`;
-export const lowStockPath = () => `${ADMIN_PREFIX}/inventory/low-stock`;
-export const outOfStockPath = () => `${ADMIN_PREFIX}/inventory/out-of-stock`;
-export const stockMovementsPath = () => `${ADMIN_PREFIX}/inventory/movements`;
-export const suppliersPath = () => `${ADMIN_PREFIX}/inventory/suppliers`;
-
-// Customers Admin
-export const customersPath = () => `${ADMIN_PREFIX}/customers`;
-export const allCustomersPath = () => `${ADMIN_PREFIX}/customers/all`;
-export const customerGroupsPath = () => `${ADMIN_PREFIX}/customers/groups`;
-export const loyaltyProgramPath = () => `${ADMIN_PREFIX}/customers/loyalty`;
-export const customerSupportPath = () => `${ADMIN_PREFIX}/customers/support`;
-
-// Analytics Admin
 export const analyticsPath = () => `${ADMIN_PREFIX}/analytics`;
-export const salesReportPath = () => `${ADMIN_PREFIX}/analytics/sales`;
-export const productPerformancePath = () =>
+export const analyticsOverviewPath = () => `${ADMIN_PREFIX}/analytics/overview`;
+export const analyticsSalesReportsPath = () =>
+  `${ADMIN_PREFIX}/analytics/sales`;
+export const analyticsTrafficSourcesPath = () =>
+  `${ADMIN_PREFIX}/analytics/traffic`;
+export const analyticsConversionFunnelPath = () =>
+  `${ADMIN_PREFIX}/analytics/conversion`;
+export const analyticsCustomerBehaviorPath = () =>
+  `${ADMIN_PREFIX}/analytics/behavior`;
+export const analyticsProductPerformancePath = () =>
   `${ADMIN_PREFIX}/analytics/products`;
-export const customerAnalyticsPath = () =>
-  `${ADMIN_PREFIX}/analytics/customers`;
-export const trafficSourcesPath = () => `${ADMIN_PREFIX}/analytics/traffic`;
-export const conversionRatesPath = () => `${ADMIN_PREFIX}/analytics/conversion`;
+export const analyticsRevenueAnalyticsPath = () =>
+  `${ADMIN_PREFIX}/analytics/revenue`;
 
-// Financial Admin
-export const financialPath = () => `${ADMIN_PREFIX}/financial`;
-export const revenuePath = () => `${ADMIN_PREFIX}/financial/revenue`;
-export const expensesPath = () => `${ADMIN_PREFIX}/financial/expenses`;
-export const profitLossPath = () => `${ADMIN_PREFIX}/financial/pnl`;
-export const taxReportsPath = () => `${ADMIN_PREFIX}/financial/tax`;
-export const payoutsPath = () => `${ADMIN_PREFIX}/financial/payouts`;
+// --- Commerce Paths ---
+export const ordersPath = () => `${ADMIN_PREFIX}/orders`;
+export const ordersAllOrdersPath = () => `${ADMIN_PREFIX}/orders`;
+export const ordersPendingPaymentPath = () =>
+  `${ADMIN_PREFIX}/orders/pending-payment`;
+export const ordersProcessingPath = () => `${ADMIN_PREFIX}/orders/processing`;
+export const ordersShippedPath = () => `${ADMIN_PREFIX}/orders/shipped`;
+export const ordersDeliveredPath = () => `${ADMIN_PREFIX}/orders/delivered`;
+export const ordersCancelledPath = () => `${ADMIN_PREFIX}/orders/cancelled`;
+export const ordersRefundedPath = () => `${ADMIN_PREFIX}/orders/refunded`;
+export const ordersReturnsPath = () => `${ADMIN_PREFIX}/orders/returns`;
+export const ordersExchangesPath = () => `${ADMIN_PREFIX}/orders/exchanges`;
+export const ordersAbandonedCartsPath = () =>
+  `${ADMIN_PREFIX}/orders/abandoned-carts`;
 
-// Marketing Admin
+export const adminProductsPath = () => `${ADMIN_PREFIX}/products`;
+export const productsAllProductsPath = () => `${ADMIN_PREFIX}/products/all`;
+export const productsAddProductPath = () => `${ADMIN_PREFIX}/products/new`;
+export const productsCategoriesPath = () =>
+  `${ADMIN_PREFIX}/products/categories`;
+export const productsCollectionsPath = () =>
+  `${ADMIN_PREFIX}/products/collections`;
+export const productsBrandsPath = () => `${ADMIN_PREFIX}/products/brands`;
+export const productsAttributesPath = () =>
+  `${ADMIN_PREFIX}/products/attributes`;
+export const productsVariantsPath = () => `${ADMIN_PREFIX}/products/variants`;
+export const productsReviewsPath = () => `${ADMIN_PREFIX}/products/reviews`;
+export const productsBulkImportPath = () => `${ADMIN_PREFIX}/products/import`;
+export const productsBulkExportPath = () => `${ADMIN_PREFIX}/products/export`;
+export const productsSeoOptimizationPath = () => `${ADMIN_PREFIX}/products/seo`;
+
+export const inventoryPath = () => `${ADMIN_PREFIX}/inventory`;
+export const inventoryStockOverviewPath = () =>
+  `${ADMIN_PREFIX}/inventory/overview`;
+export const inventoryStockLevelsPath = () =>
+  `${ADMIN_PREFIX}/inventory/levels`;
+export const inventoryLowStockPath = () =>
+  `${ADMIN_PREFIX}/inventory/low-stock`;
+export const inventoryOutOfStockPath = () =>
+  `${ADMIN_PREFIX}/inventory/out-of-stock`;
+export const inventoryStockMovementsPath = () =>
+  `${ADMIN_PREFIX}/inventory/movements`;
+export const inventoryPurchaseOrdersPath = () =>
+  `${ADMIN_PREFIX}/inventory/purchase-orders`;
+export const inventorySuppliersPath = () =>
+  `${ADMIN_PREFIX}/inventory/suppliers`;
+export const inventoryWarehousesPath = () =>
+  `${ADMIN_PREFIX}/inventory/warehouses`;
+export const inventoryStockTransfersPath = () =>
+  `${ADMIN_PREFIX}/inventory/transfers`;
+
+export const customersPath = () => `${ADMIN_PREFIX}/customers`;
+export const customersAllCustomersPath = () => `${ADMIN_PREFIX}/customers`;
+export const customersCustomerGroupsPath = () =>
+  `${ADMIN_PREFIX}/customers/groups`;
+export const customersCustomerSegmentsPath = () =>
+  `${ADMIN_PREFIX}/customers/segments`;
+export const customersLoyaltyProgramPath = () =>
+  `${ADMIN_PREFIX}/customers/loyalty`;
+export const customersRewardPointsPath = () =>
+  `${ADMIN_PREFIX}/customers/rewards`;
+export const customersCustomerSupportPath = () =>
+  `${ADMIN_PREFIX}/customers/support`;
+export const customersLiveChatPath = () => `${ADMIN_PREFIX}/customers/chat`;
+export const customersCustomerFeedbackPath = () =>
+  `${ADMIN_PREFIX}/customers/feedback`;
+
+// --- Marketing Paths ---
 export const marketingPath = () => `${ADMIN_PREFIX}/marketing`;
-export const campaignsPath = () => `${ADMIN_PREFIX}/marketing/campaigns`;
-export const emailMarketingPath = () => `${ADMIN_PREFIX}/marketing/email`;
-export const socialMediaPath = () => `${ADMIN_PREFIX}/marketing/social`;
-export const seoToolsPath = () => `${ADMIN_PREFIX}/marketing/seo`;
-export const affiliateProgramPath = () => `${ADMIN_PREFIX}/marketing/affiliate`;
+export const marketingCampaignsPath = () =>
+  `${ADMIN_PREFIX}/marketing/campaigns`;
+export const marketingEmailMarketingPath = () =>
+  `${ADMIN_PREFIX}/marketing/email`;
+export const marketingSmsMarketingPath = () => `${ADMIN_PREFIX}/marketing/sms`;
+export const marketingSocialMediaPath = () =>
+  `${ADMIN_PREFIX}/marketing/social`;
+export const marketingInfluencerProgramPath = () =>
+  `${ADMIN_PREFIX}/marketing/influencers`;
+export const marketingAffiliateProgramPath = () =>
+  `${ADMIN_PREFIX}/marketing/affiliates`;
+export const marketingSeoToolsPath = () => `${ADMIN_PREFIX}/marketing/seo`;
+export const marketingContentMarketingPath = () =>
+  `${ADMIN_PREFIX}/marketing/content`;
+export const marketingAbTestingPath = () =>
+  `${ADMIN_PREFIX}/marketing/ab-testing`;
 
-// Promotions Admin
 export const promotionsPath = () => `${ADMIN_PREFIX}/promotions`;
-export const discountCodesPath = () => `${ADMIN_PREFIX}/promotions/discounts`;
-export const flashSalesPath = () => `${ADMIN_PREFIX}/promotions/flash-sales`;
-export const bundleOffersPath = () => `${ADMIN_PREFIX}/promotions/bundles`;
-export const giftCardsPath = () => `${ADMIN_PREFIX}/promotions/gift-cards`;
+export const promotionsDiscountCodesPath = () =>
+  `${ADMIN_PREFIX}/promotions/discount-codes`;
+export const promotionsFlashSalesPath = () =>
+  `${ADMIN_PREFIX}/promotions/flash-sales`;
+export const promotionsBundleOffersPath = () =>
+  `${ADMIN_PREFIX}/promotions/bundles`;
+export const promotionsBuyXGetYPath = () => `${ADMIN_PREFIX}/promotions/bxgy`;
+export const promotionsGiftCardsPath = () =>
+  `${ADMIN_PREFIX}/promotions/gift-cards`;
+export const promotionsLoyaltyRewardsPath = () =>
+  `${ADMIN_PREFIX}/promotions/loyalty`;
+export const promotionsSeasonalSalesPath = () =>
+  `${ADMIN_PREFIX}/promotions/seasonal`;
+export const promotionsVolumeDiscountsPath = () =>
+  `${ADMIN_PREFIX}/promotions/volume`;
 
-// Store Settings Admin
-export const storePath = () => `${ADMIN_PREFIX}/store`;
-export const storeGeneralPath = () => `${ADMIN_PREFIX}/store/general`;
-export const storeShippingPath = () => `${ADMIN_PREFIX}/store/shipping`;
-export const storePaymentsPath = () => `${ADMIN_PREFIX}/store/payments`;
-export const storeTaxesPath = () => `${ADMIN_PREFIX}/store/taxes`;
-export const storeNotificationsPath = () =>
-  `${ADMIN_PREFIX}/store/notifications`;
+// --- Financial Paths ---
+export const financePath = () => `${ADMIN_PREFIX}/finance`;
+export const financeRevenueOverviewPath = () =>
+  `${ADMIN_PREFIX}/finance/revenue`;
+export const financeProfitLossPath = () =>
+  `${ADMIN_PREFIX}/finance/profit-loss`;
+export const financeExpensesPath = () => `${ADMIN_PREFIX}/finance/expenses`;
+export const financeTaxManagementPath = () => `${ADMIN_PREFIX}/finance/taxes`;
+export const financePayoutsPath = () => `${ADMIN_PREFIX}/finance/payouts`;
+export const financeInvoicesPath = () => `${ADMIN_PREFIX}/finance/invoices`;
+export const financeFinancialReportsPath = () =>
+  `${ADMIN_PREFIX}/finance/reports`;
+export const financeBudgetPlanningPath = () => `${ADMIN_PREFIX}/finance/budget`;
 
-// Design Admin
+export const paymentsPath = () => `${ADMIN_PREFIX}/payments`;
+export const paymentsPaymentMethodsPath = () =>
+  `${ADMIN_PREFIX}/payments/methods`;
+export const paymentsPaymentGatewaysPath = () =>
+  `${ADMIN_PREFIX}/payments/gateways`;
+export const paymentsTransactionsPath = () =>
+  `${ADMIN_PREFIX}/payments/transactions`;
+export const paymentsRefundsPath = () => `${ADMIN_PREFIX}/payments/refunds`;
+export const paymentsDisputesPath = () => `${ADMIN_PREFIX}/payments/disputes`;
+export const paymentsFraudProtectionPath = () =>
+  `${ADMIN_PREFIX}/payments/fraud`;
+export const paymentsPaymentAnalyticsPath = () =>
+  `${ADMIN_PREFIX}/payments/analytics`;
+
+// --- Operations Paths ---
+export const shippingPath = () => `${ADMIN_PREFIX}/shipping`;
+export const shippingShippingZonesPath = () => `${ADMIN_PREFIX}/shipping/zones`;
+export const shippingShippingRatesPath = () => `${ADMIN_PREFIX}/shipping/rates`;
+export const shippingShippingLabelsPath = () =>
+  `${ADMIN_PREFIX}/shipping/labels`;
+export const shippingTrackingPath = () => `${ADMIN_PREFIX}/shipping/tracking`;
+export const shippingCarriersPath = () => `${ADMIN_PREFIX}/shipping/carriers`;
+export const shippingDeliveryOptionsPath = () =>
+  `${ADMIN_PREFIX}/shipping/delivery`;
+export const shippingInternationalPath = () =>
+  `${ADMIN_PREFIX}/shipping/international`;
+
+export const storeSettingsPath = () => `${ADMIN_PREFIX}/settings`;
+export const storeSettingsGeneralPath = () =>
+  `${ADMIN_PREFIX}/settings/general`;
+export const storeSettingsStoreDetailsPath = () =>
+  `${ADMIN_PREFIX}/settings/store`;
+export const storeSettingsCheckoutPath = () =>
+  `${ADMIN_PREFIX}/settings/checkout`;
+export const storeSettingsNotificationsPath = () =>
+  `${ADMIN_PREFIX}/settings/notifications`;
+export const storeSettingsLegalPagesPath = () =>
+  `${ADMIN_PREFIX}/settings/legal`;
+export const storeSettingsDomainsPath = () =>
+  `${ADMIN_PREFIX}/settings/domains`;
+export const storeSettingsLanguagesPath = () =>
+  `${ADMIN_PREFIX}/settings/languages`;
+export const storeSettingsCurrenciesPath = () =>
+  `${ADMIN_PREFIX}/settings/currencies`;
+
+// --- Content Paths ---
+export const contentPath = () => `${ADMIN_PREFIX}/content`;
+export const contentPagesPath = () => `${ADMIN_PREFIX}/content/pages`;
+export const contentBlogPostsPath = () => `${ADMIN_PREFIX}/content/blog`;
+export const contentNavigationPath = () => `${ADMIN_PREFIX}/content/navigation`;
+export const contentMediaLibraryPath = () => `${ADMIN_PREFIX}/content/media`;
+export const contentBannersPath = () => `${ADMIN_PREFIX}/content/banners`;
+export const contentTestimonialsPath = () =>
+  `${ADMIN_PREFIX}/content/testimonials`;
+export const contentFaqPath = () => `${ADMIN_PREFIX}/content/faq`;
+
 export const designPath = () => `${ADMIN_PREFIX}/design`;
 export const designThemesPath = () => `${ADMIN_PREFIX}/design/themes`;
 export const designCustomizePath = () => `${ADMIN_PREFIX}/design/customize`;
-export const designPagesPath = () => `${ADMIN_PREFIX}/design/pages`;
-export const designNavigationPath = () => `${ADMIN_PREFIX}/design/navigation`;
-export const designMediaLibraryPath = () => `${ADMIN_PREFIX}/design/media`;
+export const designTemplatesPath = () => `${ADMIN_PREFIX}/design/templates`;
+export const designEmailTemplatesPath = () =>
+  `${ADMIN_PREFIX}/design/email-templates`;
+export const designMobileAppPath = () => `${ADMIN_PREFIX}/design/mobile`;
+export const designPwaSettingsPath = () => `${ADMIN_PREFIX}/design/pwa`;
 
-// Tools Admin
-export const appsPath = () => `${ADMIN_PREFIX}/apps`;
-export const shippingPath = () => `${ADMIN_PREFIX}/shipping`;
-export const paymentsPath = () => `${ADMIN_PREFIX}/payments`;
+// --- Tools Paths ---
+export const appsExtensionsPath = () => `${ADMIN_PREFIX}/apps`;
+export const appsAppStorePath = () => `${ADMIN_PREFIX}/apps/store`;
+export const appsInstalledAppsPath = () => `${ADMIN_PREFIX}/apps/installed`;
+export const appsCustomAppsPath = () => `${ADMIN_PREFIX}/apps/custom`;
+export const appsApiKeysPath = () => `${ADMIN_PREFIX}/apps/api-keys`;
+export const appsWebhooksPath = () => `${ADMIN_PREFIX}/apps/webhooks`;
+
 export const reportsPath = () => `${ADMIN_PREFIX}/reports`;
+export const reportsSalesReportsPath = () => `${ADMIN_PREFIX}/reports/sales`;
+export const reportsCustomerReportsPath = () =>
+  `${ADMIN_PREFIX}/reports/customers`;
+export const reportsProductReportsPath = () =>
+  `${ADMIN_PREFIX}/reports/products`;
+export const reportsInventoryReportsPath = () =>
+  `${ADMIN_PREFIX}/reports/inventory`;
+export const reportsMarketingReportsPath = () =>
+  `${ADMIN_PREFIX}/reports/marketing`;
+export const reportsCustomReportsPath = () => `${ADMIN_PREFIX}/reports/custom`;
+export const reportsScheduledReportsPath = () =>
+  `${ADMIN_PREFIX}/reports/scheduled`;
 
+export const securityPath = () => `${ADMIN_PREFIX}/security`;
+export const securityUserPermissionsPath = () =>
+  `${ADMIN_PREFIX}/security/permissions`;
+export const securityStaffAccountsPath = () => `${ADMIN_PREFIX}/security/staff`;
+export const securityActivityLogsPath = () => `${ADMIN_PREFIX}/security/logs`;
+export const securityTwoFactorAuthPath = () => `${ADMIN_PREFIX}/security/2fa`;
+export const securityIpRestrictionsPath = () => `${ADMIN_PREFIX}/security/ip`;
+export const securitySslCertificatePath = () => `${ADMIN_PREFIX}/security/ssl`;
 // ---------------------------
 // Default Redirect (logged in users)
 // ---------------------------
@@ -191,17 +326,15 @@ export const userRoutes = [
 
 export const adminRoutes = [
   dashboardPath(),
-  adminProductsPath(),
+  productsPath(),
   ordersPath(),
   inventoryPath(),
   customersPath(),
   analyticsPath(),
-  financialPath(),
+  financePath(),
   marketingPath(),
   promotionsPath(),
-  storePath(),
   designPath(),
-  appsPath(),
 ];
 
 export const superadminRoutes = [
