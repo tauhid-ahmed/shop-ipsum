@@ -1,6 +1,12 @@
 "use client";
 
-import { LucideChevronRight, LucidePackage, LucideUser } from "lucide-react";
+import {
+  LucideChevronRight,
+  LucidePackage,
+  LucidePanelLeftDashed,
+  LucidePanelRightDashed,
+  LucideUser,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { createElement, useEffect } from "react";
@@ -15,6 +21,7 @@ import {
   type SidebarSectionType,
 } from "../data/sidebar-data";
 import { useSidebar } from "./sidebar-provider";
+import { Button } from "@/components/ui/button";
 
 type SidebarSectionProps = {
   sectionName: string;
@@ -22,20 +29,28 @@ type SidebarSectionProps = {
 };
 
 export default function Sidebar() {
-  const {
-    handlePointerEnter,
-    handlePointerLeave,
-    isMouseHovering,
-    isCollapsedSidebar,
-  } = useSidebar();
+  const { handlePointerEnter, handlePointerLeave, isCollapsedSidebar } =
+    useSidebar();
 
   return (
-    <nav
+    <motion.nav
       className={cn(
-        "h-screen flex flex-col border-r border-border bg-popover gap-4 z-50 sticky top-0 text-sm",
-        isMouseHovering && "w-[16.25rem]",
+        "h-screen flex flex-col border-r border-border bg-popover gap-4 z-50 sticky top-0 text-sm whitespace-nowrap",
         isCollapsedSidebar && "fixed left-0"
       )}
+      style={{
+        width: isCollapsedSidebar
+          ? "var(--_sidebar-collapsed)"
+          : "var(--_sidebar-expanded)",
+      }}
+      animate={{
+        width: isCollapsedSidebar
+          ? "var(--_sidebar-collapsed)"
+          : "var(--_sidebar-expanded)",
+      }}
+      whileHover={{
+        width: "var(--_sidebar-expanded)",
+      }}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
     >
@@ -52,7 +67,7 @@ export default function Sidebar() {
       </div>
 
       <SidebarFooter />
-    </nav>
+    </motion.nav>
   );
 }
 
@@ -191,14 +206,18 @@ function SidebarHeader() {
       </span>
 
       {isExpanded && (
-        <div className="mt-2">
-          <Heading as="h4" size="default" className="leading-1.5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mt-2"
+        >
+          <Heading as="h4" size="default" className="leading-2.5">
             {env.NEXT_PUBLIC_APP_NAME}
           </Heading>
           <span className="text-sm text-muted-foreground">
             Enterprise Edition
           </span>
-        </div>
+        </motion.div>
       )}
     </div>
   );
@@ -214,14 +233,18 @@ function SidebarFooter() {
       </span>
 
       {isExpanded && (
-        <div className="mt-2">
-          <Heading as="h4" size="default" className="leading-1.5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mt-2"
+        >
+          <Heading as="h4" size="default" className="leading-2.5">
             Sarah Johnson
           </Heading>
           <span className="text-sm text-muted-foreground">
             Store Administrator
           </span>
-        </div>
+        </motion.div>
       )}
     </div>
   );
@@ -282,5 +305,22 @@ function SidebarIcon({
         }),
       })}
     </span>
+  );
+}
+
+export function SidebarToggleButton() {
+  const { isExpanded, toggleSidebarCollapse } = useSidebar();
+  return (
+    <Button
+      variant="transparent"
+      className="size-8 bg-primary/30"
+      onClick={toggleSidebarCollapse}
+    >
+      {isExpanded ? (
+        <LucidePanelLeftDashed className="size-6" />
+      ) : (
+        <LucidePanelRightDashed className="size-6" />
+      )}
+    </Button>
   );
 }
