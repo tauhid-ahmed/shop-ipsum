@@ -71,7 +71,7 @@ function SidebarSection({ sectionName, sections }: SidebarSectionProps) {
           {sections.map((section) => (
             <li key={section.title}>
               {section.url ? (
-                <HoveredLabel>
+                <ActiveLabel>
                   <ActiveLink
                     href={section.url}
                     className={cn("flex flex-nowrap gap-1 items-center")}
@@ -79,7 +79,7 @@ function SidebarSection({ sectionName, sections }: SidebarSectionProps) {
                     <SidebarIcon icon={section.icon} />
                     <AnimatedLabel>{section.title}</AnimatedLabel>
                   </ActiveLink>
-                </HoveredLabel>
+                </ActiveLabel>
               ) : (
                 <CollapsibleSection
                   section={section}
@@ -109,7 +109,9 @@ function CollapsibleSection({
 
   return (
     <>
-      <HoveredLabel className={isActive ? "bg-primary text-foreground" : ""}>
+      <ActiveLabel
+        className={isActive ? "bg-primary text-primary-foreground" : ""}
+      >
         <button
           className={cn(
             "flex items-center flex-nowrap gap-1 w-full cursor-pointer justify-start group"
@@ -131,14 +133,14 @@ function CollapsibleSection({
               <LucideChevronRight
                 size={20}
                 className={cn(
-                  "text-muted-foreground group-hover:text-foreground",
-                  isActive && "text-foreground"
+                  "text-secondary-foreground group-hover:text-primary-foreground",
+                  isActive && "text-primary-foreground"
                 )}
               />
             </span>
           )}
         </button>
-      </HoveredLabel>
+      </ActiveLabel>
       <NestedLinks sectionName={sectionName} navItems={section.navItems} />
     </>
   );
@@ -169,9 +171,9 @@ function NestedLinks({
       {navItems.map((item, i) => (
         <li key={i}>
           <ActiveLink href={item.url}>
-            <HoveredLabel leftExpanded>
+            <ActiveLabel leftExpanded>
               <AnimatedLabel>{item.title}</AnimatedLabel>
-            </HoveredLabel>
+            </ActiveLabel>
           </ActiveLink>
         </li>
       ))}
@@ -183,7 +185,7 @@ function SidebarHeader() {
   const { isExpanded } = useSidebar();
 
   return (
-    <div className="p-[var(--_sidebar-spacing)] flex gap-2 items-start relative border-b border-border h-[var(--_sidebar-header-height)]">
+    <div className="p-[var(--_sidebar-spacing)] flex gap-2 items-center relative border-b border-border h-[var(--_sidebar-header-height)]">
       <span className="bg-primary/20 text-primary rounded">
         <SidebarIcon icon={LucidePackage} size="lg" />
       </span>
@@ -225,7 +227,7 @@ function SidebarFooter() {
   );
 }
 
-function HoveredLabel({
+function ActiveLabel({
   children,
   className,
   leftExpanded,
@@ -233,7 +235,7 @@ function HoveredLabel({
   return (
     <span
       className={cn(
-        "block relative hover:bg-primary hover:text-foreground rounded-sm [.is-active-link_&]:bg-primary [.is-active-link_&]:text-foreground",
+        "block relative hover:bg-primary hover:text-primary-foreground rounded-sm [.is-active-link_&]:bg-primary [.is-active-link_&]:text-primary-foreground",
         {
           "-ml-[var(--_sidebar-spacing)] px-[var(--_sidebar-spacing)]":
             leftExpanded,
