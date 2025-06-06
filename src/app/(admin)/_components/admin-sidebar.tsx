@@ -313,7 +313,7 @@ export function SidebarToggleButton() {
   return (
     <Button
       variant="transparent"
-      className="size-8 bg-primary/30"
+      className="size-8 bg-primary/20 text-primary"
       onClick={toggleSidebarCollapse}
     >
       {isExpanded ? (
