@@ -18,7 +18,10 @@ export default function ActiveLink({
   const isActive = exact ? pathname === href : pathname.startsWith(href);
 
   return (
-    <Link href={href} className={cn(className, isActive && "text-primary")}>
+    <Link
+      href={href}
+      className={cn("block w-full", isActive && "is-active-link", className)}
+    >
       {children}
     </Link>
   );
