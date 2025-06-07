@@ -35,8 +35,7 @@ export default function Sidebar() {
   return (
     <motion.nav
       className={cn(
-        "h-screen flex flex-col border-r border-border bg-popover gap-4 z-50 sticky top-0 text-sm whitespace-nowrap",
-        isCollapsedSidebar && "fixed left-0"
+        "h-screen flex flex-col border-r border-border bg-popover gap-4 z-50 sticky top-0 text-sm whitespace-nowrap"
       )}
       style={{
         width: isCollapsedSidebar
@@ -200,7 +199,7 @@ function SidebarHeader() {
   const { isExpanded } = useSidebar();
 
   return (
-    <div className="p-[var(--_sidebar-spacing)] flex gap-2 items-center relative border-b border-border h-[var(--_sidebar-header-height)]">
+    <div className="p-[var(--_sidebar-spacing)] flex gap-2 items-center relative h-[var(--_sidebar-header-height)] after:absolute after:bottom-0 after:inset-x-2 after:h-px after:bg-border">
       <span className="bg-primary/20 text-primary rounded">
         <SidebarIcon icon={LucidePackage} size="lg" />
       </span>

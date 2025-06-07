@@ -19,9 +19,9 @@ export default function AdminContainer({ children }: React.PropsWithChildren) {
         } as React.CSSProperties
       }
       className={cn(
-        "grid grid-cols-[var(--_sidebar-collapsed)_1fr]",
+        "grid grid-cols-[var(--_sidebar-collapsed)_1fr] transition-[grid] duration-300",
         !isCollapsedSidebar && "grid-cols-[var(--_sidebar-expanded)_1fr]",
-        isCollapsedSidebar && "pl-[var(--_sidebar-collapsed)] grid-cols-[1fr]"
+        isCollapsedSidebar && "grid-cols-[var(--_sidebar-collapsed)_1fr]"
       )}
     >
       {children}
