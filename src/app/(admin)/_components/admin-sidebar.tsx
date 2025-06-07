@@ -317,9 +317,9 @@ export function SidebarToggleButton() {
       onClick={toggleSidebarCollapse}
     >
       {isExpanded ? (
-        <LucidePanelLeftDashed className="size-6" />
+        <LucidePanelLeftDashed className="size-4" />
       ) : (
-        <LucidePanelRightDashed className="size-6" />
+        <LucidePanelRightDashed className="size-4" />
       )}
     </Button>
   );
