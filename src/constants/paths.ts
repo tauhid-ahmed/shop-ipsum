@@ -17,7 +17,7 @@ export const giftPath = () => "/gift";
 
 // Auth Routes
 export const signInPath = () => "/sign-in";
-export const registerPath = () => "/sign-out";
+export const registerPath = () => "/register";
 export const verifyEmailPath = () => "/verify-email";
 export const forgotPasswordPath = () => "/forgot-password";
 export const resetPasswordPath = () => "/reset-password";

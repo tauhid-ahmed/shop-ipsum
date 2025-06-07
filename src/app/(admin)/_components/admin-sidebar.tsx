@@ -35,7 +35,7 @@ export default function Sidebar() {
   return (
     <motion.nav
       className={cn(
-        "h-screen flex flex-col border-r border-border bg-secondary gap-4 z-50 sticky top-0 text-sm whitespace-nowrap"
+        "h-screen flex flex-col border-r border-border bg-sidebar gap-4 z-50 sticky top-0 text-sm whitespace-nowrap"
       )}
       style={{
         width: isCollapsedSidebar
@@ -76,7 +76,7 @@ export default function Sidebar() {
 function SidebarSection({ sectionName, sections }: SidebarSectionProps) {
   return (
     <div className="px-[var(--_sidebar-spacing)]">
-      <div className="border-b border-double border-border pb-2 space-y-1">
+      <div className="border-b border-border pb-2 space-y-1">
         <Heading
           as="h4"
           size="xs"
@@ -143,17 +143,11 @@ function CollapsibleSection({
           {isExpanded && (
             <span
               className={cn(
-                "ml-auto transition-transform duration-200",
+                "ml-auto transition-transform duration-300 mr-1",
                 isActive && "rotate-90"
               )}
             >
-              <LucideChevronRight
-                size={20}
-                className={cn(
-                  "text-accent-foreground group-hover:text-accent-foreground",
-                  isActive && "text-accent-foreground"
-                )}
-              />
+              <LucideChevronRight size={16} />
             </span>
           )}
         </button>

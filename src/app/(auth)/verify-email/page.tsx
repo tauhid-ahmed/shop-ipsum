@@ -1,5 +1,5 @@
 import { getVerificationTokenByToken } from "@/db/queries";
-import EmailVerificationForm from "@/features/auth/components/email-verify-form";
+import EmailVerificationForm from "@/app/(auth)/_components/email-verify-form";
 
 type Props = {
   searchParams: Promise<{

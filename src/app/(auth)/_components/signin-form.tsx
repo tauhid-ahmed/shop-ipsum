@@ -12,15 +12,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { signInAction } from "../actions/signin.action";
-import { signInFormSchema, type SignInFormSchema } from "../validators-schema";
-import {
-  AuthCard,
-  AuthCardContent,
-  AuthCardHeader,
-  AuthCardNotify,
-  AuthCardRedirectFooter,
-} from "./auth-card";
-import { SocialForm } from "./social-form";
+import { signInFormSchema, type SignInFormSchema } from "./validators-schema";
+import { AuthCard, AuthCardNotification } from "./auth-card";
 
 const defaultValues = {
   email: "",
@@ -44,45 +37,42 @@ export function SignInForm() {
   const searchParams = useSearchParams();
 
   return (
-    <AuthCard>
-      <AuthCardHeader title="Sign in to your account" />
-      <AuthCardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <fieldset>
-              <TextField label="Email" name="email" />
-              <TextField label="Password" name="password" type="password" />
-              <div className="flex flex-col gap-6">
-                <AuthCardNotify notify={notify?.notify as Notify} />
-                <div className="flex items-center gap-3">
-                  <RememberMe />
-                  <ForgotPasswordRedirect />
-                </div>
-                <Button
-                  className="w-full"
-                  disabled={
-                    !form.formState.isValid || form.formState.isSubmitting
-                  }
-                  type="submit"
-                >
-                  {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
-                </Button>
+    <AuthCard
+      title="Sign in to your account"
+      redirectMessage="Don't have an account yet?"
+      redirectLabel="Create an account"
+      redirectHref={paths.registerPath()}
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <fieldset className="space-y-6">
+            <TextField label="Email" name="email" />
+            <TextField label="Password" name="password" type="password" />
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <RememberMe />
+                <ForgotPasswordRedirect />
               </div>
-            </fieldset>
-          </form>
-        </Form>
-        <SocialForm />
-      </AuthCardContent>
-      <AuthCardRedirectFooter
-        message="Don't have an account yet?"
-        redirectName="Create an account"
-        redirectHref={paths.registerPath()}
-      />
-      <div className="text-center p-2 text-sm font-medium text-white bg-rose-500 dark:bg-rose-800 rounded border border-border">
+
+              <Button
+                className="w-full"
+                disabled={
+                  !form.formState.isValid || form.formState.isSubmitting
+                }
+                type="submit"
+              >
+                {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
+              </Button>
+            </div>
+          </fieldset>
+        </form>
+      </Form>
+
+      {/* <div className="text-center p-2 text-sm font-medium text-white bg-rose-500 dark:bg-rose-800 rounded border border-border">
         Verification code is unavailable on the free tier. Use{" "}
         <strong className="underline">Google</strong> or{" "}
         <strong className="underline">GitHub</strong> to sign in.
-      </div>
+      </div> */}
     </AuthCard>
   );
 }
