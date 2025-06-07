@@ -113,4 +113,4 @@ export const productFormSections: SectionConfig[] = [
     defaultExpanded: true,
     icon: Layers,
   },
-];
+] as const;

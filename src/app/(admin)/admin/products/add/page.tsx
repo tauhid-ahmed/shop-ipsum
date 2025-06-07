@@ -1,6 +1,7 @@
 import { Heading } from "@/components";
 import { Button } from "@/components/ui/button";
 import { LucideBox, LucideSave, LucideX } from "lucide-react";
+import ProductDetails from "../_components/product-form/sections/product-details";
 
 export default function AddNewProductPage() {
   return (
@@ -25,9 +26,14 @@ export default function AddNewProductPage() {
           </Button>
         </div>
       </div>
-      <div className="grid grid-cols-[3fr_1fr] gap-[var(--_sidebar-spacing)]">
-        <div className="border h-10"></div>
-        <div className="border h-10"></div>
+      <div className="grid grid-cols-[2fr_1fr] gap-[var(--_sidebar-spacing)]">
+        <div>
+          <ProductDetails />
+        </div>
+
+        <div>
+          <ProductDetails />
+        </div>
       </div>
     </div>
   );
