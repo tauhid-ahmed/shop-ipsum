@@ -127,7 +127,7 @@ function CollapsibleSection({
   return (
     <>
       <ActiveLabel
-        className={isActive ? "bg-primary text-primary-foreground" : ""}
+        className={isActive ? "bg-accent text-accent-foreground" : ""}
       >
         <button
           className={cn(
@@ -150,8 +150,8 @@ function CollapsibleSection({
               <LucideChevronRight
                 size={20}
                 className={cn(
-                  "text-secondary-foreground group-hover:text-primary-foreground",
-                  isActive && "text-primary-foreground"
+                  "text-accent-foreground group-hover:text-accent-foreground",
+                  isActive && "text-accent-foreground"
                 )}
               />
             </span>
@@ -203,7 +203,7 @@ function SidebarHeader() {
 
   return (
     <div className="p-[var(--_sidebar-spacing)] flex gap-2 items-center relative h-[var(--_sidebar-header-height)] after:absolute after:bottom-0 after:inset-x-2 after:h-px after:bg-border">
-      <span className="bg-primary/20 text-primary rounded">
+      <span className="bg-accent text-primary rounded">
         <SidebarIcon icon={LucidePackage} size="lg" />
       </span>
 
@@ -230,7 +230,7 @@ function SidebarFooter() {
 
   return (
     <div className="p-4 flex gap-2 items-start h-[var(--_sidebar-footer-height)]">
-      <span className="bg-primary/20 text-primary rounded">
+      <span className="bg-accent text-primary rounded">
         <SidebarIcon icon={LucideUser} size="lg" />
       </span>
 
@@ -260,7 +260,7 @@ function ActiveLabel({
   return (
     <span
       className={cn(
-        "block relative hover:bg-primary hover:text-primary-foreground rounded-sm [.is-active-link_&]:bg-primary [.is-active-link_&]:text-primary-foreground",
+        "block relative hover:bg-accent hover:text-accent-foreground rounded-sm [.is-active-link_&]:bg-accent [.is-active-link_&]:text-accent-foreground",
         {
           "-ml-[var(--_sidebar-spacing)] px-[var(--_sidebar-spacing)]":
             leftExpanded,
@@ -315,7 +315,7 @@ export function SidebarToggleButton() {
   return (
     <Button
       variant="transparent"
-      className="size-8 bg-primary/20 text-primary"
+      className="size-8 bg-accent text-primary"
       onClick={toggleSidebarCollapse}
     >
       {isExpanded ? (

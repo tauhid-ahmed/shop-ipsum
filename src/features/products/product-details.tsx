@@ -13,7 +13,7 @@ import { DotSeparator } from "@/components/dot-separator";
 import Breadcrumbs from "@/components/breadcrumbs";
 import { useAuth } from "@/hooks/useAuth";
 import { redirect } from "next/navigation";
-import { signInPath } from "@/lib/constants/paths";
+import { signInPath } from "@/constants/paths";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   const {
