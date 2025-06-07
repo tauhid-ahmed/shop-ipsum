@@ -8,7 +8,7 @@ export default function AddNewProductPage() {
       <div className="rounded bg-secondary flex justify-between items-center p-[var(--_sidebar-spacing)]">
         <div className="flex items-center gap-[var(--_sidebar-spacing)]">
           <LucideBox size={48} />
-          <div className="">
+          <div className="bg-accent">
             <Heading as="h2" size="2xl">
               Product Management
             </Heading>
