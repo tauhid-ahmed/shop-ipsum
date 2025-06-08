@@ -13,7 +13,7 @@ export default function AdminDashboardLayout({
       <SidebarProvider>
         <AdminContainer>
           <Sidebar />
-          <div className="px-[var(--_sidebar-spacing)]">
+          <div className="px-[calc(var(--_sidebar-spacing))]">
             <AdminHeader />
             {children}
           </div>

@@ -13,9 +13,14 @@ type TextFieldProps = {
   name: string;
   placeholder?: string;
   type?: string;
-};
+} & React.ComponentProps<"textarea">;
 
-export function TextArea({ label, name, placeholder }: TextFieldProps) {
+export function TextArea({
+  label,
+  name,
+  placeholder,
+  ...props
+}: TextFieldProps) {
   const form = useFormContext();
   return (
     <FormField
@@ -25,7 +30,7 @@ export function TextArea({ label, name, placeholder }: TextFieldProps) {
         <FormItem className="space-y-1">
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Textarea {...field} placeholder={placeholder} />
+            <Textarea {...field} placeholder={placeholder} {...props} />
           </FormControl>
           <FormMessage />
         </FormItem>

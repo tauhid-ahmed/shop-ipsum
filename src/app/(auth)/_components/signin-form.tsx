@@ -53,7 +53,7 @@ export function SignInForm() {
                 <RememberMe />
                 <ForgotPasswordRedirect />
               </div>
-
+              <AuthCardNotification notify={notify as Notify} />
               <Button
                 className="w-full"
                 disabled={
