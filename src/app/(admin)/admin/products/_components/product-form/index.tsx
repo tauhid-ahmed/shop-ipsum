@@ -12,6 +12,8 @@ import {
   ProductReturnPolicy,
   ProductShipping,
   ProductAiGenerator, // Make sure this is imported
+  ProductStatusVisibility,
+  ProductPromotionsDiscounts,
 } from "./sections";
 
 const dummyMediaStats = {
@@ -19,35 +21,36 @@ const dummyMediaStats = {
   storageUsed: "0MB",
   imageLimit: 10,
 };
-export function ProductForm() {
+
+interface ProductFormProps {
+  initialData?: Record<string, any>; // Or a more specific product type
+  onSubmit: (data: Record<string, any>) => void; // Or a more specific product type
+  isLoading?: boolean; // To disable form while submitting/loading
+}
+
+export function ProductForm({
+  initialData,
+  onSubmit,
+  isLoading,
+}: ProductFormProps) {
   const form = useForm({
-    defaultValues: {},
-    // It's good practice to define defaultValues for all form fields, including SEO:
-    // defaultValues: {
-    //   seoMetaTitle: "",
-    //   seoMetaDescription: "",
-    //   seoProductSlug: "",
-    //   seoMetaKeywords: "",
-    //   returnPolicyEligibility: "eligible",
-    //   returnPolicyDuration: 30,
-    //   returnPolicyDetails: "",
-    //   shippingWeight: "",
-    //   shippingDimensions: "",
-    //   shippingClass: "",
-    //   shippingRequiresPhysical: true,
-    //   // ... other product fields
-    // },
+    defaultValues: initialData || {},
+    // resolver: zodResolver(yourProductSchema), // Add your Zod schema for validation
   });
   return (
     <Form {...form}>
       {/* Main form grid: 2/3 for primary content, 1/3 for secondary/AI tools */}
-      <form className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
         {/* Left Column (Main Content) */}
         <div className="md:col-span-2 space-y-6">
           <ProductDetails isExpanded={true} />
           <ProductVariants />
           <ProductMedia stats={dummyMediaStats} />
           <ProductFeatures />
+          <ProductPromotionsDiscounts />
           <ProductReturnPolicy />{" "}
           {/* Moved Return Policy to left for balance if needed */}
         </div>
@@ -55,6 +58,7 @@ export function ProductForm() {
         {/* Right Column (Secondary/AI Tools) */}
         <div className="md:col-span-1 space-y-6">
           <ProductAiGenerator />
+          <ProductStatusVisibility />
           <ProductSeoMeta />
           <ProductShipping />
         </div>

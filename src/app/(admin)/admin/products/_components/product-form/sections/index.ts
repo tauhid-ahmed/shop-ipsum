@@ -6,3 +6,5 @@ export { default as ProductSeoMeta } from "./product-seo-meta";
 export { default as ProductReturnPolicy } from "./product-return-policy";
 export { default as ProductShipping } from "./product-shipping";
 export { default as ProductAiGenerator } from "./product-ai-generator";
+export { default as ProductStatusVisibility } from "./product-status-visibility";
+export { default as ProductPromotionsDiscounts } from "./product-promotions-discounts";

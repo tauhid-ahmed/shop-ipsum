@@ -9,6 +9,7 @@ import {
   Truck,
   Layers,
   Sparkles, // Or your chosen icon for AI Generator
+  Eye, // Example icon for Status & Visibility
 } from "lucide-react";
 
 export type SectionConfigData = Record<
@@ -78,5 +79,11 @@ export const productFormSections: SectionConfigData = {
     title: "AI Content Assistant",
     description: "Generate or enhance product content using AI.",
     icon: Sparkles, // Ensure this icon is imported and used correctly
+  },
+  productStatusVisibility: {
+    id: "productStatusVisibility",
+    title: "Status & Visibility",
+    description: "Manage product status, visibility, and publishing schedule.",
+    icon: Eye, // Or your chosen icon
   },
 };
