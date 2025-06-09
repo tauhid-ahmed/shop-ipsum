@@ -1,35 +1,35 @@
-import { Heading } from "@/components";
-import { Button } from "@/components/ui/button";
-import { LucideBox, LucideSave, LucideX } from "lucide-react";
-import { ProductForm } from "../_components/product-form";
-import { Card, CardContent } from "@/components/ui/card";
+"use client"; // Add this directive
+
+import { ProductForm, ProductPageHeader } from "../_components";
 
 export default function AddNewProductPage() {
+  const handlePublishProduct = () => {
+    console.log("Publish Product clicked");
+    // Implement actual save logic, e.g., trigger form validation and submission
+  };
+
+  const handleCancel = () => {
+    console.log("Cancel clicked");
+    // Implement navigation, e.g., router.back() or redirect to products list
+  };
+
+  const handleSaveDraft = () => {
+    console.log("Save Draft clicked");
+    // Implement save draft logic
+  };
+
   return (
     <div className="pt-[var(--_sidebar-spacing)] space-y-[var(--_sidebar-spacing)]">
-      <Card>
-        <CardContent className="flex justify-between gap-10">
-          <div className="flex flex-col relative pl-14">
-            <LucideBox
-              size={48}
-              className="absolute left-0 top-1 text-primary"
-            />
-            <Heading as="h2" size="2xl">
-              Product Management
-            </Heading>
-            <p>Essential details and categorization for your product</p>
-          </div>
-          <div className="self-end flex flex-wrap gap-4">
-            <Button>
-              <LucideX /> Cancel
-            </Button>
-            <Button>
-              <LucideSave />
-              Save Product
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      <ProductPageHeader
+        pageTitle="Add New Product"
+        pageDescription="Fill in the details to create and publish a new product. Ensure all required fields are completed for best results."
+        onMainAction={handlePublishProduct}
+        onCancel={handleCancel}
+        onSaveDraft={handleSaveDraft}
+        isEditing={false} // Explicitly set for clarity on the "add" page
+        // Example of providing a timestamp:
+        // lastSavedTimestamp={new Date().toISOString()}
+      />
       <div className="after:block after:h-[50vh]">
         <ProductForm />
       </div>
