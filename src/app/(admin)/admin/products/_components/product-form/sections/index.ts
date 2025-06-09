@@ -5,3 +5,4 @@ export { default as ProductMedia } from "./product-media";
 export { default as ProductSeoMeta } from "./product-seo-meta";
 export { default as ProductReturnPolicy } from "./product-return-policy";
 export { default as ProductShipping } from "./product-shipping";
+export { default as ProductAiGenerator } from "./product-ai-generator";

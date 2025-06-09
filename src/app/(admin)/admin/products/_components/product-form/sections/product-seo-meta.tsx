@@ -37,8 +37,9 @@ export default function ProductSeoMeta() {
       description={productSeoMeta.description}
       icon={<productSeoMeta.icon className="text-teal-500" />} // Example color
     >
-      <fieldset className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div className="md:col-span-1 space-y-6">
+      {/* Changed to a single column layout for inputs and preview */}
+      <fieldset className="space-y-6">
+        <div className="space-y-6">
           <TextField
             name="seoMetaTitle"
             label="Meta Title"
@@ -65,7 +66,8 @@ export default function ProductSeoMeta() {
           />
         </div>
 
-        <div className="md:col-span-1">
+        {/* Preview Card now flows below the inputs */}
+        <div>
           <Card>
             <CardHeader>
               <CardTitle className="text-sm font-medium text-muted-foreground">

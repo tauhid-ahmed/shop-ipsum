@@ -8,6 +8,7 @@ import {
   Search,
   Truck,
   Layers,
+  Sparkles, // Or your chosen icon for AI Generator
 } from "lucide-react";
 
 export type SectionConfigData = Record<
@@ -70,5 +71,12 @@ export const productFormSections: SectionConfigData = {
     description:
       "Add multiple variations of the product with different attributes.",
     icon: Layers,
+  },
+  productAiGenerator: {
+    // Add this entry if it's missing
+    id: "productAiGenerator",
+    title: "AI Content Assistant",
+    description: "Generate or enhance product content using AI.",
+    icon: Sparkles, // Ensure this icon is imported and used correctly
   },
 };

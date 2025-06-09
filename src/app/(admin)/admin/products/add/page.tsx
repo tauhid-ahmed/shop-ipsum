@@ -31,13 +31,7 @@ export default function AddNewProductPage() {
         </CardContent>
       </Card>
       <div className="after:block after:h-[50vh]">
-        <div className="grid grid-cols-[2fr_1fr] gap-[var(--_sidebar-spacing)]">
-          <div>
-            <ProductForm />
-          </div>
-
-          <div>{/* <ProductForm /> */}</div>
-        </div>
+        <ProductForm />
       </div>
     </div>
   );

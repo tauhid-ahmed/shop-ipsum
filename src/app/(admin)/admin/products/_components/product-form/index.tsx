@@ -11,6 +11,7 @@ import {
   ProductSeoMeta,
   ProductReturnPolicy,
   ProductShipping,
+  ProductAiGenerator, // Make sure this is imported
 } from "./sections";
 
 const dummyMediaStats = {
@@ -39,14 +40,24 @@ export function ProductForm() {
   });
   return (
     <Form {...form}>
-      <form className="space-y-4">
-        <ProductDetails isExpanded={true} />
-        <ProductVariants />
-        <ProductMedia stats={dummyMediaStats} />
-        <ProductFeatures />
-        <ProductSeoMeta />
-        <ProductReturnPolicy />
-        <ProductShipping />
+      {/* Main form grid: 2/3 for primary content, 1/3 for secondary/AI tools */}
+      <form className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Left Column (Main Content) */}
+        <div className="md:col-span-2 space-y-6">
+          <ProductDetails isExpanded={true} />
+          <ProductVariants />
+          <ProductMedia stats={dummyMediaStats} />
+          <ProductFeatures />
+          <ProductReturnPolicy />{" "}
+          {/* Moved Return Policy to left for balance if needed */}
+        </div>
+
+        {/* Right Column (Secondary/AI Tools) */}
+        <div className="md:col-span-1 space-y-6">
+          <ProductAiGenerator />
+          <ProductSeoMeta />
+          <ProductShipping />
+        </div>
       </form>
     </Form>
   );
