@@ -1,3 +1,4 @@
+"use client";
 import { useFormContext } from "react-hook-form";
 import {
   FormControl,
@@ -17,7 +18,7 @@ type TextFieldProps = {
   required?: boolean;
 } & React.ComponentProps<"input">;
 
-export function TextField({
+export default function TextField({
   label,
   name,
   placeholder,

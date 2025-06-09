@@ -1,16 +1,31 @@
 import { SelectField } from "@/components";
 import { type InputSelectProps } from "@/components/select-field";
 import { TextArea } from "@/components/text-area";
-import { TextField } from "@/components/text-field";
+import { TextField } from "@/components";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LucideRefreshCcw } from "lucide-react";
 import ActionButton from "../action-button";
 import { productFormSections } from "../form-sections.config";
 import { ProductFormCard } from "../ui/product-form-card";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 
 const { productDetails } = productFormSections;
 
+// Example: These should come from a config, API, or form state
+const departmentOptions = [
+  { label: "Electronics", value: "electronics" },
+  { label: "Books", value: "books" },
+];
+const categoryOptions = (department?: string) => {
+  // Example: categories could depend on department
+  if (department === "electronics")
+    return [
+      { label: "Mobiles", value: "mobiles" },
+      { label: "Laptops", value: "laptops" },
+    ];
+  return [{ label: "Fiction", value: "fiction" }];
+};
 export default function ProductDetails({
   isExpanded,
 }: {
@@ -29,14 +44,14 @@ export default function ProductDetails({
           <div className="flex items-end gap-2 flex-1">
             <TextField
               className="w-full"
-              name={"product-title"}
+              name="product-slug"
               label="URL Slug"
             />
             <ActionButton size="icon">
               <LucideRefreshCcw />
             </ActionButton>
           </div>
-          <TextField name={"product-title"} label="Brand" />
+          <TextField name="product-brand" label="Brand" />
           <TextArea
             label="Short Description"
             name="short-description"
@@ -58,12 +73,12 @@ export default function ProductDetails({
   );
 }
 
-function ProductCategories({ ...props }: InputSelectProps) {
-  return <SelectField {...props} />;
-}
-
-// Renamed from DiscountAndPolicy for clarity as it handles categories
 function ProductCategoriesSection() {
+  // State to hold the selected department value
+  const [selectedDepartment, setSelectedDepartment] = useState<
+    string | undefined
+  >(departmentOptions[0]?.value);
+
   return (
     <Card>
       <CardHeader>
@@ -71,18 +86,25 @@ function ProductCategoriesSection() {
       </CardHeader>
       <CardContent>
         <div className="flex flex-wrap gap-4 [&>*]:flex-1 [&>*]:basis-52">
-          <ProductCategories
-            options={[{ label: "Electronics", value: "electronics" }]} // Example: Options should be dynamic
+          <SelectField
+            // options should be dynamic, e.g., from props or state
+            options={departmentOptions}
             label="Departments"
             name="department"
+            // When department changes, update selectedDepartment state
+            // Note: The actual `onChange` for `SelectField` would need to be connected
+            // to react-hook-form or a local handler that calls setSelectedDepartment.
+            // For react-hook-form, you'd typically use `watch` or `control.getValues()`
+            // and a `useEffect` to update `selectedDepartment`.
+            // For simplicity here, we'll assume a direct way to set it or it's handled by the form.
           />
-          <ProductCategories
-            options={[{ label: "Mobiles", value: "mobiles" }]} // Example: Options should be dynamic
+          <SelectField
+            options={categoryOptions(selectedDepartment)} // Use state to get dynamic options
             label="Category"
             name="category"
           />
-          <ProductCategories
-            options={[{ label: "Smartphones", value: "smartphones" }]} // Example: Options should be dynamic
+          <SelectField
+            options={[{ label: "Smartphones", value: "smartphones" }]} // Example: Subcategories could depend on category
             label="Subcategory"
             name="subcategory"
           />
@@ -94,8 +116,14 @@ function ProductCategoriesSection() {
 
 function ProductTags() {
   // Example: Current tags should ideally come from form state
-  const currentTags = ["# Trending"];
-  const suggestedTagLabels = ["Trending", "Featured", "New Arrival", "Eco Friendly"];
+  const [currentTags, setCurrentTags] = useState<string[]>(["# Trending"]); // Manage with form state
+  const suggestedTagLabels = [
+    // Could be props or from a config
+    "Trending",
+    "Featured",
+    "New Arrival",
+    "Eco Friendly",
+  ];
 
   return (
     <Card>
@@ -112,11 +140,12 @@ function ProductTags() {
           />
           <ActionButton>+ Add</ActionButton>
         </div>
-        <span className=" text-xs bottom-0">
+        <span className="text-xs text-muted-foreground mt-1 mb-4 block">
           Tags help customers discover your product through search and filtering
         </span>
         <div className="mt-6">
-          <span className="text-sm"> Current Tags (1)</span>
+          {/* Removed leading space */}
+          <span className="text-sm">Current Tags ({currentTags.length})</span>
           <span className="flex gap-2 mt-2 flex-wrap">
             {currentTags.map((tag) => (
               <Badge
@@ -131,9 +160,12 @@ function ProductTags() {
           </span>
         </div>
         <div className="mt-6">
-          <span className="text-sm"> Suggest Tags ({suggestedTagLabels.length})</span>
+          <span className="text-sm">
+            {/* Removed leading space */}
+            Suggest Tags ({suggestedTagLabels.length})
+          </span>
           <span className="flex gap-2 mt-2 flex-wrap">
-            {suggestedTagLabels.map(label => (
+            {suggestedTagLabels.map((label) => (
               <Badge
                 key={label}
                 variant="outline"

@@ -8,6 +8,9 @@ import {
   ProductFeatures,
   ProductMedia,
   ProductVariants,
+  ProductSeoMeta,
+  ProductReturnPolicy,
+  ProductShipping,
 } from "./sections";
 
 const dummyMediaStats = {
@@ -18,6 +21,21 @@ const dummyMediaStats = {
 export function ProductForm() {
   const form = useForm({
     defaultValues: {},
+    // It's good practice to define defaultValues for all form fields, including SEO:
+    // defaultValues: {
+    //   seoMetaTitle: "",
+    //   seoMetaDescription: "",
+    //   seoProductSlug: "",
+    //   seoMetaKeywords: "",
+    //   returnPolicyEligibility: "eligible",
+    //   returnPolicyDuration: 30,
+    //   returnPolicyDetails: "",
+    //   shippingWeight: "",
+    //   shippingDimensions: "",
+    //   shippingClass: "",
+    //   shippingRequiresPhysical: true,
+    //   // ... other product fields
+    // },
   });
   return (
     <Form {...form}>
@@ -26,6 +44,9 @@ export function ProductForm() {
         <ProductVariants />
         <ProductMedia stats={dummyMediaStats} />
         <ProductFeatures />
+        <ProductSeoMeta />
+        <ProductReturnPolicy />
+        <ProductShipping />
       </form>
     </Form>
   );

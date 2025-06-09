@@ -1,6 +1,6 @@
 "use client";
 import { CheckboxField } from "@/components/checkbox-field";
-import { TextField } from "@/components/text-field";
+import { TextField } from "@/components";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
