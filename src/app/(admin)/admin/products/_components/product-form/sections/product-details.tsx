@@ -50,7 +50,7 @@ export default function ProductDetails({
             className="min-h-32"
           />
 
-          <DiscountAndPolicy />
+          <ProductCategoriesSection />
           <ProductTags />
         </fieldset>
       </ProductFormCard>
@@ -62,7 +62,8 @@ function ProductCategories({ ...props }: InputSelectProps) {
   return <SelectField {...props} />;
 }
 
-function DiscountAndPolicy() {
+// Renamed from DiscountAndPolicy for clarity as it handles categories
+function ProductCategoriesSection() {
   return (
     <Card>
       <CardHeader>
@@ -71,17 +72,17 @@ function DiscountAndPolicy() {
       <CardContent>
         <div className="flex flex-wrap gap-4 [&>*]:flex-1 [&>*]:basis-52">
           <ProductCategories
-            options={[{ label: "Apple Inc", value: "apple-inc" }]}
+            options={[{ label: "Electronics", value: "electronics" }]} // Example: Options should be dynamic
             label="Departments"
             name="department"
           />
           <ProductCategories
-            options={[{ label: "Apple Inc", value: "apple-inc" }]}
+            options={[{ label: "Mobiles", value: "mobiles" }]} // Example: Options should be dynamic
             label="Category"
             name="category"
           />
           <ProductCategories
-            options={[{ label: "Apple Inc", value: "apple-inc" }]}
+            options={[{ label: "Smartphones", value: "smartphones" }]} // Example: Options should be dynamic
             label="Subcategory"
             name="subcategory"
           />
@@ -92,6 +93,10 @@ function DiscountAndPolicy() {
 }
 
 function ProductTags() {
+  // Example: Current tags should ideally come from form state
+  const currentTags = ["# Trending"];
+  const suggestedTagLabels = ["Trending", "Featured", "New Arrival", "Eco Friendly"];
+
   return (
     <Card>
       <CardHeader>
@@ -112,42 +117,32 @@ function ProductTags() {
         </span>
         <div className="mt-6">
           <span className="text-sm"> Current Tags (1)</span>
-          <span className="flex gap-2 mt-2">
-            <Badge
-              variant="outline"
-              className="rounded-full text-muted-foreground"
-            >
-              # Trending
-            </Badge>
+          <span className="flex gap-2 mt-2 flex-wrap">
+            {currentTags.map((tag) => (
+              <Badge
+                key={tag}
+                variant="outline"
+                className="rounded-full text-muted-foreground"
+                // onClick={() => handleRemoveCurrentTag(tag)} // Add functionality
+              >
+                {tag}
+              </Badge>
+            ))}
           </span>
         </div>
         <div className="mt-6">
-          <span className="text-sm"> Suggest Tags (4)</span>
-          <span className="flex gap-2 mt-2">
-            <Badge
-              variant="outline"
-              className="rounded-full text-muted-foreground"
-            >
-              + Trending
-            </Badge>
-            <Badge
-              variant="outline"
-              className="rounded-full text-muted-foreground"
-            >
-              + Featured
-            </Badge>
-            <Badge
-              variant="outline"
-              className="rounded-full text-muted-foreground"
-            >
-              + New Arrival
-            </Badge>
-            <Badge
-              variant="outline"
-              className="rounded-full text-muted-foreground"
-            >
-              + Eco Friendly
-            </Badge>
+          <span className="text-sm"> Suggest Tags ({suggestedTagLabels.length})</span>
+          <span className="flex gap-2 mt-2 flex-wrap">
+            {suggestedTagLabels.map(label => (
+              <Badge
+                key={label}
+                variant="outline"
+                className="rounded-full text-muted-foreground cursor-pointer hover:bg-accent"
+                // onClick={() => handleAddTag(label)} // Add functionality
+              >
+                + {label}
+              </Badge>
+            ))}
           </span>
         </div>
       </CardContent>

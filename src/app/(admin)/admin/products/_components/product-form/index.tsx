@@ -10,6 +10,11 @@ import {
   ProductVariants,
 } from "./sections";
 
+const dummyMediaStats = {
+  imageCount: 0,
+  storageUsed: "0MB",
+  imageLimit: 10,
+};
 export function ProductForm() {
   const form = useForm({
     defaultValues: {},
@@ -19,7 +24,7 @@ export function ProductForm() {
       <form className="space-y-4">
         <ProductDetails isExpanded={true} />
         <ProductVariants />
-        <ProductMedia />
+        <ProductMedia stats={dummyMediaStats} />
         <ProductFeatures />
       </form>
     </Form>
