@@ -7,15 +7,15 @@ export const navItems = [
   },
   {
     name: "Men",
-    href: paths.categoryPath("men"),
+    href: paths.menPath(),
   },
   {
     name: "Women",
-    href: paths.categoryPath("women"),
+    href: paths.womenPath(),
   },
   {
     name: "Children",
-    href: paths.categoryPath("children"),
+    href: paths.childrenPath(),
   },
   {
     name: "Gift",
