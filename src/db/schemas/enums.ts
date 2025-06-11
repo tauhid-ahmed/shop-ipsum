@@ -18,25 +18,23 @@ export const audienceEnum = pgEnum("audience", [
   "babies",
 ]);
 
-// Discount types
+// Discount types for direct product/variant pricing
 export const discountTypeEnum = pgEnum("discount_type", [
   "percentage",
   "fixed",
-  "buy_one_get_one",
+]);
+
+// Coupon effect types
+export const couponTypeEnum = pgEnum("coupon_type", [
+  "percentage_off_order",
+  "fixed_amount_off_order",
+  "percentage_off_product", // Coupon applies to specific products
+  "fixed_amount_off_product", // Coupon applies to specific products
   "free_shipping",
 ]);
 
 // Supported currencies
-export const currencyEnum = pgEnum("currency", [
-  "USD",
-  "EUR",
-  "BDT",
-  "GBP",
-  "JPY",
-  "CAD",
-  "AUD",
-  "INR",
-]);
+export const currencyEnum = pgEnum("currency", ["USD", "EUR", "BDT"]);
 
 // Product lifecycle status
 export const productStatusEnum = pgEnum("product_status", [
@@ -160,4 +158,15 @@ export const inventoryTrackingEnum = pgEnum("inventory_tracking", [
   "none",
   "simple",
   "variant_level",
+]);
+
+// Promotion types
+export const promotionTypeEnum = pgEnum("promotion_type", [
+  "bogo_buy_x_get_y_product", // Buy X of specific product, get Y of same/different product free/discounted
+  "percentage_off_category",
+  "fixed_amount_off_category",
+  "percentage_off_order_min_spend",
+  "fixed_amount_off_order_min_spend",
+  "free_shipping_min_spend",
+  "bundle_deal", // Buy a set of products for a fixed price
 ]);

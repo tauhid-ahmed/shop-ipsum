@@ -9,20 +9,7 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
-
-export const userRoleEnum = pgEnum("user_role", [
-  "user",
-  "admin",
-  "seller",
-  "superadmin",
-]);
-
-export const addressTypeEnum = pgEnum("address_type", [
-  "home",
-  "work",
-  "billing",
-  "shipping",
-]);
+import { userRoleEnum, addressTypeEnum } from "./enums"; // Use enums from the central file
 
 export const paymentMethodTypeEnum = pgEnum("payment_method_type", [
   "card", // Credit/Debit
@@ -160,3 +147,4 @@ export const authenticators = pgTable(
 
 export type UserType = InferInsertModel<typeof users>;
 export type AccountType = InferInsertModel<typeof accounts>;
+export type Address = typeof addresses.$inferSelect; // Added explicit export for Address type
