@@ -32,12 +32,12 @@ export function ProductFormCard({
   console.log({ isCardCollapsed });
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <Card className="shadow-2xl">
+      <Card className="shadow-xl">
         <CardHeader
           onClick={handleCardCollapsed}
           className="relative px-20! group"
         >
-          <span className="rounded-xl absolute left-6 top-1 bg-accent size-10">
+          <span className="rounded-xl absolute left-6 top-0 bg-accent size-12">
             {cloneElement(icon, {
               className: "size-full p-2 " + icon.props.className,
             })}
