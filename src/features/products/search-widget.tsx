@@ -44,7 +44,7 @@ export function SearchWidget() {
         </Button>
       </SheetTrigger>
       <SheetContent side="top">
-        <Container size="xs">
+        <Container size="sm">
           <div className="py-14 space-y-6">
             <div className="space-y-2">
               <div className="flex justify-between items-center">
