@@ -12,7 +12,7 @@ export default async function Home() {
     <>
       <IntroBanner />
       <ProductReveal title="Trending" products={products} />
-      <ProductReveal title="Trending" products={products} />
+      <ProductReveal title="Featured" products={products} />
       <ProductCategoryCard />
       {/* <ProductReveal category="New Arrivals" /> */}
       <ProductPromo

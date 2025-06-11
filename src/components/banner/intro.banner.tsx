@@ -5,20 +5,40 @@ import { Section } from "../layout/section";
 import Embla, { useEmblaContext } from "../embla";
 import Image from "next/image";
 import Link from "next/link";
-import { categoryPath } from "@/constants/paths";
+import { productDetailsPath } from "@/constants/paths";
 
 type DataType = {
   id: string;
   image: string;
-  category: string;
+  slug: string;
 };
 
 const data: DataType[] = [
-  { id: "1", image: "/assets/banner/banner-01.webp", category: "kid-fashion" },
-  { id: "2", image: "/assets/banner/banner-02.webp", category: "shoes" },
-  { id: "3", image: "/assets/banner/banner-03.webp", category: "women" },
-  { id: "4", image: "/assets/banner/banner-04.webp", category: "jewellery" },
-  { id: "5", image: "/assets/banner/banner-05.webp", category: "men" },
+  {
+    id: "1",
+    image: "/assets/banner/banner-01.webp",
+    slug: "techlisten-pro-sound-noise-cancelling-headphones",
+  },
+  {
+    id: "2",
+    image: "/assets/banner/banner-02.webp",
+    slug: "wristtech-fit-pro-smartwatch",
+  },
+  {
+    id: "3",
+    image: "/assets/banner/banner-03.webp",
+    slug: "alpine-core-trek-shell-waterproof-jacket",
+  },
+  {
+    id: "4",
+    image: "/assets/banner/banner-04.webp",
+    slug: "mountain-trek-ultra-grip-hiking-boots",
+  },
+  {
+    id: "5",
+    image: "/assets/banner/banner-05.webp",
+    slug: "wristtech-fit-pro-smartwatch",
+  },
 ];
 
 export default function IntroBanner() {
@@ -44,7 +64,7 @@ function Carousel() {
   return product.map((item, index) => (
     <Embla.Slide key={index}>
       <div className="h-60 md:h-72 lg:h-80 relative rounded overflow-hidden">
-        <Link href={categoryPath(item.category)}>
+        <Link href={productDetailsPath(item.slug)}>
           <Image
             src={item.image}
             fill
