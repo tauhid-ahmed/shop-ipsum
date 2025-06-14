@@ -42,7 +42,7 @@ export default function ProductCard({
           </div>
           <Link
             href={`${productDetailsPath(data.slug, data.id)}`}
-            className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center bg-accent"
+            className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center bg-accent/50"
           >
             <div className="inline-block h-full rounded overflow-hidden group-hover/card:scale-150 transition-transform duration-300">
               <ProductImage
