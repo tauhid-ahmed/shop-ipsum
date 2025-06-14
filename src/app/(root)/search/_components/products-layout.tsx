@@ -14,7 +14,7 @@ export function ProductsContainer({ children }: React.PropsWithChildren) {
       <div
         className={cn("grid transition-[grid] relative w-full", {
           "grid-cols-[0px_1fr]": isSidebarCollapsed,
-          "grid-cols-[260px_1fr]": !isSidebarCollapsed,
+          "grid-cols-[260px_1fr] gap-4": !isSidebarCollapsed,
         })}
       >
         {children}
@@ -28,13 +28,13 @@ export function ProductsGrid({ children }: React.PropsWithChildren) {
 
   const columnWidth =
     isSidebarCollapsed && productDisplayMode === PRODUCT_DISPLAY_MODE_GRID
-      ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
       : !isSidebarCollapsed && productDisplayMode === PRODUCT_DISPLAY_MODE_GRID
-      ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
       : "grid-cols-1";
 
   return (
-    <div className="mt-4">
+    <div className="">
       <ProductsHeader />
       <div className={cn("grid gap-4 mt-4", columnWidth)}>{children}</div>
     </div>

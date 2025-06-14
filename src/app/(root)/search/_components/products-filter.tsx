@@ -1,0 +1,159 @@
+"use client";
+
+import { Heading } from "@/components";
+import { DualRangeSlider } from "@/components/dual-range-slider";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
+import { LucideChevronRight } from "lucide-react";
+import { useState } from "react";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+type FilterSection = {
+  title: string;
+} & React.ComponentProps<"div">;
+
+export function FilterSection({ title, children }: FilterSection) {
+  const [isExpanded, setIsExpanded] = useState(true);
+  return (
+    <div className="space-y-4">
+      <div
+        className="border-b border-double border-border pb-0.5 relative after:absolute after:w-1/2 after:h-0.5 after:bg-accent after:left-0 after:-bottom-px flex justify-between items-center cursor-pointer group"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <Heading>{title}</Heading>
+        <Button
+          variant="ghost"
+          size="icon"
+          className={cn("group-hover:bg-accent/40")}
+        >
+          <LucideChevronRight
+            className={cn(
+              "transition-transform duration-200",
+              isExpanded && "rotate-90"
+            )}
+          />
+        </Button>
+      </div>
+      {isExpanded && <div className="space-y-4">{children}</div>}
+    </div>
+  );
+}
+
+export function FilterPrice() {
+  const [amount, setAmount] = useState([0, 100]);
+  const handleAmountChange = (type: "min" | "max") => {
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
+      setAmount((prevAmount) => {
+        if (type === "min") {
+          return [Number(e.target.value), prevAmount[1]];
+        }
+        return [prevAmount[0], Number(e.target.value)];
+      });
+    };
+  };
+  return (
+    <>
+      <DualRangeSlider value={amount} onValueChange={setAmount} />
+      <div className="flex gap-4 justify-between items-center">
+        <Input value={amount[0]} onChange={handleAmountChange("min")} />
+        <span>to</span>
+        <Input value={amount[1]} onChange={handleAmountChange("max")} />
+      </div>
+    </>
+  );
+}
+
+const colors = [
+  { name: "red", code: "red" },
+  { name: "blue", code: "blue" },
+  { name: "orange", code: "orange" },
+  { name: "indigo", code: "indigo" },
+];
+
+export function FilterColors() {
+  return (
+    <>
+      <RadioGroup defaultValue="comfortable">
+        {colors.map((color) => (
+          <div className="flex items-center gap-3">
+            <RadioGroupItem
+              value={color.name}
+              id="r1"
+              style={{ background: color.code }}
+            />
+            <Label htmlFor="r1" className="capitalize">
+              {color.name}
+            </Label>
+          </div>
+        ))}
+      </RadioGroup>
+    </>
+  );
+}
+
+export function FilterBrands() {
+  const [brand, setBrand] = useState("");
+  return (
+    <>
+      <Input
+        placeholder="search"
+        value={brand}
+        onChange={(e) => setBrand(e.target.value)}
+      />
+      <RadioGroup defaultValue="comfortable">
+        <div className="flex items-center gap-3">
+          <RadioGroupItem value={"zara"} id="r1" />
+          <Label htmlFor="r1" className="capitalize">
+            Zara
+          </Label>
+        </div>
+        <div className="flex items-center gap-3">
+          <RadioGroupItem value={"raymond"} id="r2" />
+          <Label htmlFor="r2" className="capitalize">
+            Raymond
+          </Label>
+        </div>
+      </RadioGroup>
+    </>
+  );
+}
+
+export function FilterCategories() {
+  return (
+    <ul className="space-y-2">
+      <li>Men's Fashion</li>
+      <li>Women's Fashion</li>
+      <li>Kid's Fashion</li>
+      <li>Summer's Fashion</li>
+    </ul>
+  );
+}
+
+export function FilterSizes() {
+  return (
+    <>
+      <RadioGroup defaultValue="comfortable">
+        <div className="flex items-center gap-3">
+          <RadioGroupItem value={"zara"} id="r1" />
+          <Label htmlFor="r1" className="capitalize">
+            XS
+          </Label>
+        </div>
+        <div className="flex items-center gap-3">
+          <RadioGroupItem value={"raymond"} id="r2" />
+          <Label htmlFor="r2" className="capitalize">
+            XL
+          </Label>
+        </div>
+        <div className="flex items-center gap-3">
+          <RadioGroupItem value={"raymond"} id="r2" />
+          <Label htmlFor="r2" className="capitalize">
+            2XL
+          </Label>
+        </div>
+      </RadioGroup>
+    </>
+  );
+}

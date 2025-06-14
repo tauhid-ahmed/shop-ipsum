@@ -1,6 +1,6 @@
 import { ProductLayoutProvider } from "./_components/product-layout-provider";
 import { ProductsContainer } from "./_components/products-layout";
-import ProductsSidebar from "./_components/products-sidebar";
+import { ProductsSidebar } from "./_components/products-sidebar";
 
 type Props = {
   children: React.ReactNode;
