@@ -18,7 +18,7 @@ export function ProductsHeader() {
       <Button variant="outline" size="icon" onClick={toggleSidebarCollapse}>
         <LucidePanelLeftDashed />
       </Button>
-      <div className="">
+      <div className="flex gap-4">
         <Button
           variant="outline"
           size="icon"
