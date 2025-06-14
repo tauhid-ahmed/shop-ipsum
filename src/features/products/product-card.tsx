@@ -34,10 +34,15 @@ export default function ProductCard({
   return (
     <Card className="group/card h-full relative">
       <CardContent className="relative px-2 h-full flex gap-4 flex-col">
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden px-2">
+          <div className="absolute top-0 right-2 z-10 opacity-0 group-hover/card:opacity-100 -translate-y-2 group-hover/card:translate-y-0 transition-[transform_opacity] duration-200 backdrop-blur">
+            <Button variant="transparent" size="icon">
+              <LucideHeart />
+            </Button>
+          </div>
           <Link
             href={`${productDetailsPath(data.slug, data.id)}`}
-            className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center"
+            className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center bg-accent"
           >
             <div className="inline-block h-full rounded overflow-hidden group-hover/card:scale-150 transition-transform duration-300">
               <ProductImage
@@ -75,11 +80,7 @@ export default function ProductCard({
           </CardDescription>
         </Link>
       </CardContent>
-      <div className="absolute top-0 right-0 z-10">
-        <Button variant="ghost" size="icon">
-          <LucideHeart />
-        </Button>
-      </div>
+
       {quickShop && (
         <div
           onClick={() => quickShopRef.current?.handleQuickShopOpen()}
