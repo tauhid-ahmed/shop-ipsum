@@ -4,11 +4,13 @@ import { Heading } from "@/components";
 import { DualRangeSlider } from "@/components/dual-range-slider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { LucideChevronRight } from "lucide-react";
-import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
+import { LucideChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type FilterSection = {
   title: string;
@@ -43,6 +45,9 @@ export function FilterSection({ title, children }: FilterSection) {
 
 export function FilterPrice() {
   const [amount, setAmount] = useState([0, 100]);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const handleAmountChange = (type: "min" | "max") => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       setAmount((prevAmount) => {
@@ -53,6 +58,15 @@ export function FilterPrice() {
       });
     };
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("price-min", amount[0].toString());
+    params.set("price-max", amount[1].toString());
+
+    router.push(`?${params.toString()}`);
+  }, [amount, router, searchParams]);
+
   return (
     <>
       <DualRangeSlider value={amount} onValueChange={setAmount} />
@@ -73,9 +87,21 @@ const colors = [
 ];
 
 export function FilterColors() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const handleColorChange = (color: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("color", color);
+    router.push(`?${params.toString()}`);
+    console.log("alls");
+  };
+  const selectedColor = searchParams.get("color") || "red";
   return (
     <>
-      <RadioGroup defaultValue="comfortable">
+      <RadioGroup
+        onValueChange={(value) => handleColorChange(value)}
+        defaultValue={selectedColor}
+      >
         {colors.map((color) => (
           <div className="flex items-center gap-3">
             <RadioGroupItem

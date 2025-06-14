@@ -17,7 +17,7 @@ export function Container({
           "max-w-[30rem]": size === "sm",
           "max-w-4xl": size === "md",
           "max-w-5xl": size === "lg",
-          "max-w-7xl": size === "xl",
+          "max-w-[90rem]": size === "xl",
         },
         className
       )}

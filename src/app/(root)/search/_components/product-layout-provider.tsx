@@ -33,7 +33,7 @@ const ProductLayoutContext = createContext<
  * to these layout preferences.
  */
 export function ProductLayoutProvider({ children }: PropsWithChildren) {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [productDisplayMode, setProductDisplayMode] =
     useState<ProductDisplayMode>(PRODUCT_DISPLAY_MODE_GRID);
 

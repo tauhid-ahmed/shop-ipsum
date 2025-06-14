@@ -12,7 +12,7 @@ export function ProductsContainer({ children }: React.PropsWithChildren) {
   return (
     <Container>
       <div
-        className={cn("grid transition-[grid] relative w-full", {
+        className={cn("grid transition-[grid] relative w-full py-4", {
           "grid-cols-[0px_1fr]": isSidebarCollapsed,
           "grid-cols-[260px_1fr] gap-4": !isSidebarCollapsed,
         })}

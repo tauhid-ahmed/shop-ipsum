@@ -18,16 +18,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 export function ProductsHeader() {
   const {
     addProductDisplayModeGrid,
     addProductDisplayModeList,
     toggleSidebarCollapse,
+    isSidebarCollapsed,
   } = useProductLayout();
 
   return (
-    <div className="flex justify-between py-4 border-b border-border z-50 sticky top-18 bg-background backdrop-blur">
+    <div
+      className={cn(
+        "flex justify-between py-4 border-b border-border z-50 sticky top-18 bg-sidebar px-8 backdrop-blur",
+        !isSidebarCollapsed && "-ml-4"
+      )}
+    >
       <div className="flex gap-4 items-center">
         <Button variant="outline" size="icon" onClick={toggleSidebarCollapse}>
           <LucidePanelLeftDashed />
