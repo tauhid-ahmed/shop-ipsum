@@ -10,9 +10,9 @@ export const contactPath = () => "/contact";
 export const aboutPath = () => "/about";
 
 // Shop Routes
-export const menPath = () => "/search?category=men";
-export const womenPath = () => "/search?category=women";
-export const childrenPath = () => "/search?category=children";
+export const menPath = () => "/search/men";
+export const womenPath = () => "/search/women";
+export const childrenPath = () => "/search/children";
 export const giftPath = () => "/gift";
 
 // Auth Routes
@@ -24,7 +24,7 @@ export const resetPasswordPath = () => "/reset-password";
 
 // Product Routes
 export const productsPath = () => "/search";
-export const productDetailsPath = (slug: string) => `/search/${slug}`;
+export const productDetailsPath = (slug: string) => `/product/${slug}`;
 
 // Category Routes
 export const categoryPath = (category: string) => `/category/${category}`;

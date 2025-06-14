@@ -10,6 +10,7 @@ import {
   boolean,
   primaryKey,
   AnyPgColumn,
+  serial,
 } from "drizzle-orm/pg-core";
 import {
   audienceEnum,
@@ -19,6 +20,7 @@ import {
   sizeTypeEnum,
   visibilityEnum,
 } from "./enums";
+import { types } from "./taxonomy";
 
 // Brands table (referenced by products)
 export const brands = pgTable("brands", {
@@ -93,64 +95,41 @@ export const tags = pgTable("tags", {
 // =============================================
 
 // Main products table
+
 export const products = pgTable("products", {
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
+
+  type_id: serial("type_id")
+    .references(() => types.id, { onDelete: "restrict" })
+    .notNull(),
+
   brand_id: uuid("brand_id")
     .references(() => brands.id, { onDelete: "restrict" })
     .notNull(),
-  category_id: uuid("category_id").references(() => categories.id, {
-    onDelete: "set null",
-  }),
 
-  // Product identifiers
-  sku: varchar("sku", { length: 64 }).unique(), // Made nullable, primary SKU might be at variantSizes level
-  upc: varchar("upc", { length: 20 }),
-  ean: varchar("ean", { length: 20 }),
+  // Keep other fields same...
   slug: varchar("slug", { length: 255 }).unique().notNull(),
-
-  // Product information
   title: varchar("title", { length: 255 }).notNull(),
   short_description: text("short_description"),
   long_description: text("long_description"),
   features: jsonb("features").$type<string[]>().default([]),
-
-  // Product configuration
-  // target_audience: audienceEnum("target_audience").array().notNull(), // Removed, using productAudiences junction table
   status: productStatusEnum("status").default("draft").notNull(),
   visibility: visibilityEnum("visibility").default("public").notNull(),
-  is_physical: boolean("is_physical").default(true).notNull(), // Added: Is it a physical product?
-  is_taxable: boolean("is_taxable").default(true).notNull(), // Added: Is the product taxable?
-
-  // SEO fields
+  is_physical: boolean("is_physical").default(true).notNull(),
+  is_taxable: boolean("is_taxable").default(true).notNull(),
   seo_meta_title: varchar("seo_meta_title", { length: 255 }),
   seo_meta_description: text("seo_meta_description"),
   seo_keywords: varchar("seo_keywords", { length: 500 }),
-
-  // Analytics
   sales_count: integer("sales_count").default(0).notNull(),
   views: integer("views").default(0).notNull(),
-
-  // Timestamps
   created_at: timestamp("created_at", { withTimezone: true })
     .defaultNow()
     .notNull(),
   updated_at: timestamp("updated_at", { withTimezone: true })
     .defaultNow()
     .notNull(),
-});
-
-export const audiences = pgTable("audiences", {
-  id: uuid("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: audienceEnum("name").notNull().unique(), // Use audienceEnum for the name
-  slug: varchar("slug", { length: 100 }).notNull().unique(),
-  description: text("description"),
-  display_order: integer("display_order").default(0),
-  is_active: boolean("is_active").default(true),
-  created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
 
 // Then use a junction table for many-to-many relationship
