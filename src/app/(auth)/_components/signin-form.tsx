@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { signInAction } from "../actions/signin.action";
 import { signInFormSchema, type SignInFormSchema } from "./validators-schema";
 import { AuthCard, AuthCardNotification } from "./auth-card";
+import { SubmitButton } from ".";
 
 const defaultValues = {
   email: "",
@@ -54,15 +55,16 @@ export function SignInForm() {
                 <ForgotPasswordRedirect />
               </div>
               <AuthCardNotification notify={notify as Notify} />
-              <Button
+
+              <SubmitButton
                 className="w-full"
+                idleLabel="Sign in"
+                submittingLabel="Signing you in..."
                 disabled={
                   !form.formState.isValid || form.formState.isSubmitting
                 }
-                type="submit"
-              >
-                {form.formState.isSubmitting ? "Signing in..." : "Sign in"}
-              </Button>
+                isSubmitting={form.formState.isSubmitting}
+              />
             </div>
           </fieldset>
         </form>

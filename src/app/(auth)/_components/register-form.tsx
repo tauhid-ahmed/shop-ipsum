@@ -16,6 +16,7 @@ import {
   type RegisterFormSchema,
 } from "./validators-schema";
 import { AuthCard } from "./auth-card";
+import SubmitButton from "./submit-button";
 
 const defaultValues = {
   name: "",
@@ -72,16 +73,17 @@ export default function RegisterForm() {
                 </span>
               </div>
 
-              <Button
+              <SubmitButton
+                idleLabel="Create an account"
+                submittingLabel="Creating your account"
                 disabled={
                   !termsAndCondition ||
                   form.formState.isSubmitting ||
                   !form.formState.isValid
                 }
+                isSubmitting={form.formState.isSubmitting}
                 className="w-full"
-              >
-                Create an account
-              </Button>
+              />
             </div>
           </fieldset>
         </form>
