@@ -1,19 +1,18 @@
 "use client";
-import { Container } from "@/components/layout/container";
-import { Section } from "@/components/layout/section";
-import { Button } from "@/components/ui/button";
 import { Heading } from "@/components";
-import { ProductImageGallery } from "./product-image-gallery";
-import { type ProductType } from "@/data/products";
-import { LucideStar } from "lucide-react";
-import { useProductAttributes } from "@/hooks/useProductAttributes";
-import { ProductAttributes } from "./product-attributes";
-import React from "react";
-import { DotSeparator } from "@/components/dot-separator";
 import Breadcrumbs from "@/components/breadcrumbs";
-import { useAuth } from "@/hooks/useAuth";
-import { redirect } from "next/navigation";
+import { DotSeparator } from "@/components/dot-separator";
+import { Button } from "@/components/ui/button";
 import { signInPath } from "@/constants/paths";
+import { type ProductType } from "@/data/products";
+import { useAuth } from "@/hooks/useAuth";
+import { useProductAttributes } from "@/hooks/useProductAttributes";
+import { LucideStar } from "lucide-react";
+import { redirect } from "next/navigation";
+import { ProductReviewDetails, ProductSection } from ".";
+import { ProductAttributes } from "./product-attributes";
+import { ProductImageGallery } from "./product-image-gallery";
+import { useState } from "react";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   const {
@@ -29,58 +28,57 @@ export default function ProductDetails({ product }: { product: ProductType }) {
 
   return (
     <>
-      <Section padding="xs">
-        <Container>
-          <div className="space-y-4">
-            <div className="flex md:flex-row gap-10 lg:gap-16 flex-col md:items-start">
-              <div className="flex-1 basis-1/2 md:sticky top-18">
-                <ProductImageGallery
-                  images={product.media.images}
-                  alt={product.productDetails.title}
+      <ProductSection>
+        <div className="space-y-4">
+          <div className="flex md:flex-row gap-10 lg:gap-16 flex-col md:items-start">
+            <div className="flex-1 basis-1/2 md:sticky top-18">
+              <ProductImageGallery
+                images={product.media.images}
+                alt={product.productDetails.title}
+              />
+            </div>
+
+            <div className="flex-1 basis-1/2 space-y-6 lg:space-y-8">
+              <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
+                <Breadcrumbs product={product} />
+                <div className="space-y-2">
+                  <Heading className="text-foreground/80" size="md" as="h2">
+                    {product.brand.name}
+                  </Heading>
+                  <Heading size="2xl" as="h3">
+                    {product.productDetails.title}
+                  </Heading>
+                </div>
+                <ProductMetadata
+                  originalPrice={product.pricing.original.amount}
+                  basePrice={product.pricing.base.amount}
+                  salesCount={product.salesCount}
+                  averageRating={product.ratings.average}
                 />
               </div>
-
-              <div className="flex-1 basis-1/2 space-y-6 lg:space-y-8">
-                <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
-                  <Breadcrumbs product={product} />
-                  <div className="space-y-2">
-                    <Heading className="text-foreground/80" size="md" as="h2">
-                      {product.brand.name}
-                    </Heading>
-                    <Heading size="2xl" as="h3">
-                      {product.productDetails.title}
-                    </Heading>
-                  </div>
-                  <ProductMetadata
-                    originalPrice={product.pricing.original.amount}
-                    basePrice={product.pricing.base.amount}
-                    salesCount={product.salesCount}
-                    averageRating={product.ratings.average}
-                  />
-                </div>
-                <ProductDescription product={product} />
-                <ProductSection title="Select Color">
-                  <ProductAttributes
-                    attributes={allColors}
-                    availableAttributes={availableColors}
-                    valueChange={handleColorChange}
-                    value={selectedColor}
-                  />
-                </ProductSection>
-                <ProductSection title="Select Size">
-                  <ProductAttributes
-                    attributes={allSizes}
-                    availableAttributes={availableSizes}
-                    valueChange={handleSizeChange}
-                    value={selectedSize}
-                  />
-                </ProductSection>
-                <CTAAction />
-              </div>
+              <ProductDescription product={product} />
+              <ProductSubSection title="Select Color">
+                <ProductAttributes
+                  attributes={allColors}
+                  availableAttributes={availableColors}
+                  valueChange={handleColorChange}
+                  value={selectedColor}
+                />
+              </ProductSubSection>
+              <ProductSubSection title="Select Size">
+                <ProductAttributes
+                  attributes={allSizes}
+                  availableAttributes={availableSizes}
+                  valueChange={handleSizeChange}
+                  value={selectedSize}
+                />
+              </ProductSubSection>
+              <CTAAction />
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+        <ProductReviewDetails product={product} />
+      </ProductSection>
     </>
   );
 }
@@ -93,11 +91,11 @@ type ProductMetadataProps = {
 };
 
 function ProductDescription({ product }: { product: ProductType }) {
-  const [showMore, setShowMore] = React.useState(false);
+  const [showMore, setShowMore] = useState(false);
   const wordLength = product.productDetails.longDescription.split(" ").length;
   const wordLimit = 20;
   return (
-    <ProductSection title="Description:">
+    <ProductSubSection title="Description:">
       <div className="text-foreground/90 space-y-3">
         {product.productDetails.longDescription
           .split(" ")
@@ -118,7 +116,7 @@ function ProductDescription({ product }: { product: ProductType }) {
       >
         {showMore && wordLength > wordLimit ? "Show less" : "Read more"}
       </Button>
-    </ProductSection>
+    </ProductSubSection>
   );
 }
 
@@ -158,7 +156,7 @@ function ProductMetadata({
 //   );
 // }
 
-function ProductSection({
+function ProductSubSection({
   title,
   children,
 }: {
@@ -182,7 +180,7 @@ function CTAAction() {
     <div className="space-y-4 md:space-y-6">
       <Button
         onClick={() => {
-          if (!user.id) {
+          if (!user?.id) {
             redirect(signInPath());
           }
         }}

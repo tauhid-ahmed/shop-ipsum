@@ -1,5 +1,5 @@
 import { Container } from "./container";
-import { SearchWidget } from "@/features/products/search-widget";
+import { ProductSearchWidget } from "@/components/products";
 import { CartWidget } from "@/features/cart/cart-widget";
 import { Logo } from "@/components";
 import Navigation from "./mobile-nav";
@@ -18,7 +18,7 @@ export default async function Header() {
         <nav className="flex items-center text-foreground/90">
           <div className="flex flex-1 gap-1 lg:hidden">
             <Navigation />
-            <SearchWidget />
+            <ProductSearchWidget />
           </div>
           <div className="flex-1 lg:flex gap-4 hidden">
             <DesktopNav />
@@ -27,7 +27,7 @@ export default async function Header() {
           <div className="flex-1 flex justify-end">
             <div className="flex gap-1 items-center">
               <div className="hidden lg:block">
-                <SearchWidget />
+                <ProductSearchWidget />
               </div>
               <WishlistOverview />
               {!user ? (

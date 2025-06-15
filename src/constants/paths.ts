@@ -1,5 +1,5 @@
 // constants for prefixes
-const ADMIN_PREFIX = "/admin";
+const ADMIN_PREFIX = "/dashboard";
 const API_PREFIX = "/api";
 
 // ---------------------------

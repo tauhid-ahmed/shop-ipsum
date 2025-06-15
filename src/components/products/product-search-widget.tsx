@@ -19,13 +19,13 @@ import { Container } from "@/components/layout/container";
 import { Input } from "@/components/ui/input";
 import { Heading } from "@/components";
 import Link from "next/link";
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 
-export function SearchWidget() {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const inputRef = React.useRef<HTMLInputElement>(null);
+export default function ProductSearchWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       if (inputRef.current && isOpen) {
         if (document.activeElement instanceof HTMLElement) {
@@ -71,10 +71,10 @@ export function SearchWidget() {
                 </Button>
               </div>
             </div>
-            <Product />
-            <SearchBar />
+            <ProductList />
+            <ProductSearchBar />
             <div className="space-y-2">
-              <Categories />
+              <ProductCategories />
             </div>
           </div>
         </Container>
@@ -83,7 +83,7 @@ export function SearchWidget() {
   );
 }
 
-function Categories() {
+function ProductCategories() {
   return (
     <div className="space-y-2">
       <SheetTitle asChild className="flex items-center">
@@ -101,7 +101,7 @@ function Categories() {
   );
 }
 
-function SearchBar() {
+function ProductSearchBar() {
   return (
     <div className="bg-secondary py-2 px-8 text-sm flex justify-between items-center gap-2 rounded">
       <SheetDescription className="underline underline-offset-2 text-muted-foreground">
@@ -114,56 +114,29 @@ function SearchBar() {
   );
 }
 
-function Product() {
+function ProductList() {
   return (
     <div className="flex flex-col gap-2 max-h-48 overflow-y-scroll">
-      <Link
-        href="#"
-        className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10 rounded"
-      >
-        <div className="size-12 rounded bg-secondary"></div>
-        <div className="flex flex-col p-1">
-          <span className="text-sm font-medium leading-tight">
-            Featured product
-          </span>
-          <span className="text-muted-foreground">Premium shirts</span>
-        </div>
-        <Button className="ml-auto" variant="ghost" shape="pill" size="icon">
-          <LucideExternalLink className="size-4" />
-        </Button>
-      </Link>
-      <Link
-        href="#"
-        className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10 rounded"
-      >
-        <div className="size-12 rounded bg-secondary"></div>
-        <div className="flex flex-col p-1">
-          <span className="text-sm font-medium leading-tight">
-            Featured product
-          </span>
-          <span className="text-muted-foreground">Premium shirts</span>
-        </div>
-        <Button className="ml-auto" variant="ghost" shape="pill" size="icon">
-          <LucideExternalLink className="size-4" />
-        </Button>
-      </Link>
-      <Link
-        href="#"
-        className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10 rounded"
-      >
-        <div className="size-12 rounded bg-secondary"></div>
-        <div className="flex flex-col p-1">
-          <span className="text-sm font-medium leading-tight">
-            Featured product
-          </span>
-          <span className="text-muted-foreground">Premium shirts</span>
-        </div>
-        <Button className="ml-auto" variant="ghost" shape="pill" size="icon">
-          <LucideExternalLink className="size-4" />
-        </Button>
-      </Link>
+      {[...Array(3).keys()].map((item) => (
+        <Link
+          key={item}
+          href="#"
+          className="flex gap-4 border border-border/50 p-1 hover:bg-primary/10 rounded"
+        >
+          <div className="size-12 rounded bg-secondary">
+            {/* Product Image */}
+          </div>
+          <div className="flex flex-col p-1">
+            <span className="text-sm font-medium leading-tight">
+              Featured product
+            </span>
+            <span className="text-muted-foreground">Premium shirts</span>
+          </div>
+          <Button className="ml-auto" variant="ghost" shape="pill" size="icon">
+            <LucideExternalLink className="size-4" />
+          </Button>
+        </Link>
+      ))}
     </div>
   );
 }
-
-// https://www.facebook.com/share/p/1GhmRrensp/

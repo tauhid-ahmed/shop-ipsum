@@ -1,7 +1,7 @@
-import ProductReveal from "@/features/products/product-reveal";
+import ProductReveal from "@/components/products/product-carousel";
 import IntroBanner from "@/components/banner/intro.banner";
-import ProductCategoryCard from "@/features/products/product-category-preview";
-import ProductPromo from "@/features/products/product-promo";
+import ProductCategoryCard from "@/components/products/product-category-preview";
+import { ProductMarketingCallout } from "@/components/products";
 import { products } from "@/data/products";
 // import { getTrendingProducts } from "@/lib/product-ranking";
 
@@ -15,7 +15,7 @@ export default async function Home() {
       <ProductReveal title="Featured" products={products} />
       <ProductCategoryCard />
       {/* <ProductReveal category="New Arrivals" /> */}
-      <ProductPromo
+      <ProductMarketingCallout
         title="Get 25% off during our one-time sale"
         description="Most of our products are limited releases that won't come back. Get your favorite items while they're in stock."
         ctaLink="#"

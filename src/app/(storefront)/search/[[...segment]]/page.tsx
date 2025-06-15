@@ -1,4 +1,4 @@
-import ProductCard from "@/features/products/product-card";
+import ProductCard from "@/components/products/product-card";
 import { ProductsGrid, ProductsGridItem } from "../_components/products-layout";
 import { products } from "@/data/products";
 
