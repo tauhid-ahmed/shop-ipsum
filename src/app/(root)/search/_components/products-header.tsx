@@ -31,8 +31,7 @@ export function ProductsHeader() {
   return (
     <div
       className={cn(
-        "flex justify-between py-4 border-b border-border z-50 sticky top-18 bg-sidebar px-8 backdrop-blur",
-        !isSidebarCollapsed && "-ml-4"
+        "flex justify-between py-4 h-16 border-b border-border z-50 sticky top-18 bg-sidebar px-4 backdrop-blur"
       )}
     >
       <div className="flex gap-4 items-center">
@@ -52,11 +51,11 @@ export function ProductsHeader() {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Sort By</SelectLabel>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              <SelectItem value="apple">Default Sorting</SelectItem>
+              <SelectItem value="banana">Low to High</SelectItem>
+              <SelectItem value="blueberry">High to Low</SelectItem>
+              <SelectItem value="grapes">New Added</SelectItem>
+              <SelectItem value="pineapple">On Sale</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

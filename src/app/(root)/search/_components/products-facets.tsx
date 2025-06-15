@@ -7,10 +7,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
-import { LucideChevronRight } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@radix-ui/react-select";
+import { LucideArrowUpDown, LucideChevronRight } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 type FilterSection = {
   title: string;
@@ -86,6 +94,7 @@ const colors = [
   { name: "indigo", code: "indigo" },
 ];
 
+// Filter colors
 export function FilterColors() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -119,6 +128,7 @@ export function FilterColors() {
   );
 }
 
+// Filter Brands
 export function FilterBrands() {
   const [brand, setBrand] = useState("");
   return (
@@ -146,6 +156,7 @@ export function FilterBrands() {
   );
 }
 
+// Filter Categories
 export function FilterCategories() {
   return (
     <ul className="space-y-2">
@@ -157,6 +168,7 @@ export function FilterCategories() {
   );
 }
 
+// Filter Sizes
 export function FilterSizes() {
   return (
     <>
@@ -181,5 +193,27 @@ export function FilterSizes() {
         </div>
       </RadioGroup>
     </>
+  );
+}
+
+// Sort Products
+export function SortProducts() {
+  return (
+    <Select>
+      <SelectTrigger className="rounded-full">
+        <LucideArrowUpDown />
+        <SelectValue placeholder="Sort by" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Sort By</SelectLabel>
+          <SelectItem value="apple">Default Sorting</SelectItem>
+          <SelectItem value="banana">Low to High</SelectItem>
+          <SelectItem value="blueberry">High to Low</SelectItem>
+          <SelectItem value="grapes">New Added</SelectItem>
+          <SelectItem value="pineapple">On Sale</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 }

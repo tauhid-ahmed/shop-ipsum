@@ -52,38 +52,71 @@ const output = {
   types: [] as Section[],
 };
 
-function recursiveTaxonomy(rawData = data, level = 1, results = output, slug) {
-  Object.entries(rawData).map(([key, value]) => {
-    switch (level) {
-      case 1:
-        results.departments.push({ name: key, slug: key });
-        break;
-      case 2:
-        results.categories.push({ name: key, slug: key, id: key });
-        break;
-      case 3:
-        results.subCategories.push({ name: key, slug: key, id: key });
-        break;
-      case 4:
-        results.types.push({ name: key, slug: key, id: key });
-        break;
-    }
-
-    if (typeof value === "object" && !Array.isArray(value)) {
-      recursiveTaxonomy(value, level + 1, results, key);
-    } else if (Array.isArray(value)) {
-      results.types.push(
-        ...value.map((typeName) => ({
-          name: typeName,
-          slug: typeName,
-          id: slug,
-        }))
-      );
-    }
-  });
-
-  return results;
+interface TaxonomyNode {
+  id: number;
+  name: string;
 }
 
-console.clear();
-console.log(JSON.stringify(recursiveTaxonomy(), null, 2));
+interface Taxonomy {
+  departments: (TaxonomyNode & {})[];
+  categories: (TaxonomyNode & { departmentId: number })[];
+  subCategories: (TaxonomyNode & { categoryId: number })[];
+  types: (TaxonomyNode & { subCategoryId?: number; categoryId: number })[];
+}
+
+function buildTaxonomy(
+  data: any,
+  level = 0,
+  parentIds: { departmentId?: number; categoryId?: number } = {},
+  result: Taxonomy = {
+    departments: [],
+    categories: [],
+    subCategories: [],
+    types: [],
+  },
+  idCounter = { value: 1 }
+): Taxonomy {
+  for (const [name, value] of Object.entries(data)) {
+    const id = idCounter.value++;
+
+    // Add to appropriate level
+    if (level === 0) {
+      result.departments.push({ id, name });
+      parentIds = { departmentId: id };
+    } else if (level === 1) {
+      if (!parentIds.departmentId) throw new Error("Missing departmentId");
+      result.categories.push({
+        id,
+        name,
+        departmentId: parentIds.departmentId,
+      });
+      parentIds = { ...parentIds, categoryId: id };
+    } else if (level === 2) {
+      if (!parentIds.categoryId) throw new Error("Missing categoryId");
+      result.subCategories.push({ id, name, categoryId: parentIds.categoryId });
+      parentIds = { ...parentIds, subCategoryId: id };
+    }
+
+    // Handle recursion or types
+    if (typeof value === "object" && !Array.isArray(value)) {
+      buildTaxonomy(value, level + 1, { ...parentIds }, result, idCounter);
+    } else if (Array.isArray(value)) {
+      if (!parentIds.categoryId) throw new Error("Missing categoryId");
+
+      value.forEach((typeName) => {
+        result.types.push({
+          id: idCounter.value++,
+          name: typeName,
+          categoryId: parentIds.categoryId,
+          ...(level === 2 ? { subCategoryId: id } : {}),
+        });
+      });
+    }
+  }
+
+  return result;
+}
+
+// Usage
+const perfectTaxonomy = buildTaxonomy(data);
+console.log(JSON.stringify(perfectTaxonomy, null, 2));

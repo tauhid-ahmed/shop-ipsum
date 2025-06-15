@@ -14,7 +14,7 @@ export function ProductsContainer({ children }: React.PropsWithChildren) {
       <div
         className={cn("grid transition-[grid] relative w-full py-4", {
           "grid-cols-[0px_1fr]": isSidebarCollapsed,
-          "grid-cols-[260px_1fr] gap-4": !isSidebarCollapsed,
+          "grid-cols-[18.75rem_1fr] gap-4": !isSidebarCollapsed,
         })}
       >
         {children}
