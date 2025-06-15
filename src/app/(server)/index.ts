@@ -6,7 +6,7 @@ import { cors } from "hono/cors";
 // export const runtime = "edge";
 
 const app = new Hono()
-  .basePath("/api/v1")
+  .basePath("/api")
   // middleware
   .use(logger())
   .use(cors());
