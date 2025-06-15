@@ -12,7 +12,11 @@ const classnames = {
   lg: "size-8 lg:size-12 text-xl lg:text-2xl",
 } as const;
 
-export function UserImage({ name, image, size }: ProfileImageProps) {
+export default function UserProfilePicture({
+  name,
+  image,
+  size,
+}: ProfileImageProps) {
   return (
     <div
       className={cn(

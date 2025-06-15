@@ -1,13 +1,15 @@
 import { Container } from "./container";
 import { ProductSearchWidget } from "@/components/products";
-import { CartWidget } from "@/features/cart/cart-widget";
+import { CartWidget } from "@/components/cart/cart-widget";
 import { Logo } from "@/components";
 import Navigation from "./mobile-nav";
 import { DesktopNav } from "./desktop-nav";
-import WishlistOverview from "@/features/wishlist/wishlist-overview";
+import WishlistOverview from "@/components/wishlist/wishlist-overview";
 import { getServerSession } from "@/lib/get-server-session";
-import { UserWidget } from "@/features/users/user-widget";
-import { UserButton } from "@/features/users/user-button";
+import { UserProfileWidget } from "@/components/users/";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { signInPath } from "@/constants/paths";
 
 export default async function Header() {
   const user = await getServerSession();
@@ -31,9 +33,9 @@ export default async function Header() {
               </div>
               <WishlistOverview />
               {!user ? (
-                <UserButton />
+                <SignInButton />
               ) : (
-                <UserWidget
+                <UserProfileWidget
                   user={{
                     name: user.name ?? "",
                     email: user.email ?? "",
@@ -46,5 +48,13 @@ export default async function Header() {
         </nav>
       </Container>
     </header>
+  );
+}
+
+function SignInButton() {
+  return (
+    <Button asChild>
+      <Link href={signInPath()}>Sign In</Link>
+    </Button>
   );
 }

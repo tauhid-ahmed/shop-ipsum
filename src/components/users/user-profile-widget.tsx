@@ -18,7 +18,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { UserImage } from "./user-image";
+import { UserProfilePicture } from ".";
 
 const menuItems = [
   {
@@ -51,7 +51,7 @@ type ProfileWidgetProps = {
     image?: string;
   };
 };
-export function UserWidget({ user }: ProfileWidgetProps) {
+export default function UserProfileWidget({ user }: ProfileWidgetProps) {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const pathname = usePathname();
 
@@ -69,7 +69,7 @@ export function UserWidget({ user }: ProfileWidgetProps) {
     >
       <PopoverTrigger className="cursor-pointer" asChild>
         <Button size="icon" variant="ghost">
-          <UserImage size="md" name={user.name} image={user.image} />
+          <UserProfilePicture size="md" name={user.name} image={user.image} />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -116,7 +116,7 @@ function ProfileHeader({
   return (
     <>
       <div className="flex flex-col gap-2 py-6 border-b border-border bg-accent/60 items-center">
-        <UserImage size="lg" name={name} image={image} />
+        <UserProfilePicture size="lg" name={name} image={image} />
         <Heading
           as="h3"
           size="lg"
