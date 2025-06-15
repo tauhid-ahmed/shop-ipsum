@@ -3,7 +3,7 @@
 import { createVerificationToken } from "@/db/mutations/verification";
 import { createUser } from "@/db/mutations/users";
 import { getUserByEmail } from "@/db/queries/users";
-import { encryptPassword } from "@/lib/utils";
+import { encryptPassword } from "@/lib/auth-utils";
 import {
   registerFormSchema,
   RegisterFormSchema,

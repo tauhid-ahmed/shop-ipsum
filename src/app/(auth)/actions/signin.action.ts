@@ -4,7 +4,7 @@ import { createVerificationToken } from "@/db/mutations/verification";
 import { getUserByEmail } from "@/db/queries/users";
 import { defaultRedirectPath } from "@/constants/paths";
 import { AppError } from "@/lib/error/app-error";
-import { decryptPassword } from "@/lib/utils";
+import { decryptPassword } from "@/lib/auth-utils";
 import {
   ApiResponse,
   successResponse,
