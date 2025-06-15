@@ -29,11 +29,7 @@ export function ProductsHeader() {
   } = useProductLayout();
 
   return (
-    <div
-      className={cn(
-        "flex justify-between py-4 h-16 z-50 backdrop-blur rounded"
-      )}
-    >
+    <div className={cn("flex justify-between py-4 h-16 z-50 rounded")}>
       <div className="flex gap-4 items-center">
         <Button variant="outline" size="icon" onClick={toggleSidebarCollapse}>
           <LucidePanelLeftDashed />
