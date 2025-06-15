@@ -31,7 +31,7 @@ export function ProductsHeader() {
   return (
     <div
       className={cn(
-        "flex justify-between py-4 h-16 border-b border-border z-50 sticky top-18 bg-sidebar px-4 backdrop-blur"
+        "flex justify-between py-4 h-16 z-50 backdrop-blur rounded"
       )}
     >
       <div className="flex gap-4 items-center">
@@ -59,7 +59,7 @@ export function ProductsHeader() {
             </SelectGroup>
           </SelectContent>
         </Select>
-        <div className="">
+        <div className="flex gap-1">
           <Button
             variant="outline"
             size="icon"

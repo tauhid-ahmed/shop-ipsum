@@ -36,7 +36,7 @@ export function ProductsGrid({ children }: React.PropsWithChildren) {
   return (
     <div className="">
       <ProductsHeader />
-      <div className={cn("grid gap-4 mt-4", columnWidth)}>{children}</div>
+      <div className={cn("grid gap-4", columnWidth)}>{children}</div>
     </div>
   );
 }
