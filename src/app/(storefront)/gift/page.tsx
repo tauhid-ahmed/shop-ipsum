@@ -12,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useEffect } from "react";
 
 export function SheetDemo() {
   return (
@@ -48,6 +49,11 @@ export function SheetDemo() {
 }
 
 export default function GiftPage() {
+  useEffect(() => {
+    const f = async () => {
+      // const response =
+    };
+  }, []);
   return (
     <div>
       <SheetDemo />
