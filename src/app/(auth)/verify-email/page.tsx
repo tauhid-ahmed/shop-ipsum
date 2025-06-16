@@ -2,39 +2,28 @@ import { getVerificationTokenByToken } from "@/db/queries/verification";
 import EmailVerificationForm from "@/app/(auth)/_components/email-verify-form";
 
 type VerifyEmailPageProps = {
-  searchParams: { token?: string };
+  searchParams: Promise<{ token: string }>;
+};
+
+const tokenData = {
+  token: "",
+  message: "",
 };
 
 export default async function VerifyEmailPage({
   searchParams,
 }: VerifyEmailPageProps) {
-  const token = searchParams.token;
-  let initialData: {
-    token: string;
-    identifier: string;
-    isValid: boolean;
-    message: string;
-  } = {
-    token: "",
-    identifier: "",
-    isValid: false,
-    message: "",
-  };
+  const { token } = await searchParams;
 
   if (token) {
     const tokenRecord = await getVerificationTokenByToken(token);
 
     if (tokenRecord && new Date(tokenRecord.expires) > new Date()) {
-      initialData = {
-        token: tokenRecord.token,
-        identifier: tokenRecord.identifier,
-        isValid: true,
-        message: "Token is valid",
-      };
+      tokenData.token = tokenRecord.token;
     } else {
-      initialData.message = "Token is invalid or expired.";
+      tokenData.message = "Invalid token";
     }
   }
 
-  return <EmailVerificationForm initialData={initialData} />;
+  return <EmailVerificationForm initialData={tokenData} />;
 }

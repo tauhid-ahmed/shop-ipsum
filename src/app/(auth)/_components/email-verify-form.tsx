@@ -19,22 +19,14 @@ export default function EmailVerificationForm({
   initialData: any;
 }) {
   const [otp, setOtp] = useState(initialData.token || "");
-  const [verification, setVerification] = useState({
-    message: "",
-    type: "",
-  });
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const data = await verifyEmailTokenAction(otp);
-    if (data.message === VALIDATION_MESSAGES.TOKEN.VERIFIED) {
-      setVerification({ message: data.message, type: data.type });
-    }
+    const response = await verifyEmailTokenAction(otp);
   };
 
   return (
     <AuthCard title="Please verify your email" socialInfo={false}>
-      {sessionStorage.getItem("masked-email")}
       <form onSubmit={handleSubmit}>
         <div className="w-fit mx-auto space-y-4">
           <InputOTP
