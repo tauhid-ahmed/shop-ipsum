@@ -3,7 +3,7 @@ Although this method does not guarantee absolute uniqueness, it is sufficient fo
 */
 
 export const generateToken = () => {
-  const randomNum = Math.floor(1000 + Math.random() * 9000).toString(); // 4-digit random number
+  const randomNum = Math.floor(1000 + Math.random() * 9999).toString(); // 4-digit random number
   const timestamp = Date.now().toString().slice(-2); // Last 2 digits of timestamp
   const token = `${randomNum}${timestamp}`; // Combine random number and timestamp
 
