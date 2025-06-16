@@ -8,13 +8,15 @@ import { verifyEmailPath } from "@/constants/paths";
 export const sendEmail = new Hono();
 
 sendEmail.post("/", async (c) => {
-  const { name, email } = await c.req.json();
+  const { name, email, token } = await c.req.json();
 
   const html = await render(
     <EmailVerificationTemplate
       name={name}
-      code="123456"
-      verifyUrl={`${env.NEXT_PUBLIC_APP_URL}/${verifyEmailPath}?token=123456`}
+      code={token}
+      verifyUrl={`${
+        env.NEXT_PUBLIC_APP_URL
+      }/${verifyEmailPath()}?token=${token}`}
     />
   );
 
