@@ -147,7 +147,7 @@ function ProductCTA({ slug, productId }: { slug: string; productId: string }) {
   const router = useRouter();
   const handleAddToCart = () => {
     if (!isAuthenticated) {
-      return router.push(signInPath());
+      return router.push(signInPath(productDetailsPath(slug)));
     }
     alert("To be implemented");
   };
