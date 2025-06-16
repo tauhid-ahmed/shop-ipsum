@@ -27,10 +27,6 @@ export const env = createEnv({
       .string()
       .min(1, "❌ Missing GitHub OAuth Client Secret (AUTH_GITHUB_SECRET)."),
 
-    RESEND_API_KEY: z
-      .string()
-      .min(1, "❌ RESEND_API_KEY is required for email delivery."),
-
     EMAIL_FROM: z
       .string()
       .email("❌ EMAIL_FROM must be a valid email address."),
@@ -78,7 +74,6 @@ export const env = createEnv({
     AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
     AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
 
-    RESEND_API_KEY: process.env.RESEND_API_KEY,
     EMAIL_FROM: process.env.EMAIL_FROM,
     EMAIL_PASS: process.env.EMAIL_PASS,
 
