@@ -10,7 +10,7 @@ export function FormLink({
 }: React.ComponentProps<"link">) {
   return (
     <Link
-      href={href as string}
+      href={href || "/"}
       className={cn(
         "text-sm text-blue-600 dark:text-blue-400 font-semibold hover:underline underline-offset-2 focus:underline active:underline",
         className

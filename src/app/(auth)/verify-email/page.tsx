@@ -1,35 +1,40 @@
-import { getVerificationTokenByToken } from "@/db/queries";
+import { getVerificationTokenByToken } from "@/db/queries/verification";
 import EmailVerificationForm from "@/app/(auth)/_components/email-verify-form";
 
-type Props = {
-  searchParams: Promise<{
+type VerifyEmailPageProps = {
+  searchParams: { token?: string };
+};
+
+export default async function VerifyEmailPage({
+  searchParams,
+}: VerifyEmailPageProps) {
+  const token = searchParams.token;
+  let initialData: {
     token: string;
-  }>;
-};
+    identifier: string;
+    isValid: boolean;
+    message: string;
+  } = {
+    token: "",
+    identifier: "",
+    isValid: false,
+    message: "",
+  };
 
-export type Notify = {
-  type: "error" | "success" | "";
-  message: string;
-  identifier: string;
-  token: string;
-};
-
-const notify: Notify = {
-  type: "",
-  message: "",
-  identifier: "",
-  token: "",
-};
-
-export default async function VerifyEmailPage({ searchParams }: Props) {
-  const { token } = await searchParams;
   if (token) {
-    const tokenData = await getVerificationTokenByToken(token);
-    if (tokenData && new Date(tokenData.expires) > new Date()) {
-      notify.token = tokenData.token;
-      notify.identifier = tokenData.identifier;
+    const tokenRecord = await getVerificationTokenByToken(token);
+
+    if (tokenRecord && new Date(tokenRecord.expires) > new Date()) {
+      initialData = {
+        token: tokenRecord.token,
+        identifier: tokenRecord.identifier,
+        isValid: true,
+        message: "Token is valid",
+      };
+    } else {
+      initialData.message = "Token is invalid or expired.";
     }
   }
 
-  return <EmailVerificationForm notify={notify} />;
+  return <EmailVerificationForm initialData={initialData} />;
 }

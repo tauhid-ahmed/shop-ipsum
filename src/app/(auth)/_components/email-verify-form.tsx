@@ -1,28 +1,24 @@
 "use client";
 
-import { AuthCard } from "./auth-card";
-import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import { verifyEmailTokenAction } from "@/actions/auth/verify-email.action";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { VALIDATION_MESSAGES } from "@/lib/validation";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { tokenVerifyAction } from "../../../actions/auth/verify-email.action";
-import { type NotifyType } from "../types";
-import { VALIDATION_MESSAGES } from "./validation-messages";
+import React, { useState } from "react";
+import { AuthCard } from "./auth-card";
+import { SubmitButton } from "./submit-button";
 
-export type Notify = {
-  type: "error" | "success" | "";
-  message: string;
-  identifier: string;
-  token: string;
-};
-
-export default function EmailVerificationForm({ notify }: { notify: Notify }) {
-  const [otp, setOtp] = useState(notify.token || "");
+export default function EmailVerificationForm({
+  initialData,
+}: {
+  initialData: any;
+}) {
+  const [otp, setOtp] = useState(initialData.token || "");
   const [verification, setVerification] = useState({
     message: "",
     type: "",
@@ -30,16 +26,14 @@ export default function EmailVerificationForm({ notify }: { notify: Notify }) {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const data = await tokenVerifyAction(otp);
+    const data = await verifyEmailTokenAction(otp);
     if (data.message === VALIDATION_MESSAGES.TOKEN.VERIFIED) {
       setVerification({ message: data.message, type: data.type });
     }
   };
 
-  return null;
-
   return (
-    <AuthCard title="Please verify your email">
+    <AuthCard title="Please verify your email" socialInfo={false}>
       {sessionStorage.getItem("masked-email")}
       <form onSubmit={handleSubmit}>
         <div className="w-fit mx-auto space-y-4">
@@ -61,22 +55,16 @@ export default function EmailVerificationForm({ notify }: { notify: Notify }) {
               <InputOTPSlot index={5} />
             </InputOTPGroup>
           </InputOTP>
-          <AuthCardNotify notify={verification as NotifyType} />
-          <Button
+          <SubmitButton
             disabled={otp.length !== 6}
             type="submit"
             className="w-full flex items-center justify-center"
-          >
-            Verify
-          </Button>
+            isSubmitting={false}
+            idleLabel="Verify"
+            submittingLabel="Verifying"
+          />
         </div>
       </form>
-      <div className="text-center p-2 text-sm font-medium text-white bg-rose-500 dark:bg-rose-800 rounded border border-border">
-        Verification code is unavailable on the free tier. Use{" "}
-        <strong className="underline">Google</strong> or{" "}
-        <strong className="underline">GitHub</strong> to sign in.
-      </div>
-      <div className="p-4">{notify.identifier}</div>
     </AuthCard>
   );
 }

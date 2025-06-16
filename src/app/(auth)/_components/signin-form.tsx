@@ -3,7 +3,7 @@ import { TextField } from "@/components";
 import { Form } from "@/components/ui/form";
 import * as paths from "@/constants/paths";
 import { signInFormSchema, type SignInFormSchema } from "@/lib/validation";
-import { Notification } from "@/utils/api-responses";
+import { type Notification } from "@/utils/api-responses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";

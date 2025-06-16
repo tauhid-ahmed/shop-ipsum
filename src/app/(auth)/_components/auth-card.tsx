@@ -5,9 +5,10 @@ import { SocialForm } from "./social-form";
 
 type AuthCardProps = {
   title: string;
-  redirectMessage: string;
-  redirectLabel: string;
-  redirectHref: string;
+  redirectMessage?: string;
+  redirectLabel?: string;
+  redirectHref?: string;
+  socialInfo?: boolean;
 } & React.ComponentProps<"div">;
 
 export function AuthCard({
@@ -15,6 +16,7 @@ export function AuthCard({
   redirectMessage,
   redirectHref,
   redirectLabel,
+  socialInfo = true,
   children,
 }: AuthCardProps) {
   return (
@@ -29,7 +31,7 @@ export function AuthCard({
         <CardContent>
           <div className="space-y-4">
             {children}
-            <SocialForm />
+            {socialInfo && <SocialForm />}
           </div>
         </CardContent>
       </Card>
