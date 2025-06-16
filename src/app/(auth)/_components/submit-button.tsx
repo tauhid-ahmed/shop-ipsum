@@ -26,7 +26,7 @@ const transitionVariants = {
   },
 };
 
-export default function SubmitButton({
+export function SubmitButton({
   disabled,
   isSubmitting,
   idleLabel,

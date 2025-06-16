@@ -10,13 +10,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { registerAction } from "../actions/register.action";
-import {
-  registerFormSchema,
-  type RegisterFormSchema,
-} from "./validators-schema";
+import { registerUserAction } from "@/actions/auth";
+import { registerFormSchema, type RegisterFormSchema } from "@/lib/validation";
 import { AuthCard } from "./auth-card";
-import SubmitButton from "./submit-button";
+import { SubmitButton } from "./submit-button";
 
 const defaultValues = {
   name: "",
@@ -37,7 +34,7 @@ export default function RegisterForm() {
   const router = useRouter();
   const onSubmit = async (formData: RegisterFormSchema) => {
     setNotify(null);
-    const data = await registerAction(formData);
+    const data = await registerUserAction(formData);
     setNotify(data.notify as Notify);
     if (data?.notify?.type === "success") {
       sessionStorage.setItem("masked-email", formData.email);

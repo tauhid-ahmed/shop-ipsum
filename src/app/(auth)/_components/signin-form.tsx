@@ -11,10 +11,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { signInAction } from "../actions/signin.action";
-import { signInFormSchema, type SignInFormSchema } from "./validators-schema";
+import { signInAction } from "../../../actions/auth/signin.action";
+import { signInFormSchema, type SignInFormSchema } from "@/lib/validation";
 import { AuthCard, AuthCardNotification } from "./auth-card";
-import { SubmitButton } from ".";
+import { SubmitButton } from "./submit-button";
 
 const defaultValues = {
   email: "",

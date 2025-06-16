@@ -10,7 +10,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { tokenVerifyAction } from "../actions/email-verify.action";
+import { tokenVerifyAction } from "../../../actions/auth/verify-email.action";
 import { type NotifyType } from "../types";
 import { VALIDATION_MESSAGES } from "./validation-messages";
 

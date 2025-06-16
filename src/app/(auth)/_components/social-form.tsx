@@ -2,7 +2,7 @@ import { GithubLogo } from "@/components/icons/github";
 import { GoogleLogo } from "@/components/icons/google";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { socialAction } from "../actions/social.action";
+import { socialAction } from "../../../actions/auth/social.action";
 
 export function SocialForm() {
   const [loading, setLoading] = useState(false);
