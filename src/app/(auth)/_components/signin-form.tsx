@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { signInAction } from "../../../actions/auth/signin.action";
+import { signInAction } from "@/actions/auth/signin.action";
 import { AuthCard } from "./auth-card";
 import { AuthCheckboxField } from "./auth-checkbox-field";
 import { AuthNotification } from "./auth-notification";
