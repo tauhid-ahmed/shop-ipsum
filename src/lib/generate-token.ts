@@ -12,5 +12,5 @@ export const generateToken = () => {
     .split("")
     .sort(() => Math.random() - 0.5)
     .join("");
-  return shuffledToken; // 6-digit shuffled token
+  return shuffledToken.slice(0, 6); // 6-digit shuffled token
 };
