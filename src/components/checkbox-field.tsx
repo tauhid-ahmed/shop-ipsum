@@ -1,3 +1,5 @@
+"use client";
+
 import { useFormContext } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
