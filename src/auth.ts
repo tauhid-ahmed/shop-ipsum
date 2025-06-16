@@ -23,11 +23,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return user;
       },
     }),
-    Google({
-      authorization: {
-        url: "https://accounts.google.com/o/oauth2/v2/auth",
-      },
-    }),
+    Google,
     Github,
   ],
 
