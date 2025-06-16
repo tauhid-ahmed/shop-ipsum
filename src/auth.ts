@@ -17,7 +17,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Credentials({
       name: "credentials",
       async authorize(credentials) {
-        console.log({ credentials });
         const { email } = credentials;
         const user = await getUserByEmail(email as string);
         if (!user) return null;
