@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "Sign in",
 };
 
-export default async function SignInPage() {
-  return <SignInForm />;
+type SigninPageProps = {
+  searchParams: Promise<{ callbackUrl: string }>;
+};
+
+export default async function SignInPage({ searchParams }: SigninPageProps) {
+  const { callbackUrl } = await searchParams;
+  return <SignInForm callbackUrl={callbackUrl} />;
 }
