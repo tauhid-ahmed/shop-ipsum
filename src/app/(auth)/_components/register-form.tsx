@@ -1,7 +1,6 @@
 "use client";
 import { registerUserAction } from "@/actions/auth";
 import { TextField } from "@/components";
-import { CheckboxField } from "@/components/checkbox-field";
 import { Form } from "@/components/ui/form";
 import * as paths from "@/constants/paths";
 import { registerFormSchema, type RegisterFormSchema } from "@/lib/validation";
@@ -12,8 +11,9 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { AuthCard } from "./auth-card";
-import { SubmitButton } from "./submit-button";
 import { AuthNotification } from "./auth-notification";
+import { SubmitButton } from "./submit-button";
+import { AuthCheckboxField } from "./auth-checkbox-field";
 
 const defaultValues = {
   name: "",
@@ -62,12 +62,20 @@ export default function RegisterForm() {
             />
             <div className="flex flex-col gap-4">
               <AuthNotification notification={notification as Notification} />
-              <div className="flex items-center text-sm gap-3 font-medium">
-                <CheckboxField name="terms_and_condition" />
-                <span className="hover:underline cursor-pointer hover:text-blue-500">
-                  <Link href="#">I accept the terms and conditions.</Link>
-                </span>
-              </div>
+              <AuthCheckboxField
+                name="terms_and_condition"
+                label={
+                  <>
+                    I agree to the{" "}
+                    <Link
+                      href="/terms"
+                      className="underline text-primary hover:text-primary/80"
+                    >
+                      Terms & Conditions
+                    </Link>
+                  </>
+                }
+              />
 
               <SubmitButton
                 idleLabel="Create an account"

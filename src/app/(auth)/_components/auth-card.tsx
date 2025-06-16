@@ -1,6 +1,6 @@
 import { Heading, Logo } from "@/components";
 import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
+import { FormLink } from "./form-link";
 import { SocialForm } from "./social-form";
 
 type AuthCardProps = {
@@ -37,12 +37,7 @@ export function AuthCard({
         <span className="text-muted-foreground font-medium">
           {redirectMessage}
         </span>
-        <Link
-          className="text-blue-600 dark:text-blue-400 font-semibold hover:underline underline-offset-2 focus:underline active:underline"
-          href={redirectHref}
-        >
-          {redirectLabel}
-        </Link>
+        <FormLink href={redirectHref}>{redirectLabel}</FormLink>
       </div>
     </div>
   );

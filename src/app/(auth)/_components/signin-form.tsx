@@ -1,19 +1,18 @@
 "use client";
-import { CheckboxField } from "@/components/checkbox-field";
 import { TextField } from "@/components";
 import { Form } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
 import * as paths from "@/constants/paths";
+import { signInFormSchema, type SignInFormSchema } from "@/lib/validation";
 import { Notification } from "@/utils/api-responses";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { signInAction } from "../../../actions/auth/signin.action";
-import { signInFormSchema, type SignInFormSchema } from "@/lib/validation";
 import { AuthCard } from "./auth-card";
+import { AuthCheckboxField } from "./auth-checkbox-field";
 import { AuthNotification } from "./auth-notification";
+import { FormLink } from "./form-link";
 import { SubmitButton } from "./submit-button";
 
 const defaultValues = {
@@ -52,9 +51,11 @@ export function SignInForm() {
             <TextField label="Email" name="email" />
             <TextField label="Password" name="password" type="password" />
             <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <RememberMe />
-                <ForgotPasswordRedirect />
+              <div className="flex items-center justify-between gap-2">
+                <AuthCheckboxField name="remember_me" label="Remember me" />
+                <FormLink href={paths.forgotPasswordPath()}>
+                  Forgot Password?
+                </FormLink>
               </div>
               <AuthNotification notification={notification as Notification} />
               <SubmitButton
@@ -62,7 +63,9 @@ export function SignInForm() {
                 idleLabel="Sign in"
                 submittingLabel="Signing you in..."
                 disabled={
-                  !form.formState.isValid || form.formState.isSubmitting
+                  !rememberMe ||
+                  !form.formState.isValid ||
+                  form.formState.isSubmitting
                 }
                 isSubmitting={form.formState.isSubmitting}
               />
@@ -71,31 +74,11 @@ export function SignInForm() {
         </form>
       </Form>
 
-      {/* <div className="text-center p-2 text-sm font-medium text-white bg-rose-500 dark:bg-rose-800 rounded border border-border">
+      <div className="text-center p-2 text-sm font-medium text-white bg-rose-500 dark:bg-rose-800 rounded border border-border">
         Verification code is unavailable on the free tier. Use{" "}
         <strong className="underline">Google</strong> or{" "}
         <strong className="underline">GitHub</strong> to sign in.
-      </div> */}
+      </div>
     </AuthCard>
-  );
-}
-
-function RememberMe() {
-  return (
-    <Label className="flex gap-3 flex-row items-center cursor-pointer">
-      <CheckboxField name="remember_me" />
-      <span className="text-sm">Remember me</span>
-    </Label>
-  );
-}
-
-function ForgotPasswordRedirect() {
-  return (
-    <Link
-      href={paths.forgotPasswordPath()}
-      className="text-sm ml-auto text-blue-600 dark:text-blue-400 font-medium hover:underline underline-offset-2 focus:underline active:underline"
-    >
-      Forgot Password?
-    </Link>
   );
 }
