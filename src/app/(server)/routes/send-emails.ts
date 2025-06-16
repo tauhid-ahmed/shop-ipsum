@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import nodemailer from "nodemailer";
+import { env } from "@/env";
 
 export const sendEmail = new Hono();
 
@@ -17,8 +18,8 @@ sendEmail.post("/", async (c) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.EMAIL_FROM,
-      pass: process.env.EMAIL_PASS, // 🔐 make sure this is set in your env
+      user: env.EMAIL_FROM,
+      pass: env.EMAIL_PASS,
     },
     tls: {
       rejectUnauthorized: false,
@@ -27,7 +28,7 @@ sendEmail.post("/", async (c) => {
 
   try {
     await transporter.sendMail({
-      from: `Your App <${process.env.EMAIL_FROM}>`,
+      from: `Your App <${env.EMAIL_FROM}>`,
       to: email || "tauhidahmed@gmail.com",
       subject: "Hello from Hono + Nodemailer!",
       html: emailHtml,
