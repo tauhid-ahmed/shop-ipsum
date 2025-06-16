@@ -49,6 +49,7 @@ export const signInAction = withErrorHandler(
           name: user.name,
           email: user.email,
           token: token.token,
+          callbackUrl: safeParsedData.data.callbackUrl || "",
         }),
         cache: "no-store",
       });
@@ -57,7 +58,7 @@ export const signInAction = withErrorHandler(
 
     await signIn("credentials", {
       email: user.email,
-      redirectTo: defaultRedirectPath(),
+      redirectTo: safeParsedData.data.callbackUrl || defaultRedirectPath(),
     });
 
     return createSuccessResponse(
