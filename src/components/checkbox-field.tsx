@@ -2,7 +2,13 @@ import { useFormContext } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 
-export default function CheckboxField({ name }: { name: string }) {
+export default function CheckboxField({
+  name,
+  id,
+}: {
+  name: string;
+  id: string;
+}) {
   const form = useFormContext();
   return (
     <FormField
@@ -12,6 +18,7 @@ export default function CheckboxField({ name }: { name: string }) {
         <FormItem>
           <FormControl>
             <Checkbox
+              id={id}
               checked={value}
               onCheckedChange={(checked) => onChange(checked)}
               className="border-primary"
