@@ -1,15 +1,15 @@
 "use server";
-import { getVerificationTokenByToken } from "@/db/queries/email-verify";
+import { getVerificationTokenByToken } from "@/db/queries/verification";
 import {
-  createEmailVerificationToken,
+  createVerificationToken,
   deleteVerificationToken,
-} from "@/db/mutations/email-verify";
+} from "@/db/mutations/verification";
 import { signIn } from "@/auth";
-import { VALIDATION_MESSAGES } from "../validation-messages";
+import { VALIDATION_MESSAGES } from "@/lib/validation";
 import { type Notify } from "@/utils/api-responses";
-import { getUserByEmailWithAccount } from "@/db/queries";
+import { getUserByEmailWithAccount } from "@/db/queries/users";
 
-export const tokenVerifyAction = async (token: string): Promise<Notify> => {
+export async function verifyEmailTokenAction(token: string): Promise<Notify> {
   const tokenData = await getVerificationTokenByToken(token);
   if (!tokenData)
     return { message: VALIDATION_MESSAGES.TOKEN.INVALID, type: "error" };
@@ -51,4 +51,4 @@ export const tokenVerifyAction = async (token: string): Promise<Notify> => {
     message: "Token is valid",
     type: "success",
   };
-};
+}
