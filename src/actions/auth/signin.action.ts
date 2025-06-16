@@ -1,16 +1,23 @@
 "use server";
 import { signIn } from "@/auth";
-import { defaultRedirectPath } from "@/constants/paths";
+import { defaultRedirectPath, verifyEmailPath } from "@/constants/paths";
 import { getUserByEmail } from "@/db/queries/users";
 import { decryptPassword } from "@/lib/auth-utils";
 import { AppError } from "@/lib/error/app-error";
 import { withErrorHandler } from "@/lib/error/with-error-handler";
-import { signInFormSchema, SignInFormSchema } from "@/lib/validation";
+import {
+  signInFormSchema,
+  SignInFormSchema,
+  VALIDATION_MESSAGES,
+} from "@/lib/validation";
+import { createVerificationToken } from "@/db/mutations/verification";
+
 import {
   ApiResponse,
   createSuccessResponse,
   createValidationErrorResponse,
 } from "@/utils/api-responses";
+import { redirect } from "next/navigation";
 
 export const signInAction = withErrorHandler(
   async (formData: SignInFormSchema): Promise<ApiResponse> => {
@@ -22,26 +29,39 @@ export const signInAction = withErrorHandler(
 
     const user = await getUserByEmail(safeParsedData.data.email);
     if (!user || !user.password)
-      throw new AppError("Invalid credentials", { code: "" });
+      throw new AppError(VALIDATION_MESSAGES.USER_RESPONSES.INVALID_DATA);
 
     const matchedPassword = await decryptPassword(
       safeParsedData.data.password,
       user.password
     );
     if (!matchedPassword)
-      throw new AppError("Invalid credentials!", { code: "" });
+      throw new AppError(VALIDATION_MESSAGES.USER_RESPONSES.INVALID_DATA);
 
-    // if (!user.emailVerified) {
-    //   if (!user.email) throw new AppError("Email is required");
-    //   await createVerificationToken(user.email);
-    //   return successResponse("");
-    // }
+    if (!user.emailVerified) {
+      const token = await createVerificationToken(user.email);
+      await fetch(`http:/localhost:3000/api/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email,
+          token: token.token,
+        }),
+        cache: "no-store",
+      });
+      redirect(verifyEmailPath());
+    }
 
-    await signIn("credentials", {
-      email: user.email,
-      redirectTo: defaultRedirectPath(),
-    });
+    // await signIn("credentials", {
+    //   email: user.email,
+    //   redirectTo: defaultRedirectPath(),
+    // });
 
-    return createSuccessResponse("Signed in successful!");
+    return createSuccessResponse(
+      VALIDATION_MESSAGES.USER_RESPONSES.LOGIN_SUCCESS
+    );
   }
 );
