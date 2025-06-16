@@ -7,9 +7,9 @@ import { cors } from "hono/cors";
 
 const app = new Hono()
   .basePath("/api")
-  // middleware
-  .use(logger())
-  .use(cors());
+  // middlewares
+  .use("*", logger())
+  .use("*", cors());
 
 export const GET = handle(app);
 export const POST = handle(app);
