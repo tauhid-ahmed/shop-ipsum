@@ -7,16 +7,24 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { VALIDATION_MESSAGES } from "@/lib/validation";
 import { type Notification } from "@/utils/api-responses";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import React, { useState } from "react";
 import { AuthCard } from "./auth-card";
 import { SubmitButton } from "./submit-button";
-import { AuthNotification } from "./auth-notification";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { defaultRedirectPath } from "@/constants/paths";
+type VerifyEmailTokenResponse = {
+  success: boolean;
+  message?: string;
+  notification?: Notification;
+  data?: {
+    user?: {
+      email: string;
+    };
+  };
+};
 
 type EmailVerificationFormProps = {
   initialData: {
@@ -32,17 +40,15 @@ export default function EmailVerificationForm({
     initialData.token || ""
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [notification, setNotification] = useState<Notification | null>(
-    initialData.message ? { type: "error", message: initialData.message } : null
-  );
+
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setNotification(null); // Clear previous notifications
     setIsSubmitting(true);
-    const response = await verifyEmailTokenAction(verificationToken);
-    setNotification(response.notification || null);
+    const response = (await verifyEmailTokenAction(
+      verificationToken
+    )) as VerifyEmailTokenResponse;
 
     if (response.success && response.data?.user?.email) {
       setIsSubmitting(false);
@@ -55,7 +61,6 @@ export default function EmailVerificationForm({
       setIsSubmitting(false);
       if (!response.notification && response.message) {
         // Fallback if notification object isn't directly on response
-        setNotification({ type: "error", message: response.message });
       }
     }
   };
@@ -82,7 +87,6 @@ export default function EmailVerificationForm({
               <InputOTPSlot index={5} />
             </InputOTPGroup>
           </InputOTP>
-          <AuthNotification notification={notification} />
           <SubmitButton
             disabled={verificationToken.length !== 6}
             type="submit"
