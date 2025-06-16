@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 
-export function CheckboxField({ name }: { name: string }) {
+export default function CheckboxField({ name }: { name: string }) {
   const form = useFormContext();
   return (
     <FormField
