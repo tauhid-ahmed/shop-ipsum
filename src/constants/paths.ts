@@ -16,9 +16,11 @@ export const childrenPath = () => "/search/children";
 export const giftPath = () => "/gift";
 
 // Auth Routes
-export const signInPath = () => "/sign-in";
+export const signInPath = (callbackUrl?: string) =>
+  callbackUrl ? `/sign-in?callbackUrl=${callbackUrl}` : "/sign-in";
 export const registerPath = () => "/register";
-export const verifyEmailPath = () => "/verify-email";
+export const verifyEmailPath = (callbackUrl?: string) =>
+  callbackUrl ? `/verify-email?callbackUrl=${callbackUrl}` : "/verify-email";
 export const forgotPasswordPath = () => "/forgot-password";
 export const resetPasswordPath = () => "/reset-password";
 
