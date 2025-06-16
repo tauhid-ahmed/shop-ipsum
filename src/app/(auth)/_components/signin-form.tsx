@@ -15,20 +15,19 @@ import { AuthNotification } from "./auth-notification";
 import { FormLink } from "./form-link";
 import { SubmitButton } from "./submit-button";
 
-const defaultValues = {
-  email: "",
-  password: "",
-  remember_me: false,
-};
-
-export function SignInForm() {
+export function SignInForm({ callbackUrl }: { callbackUrl: string }) {
   const [notification, setNotification] = React.useState<Notification | null>(
     null
   );
   const form = useForm<SignInFormSchema>({
     mode: "all",
     resolver: zodResolver(signInFormSchema),
-    defaultValues,
+    defaultValues: {
+      email: "",
+      password: "",
+      remember_me: false,
+      callbackUrl: callbackUrl,
+    },
   });
   const router = useRouter();
   const rememberMe = form.watch("remember_me");
@@ -47,6 +46,7 @@ export function SignInForm() {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
+          <TextField type="hidden" name="callbackUrl" />
           <fieldset className="space-y-6">
             <TextField label="Email" name="email" />
             <TextField label="Password" name="password" type="password" />
