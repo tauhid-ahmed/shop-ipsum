@@ -59,12 +59,15 @@ export const registerUserAction = withErrorHandler(
     const token = await createVerificationToken(newUser.email);
     await fetch(`http:/localhost:3000/api/send-email`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name: newUserData.name,
         email: newUser.email,
         token: token.token,
       }),
-      cache: "no-cache",
+      cache: "no-store",
     });
 
     return createSuccessResponse(
