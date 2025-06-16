@@ -1,12 +1,13 @@
 "use server";
 import { getVerificationTokenByToken } from "@/db/queries/verification";
+import { getUserByEmail } from "@/db/queries/users";
 import { deleteVerificationTokenByEmail } from "@/db/mutations/verification";
 import { signIn } from "@/auth";
 import { VALIDATION_MESSAGES } from "@/lib/validation";
 import { ApiResponse, createSuccessResponse } from "@/utils/api-responses";
-import { getUserByEmailWithAccount } from "@/db/queries/users";
 import { withErrorHandler } from "@/lib/error/with-error-handler";
 import { AppError } from "@/lib/error/app-error";
+import { updateEmailVerifiedStatus } from "@/db/mutations/users";
 
 export const verifyEmailTokenAction = withErrorHandler(async function (
   token: string
@@ -19,22 +20,15 @@ export const verifyEmailTokenAction = withErrorHandler(async function (
 
   if (isExpired) throw new AppError("Token Expired");
 
-  const user = await getUserByEmailWithAccount(tokenData.identifier);
+  const user = await getUserByEmail(tokenData.identifier);
 
-  if (!user?.name) throw new AppError("User not found");
+  if (!user) throw new AppError("User not found");
 
-  if (user.name) {
-    await deleteVerificationTokenByEmail(tokenData.identifier);
-    await signIn("credentials", {
-      email: user.email,
-    });
-    return createSuccessResponse("Account verification successful");
-  }
+  await updateEmailVerifiedStatus(tokenData.identifier);
+  await deleteVerificationTokenByEmail(tokenData.identifier);
 
   await signIn("credentials", {
     email: user.email,
-    redirectTo: "/",
   });
-
-  return createSuccessResponse("Signin successful");
+  return createSuccessResponse("Account verification successful");
 });
