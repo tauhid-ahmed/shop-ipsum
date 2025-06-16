@@ -2,7 +2,6 @@
 import { getVerificationTokenByToken } from "@/db/queries/verification";
 import { getUserByEmail } from "@/db/queries/users";
 import { deleteVerificationTokenByEmail } from "@/db/mutations/verification";
-import { signIn } from "@/auth";
 import { VALIDATION_MESSAGES } from "@/lib/validation";
 import { ApiResponse, createSuccessResponse } from "@/utils/api-responses";
 import { withErrorHandler } from "@/lib/error/with-error-handler";
@@ -20,17 +19,19 @@ export const verifyEmailTokenAction = withErrorHandler(async function (
 
   if (isExpired) throw new AppError(VALIDATION_MESSAGES.TOKEN.EXPIRED);
 
-  const user = await getUserByEmail(tokenData.identifier);
+  const existingUser = await getUserByEmail(tokenData.identifier);
 
-  if (!user) throw new AppError(VALIDATION_MESSAGES.USER_RESPONSES.NOT_FOUND);
+  if (!existingUser)
+    throw new AppError(VALIDATION_MESSAGES.USER_RESPONSES.NOT_FOUND);
 
   await updateEmailVerifiedStatus(tokenData.identifier);
   await deleteVerificationTokenByEmail(tokenData.identifier);
 
-  await signIn("credentials", {
-    email: user.email,
+  // Fetch the user again to get the updated emailVerified status
+  const updatedUser = await getUserByEmail(tokenData.identifier);
+
+  return createSuccessResponse({
+    user: updatedUser, // Return the user object with the updated status
+    message: VALIDATION_MESSAGES.ACCOUNT_VERIFICATION.VERIFICATION_SUCCESS,
   });
-  return createSuccessResponse(
-    VALIDATION_MESSAGES.ACCOUNT_VERIFICATION.VERIFICATION_SUCCESS
-  );
 });

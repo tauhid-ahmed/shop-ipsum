@@ -8,21 +8,56 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { VALIDATION_MESSAGES } from "@/lib/validation";
+import { type Notification } from "@/utils/api-responses";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import React, { useState } from "react";
 import { AuthCard } from "./auth-card";
 import { SubmitButton } from "./submit-button";
+import { AuthNotification } from "./auth-notification";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { defaultRedirectPath } from "@/constants/paths";
+
+type EmailVerificationFormProps = {
+  initialData: {
+    token: string;
+    message?: string; // For initial messages like "Invalid token"
+  };
+};
 
 export default function EmailVerificationForm({
   initialData,
-}: {
-  initialData: any;
-}) {
-  const [otp, setOtp] = useState(initialData.token || "");
+}: EmailVerificationFormProps) {
+  const [verificationToken, setVerificationToken] = useState(
+    initialData.token || ""
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState<Notification | null>(
+    initialData.message ? { type: "error", message: initialData.message } : null
+  );
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await verifyEmailTokenAction(otp);
+    setNotification(null); // Clear previous notifications
+    setIsSubmitting(true);
+    const response = await verifyEmailTokenAction(verificationToken);
+    setNotification(response.notification || null);
+
+    if (response.success && response.data?.user?.email) {
+      setIsSubmitting(false);
+      await signIn("credentials", {
+        email: response.data.user.email,
+        redirect: false, // Handle redirect manually after sign-in
+      });
+      router.push(defaultRedirectPath()); // Redirect to dashboard or home
+    } else {
+      setIsSubmitting(false);
+      if (!response.notification && response.message) {
+        // Fallback if notification object isn't directly on response
+        setNotification({ type: "error", message: response.message });
+      }
+    }
   };
 
   return (
@@ -30,8 +65,8 @@ export default function EmailVerificationForm({
       <form onSubmit={handleSubmit}>
         <div className="w-fit mx-auto space-y-4">
           <InputOTP
-            value={otp}
-            onChange={setOtp}
+            value={verificationToken}
+            onChange={setVerificationToken}
             maxLength={6}
             pattern={REGEXP_ONLY_DIGITS}
           >
@@ -47,11 +82,12 @@ export default function EmailVerificationForm({
               <InputOTPSlot index={5} />
             </InputOTPGroup>
           </InputOTP>
+          <AuthNotification notification={notification} />
           <SubmitButton
-            disabled={otp.length !== 6}
+            disabled={verificationToken.length !== 6}
             type="submit"
             className="w-full flex items-center justify-center"
-            isSubmitting={false}
+            isSubmitting={isSubmitting}
             idleLabel="Verify"
             submittingLabel="Verifying"
           />
