@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ Shop Ipsum - Modern E-Commerce Platform (Next.js + Hono)
 
-## Getting Started
+A modern, full-stack eCommerce SaaS application built with cutting-edge technologies, designed for scalability, performance, and clean architecture.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- ✅ **Modern Stack**: Next.js 15 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui
+- ⚡ **API Layer**: Hono.js (Edge-ready) with Vercel deployment support
+- 🎨 **UI/UX**: Accessible components, smooth animations (Framer Motion + CSS), dark/light theme support
+- 🛒 **eCommerce Ready**:
+  - Hierarchical taxonomy (departments → categories → subcategories)
+  - Dynamic product filters with facets (color, size, price range)
+  - Product listing, detail, and variations
+- 🔐 **Authentication**: NextAuth.js v5, social login, email verification, password reset
+- 📦 **ORM & DB**: Drizzle ORM with Neon Postgres
+- 🧩 **Modular Structure**: Fully reusable, colocated components & actions
+- 🧪 **Validation**: Zod schemas with centralized error messaging
+- 📈 **Dashboard**: Role-based access for Admins and Users
+- 🌐 **SEO Optimized**, blazing fast and mobile responsive
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧱 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Area          | Tech                           |
+| ------------- | ------------------------------ |
+| Frontend      | Next.js 15 (App Router), React |
+| Styling       | Tailwind CSS v4, shadcn/ui     |
+| Animation     | Framer Motion, native CSS      |
+| Backend (API) | Hono.js (Edge Middleware)      |
+| Auth          | NextAuth.js v5                 |
+| ORM & DB      | Drizzle ORM + Neon Postgres    |
+| Validation    | Zod                            |
+| Deployment    | Vercel                         |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Folder Structure
