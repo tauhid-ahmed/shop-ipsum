@@ -10,7 +10,6 @@ import {
 } from "@/lib/validation";
 
 import { verifyEmailPath } from "@/constants/paths";
-import { env } from "@/env";
 import { AppError } from "@/lib/error/app-error";
 import { withErrorHandler } from "@/lib/error/with-error-handler";
 import {
@@ -18,8 +17,6 @@ import {
   type ApiResponse,
 } from "@/utils/api-responses";
 import { redirect } from "next/navigation";
-
-const redirectUrl = `${env.NEXT_PUBLIC_APP_URL}/${verifyEmailPath()}`;
 
 export const registerUserAction = withErrorHandler(
   async (formData: RegisterFormSchema): Promise<ApiResponse> => {

@@ -6,7 +6,6 @@ import * as paths from "@/constants/paths";
 import { signInFormSchema, type SignInFormSchema } from "@/lib/validation";
 import { type Notification } from "@/utils/api-responses";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { AuthCard } from "./auth-card";
@@ -29,13 +28,11 @@ export function SignInForm({ callbackUrl }: { callbackUrl: string }) {
       callbackUrl: callbackUrl,
     },
   });
-  const router = useRouter();
   const rememberMe = form.watch("remember_me");
   const onSubmit = async (formData: SignInFormSchema) => {
     const data = await signInAction(formData);
     setNotification(data.notification as Notification);
   };
-  const searchParams = useSearchParams();
 
   return (
     <AuthCard

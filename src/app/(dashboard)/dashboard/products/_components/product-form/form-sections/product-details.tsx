@@ -1,5 +1,4 @@
 import { SelectField } from "@/components";
-import { type InputSelectProps } from "@/components/select-field";
 import { TextArea } from "@/components/text-area";
 import { TextField } from "@/components";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

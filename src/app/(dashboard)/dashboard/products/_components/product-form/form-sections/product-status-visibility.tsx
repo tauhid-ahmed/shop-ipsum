@@ -4,7 +4,7 @@ import { SelectField, TextField } from "@/components"; // Assuming TextField can
 import { Button } from "@/components/ui/button";
 import { productFormSections } from "../form-sections.config";
 import { ProductFormCard } from "../ui/product-form-card";
-import { LucideCalendar, LucideEye, LucideSave } from "lucide-react";
+import { LucideEye, LucideSave } from "lucide-react";
 // import DatePickerField from "@/components/date-picker-field"; // Ideal component
 
 const { productStatusVisibility } = productFormSections;
