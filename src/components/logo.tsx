@@ -20,6 +20,7 @@ export default function Logo({ size }: Props) {
         )}
         src={LogoImage}
         alt={env.NEXT_PUBLIC_APP_NAME}
+        priority
       />
     </Link>
   );
