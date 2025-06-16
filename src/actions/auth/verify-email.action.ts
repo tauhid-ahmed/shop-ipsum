@@ -1,47 +1,34 @@
 "use server";
 import { getVerificationTokenByToken } from "@/db/queries/verification";
-import {
-  createVerificationToken,
-  deleteVerificationToken,
-} from "@/db/mutations/verification";
+import { deleteVerificationTokenByEmail } from "@/db/mutations/verification";
 import { signIn } from "@/auth";
 import { VALIDATION_MESSAGES } from "@/lib/validation";
-import { type Notification } from "@/utils/api-responses";
+import { ApiResponse, createSuccessResponse } from "@/utils/api-responses";
 import { getUserByEmailWithAccount } from "@/db/queries/users";
+import { withErrorHandler } from "@/lib/error/with-error-handler";
+import { AppError } from "@/lib/error/app-error";
 
-export async function verifyEmailTokenAction(
+export const verifyEmailTokenAction = withErrorHandler(async function (
   token: string
-): Promise<Notification> {
+): Promise<ApiResponse> {
   const tokenData = await getVerificationTokenByToken(token);
-  if (!tokenData)
-    return { message: VALIDATION_MESSAGES.TOKEN.INVALID, type: "error" };
-  const now = new Date();
-  const isExpired = new Date(tokenData.expires) <= now;
+  if (!tokenData) throw new AppError("Token not found");
 
-  if (isExpired)
-    return {
-      message: VALIDATION_MESSAGES.TOKEN.EXPIRED,
-      type: "error",
-    };
+  const now = new Date();
+  const isExpired = new Date(tokenData.expires) < now;
+
+  if (isExpired) throw new AppError("Token Expired");
 
   const user = await getUserByEmailWithAccount(tokenData.identifier);
 
-  if (!user?.name) {
-    return {
-      message: "User not found",
-      type: "error",
-    };
-  }
+  if (!user?.name) throw new AppError("User not found");
 
   if (user.name) {
-    await deleteVerificationToken(tokenData.identifier);
+    await deleteVerificationTokenByEmail(tokenData.identifier);
     await signIn("credentials", {
       email: user.email,
     });
-    return {
-      message: VALIDATION_MESSAGES.TOKEN.VERIFIED,
-      type: "success",
-    };
+    return createSuccessResponse("Account verification successful");
   }
 
   await signIn("credentials", {
@@ -49,8 +36,5 @@ export async function verifyEmailTokenAction(
     redirectTo: "/",
   });
 
-  return {
-    message: "Token is valid",
-    type: "success",
-  };
-}
+  return createSuccessResponse("Signin successful");
+});
