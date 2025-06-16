@@ -1,17 +1,16 @@
 "use server";
 import { signIn } from "@/auth";
-import { createVerificationToken } from "@/db/mutations/verification";
-import { getUserByEmail } from "@/db/queries/users";
 import { defaultRedirectPath } from "@/constants/paths";
-import { AppError } from "@/lib/error/app-error";
+import { getUserByEmail } from "@/db/queries/users";
 import { decryptPassword } from "@/lib/auth-utils";
+import { AppError } from "@/lib/error/app-error";
+import { withErrorHandler } from "@/lib/error/with-error-handler";
+import { signInFormSchema, SignInFormSchema } from "@/lib/validation";
 import {
   ApiResponse,
   createSuccessResponse,
   createValidationErrorResponse,
 } from "@/utils/api-responses";
-import { signInFormSchema, SignInFormSchema } from "@/lib/validation";
-import { withErrorHandler } from "@/lib/error/with-error-handler";
 
 export const signInAction = withErrorHandler(
   async (formData: SignInFormSchema): Promise<ApiResponse> => {
