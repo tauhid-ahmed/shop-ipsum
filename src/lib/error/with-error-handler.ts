@@ -16,7 +16,6 @@ export function withErrorHandler<
           typeof error.cause === "number" ? error.cause : 500
         );
       }
-      // Unexpected বা অন্য কোনো error হলে generic message পাঠান
       return createErrorResponse(
         error instanceof Error ? error.message : "Unknown error",
         "UNKNOWN_ERROR",
