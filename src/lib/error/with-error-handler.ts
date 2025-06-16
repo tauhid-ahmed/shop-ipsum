@@ -1,5 +1,8 @@
 import { AppError } from "./app-error";
-import { errorResponse, type ApiResponse } from "@/utils/api-responses";
+import {
+  errorResponse,
+  type ApiResponse,
+} from "@/app/(server)/utils/api-responses";
 
 export function withErrorHandler<
   T extends (...args: any[]) => Promise<ApiResponse>

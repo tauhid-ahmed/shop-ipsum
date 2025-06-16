@@ -1,7 +1,7 @@
 import { Heading, Logo } from "@/components";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
-import { Notify } from "@/utils/api-responses";
+import { Notify } from "@/app/(server)/utils/api-responses";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { SocialForm } from "./social-form";

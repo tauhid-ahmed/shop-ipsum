@@ -15,7 +15,7 @@ import {
   successResponse,
   validationErrorResponse,
   type ApiResponse,
-} from "@/utils/api-responses";
+} from "@/app/(server)/utils/api-responses";
 import { AppError } from "@/lib/error/app-error";
 import { cookies } from "next/headers";
 import { signIn } from "@/auth";

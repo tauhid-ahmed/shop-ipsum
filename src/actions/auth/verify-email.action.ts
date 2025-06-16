@@ -6,7 +6,7 @@ import {
 } from "@/db/mutations/verification";
 import { signIn } from "@/auth";
 import { VALIDATION_MESSAGES } from "@/lib/validation";
-import { type Notify } from "@/utils/api-responses";
+import { type Notify } from "@/app/(server)/utils/api-responses";
 import { getUserByEmailWithAccount } from "@/db/queries/users";
 
 export async function verifyEmailTokenAction(token: string): Promise<Notify> {

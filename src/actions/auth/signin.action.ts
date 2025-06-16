@@ -9,7 +9,7 @@ import {
   ApiResponse,
   successResponse,
   validationErrorResponse,
-} from "@/utils/api-responses";
+} from "@/app/(server)/utils/api-responses";
 import { signInFormSchema, SignInFormSchema } from "@/lib/validation";
 import { withErrorHandler } from "@/lib/error/with-error-handler";
 

@@ -4,7 +4,7 @@ import { TextField } from "@/components";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import * as paths from "@/constants/paths";
-import { type Notify } from "@/utils/api-responses";
+import { type Notify } from "@/app/(server)/utils/api-responses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
