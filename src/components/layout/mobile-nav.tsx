@@ -6,7 +6,7 @@ import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import { useRootClick } from "@/hooks/useRootClick";
 import { cn } from "@/lib/utils";
 import { navItems } from "@/data/nav-data";
-import { ActiveRoute } from "../active-route";
+import { ActiveRoute } from "./active-route";
 
 export default function Navigation() {
   const [open, setOpen] = React.useState(false);

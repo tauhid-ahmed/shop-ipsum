@@ -1,5 +1,5 @@
 import { navItems } from "@/data/nav-data";
-import { ActiveRoute } from "../active-route";
+import { ActiveRoute } from "./active-route";
 
 export function DesktopNav() {
   return (
@@ -7,7 +7,9 @@ export function DesktopNav() {
       <ul className="flex gap-4">
         {navItems.map((item) => (
           <li key={item.href}>
-            <ActiveRoute href={item.href}>{item.name}</ActiveRoute>
+            <ActiveRoute exact={item.href === "/"} href={item.href}>
+              {item.name}
+            </ActiveRoute>
           </li>
         ))}
       </ul>
