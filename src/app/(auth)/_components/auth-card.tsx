@@ -22,7 +22,7 @@ export function AuthCard({
   return (
     <div className="space-y-8">
       <div className="flex flex-col items-center space-y-1">
-        <Logo />
+        <Logo size="lg" />
         <Heading weight="bold" size="2xl">
           {title}
         </Heading>
