@@ -1,5 +1,4 @@
 "use server";
-
 import { createVerificationToken } from "@/db/mutations/verification";
 import { createUser } from "@/db/mutations/users";
 import { getUserByEmail } from "@/db/queries/users";
@@ -8,6 +7,7 @@ import {
   registerFormSchema,
   RegisterFormSchema,
   VALIDATION_MESSAGES as MSG,
+  VALIDATION_MESSAGES,
 } from "@/lib/validation";
 
 import { withErrorHandler } from "@/lib/error/with-error-handler";
@@ -17,8 +17,10 @@ import {
   type ApiResponse,
 } from "@/utils/api-responses";
 import { AppError } from "@/lib/error/app-error";
-import { cookies } from "next/headers";
-import { signIn } from "@/auth";
+import { env } from "@/env";
+import { verifyEmailPath } from "@/constants/paths";
+
+const redirectUrl = `${env.NEXT_PUBLIC_APP_URL}/${verifyEmailPath()}`;
 
 export const registerUserAction = withErrorHandler(
   async (formData: RegisterFormSchema): Promise<ApiResponse> => {
@@ -53,23 +55,22 @@ export const registerUserAction = withErrorHandler(
     // Create new user in the database
     const [newUser] = await createUser(newUserData);
 
-    // Account creation successful &&  Verify email
-    await createVerificationToken(newUser.email);
-    const cookieStore = await cookies();
-    cookieStore.set({
-      name: "userId",
-      value: newUser.id,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-      maxAge: 60 * 15,
-      sameSite: "strict",
+    // Account creation successful && verify email process starts
+    const token = await createVerificationToken(newUser.email);
+    await fetch(`http:/localhost:3000/api/send-email`, {
+      method: "POST",
+      body: JSON.stringify({
+        name: newUserData.name,
+        email: newUser.email,
+        token: token.token,
+      }),
+      cache: "no-cache",
     });
 
-    await signIn("credentials", {
-      email: newUser.email,
-    });
-
-    return createSuccessResponse({}, "Email verification code sent");
+    return createSuccessResponse(
+      true,
+      VALIDATION_MESSAGES.ACCOUNT_VERIFICATION.EMAIL_SENT,
+      redirectUrl
+    );
   }
 );
