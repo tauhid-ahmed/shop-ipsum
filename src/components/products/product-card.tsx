@@ -36,7 +36,7 @@ export default function ProductCard({
       <CardContent className="relative px-2 h-full flex gap-4 flex-col">
         <div className="relative overflow-hidden px-2">
           <div className="absolute top-0 right-2 z-10 opacity-0 group-hover/card:opacity-100 -translate-y-2 group-hover/card:translate-y-0 transition-[transform_opacity] duration-200 backdrop-blur">
-            <Button variant="transparent" size="icon">
+            <Button variant="outline" size="icon">
               <LucideHeart />
             </Button>
           </div>

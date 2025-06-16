@@ -307,11 +307,7 @@ function SidebarIcon({
 export function SidebarToggleButton() {
   const { isExpanded, toggleSidebarCollapse } = useSidebar();
   return (
-    <Button
-      variant="transparent"
-      className="size-8 bg-accent text-primary"
-      onClick={toggleSidebarCollapse}
-    >
+    <Button variant="ghost" onClick={toggleSidebarCollapse}>
       {isExpanded ? (
         <LucidePanelLeftDashed className="size-4" />
       ) : (

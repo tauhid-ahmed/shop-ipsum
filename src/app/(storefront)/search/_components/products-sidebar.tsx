@@ -28,7 +28,7 @@ export function ProductsSidebar({}) {
         <Heading as="h2" size="xl">
           Filter
         </Heading>
-        <Button variant="transparent" size="sm">
+        <Button size="sm">
           <LucideX /> Clear
         </Button>
       </div>
