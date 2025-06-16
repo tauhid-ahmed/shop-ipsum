@@ -6,10 +6,12 @@ import {
 } from "@/db/mutations/verification";
 import { signIn } from "@/auth";
 import { VALIDATION_MESSAGES } from "@/lib/validation";
-import { type Notify } from "@/app/(server)/utils/api-responses";
+import { type Notification } from "@/utils/api-responses";
 import { getUserByEmailWithAccount } from "@/db/queries/users";
 
-export async function verifyEmailTokenAction(token: string): Promise<Notify> {
+export async function verifyEmailTokenAction(
+  token: string
+): Promise<Notification> {
   const tokenData = await getVerificationTokenByToken(token);
   if (!tokenData)
     return { message: VALIDATION_MESSAGES.TOKEN.INVALID, type: "error" };

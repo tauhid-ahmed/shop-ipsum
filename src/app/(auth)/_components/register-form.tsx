@@ -4,7 +4,7 @@ import { TextField } from "@/components";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import * as paths from "@/constants/paths";
-import { type Notify } from "@/app/(server)/utils/api-responses";
+import { type Notification } from "@/utils/api-responses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,7 +24,7 @@ const defaultValues = {
 };
 
 export default function RegisterForm() {
-  const [notify, setNotify] = React.useState<Notify | null>();
+  const [notification, setNotification] = React.useState<Notification | null>();
   const form = useForm<RegisterFormSchema>({
     mode: "all",
     resolver: zodResolver(registerFormSchema),
@@ -33,10 +33,10 @@ export default function RegisterForm() {
   const termsAndCondition = form.watch("terms_and_condition");
   const router = useRouter();
   const onSubmit = async (formData: RegisterFormSchema) => {
-    setNotify(null);
+    setNotification(null);
     const data = await registerUserAction(formData);
-    setNotify(data.notify as Notify);
-    if (data?.notify?.type === "success") {
+    setNotification(data.notification as Notification);
+    if (data?.notification?.type === "success") {
       sessionStorage.setItem("masked-email", formData.email);
       return router.push(`/auth/verify-email`);
     }

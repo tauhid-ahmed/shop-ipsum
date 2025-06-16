@@ -7,9 +7,9 @@ import { AppError } from "@/lib/error/app-error";
 import { decryptPassword } from "@/lib/auth-utils";
 import {
   ApiResponse,
-  successResponse,
-  validationErrorResponse,
-} from "@/app/(server)/utils/api-responses";
+  createSuccessResponse,
+  createValidationErrorResponse,
+} from "@/utils/api-responses";
 import { signInFormSchema, SignInFormSchema } from "@/lib/validation";
 import { withErrorHandler } from "@/lib/error/with-error-handler";
 
@@ -17,7 +17,7 @@ export const signInAction = withErrorHandler(
   async (formData: SignInFormSchema): Promise<ApiResponse> => {
     const safeParsedData = await signInFormSchema.safeParseAsync(formData);
     if (!safeParsedData.success)
-      return validationErrorResponse(
+      return createValidationErrorResponse(
         safeParsedData.error?.flatten().fieldErrors
       );
 
@@ -43,6 +43,6 @@ export const signInAction = withErrorHandler(
       redirectTo: defaultRedirectPath(),
     });
 
-    return successResponse("Signed in successful!");
+    return createSuccessResponse("Signed in successful!");
   }
 );

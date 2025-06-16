@@ -1,8 +1,5 @@
 import { Heading, Logo } from "@/components";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
-import { Notify } from "@/app/(server)/utils/api-responses";
-import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { SocialForm } from "./social-form";
 
@@ -48,19 +45,5 @@ export function AuthCard({
         </Link>
       </div>
     </div>
-  );
-}
-
-export function AuthCardNotification({
-  notify,
-}: {
-  notify: Pick<Notify, "notify">;
-}) {
-  if (!notify?.message) return null;
-  return (
-    <Alert variant={notify.type === "error" ? "destructive" : "success"}>
-      <AlertCircle className="h-4 w-4 -mt-0.5" />
-      <AlertDescription>{notify.message}</AlertDescription>
-    </Alert>
   );
 }

@@ -1,11 +1,10 @@
 "use client";
 import { CheckboxField } from "@/components/checkbox-field";
 import { TextField } from "@/components";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import * as paths from "@/constants/paths";
-import { Notify } from "@/app/(server)/utils/api-responses";
+import { Notification } from "@/utils/api-responses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -13,7 +12,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { signInAction } from "../../../actions/auth/signin.action";
 import { signInFormSchema, type SignInFormSchema } from "@/lib/validation";
-import { AuthCard, AuthCardNotification } from "./auth-card";
+import { AuthCard } from "./auth-card";
+import { AuthNotification } from "./auth-notification";
 import { SubmitButton } from "./submit-button";
 
 const defaultValues = {
@@ -23,7 +23,9 @@ const defaultValues = {
 };
 
 export function SignInForm() {
-  const [notify, setNotify] = React.useState<Notify | null>(null);
+  const [notification, setNotification] = React.useState<Notification | null>(
+    null
+  );
   const form = useForm<SignInFormSchema>({
     mode: "all",
     resolver: zodResolver(signInFormSchema),
@@ -33,7 +35,7 @@ export function SignInForm() {
   const rememberMe = form.watch("remember_me");
   const onSubmit = async (formData: SignInFormSchema) => {
     const data = await signInAction(formData);
-    setNotify(data?.notify as Notify);
+    setNotification(data.notification as Notification);
   };
   const searchParams = useSearchParams();
 
@@ -54,8 +56,7 @@ export function SignInForm() {
                 <RememberMe />
                 <ForgotPasswordRedirect />
               </div>
-              <AuthCardNotification notify={notify as Notify} />
-
+              <AuthNotification notification={notification as Notification} />
               <SubmitButton
                 className="w-full"
                 idleLabel="Sign in"

@@ -12,10 +12,10 @@ import {
 
 import { withErrorHandler } from "@/lib/error/with-error-handler";
 import {
-  successResponse,
-  validationErrorResponse,
+  createSuccessResponse,
+  createValidationErrorResponse,
   type ApiResponse,
-} from "@/app/(server)/utils/api-responses";
+} from "@/utils/api-responses";
 import { AppError } from "@/lib/error/app-error";
 import { cookies } from "next/headers";
 import { signIn } from "@/auth";
@@ -25,7 +25,7 @@ export const registerUserAction = withErrorHandler(
     // Form data validation with zod
     const safeParsedData = await registerFormSchema.safeParseAsync(formData);
     if (!safeParsedData.success) {
-      return validationErrorResponse(
+      return createValidationErrorResponse(
         safeParsedData.error.flatten().fieldErrors
       );
     }
@@ -70,6 +70,6 @@ export const registerUserAction = withErrorHandler(
       email: newUser.email,
     });
 
-    return successResponse({}, "Email verification code sent");
+    return createSuccessResponse({}, "Email verification code sent");
   }
 );
