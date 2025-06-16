@@ -45,19 +45,16 @@ export const VALIDATION_MESSAGES = {
     ACCOUNT_NOT_FOUND: "No account found with this email.",
   },
 
-  SIGNIN: {
-    FAILED: "Sign-in failed. Please try again.",
-    EMAIL_VERIFICATION_REQUIRED: "Verify your email before signing in.",
-    SUCCESS: "Signed in successfully.",
-    INVALID_CREDENTIALS: "Invalid email or password.",
-  },
-
-  REGISTRATION: {
-    ACCOUNT_CREATED: "Account created successfully. Please verify your email.",
-    ACCOUNT_CREATION_FAILED: "Account creation failed. Try again later.",
-    EMAIL_ALREADY_REGISTERED: "This email is already in use.",
-    EMAIL_VERIFICATION_REQUIRED: "Verify your email before signing in.",
-    EMAIL_VERIFICATION_CODE_SENT: "",
+  USER_RESPONSES: {
+    CREATED_SUCCESS: "Account successfully created.",
+    UPDATED_SUCCESS: "Profile updated successfully.",
+    DELETED_SUCCESS: "Account deleted successfully.",
+    NOT_FOUND: "User not found.",
+    ALREADY_EXISTS: "An account with this email already exists.",
+    INVALID_DATA: "Provided user data is invalid.",
+    UNAUTHORIZED: "You are not authorized to perform this action.",
+    LOGIN_SUCCESS: "Logged in successfully.",
+    LOGOUT_SUCCESS: "Logged out successfully.",
   },
 
   MISC: {
@@ -90,5 +87,6 @@ export const VALIDATION_MESSAGES = {
     INVALID: "Invalid token. Please try again.",
     REQUIRED: "Token is required.",
     VERIFIED: "Token verified successfully.",
+    NOT_FOUND: "Token not found.",
   },
 };
