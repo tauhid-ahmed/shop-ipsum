@@ -13,16 +13,16 @@ export const verifyEmailTokenAction = withErrorHandler(async function (
   token: string
 ): Promise<ApiResponse> {
   const tokenData = await getVerificationTokenByToken(token);
-  if (!tokenData) throw new AppError("Token not found");
+  if (!tokenData) throw new AppError(VALIDATION_MESSAGES.TOKEN.NOT_FOUND);
 
   const now = new Date();
   const isExpired = new Date(tokenData.expires) < now;
 
-  if (isExpired) throw new AppError("Token Expired");
+  if (isExpired) throw new AppError(VALIDATION_MESSAGES.TOKEN.EXPIRED);
 
   const user = await getUserByEmail(tokenData.identifier);
 
-  if (!user) throw new AppError("User not found");
+  if (!user) throw new AppError(VALIDATION_MESSAGES.USER_RESPONSES.NOT_FOUND);
 
   await updateEmailVerifiedStatus(tokenData.identifier);
   await deleteVerificationTokenByEmail(tokenData.identifier);
@@ -30,5 +30,7 @@ export const verifyEmailTokenAction = withErrorHandler(async function (
   await signIn("credentials", {
     email: user.email,
   });
-  return createSuccessResponse("Account verification successful");
+  return createSuccessResponse(
+    VALIDATION_MESSAGES.ACCOUNT_VERIFICATION.VERIFICATION_SUCCESS
+  );
 });
