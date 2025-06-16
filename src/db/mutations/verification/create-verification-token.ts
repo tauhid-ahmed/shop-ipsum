@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { verificationTokens } from "@/db/schemas";
 import { getVerificationTokenByEmail } from "@/db/queries/verification";
-import { deleteVerificationToken } from "./delete-verification-token";
+import { deleteVerificationTokenByEmail } from "./delete-verification-token";
 import { generateToken } from "@/lib/generate-token";
 
 export const createVerificationToken = async (email: string) => {
@@ -9,9 +9,7 @@ export const createVerificationToken = async (email: string) => {
   const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
   const existingToken = await getVerificationTokenByEmail(email);
 
-  if (existingToken) {
-    await deleteVerificationToken(email);
-  }
+  if (existingToken) await deleteVerificationTokenByEmail(email);
 
   const [data] = await db
     .insert(verificationTokens)
