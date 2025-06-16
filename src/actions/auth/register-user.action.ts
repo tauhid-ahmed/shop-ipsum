@@ -11,13 +11,13 @@ import {
 
 import { withErrorHandler } from "@/lib/error/with-error-handler";
 import {
-  createSuccessResponse,
   createValidationErrorResponse,
   type ApiResponse,
 } from "@/utils/api-responses";
 import { AppError } from "@/lib/error/app-error";
 import { env } from "@/env";
 import { verifyEmailPath } from "@/constants/paths";
+import { redirect } from "next/navigation";
 
 const redirectUrl = `${env.NEXT_PUBLIC_APP_URL}/${verifyEmailPath()}`;
 
@@ -69,10 +69,6 @@ export const registerUserAction = withErrorHandler(
       cache: "no-store",
     });
 
-    return createSuccessResponse(
-      true,
-      VALIDATION_MESSAGES.ACCOUNT_VERIFICATION.EMAIL_SENT,
-      redirectUrl
-    );
+    redirect(verifyEmailPath());
   }
 );
