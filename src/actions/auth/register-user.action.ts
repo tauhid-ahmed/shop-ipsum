@@ -6,7 +6,6 @@ import { encryptPassword } from "@/lib/auth-utils";
 import {
   registerFormSchema,
   RegisterFormSchema,
-  VALIDATION_MESSAGES as MSG,
   VALIDATION_MESSAGES,
 } from "@/lib/validation";
 
@@ -37,7 +36,7 @@ export const registerUserAction = withErrorHandler(
     // Checking if user with the email address is already exits;
     const existingUser = await getUserByEmail(data.email);
     if (existingUser)
-      throw new AppError(MSG.REGISTRATION.EMAIL_ALREADY_REGISTERED, {
+      throw new AppError(VALIDATION_MESSAGES.USER_RESPONSES.ALREADY_EXISTS, {
         code: "EMAIL_EXISTS",
       });
 
