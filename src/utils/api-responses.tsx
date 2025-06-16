@@ -10,6 +10,7 @@ export interface ApiResponse<T = unknown> {
   errorCode?: string;
   errors?: Record<string, string[]>;
   notification?: Notification;
+  redirectUrl?: string;
 }
 
 /**
@@ -20,11 +21,13 @@ export interface ApiResponse<T = unknown> {
  */
 export function createSuccessResponse<T>(
   data: T,
-  message?: string
+  message?: string,
+  redirectUrl?: string
 ): ApiResponse<T> {
   return {
     success: true,
     statusCode: 200,
+    redirectUrl,
     data,
     ...(message && {
       notification: {
