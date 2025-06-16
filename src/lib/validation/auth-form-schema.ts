@@ -11,6 +11,7 @@ export const signInFormSchema = z.object({
     .max(64, { message: MSG.PASSWORD.MAX })
     .trim(),
   remember_me: z.boolean().optional().default(false),
+  callbackUrl: z.string().optional(),
 });
 
 export const registerFormSchema = z
