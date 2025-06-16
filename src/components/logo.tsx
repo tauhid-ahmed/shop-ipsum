@@ -14,7 +14,10 @@ export default function Logo({ size }: Props) {
   return (
     <Link href="/">
       <Image
-        className={cn("size-10 object-cover", size === "lg" && "size-20")}
+        className={cn(
+          "size-10 object-cover",
+          size === "lg" && "size-14 md:size-20"
+        )}
         src={LogoImage}
         alt={env.NEXT_PUBLIC_APP_NAME}
       />
