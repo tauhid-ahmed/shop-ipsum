@@ -55,10 +55,10 @@ export const signInAction = withErrorHandler(
       redirect(verifyEmailPath());
     }
 
-    // await signIn("credentials", {
-    //   email: user.email,
-    //   redirectTo: defaultRedirectPath(),
-    // });
+    await signIn("credentials", {
+      email: user.email,
+      redirectTo: defaultRedirectPath(),
+    });
 
     return createSuccessResponse(
       VALIDATION_MESSAGES.USER_RESPONSES.LOGIN_SUCCESS
