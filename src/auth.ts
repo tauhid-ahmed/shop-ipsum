@@ -1,4 +1,5 @@
 import { getUserByEmail, getUserByEmailWithAccount } from "@/db/queries/users";
+import { updateEmailVerifiedStatus } from "@/db/mutations/users";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth, { type Session } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
@@ -10,7 +11,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
   events: {
     linkAccount: async ({ user }) => {
-      // await updateUserEmailVerification(user.id as string);
+      await updateEmailVerifiedStatus(user.email as string);
     },
   },
   providers: [
