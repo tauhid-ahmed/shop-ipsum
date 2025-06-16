@@ -16,11 +16,11 @@ import { SubmitButton } from "./submit-button";
 import { AuthCheckboxField } from "./auth-checkbox-field";
 
 const defaultValues = {
-  name: "",
-  email: "",
-  password: "",
-  confirm_password: "",
-  terms_and_condition: false,
+  name: "Tauhid",
+  email: "tauhidxtauhid@gmail.com",
+  password: "1234zxcvW@",
+  confirm_password: "1234zxcvW@",
+  terms_and_condition: true,
 };
 
 export default function RegisterForm() {
@@ -36,9 +36,9 @@ export default function RegisterForm() {
     setNotification(null);
     const data = await registerUserAction(formData);
     setNotification(data.notification as Notification);
-    if (data?.notification?.type === "success") {
-      sessionStorage.setItem("masked-email", formData.email);
-      return router.push(`/auth/verify-email`);
+
+    if (data?.redirectUrl) {
+      return router.push(data.redirectUrl);
     }
   };
 
