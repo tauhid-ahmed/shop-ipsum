@@ -1,19 +1,21 @@
 import { Hono } from "hono";
 import nodemailer from "nodemailer";
 import { env } from "@/env";
+import { render } from "@react-email/render";
+import { EmailVerificationTemplate } from "@/components/emails";
 
 export const sendEmail = new Hono();
 
 sendEmail.post("/", async (c) => {
   const { name, email } = await c.req.json();
 
-  const emailHtml = `
-    <div style="font-family: sans-serif; padding: 20px">
-      <h2>Welcome, ${name}!</h2>
-      <p>Thank you for trying our email service.</p>
-      <p>We're glad to have you on board.</p>
-    </div>
-  `;
+  const html = await render(
+    <EmailVerificationTemplate
+      name={name}
+      code="123456"
+      verifyUrl="https://yourapp.com/verify?token=abc123"
+    />
+  );
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -31,7 +33,7 @@ sendEmail.post("/", async (c) => {
       from: `Your App <${env.EMAIL_FROM}>`,
       to: email || "tauhidahmed@gmail.com",
       subject: "Hello from Hono + Nodemailer!",
-      html: emailHtml,
+      html: html,
       headers: {
         "X-Entity-Ref-ID": "custom-email",
       },
