@@ -1,10 +1,8 @@
 "use client";
 
 import { SelectField, TextField } from "@/components";
-import { Button } from "@/components/ui/button";
 import { productFormSections } from "../form-sections.config";
 import { ProductFormCard } from "../ui/product-form-card";
-import { LucidePercent, LucideTicket, LucideTrash2 } from "lucide-react";
 // import DatePickerField from "@/components/date-picker-field"; // Ideal component
 
 const { productPromotionDiscounts } = productFormSections;

@@ -1,15 +1,14 @@
-import { Container } from "./container";
-import { ProductSearchWidget } from "@/components/products";
-import { CartWidget } from "@/components/cart/cart-widget";
 import { Logo } from "@/components";
-import Navigation from "./mobile-nav";
-import { DesktopNav } from "./desktop-nav";
-import WishlistOverview from "@/components/wishlist/wishlist-overview";
-import { getServerSession } from "@/lib/get-server-session";
+import { ProductSearchWidget } from "@/components/products";
 import { UserProfileWidget } from "@/components/users/";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import WishlistOverview from "@/components/wishlist/wishlist-overview";
 import { signInPath } from "@/constants/paths";
+import { getServerSession } from "@/lib/get-server-session";
+import Link from "next/link";
+import { Button } from "../ui/button";
+import { Container } from "./container";
+import { DesktopNav } from "./desktop-nav";
+import Navigation from "./mobile-nav";
 
 export default async function Header() {
   const user = await getServerSession();

@@ -1,13 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { useProductLayout } from "./product-layout-provider";
 import {
   LucideArrowUpDown,
   LucideGrid3X3,
   LucideLayoutList,
   LucidePanelLeftDashed,
 } from "lucide-react";
-
-import * as React from "react";
+import { useProductLayout } from "./product-layout-provider";
 
 import {
   Select,
@@ -25,7 +23,6 @@ export function ProductsHeader() {
     addProductDisplayModeGrid,
     addProductDisplayModeList,
     toggleSidebarCollapse,
-    isSidebarCollapsed,
   } = useProductLayout();
 
   return (

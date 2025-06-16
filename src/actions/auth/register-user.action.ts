@@ -1,6 +1,6 @@
 "use server";
-import { createVerificationToken } from "@/db/mutations/verification";
 import { createUser } from "@/db/mutations/users";
+import { createVerificationToken } from "@/db/mutations/verification";
 import { getUserByEmail } from "@/db/queries/users";
 import { encryptPassword } from "@/lib/auth-utils";
 import {
@@ -9,14 +9,14 @@ import {
   VALIDATION_MESSAGES,
 } from "@/lib/validation";
 
+import { verifyEmailPath } from "@/constants/paths";
+import { env } from "@/env";
+import { AppError } from "@/lib/error/app-error";
 import { withErrorHandler } from "@/lib/error/with-error-handler";
 import {
   createValidationErrorResponse,
   type ApiResponse,
 } from "@/utils/api-responses";
-import { AppError } from "@/lib/error/app-error";
-import { env } from "@/env";
-import { verifyEmailPath } from "@/constants/paths";
 import { redirect } from "next/navigation";
 
 const redirectUrl = `${env.NEXT_PUBLIC_APP_URL}/${verifyEmailPath()}`;

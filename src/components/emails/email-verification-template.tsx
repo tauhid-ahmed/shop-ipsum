@@ -195,7 +195,7 @@ export default function EmailVerificationTemplate({
                 lineHeight: "1.4",
               }}
             >
-              Code expires in 10 minutes • Don't share with anyone
+              Code expires in 10 minutes • Don&apos;t share with anyone
             </Text>
           </Section>
 

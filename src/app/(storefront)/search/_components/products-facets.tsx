@@ -160,10 +160,10 @@ export function FilterBrands() {
 export function FilterCategories() {
   return (
     <ul className="space-y-2">
-      <li>Men's Fashion</li>
-      <li>Women's Fashion</li>
-      <li>Kid's Fashion</li>
-      <li>Summer's Fashion</li>
+      <li>Men&apos;s Fashion</li>
+      <li>Women&apos;s Fashion</li>
+      <li>Kid&apos;s Fashion</li>
+      <li>Summer&apos;s Fashion</li>
     </ul>
   );
 }

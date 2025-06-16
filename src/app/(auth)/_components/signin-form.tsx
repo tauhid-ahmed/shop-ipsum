@@ -1,4 +1,5 @@
 "use client";
+import { signInAction } from "@/actions/auth/signin.action";
 import { TextField } from "@/components";
 import { Form } from "@/components/ui/form";
 import * as paths from "@/constants/paths";
@@ -8,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { signInAction } from "@/actions/auth/signin.action";
 import { AuthCard } from "./auth-card";
 import { AuthCheckboxField } from "./auth-checkbox-field";
 import { AuthNotification } from "./auth-notification";

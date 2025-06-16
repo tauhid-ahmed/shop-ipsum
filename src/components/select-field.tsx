@@ -7,11 +7,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { useId } from "react";
 import * as React from "react";
-import { Card, CardContent } from "./ui/card";
+import { useId } from "react";
 import { FormItem, FormLabel, FormMessage } from "./ui/form";
 
 export type Option = {
