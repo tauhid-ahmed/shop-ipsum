@@ -14,7 +14,7 @@ import {
   ProductAiGenerator, // Make sure this is imported
   ProductStatusVisibility,
   ProductPromotionsDiscounts,
-} from "./sections";
+} from "./form-sections";
 
 const dummyMediaStats = {
   imageCount: 0,
