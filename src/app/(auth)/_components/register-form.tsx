@@ -1,19 +1,19 @@
 "use client";
-import { CheckboxField } from "@/components/checkbox-field";
+import { registerUserAction } from "@/actions/auth";
 import { TextField } from "@/components";
-import { Button } from "@/components/ui/button";
+import { CheckboxField } from "@/components/checkbox-field";
 import { Form } from "@/components/ui/form";
 import * as paths from "@/constants/paths";
+import { registerFormSchema, type RegisterFormSchema } from "@/lib/validation";
 import { type Notification } from "@/utils/api-responses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { registerUserAction } from "@/actions/auth";
-import { registerFormSchema, type RegisterFormSchema } from "@/lib/validation";
 import { AuthCard } from "./auth-card";
 import { SubmitButton } from "./submit-button";
+import { AuthNotification } from "./auth-notification";
 
 const defaultValues = {
   name: "",
@@ -61,8 +61,7 @@ export default function RegisterForm() {
               type="password"
             />
             <div className="flex flex-col gap-4">
-              {/* Notification currently not working so to be fixed later on */}
-              {/* <AuthCardNotification notify={notify as Notify} /> */}
+              <AuthNotification notification={notification as Notification} />
               <div className="flex items-center text-sm gap-3 font-medium">
                 <CheckboxField name="terms_and_condition" />
                 <span className="hover:underline cursor-pointer hover:text-blue-500">
