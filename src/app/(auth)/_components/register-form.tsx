@@ -7,7 +7,6 @@ import { registerFormSchema, type RegisterFormSchema } from "@/lib/validation";
 import { type Notification } from "@/utils/api-responses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { AuthCard } from "./auth-card";
@@ -31,15 +30,10 @@ export default function RegisterForm() {
     defaultValues,
   });
   const termsAndCondition = form.watch("terms_and_condition");
-  const router = useRouter();
   const onSubmit = async (formData: RegisterFormSchema) => {
     setNotification(null);
     const data = await registerUserAction(formData);
     setNotification(data.notification as Notification);
-
-    if (data?.redirectUrl) {
-      return router.push(data.redirectUrl);
-    }
   };
 
   return (
