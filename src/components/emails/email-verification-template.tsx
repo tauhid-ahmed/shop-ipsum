@@ -20,7 +20,7 @@ interface EmailVerificationTemplateProps {
 }
 
 export default function EmailVerificationTemplate({
-  name,
+  name = "there",
   code,
   verifyUrl,
   companyName = env.NEXT_PUBLIC_APP_NAME,

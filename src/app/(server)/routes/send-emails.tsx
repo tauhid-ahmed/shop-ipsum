@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 import { env } from "@/env";
 import { render } from "@react-email/render";
 import { EmailVerificationTemplate } from "@/components/emails";
+import { verifyEmailPath } from "@/constants/paths";
 
 export const sendEmail = new Hono();
 
@@ -13,7 +14,7 @@ sendEmail.post("/", async (c) => {
     <EmailVerificationTemplate
       name={name}
       code="123456"
-      verifyUrl="https://yourapp.com/verify?token=abc123"
+      verifyUrl={`${env.NEXT_PUBLIC_APP_URL}/${verifyEmailPath}?token=123456`}
     />
   );
 
@@ -30,9 +31,9 @@ sendEmail.post("/", async (c) => {
 
   try {
     await transporter.sendMail({
-      from: `Your App <${env.EMAIL_FROM}>`,
+      from: `${env.NEXT_PUBLIC_APP_NAME} <${env.EMAIL_FROM}>`,
       to: email || "tauhidahmed@gmail.com",
-      subject: "Hello from Hono + Nodemailer!",
+      subject: `Confirm Your Email to Activate Your ${env.NEXT_PUBLIC_APP_NAME} Account`,
       html: html,
       headers: {
         "X-Entity-Ref-ID": "custom-email",
