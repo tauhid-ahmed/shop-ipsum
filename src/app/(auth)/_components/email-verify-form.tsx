@@ -15,6 +15,7 @@ import { SubmitButton } from "./submit-button";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { defaultRedirectPath } from "@/constants/paths";
+import { AuthNotification } from "./auth-notification";
 type VerifyEmailTokenResponse = {
   success: boolean;
   message?: string;
@@ -29,7 +30,8 @@ type VerifyEmailTokenResponse = {
 type EmailVerificationFormProps = {
   initialData: {
     token: string;
-    message?: string; // For initial messages like "Invalid token"
+    message?: string;
+    callbackUrl?: string;
   };
 };
 
@@ -41,27 +43,28 @@ export default function EmailVerificationForm({
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [notification, setNotification] = useState<Notification | null>();
+
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsSubmitting(true);
+    setNotification(null);
     const response = (await verifyEmailTokenAction(
       verificationToken
     )) as VerifyEmailTokenResponse;
-
+    setNotification(response.notification);
     if (response.success && response.data?.user?.email) {
+      setNotification(response.notification);
       setIsSubmitting(false);
       await signIn("credentials", {
         email: response.data.user.email,
-        redirect: false, // Handle redirect manually after sign-in
+        redirect: false,
       });
-      router.push(defaultRedirectPath()); // Redirect to dashboard or home
+      router.push(initialData.callbackUrl || defaultRedirectPath());
     } else {
       setIsSubmitting(false);
-      if (!response.notification && response.message) {
-        // Fallback if notification object isn't directly on response
-      }
     }
   };
 
@@ -87,6 +90,7 @@ export default function EmailVerificationForm({
               <InputOTPSlot index={5} />
             </InputOTPGroup>
           </InputOTP>
+          <AuthNotification notification={notification as Notification} />
           <SubmitButton
             disabled={verificationToken.length !== 6}
             type="submit"
