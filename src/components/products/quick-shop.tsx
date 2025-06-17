@@ -150,7 +150,7 @@ function ProductCTA({ slug }: { slug: string; productId: string }) {
     if (!isAuthenticated) {
       return router.push(signInRoute(productDetailsRoute(slug)));
     }
-    toast("Event has been created");
+    toast("To be implemented");
   };
   return (
     <div className="flex flex-col gap-2">
