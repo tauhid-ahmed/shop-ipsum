@@ -25,6 +25,7 @@ export default function TextField({
   type = "text",
   className,
   required,
+  children,
 }: TextFieldProps) {
   const form = useFormContext();
   return (
@@ -46,7 +47,19 @@ export default function TextField({
             )}
           </FormLabel>
           <FormControl>
-            <Input {...field} placeholder={placeholder} type={type} />
+            {children ? (
+              <div className="relative">
+                <Input
+                  {...field}
+                  placeholder={placeholder}
+                  type={type}
+                  className={cn(children && "pr-9")}
+                />
+                {children}
+              </div>
+            ) : (
+              <Input {...field} placeholder={placeholder} type={type} />
+            )}
           </FormControl>
           <FormMessage />
         </FormItem>
