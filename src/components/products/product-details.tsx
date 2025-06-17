@@ -12,6 +12,7 @@ import { ProductReviewDetails, ProductSection } from ".";
 import { ProductAttributes } from "./product-attributes";
 import { ProductImageGallery } from "./product-image-gallery";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ProductDetails({ product }: { product: ProductType }) {
   const {
@@ -181,6 +182,7 @@ function CTAAction() {
           if (!user) {
             redirect(signInRoute());
           }
+          toast("To be implemented");
         }}
         className="w-full"
         size="lg"

@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import SessionProvider from "@/providers/session-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 import { cookies } from "next/headers";
 
@@ -55,6 +56,7 @@ export default async function RootLayout({
           <SpeedInsights />
           <ThemeProvider>{children}</ThemeProvider>
         </SessionProvider>
+        <Toaster />
       </body>
     </html>
   );

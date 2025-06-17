@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 import Image from "next/image";
 import { DotSeparator } from "@/components/dot-separator";
@@ -149,7 +150,7 @@ function ProductCTA({ slug }: { slug: string; productId: string }) {
     if (!isAuthenticated) {
       return router.push(signInRoute(productDetailsRoute(slug)));
     }
-    alert("To be implemented");
+    toast("Event has been created");
   };
   return (
     <div className="flex flex-col gap-2">
