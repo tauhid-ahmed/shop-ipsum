@@ -26,7 +26,7 @@ export default function NewsLetter() {
   };
 
   return (
-    <Section>
+    <Section padding="sm">
       <Container>
         <Card>
           <CardContent className="p-12">
