@@ -1,27 +1,38 @@
-import { NextResponse } from "next/server";
-// import { auth } from "./auth.config";
-// import * as paths from "@/lib/constants/paths";
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "./auth.config";
+import {
+  authRoutes,
+  adminRoutes,
+  defaultRedirectRoute,
+  signInRoute,
+  authApiRoutes,
+} from "@/constants/paths";
 
-export default async function middleware() {
-  // const session = await auth();
-  // const { nextUrl } = req;
-  // const isLoggedIn = !!session?.user;
+const adminRoles = ["admin", "super-admin"];
 
-  // const isPublicRoute =
-  //   paths.publicRoutes.includes(nextUrl.pathname) ||
-  //   nextUrl.pathname.startsWith("/products");
-  // const isAuthRoute = paths.authRoutes.includes(nextUrl.pathname);
+export default async function middleware(req: NextRequest) {
+  const session = await auth();
+  const { nextUrl } = req;
+  const isLoggedIn = !!session?.user;
 
-  // if (nextUrl.pathname.startsWith("/api/auth")) return null;
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  const isAdminRoute = nextUrl.pathname.startsWith(adminRoutes);
+  const isAuthApiRoute = nextUrl.pathname.startsWith(authApiRoutes);
 
-  // if (isLoggedIn && isAuthRoute) {
-  //   return NextResponse.redirect(new URL(paths.defaultRedirectPath(), nextUrl));
-  // }
+  if (isAuthApiRoute) return null;
 
-  // if (!isLoggedIn && !isPublicRoute && !isAuthRoute) {
-  //   return NextResponse.redirect(new URL(paths.signInPath(), nextUrl));
-  // }
+  if (isLoggedIn && isAuthRoute) {
+    return NextResponse.redirect(new URL(defaultRedirectRoute(), nextUrl));
+  }
 
+  if (!isLoggedIn && !isAuthRoute) {
+    return NextResponse.redirect(new URL(signInRoute(), nextUrl));
+  }
+
+  if (isLoggedIn && isAdminRoute) {
+    if (adminRoles.includes("admin")) return null;
+    else return NextResponse.redirect(new URL(defaultRedirectRoute(), nextUrl));
+  }
   return NextResponse.next();
 }
 
