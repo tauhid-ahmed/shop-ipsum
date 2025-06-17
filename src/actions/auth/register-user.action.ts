@@ -17,6 +17,7 @@ import {
   type ApiResponse,
 } from "@/utils/api-responses";
 import { redirect } from "next/navigation";
+import { env } from "@/env";
 
 export const registerUserAction = withErrorHandler(
   async (formData: RegisterFormSchema): Promise<ApiResponse> => {
@@ -53,7 +54,7 @@ export const registerUserAction = withErrorHandler(
 
     // Account creation successful && verify email process starts
     const token = await createVerificationToken(newUser.email);
-    await fetch(`http:/localhost:3000/api/send-email`, {
+    await fetch(`${env.API_URL}/send-email`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

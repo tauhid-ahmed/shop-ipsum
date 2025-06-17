@@ -18,6 +18,7 @@ import {
   createValidationErrorResponse,
 } from "@/utils/api-responses";
 import { redirect } from "next/navigation";
+import { env } from "@/env";
 
 export const signInAction = withErrorHandler(
   async (formData: SignInFormSchema): Promise<ApiResponse> => {
@@ -40,7 +41,7 @@ export const signInAction = withErrorHandler(
 
     if (!user.emailVerified) {
       const token = await createVerificationToken(user.email);
-      await fetch(`http:/localhost:3000/api/send-email`, {
+      await fetch(`${env.API_URL}/send-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
