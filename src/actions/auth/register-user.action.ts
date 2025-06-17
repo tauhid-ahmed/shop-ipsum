@@ -65,7 +65,6 @@ export const registerUserAction = withErrorHandler(
       }),
       cache: "no-store",
     });
-
     redirect(verifyEmailPath());
   }
 );
