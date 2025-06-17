@@ -1,6 +1,5 @@
 "use client";
 import { Heading } from "@/components";
-import Breadcrumbs from "@/components/breadcrumbs";
 import { DotSeparator } from "@/components/dot-separator";
 import { Button } from "@/components/ui/button";
 import { signInPath } from "@/constants/paths";
@@ -40,7 +39,6 @@ export default function ProductDetails({ product }: { product: ProductType }) {
 
             <div className="flex-1 basis-1/2 space-y-6 lg:space-y-8">
               <div className="space-y-4 border-b-2 border-border border-dashed pb-4">
-                <Breadcrumbs product={product} />
                 <div className="space-y-2">
                   <Heading className="text-foreground/80" size="md" as="h2">
                     {product.brand.name}

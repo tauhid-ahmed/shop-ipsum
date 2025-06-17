@@ -1,7 +1,6 @@
 import { Heading } from "@/components";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { categoryPath } from "@/constants/paths";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -68,7 +67,7 @@ type PreviewCardProps = {
 function PreviewCard({ image, className, category, badge }: PreviewCardProps) {
   return (
     <Link
-      href={categoryPath(category)}
+      href={"/"}
       className={cn("relative block h-full hover:opacity-75", className)}
     >
       <Image

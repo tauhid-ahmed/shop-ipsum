@@ -14,7 +14,7 @@ import { AuthCard } from "./auth-card";
 import { SubmitButton } from "./submit-button";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { defaultRedirectPath } from "@/constants/paths";
+import { defaultRedirectRoute } from "@/constants/paths";
 import { AuthNotification } from "./auth-notification";
 type VerifyEmailTokenResponse = {
   success: boolean;
@@ -62,7 +62,7 @@ export default function EmailVerificationForm({
         email: response.data.user.email,
         redirect: false,
       });
-      router.push(initialData.callbackUrl || defaultRedirectPath());
+      router.push(initialData.callbackUrl || defaultRedirectRoute());
     } else {
       setIsSubmitting(false);
     }

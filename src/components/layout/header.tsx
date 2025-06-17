@@ -2,7 +2,7 @@ import { Logo } from "@/components";
 import { ProductSearchWidget } from "@/components/products";
 import { UserProfileWidget } from "@/components/users/";
 import WishlistOverview from "@/components/wishlist/wishlist-overview";
-import { signInPath } from "@/constants/paths";
+import { signInRoute } from "@/constants/paths";
 import { getServerSession } from "@/lib/get-server-session";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -53,7 +53,7 @@ export default async function Header() {
 function SignInButton() {
   return (
     <Button asChild>
-      <Link href={signInPath()}>Sign In</Link>
+      <Link href={signInRoute()}>Sign In</Link>
     </Button>
   );
 }

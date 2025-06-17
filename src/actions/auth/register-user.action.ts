@@ -9,7 +9,7 @@ import {
   VALIDATION_MESSAGES,
 } from "@/lib/validation";
 
-import { verifyEmailPath } from "@/constants/paths";
+import { verifyEmailRoute } from "@/constants/paths";
 import { AppError } from "@/lib/error/app-error";
 import { withErrorHandler } from "@/lib/error/with-error-handler";
 import {
@@ -66,6 +66,6 @@ export const registerUserAction = withErrorHandler(
       }),
       cache: "no-store",
     });
-    redirect(verifyEmailPath());
+    redirect(verifyEmailRoute());
   }
 );

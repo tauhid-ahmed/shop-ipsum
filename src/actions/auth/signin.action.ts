@@ -1,6 +1,6 @@
 "use server";
 import { signIn } from "@/auth";
-import { defaultRedirectPath, verifyEmailPath } from "@/constants/paths";
+import { defaultRedirectRoute, verifyEmailRoute } from "@/constants/paths";
 import { getUserByEmail } from "@/db/queries/users";
 import { decryptPassword } from "@/lib/auth-utils";
 import { AppError } from "@/lib/error/app-error";
@@ -54,12 +54,12 @@ export const signInAction = withErrorHandler(
         }),
         cache: "no-store",
       });
-      redirect(verifyEmailPath());
+      redirect(verifyEmailRoute());
     }
 
     await signIn("credentials", {
       email: user.email,
-      redirectTo: safeParsedData.data.callbackUrl || defaultRedirectPath(),
+      redirectTo: safeParsedData.data.callbackUrl || defaultRedirectRoute(),
     });
 
     return createSuccessResponse(

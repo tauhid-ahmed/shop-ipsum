@@ -1,7 +1,7 @@
 "use server";
 import { signIn } from "@/auth";
-import { defaultRedirectPath } from "@/constants/paths";
+import { defaultRedirectRoute } from "@/constants/paths";
 
 export async function socialAction(provider: "google" | "github") {
-  await signIn(provider, { callbackUrl: defaultRedirectPath() });
+  await signIn(provider, { callbackUrl: defaultRedirectRoute() });
 }

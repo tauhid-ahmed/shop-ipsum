@@ -43,7 +43,7 @@ export default function RegisterForm() {
       title="Create an account"
       redirectMessage="Already have an account?"
       redirectLabel="Sign in"
-      redirectHref={paths.signInPath()}
+      redirectHref={paths.signInRoute()}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>

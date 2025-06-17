@@ -41,7 +41,7 @@ export function SignInForm({ callbackUrl }: { callbackUrl: string }) {
       title="Sign in to your account"
       redirectMessage="Don't have an account yet?"
       redirectLabel="Create an account"
-      redirectHref={paths.registerPath()}
+      redirectHref={paths.registerRoute()}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -54,7 +54,7 @@ export function SignInForm({ callbackUrl }: { callbackUrl: string }) {
             <div className="space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <AuthCheckboxField name="remember_me" label="Remember me" />
-                <FormLink href={paths.forgotPasswordPath()}>
+                <FormLink href={paths.forgotPasswordRoute()}>
                   Forgot Password?
                 </FormLink>
               </div>
