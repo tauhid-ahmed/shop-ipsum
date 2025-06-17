@@ -1,23 +1,17 @@
 "use client";
-import {
-  LucideExternalLink,
-  LucideMoveRight,
-  LucideSearch,
-  LucideX,
-} from "lucide-react";
+import { LucideMoveRight, LucideSearch, LucideX } from "lucide-react";
 
+import { Heading } from "@/components";
+import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetTitle,
   SheetClose,
-  SheetDescription,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
-import { Container } from "@/components/layout/container";
-import { Input } from "@/components/ui/input";
-import { Heading } from "@/components";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -39,7 +33,7 @@ export default function ProductSearchWidget() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button size="icon" shape="pill" variant="ghost">
+        <Button size="icon" variant="ghost">
           <LucideSearch />
         </Button>
       </SheetTrigger>
@@ -54,7 +48,7 @@ export default function ProductSearchWidget() {
                   </Heading>
                 </SheetTitle>
                 <SheetClose asChild>
-                  <Button variant="ghost" size="icon" shape="pill">
+                  <Button variant="ghost" size="icon">
                     <LucideX />
                   </Button>
                 </SheetClose>
@@ -66,13 +60,13 @@ export default function ProductSearchWidget() {
                   reset
                   placeholder="Search..."
                 />
-                <Button variant="ghost" size="icon" shape="pill">
+                <Button variant="ghost" size="icon">
                   <LucideSearch />
                 </Button>
               </div>
             </div>
             <ProductList />
-            <ProductSearchBar />
+
             <div className="space-y-2">
               <ProductCategories />
             </div>
@@ -85,31 +79,26 @@ export default function ProductSearchWidget() {
 
 function ProductCategories() {
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 px-2">
       <SheetTitle asChild className="flex items-center">
-        <Heading size="sm" className="text-muted-foreground uppercase">
+        <Heading size="sm" className="text-foreground uppercase">
           CATEGORIES
         </Heading>
       </SheetTitle>
-      <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm [&_a]:underline [&_a]:underline-offset-2 text-accent-foreground/80">
-        <Link href="#">Activeware</Link>
-        <Link href="#">Dresses</Link>
-        <Link href="#">Outerware</Link>
-        <Link href="#">T-Shirts</Link>
+      <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm [&_a]:underline [&_a]:underline-offset-2 text-foreground/60">
+        <Link href="#" className="hover:text-primary">
+          Activeware
+        </Link>
+        <Link href="#" className="hover:text-primary">
+          Dresses
+        </Link>
+        <Link href="#" className="hover:text-primary">
+          Outerware
+        </Link>
+        <Link href="#" className="hover:text-primary">
+          T-Shirts
+        </Link>
       </div>
-    </div>
-  );
-}
-
-function ProductSearchBar() {
-  return (
-    <div className="bg-secondary py-2 px-8 text-sm flex justify-between items-center gap-2 rounded">
-      <SheetDescription className="underline underline-offset-2 text-muted-foreground">
-        Search for <strong>&quot;shirts&quot;</strong>
-      </SheetDescription>
-      <Button variant="ghost" size="icon">
-        <LucideMoveRight />
-      </Button>
     </div>
   );
 }
@@ -132,8 +121,8 @@ function ProductList() {
             </span>
             <span className="text-muted-foreground">Premium shirts</span>
           </div>
-          <Button className="ml-auto" variant="ghost" shape="pill" size="icon">
-            <LucideExternalLink className="size-4" />
+          <Button className="ml-auto" variant="ghost" size="icon">
+            <LucideMoveRight />
           </Button>
         </Link>
       ))}
