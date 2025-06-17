@@ -13,6 +13,7 @@ import { AuthCheckboxField } from "./auth-checkbox-field";
 import { AuthNotification } from "./auth-notification";
 import { FormLink } from "./form-link";
 import { SubmitButton } from "./submit-button";
+import { PasswordField } from "./password-field";
 
 export function SignInForm({ callbackUrl }: { callbackUrl: string }) {
   const [notification, setNotification] = React.useState<Notification | null>(
@@ -46,7 +47,7 @@ export function SignInForm({ callbackUrl }: { callbackUrl: string }) {
           <TextField type="hidden" name="callbackUrl" />
           <fieldset className="space-y-6">
             <TextField label="Email" name="email" />
-            <TextField label="Password" name="password" type="password" />
+            <PasswordField label="Password" name="password" type="password" />
             <div className="space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <AuthCheckboxField name="remember_me" label="Remember me" />
