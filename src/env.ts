@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    APP_URL: z.string().url("❌ APP_URL must be a valid URL."),
+    API_URL: z.string().url("❌ APP_URL must be a valid URL."),
     DATABASE_URL: z
       .string()
       .url("❌ Invalid or missing DATABASE_URL. Must be a valid URL."),
@@ -66,7 +66,7 @@ export const env = createEnv({
   },
 
   runtimeEnv: {
-    APP_URL: process.env.APP_URL,
+    API_URL: process.env.APP_URL,
     DATABASE_URL: process.env.DATABASE_URL,
     AUTH_SECRET: process.env.AUTH_SECRET,
 
