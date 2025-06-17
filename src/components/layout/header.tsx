@@ -15,7 +15,7 @@ export default async function Header() {
 
   return (
     <header className="border-b border-border bg-secondary/50 py-4 z-50 relative backdrop-blur text-base lg:mx-0 h-18 shadow">
-      <Container>
+      <Container size="lg">
         <nav className="flex items-center text-foreground/90">
           <div className="flex flex-1 gap-1 lg:hidden">
             <Navigation />
