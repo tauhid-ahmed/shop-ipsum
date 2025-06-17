@@ -31,7 +31,9 @@ export const productsRoutePrefix = () => "/search";
 export const menRoute = () => `${productsRoutePrefix()}/men`;
 export const womenRoute = () => `${productsRoutePrefix()}/women`;
 export const childrenRoute = () => `${productsRoutePrefix()}/children`;
-export const productDetailsRoute = (slug?: string) => `/product/${slug}`;
+export const productDetailsPrefix = () => "/product";
+export const productDetailsRoute = (slug: string) =>
+  `${productDetailsPrefix()}/${slug}`;
 
 //================**********================
 //            **USER ROUTES**
@@ -60,7 +62,7 @@ export const authRoutes = [
   resetPasswordRoute(),
 ];
 
-export const publicRoutes = [productsRoutePrefix(), productDetailsRoute()];
+export const publicRoutes = [productsRoutePrefix(), productDetailsPrefix()];
 
 export const adminRoutes = adminRoutePrefix();
 export const protectedRoutes = [];
