@@ -1,47 +1,66 @@
 // constants for prefixes
 const ADMIN_PREFIX = "/dashboard";
 
-// --- Public Paths ---
-export const signInPath = (callbackUrl?: string) =>
+//================**********================
+//               **AUTH ROUTES**
+//================**********================
+export const signInRoute = (callbackUrl?: string) =>
   callbackUrl ? `/sign-in?callbackUrl=${callbackUrl}` : "/sign-in";
 
-export const registerPath = () => "/register";
+export const registerRoute = (callbackUrl?: string) =>
+  callbackUrl ? `/register?callbackUrl=${callbackUrl}` : "/register";
 
-export const verifyEmailPath = (callbackUrl?: string) =>
+export const verifyEmailRoute = (callbackUrl?: string) =>
   callbackUrl ? `/verify-email?callbackUrl=${callbackUrl}` : "/verify-email";
 
-export const forgotPasswordPath = () => "/forgot-password";
-export const resetPasswordPath = () => "/reset-password";
+export const forgotPasswordRoute = () => "/forgot-password";
+export const resetPasswordRoute = () => "/reset-password";
 
-export const homePath = () => "/";
-export const contactPath = () => "/contact";
-export const aboutPath = () => "/about";
+//================**********================
+//               **PUBLIC ROUTES**
+//================**********================
+export const homeRoute = () => "/";
+export const contactRoute = () => "/contact";
+export const aboutRoute = () => "/about";
+export const defaultRedirectRoute = () => homeRoute();
 
-export const defaultRedirectPath = () => homePath();
+//================**********================
+//            **E-COMMERCE ROUTES**
+//================**********================
+export const menRoute = () => "/search/men";
+export const womenRoute = () => "/search/women";
+export const childrenRoute = () => "/search/children";
+export const giftRoute = () => "/gift";
+export const productsRoute = () => "/search";
+export const productDetailsRoute = (slug?: string) => `/product/${slug}`;
 
-// --- E-commerce Paths ---
-export const menPath = () => "/search/men";
-export const womenPath = () => "/search/women";
-export const childrenPath = () => "/search/children";
-export const giftPath = () => "/gift";
-export const productsPath = () => "/search";
-export const productDetailsPath = (slug: string) => `/product/${slug}`;
-export const cartPath = () => "/cart";
+//================**********================
+//            **USER ROUTES**
+//================**********================
+export const userRoutePrefix = () => "/user";
+export const userDetailsRoute = (id: string) => `/${userRoutePrefix()}/${id}`;
+export const cartRoute = (userId: string) =>
+  `/${userRoutePrefix()}/${userId}/cart`;
+export const orderRoute = (userId: string) =>
+  `/${userRoutePrefix()}/${userId}/order`;
 
-// --- Admin Paths ---
-export const dashboardPath = () => `${ADMIN_PREFIX}/dashboard`;
+//================**********================
+//            **ADMIN ROUTES**
+//================**********================
+export const adminRoutePrefix = () => `${ADMIN_PREFIX}`;
 
-export const publicRoutes = [
-  homePath(),
-  signInPath(),
-  registerPath(),
-  productsPath(),
-  "/products/:pid+",
-];
+//================**********================
+//            **AUTHORIZATION**
+//================**********================
 
 export const authRoutes = [
-  signInPath(),
-  registerPath(),
-  forgotPasswordPath(),
-  verifyEmailPath(),
+  signInRoute(),
+  registerRoute(),
+  verifyEmailRoute(),
+  forgotPasswordRoute(),
+  resetPasswordRoute(),
 ];
+
+export const adminRoutes = adminRoutePrefix();
+export const protectedRoutes = [];
+export const authApiRoutes = "/api/auth";
