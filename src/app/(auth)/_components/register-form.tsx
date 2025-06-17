@@ -14,6 +14,7 @@ import { AuthNotification } from "./auth-notification";
 import { SubmitButton } from "./submit-button";
 import { AuthCheckboxField } from "./auth-checkbox-field";
 import { PasswordField } from "./password-field";
+import { LucideMail, LucideUser2 } from "lucide-react";
 
 const defaultValues = {
   name: "",
@@ -47,8 +48,12 @@ export default function RegisterForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <fieldset className="space-y-6">
-            <TextField label="Name" name="name" />
-            <TextField label="Email" name="email" />
+            <TextField label="Name" name="name">
+              <LucideUser2 className="size-9 p-2.5 absolute right-0 bottom-0" />
+            </TextField>
+            <TextField label="Email" name="email">
+              <LucideMail className="size-9 p-2.5 absolute right-0 bottom-0" />
+            </TextField>
             <PasswordField label="Password" name="password" type="password" />
             <PasswordField
               label="Confirm Password"

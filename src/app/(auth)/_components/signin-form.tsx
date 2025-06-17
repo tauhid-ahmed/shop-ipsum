@@ -14,6 +14,7 @@ import { AuthNotification } from "./auth-notification";
 import { FormLink } from "./form-link";
 import { SubmitButton } from "./submit-button";
 import { PasswordField } from "./password-field";
+import { LucideMail } from "lucide-react";
 
 export function SignInForm({ callbackUrl }: { callbackUrl: string }) {
   const [notification, setNotification] = React.useState<Notification | null>(
@@ -46,7 +47,9 @@ export function SignInForm({ callbackUrl }: { callbackUrl: string }) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <TextField type="hidden" name="callbackUrl" />
           <fieldset className="space-y-6">
-            <TextField label="Email" name="email" />
+            <TextField label="Email" name="email">
+              <LucideMail className="size-9 p-2.5 absolute right-0 bottom-0" />
+            </TextField>
             <PasswordField label="Password" name="password" type="password" />
             <div className="space-y-4">
               <div className="flex items-center justify-between gap-2">
