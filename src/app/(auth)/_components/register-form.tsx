@@ -13,6 +13,7 @@ import { AuthCard } from "./auth-card";
 import { AuthNotification } from "./auth-notification";
 import { SubmitButton } from "./submit-button";
 import { AuthCheckboxField } from "./auth-checkbox-field";
+import { PasswordField } from "./password-field";
 
 const defaultValues = {
   name: "",
@@ -48,8 +49,8 @@ export default function RegisterForm() {
           <fieldset className="space-y-6">
             <TextField label="Name" name="name" />
             <TextField label="Email" name="email" />
-            <TextField label="Password" name="password" type="password" />
-            <TextField
+            <PasswordField label="Password" name="password" type="password" />
+            <PasswordField
               label="Confirm Password"
               name="confirm_password"
               type="password"
