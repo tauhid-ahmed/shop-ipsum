@@ -31,7 +31,11 @@ export default function AddNewProductPage() {
         // lastSavedTimestamp={new Date().toISOString()}
       />
       <div className="after:block after:h-[50vh]">
-        <ProductForm />
+        <ProductForm
+          onSubmit={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
       </div>
     </div>
   );

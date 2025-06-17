@@ -22,8 +22,8 @@ const dummyMediaStats = {
 };
 
 interface ProductFormProps {
-  initialData?: Record<string, any>; // Or a more specific product type
-  onSubmit: (data: Record<string, any>) => void; // Or a more specific product type
+  initialData?: Record<string, unknown>; // Or a more specific product type
+  onSubmit: (data: Record<string, unknown>) => void; // Or a more specific product type
   isLoading?: boolean; // To disable form while submitting/loading
 }
 

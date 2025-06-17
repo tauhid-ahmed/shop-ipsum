@@ -43,8 +43,10 @@ sendEmail.post("/", async (c) => {
     });
 
     return c.json({ message: "Email sent successfully." }, 200);
-  } catch (err: any) {
-    console.error("Email error:", err);
-    return c.json({ error: err.message }, 500);
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error("Email error:", err);
+      return c.json({ error: err.message }, 500);
+    }
   }
 });
