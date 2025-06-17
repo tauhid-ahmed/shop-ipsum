@@ -64,7 +64,7 @@ type PreviewCardProps = {
   category: string;
 };
 
-function PreviewCard({ image, className, category, badge }: PreviewCardProps) {
+function PreviewCard({ image, className, badge }: PreviewCardProps) {
   return (
     <Link
       href={"/"}

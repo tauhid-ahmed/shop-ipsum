@@ -1,6 +1,5 @@
-import { getVerificationTokenByToken } from "@/db/queries/verification";
 import EmailVerificationForm from "@/app/(auth)/_components/email-verify-form";
-import { Button } from "@/components/ui/button";
+import { getVerificationTokenByToken } from "@/db/queries/verification";
 
 type VerifyEmailPageProps = {
   searchParams: Promise<{ token: string; callbackUrl: string }>;

@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 import { env } from "@/env";
 import { render } from "@react-email/render";
 import { EmailVerificationTemplate } from "@/components/emails";
-import { verifyEmailPath } from "@/constants/paths";
+import { verifyEmailRoute } from "@/constants/paths";
 
 export const sendEmail = new Hono();
 
@@ -14,7 +14,7 @@ sendEmail.post("/", async (c) => {
     <EmailVerificationTemplate
       name={name}
       code={token}
-      verifyUrl={`${env.NEXT_PUBLIC_APP_URL}/${verifyEmailPath(
+      verifyUrl={`${env.NEXT_PUBLIC_APP_URL}/${verifyEmailRoute(
         callbackUrl
       )}?token=${token}`}
     />
