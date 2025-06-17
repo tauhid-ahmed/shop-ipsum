@@ -27,18 +27,17 @@ export const defaultRedirectRoute = () => homeRoute();
 //================**********================
 //            **E-COMMERCE ROUTES**
 //================**********================
-export const menRoute = () => "/search/men";
-export const womenRoute = () => "/search/women";
-export const childrenRoute = () => "/search/children";
-export const giftRoute = () => "/gift";
-export const productsRoute = () => "/search";
+export const productsRoutePrefix = () => "/search";
+export const menRoute = () => `${productsRoutePrefix()}/men`;
+export const womenRoute = () => `${productsRoutePrefix()}/women`;
+export const childrenRoute = () => `${productsRoutePrefix()}/children`;
 export const productDetailsRoute = (slug?: string) => `/product/${slug}`;
 
 //================**********================
 //            **USER ROUTES**
 //================**********================
 export const userRoutePrefix = () => "/user";
-export const userDetailsRoute = (id: string) => `/${userRoutePrefix()}/${id}`;
+export const userDetailsRoute = (id: string) => `${userRoutePrefix()}/${id}`;
 export const cartRoute = (userId: string) =>
   `/${userRoutePrefix()}/${userId}/cart`;
 export const orderRoute = (userId: string) =>
@@ -60,6 +59,8 @@ export const authRoutes = [
   forgotPasswordRoute(),
   resetPasswordRoute(),
 ];
+
+export const publicRoutes = [productsRoutePrefix(), productDetailsRoute()];
 
 export const adminRoutes = adminRoutePrefix();
 export const protectedRoutes = [];
