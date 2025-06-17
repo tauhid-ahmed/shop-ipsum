@@ -1,5 +1,5 @@
 "use client";
-import { LucideArrowRight, LucideCheck, LucideMail } from "lucide-react";
+import { LucideCheck, LucideMail } from "lucide-react";
 import { useState } from "react";
 import { Section } from "./layout/section";
 import { Container } from "./layout/container";
@@ -9,7 +9,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "./ui/card";
@@ -32,7 +31,7 @@ export default function NewsLetter() {
         <Card>
           <CardContent className="p-12">
             <CardHeader className="p-0 mb-4 text-center">
-              <LucideMail className="size-10 md:size-14 text-primary mx-auto" />
+              <LucideMail className="size-10 md:size-14 mx-auto text-emerald-500" />
               <CardTitle className="text-2xl md:text-4xl">
                 Stay Updated
               </CardTitle>
