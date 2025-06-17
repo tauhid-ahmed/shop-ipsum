@@ -3,6 +3,7 @@ import { createErrorResponse, type ApiResponse } from "@/utils/api-responses";
 
 // Define a type for errors that might have a 'digest' property,
 // common in Next.js specific errors like redirection.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type NextErrorWithDigest = { digest?: string; [key: string]: any };
 
 // Helper to check for Next.js redirect errors
@@ -13,7 +14,9 @@ const isNextRedirectError = (error: unknown): error is NextErrorWithDigest => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function withErrorHandler<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends (...args: any[]) => Promise<ApiResponse>
 >(fn: T): T {
   return (async (...args: Parameters<T>): Promise<ApiResponse> => {
