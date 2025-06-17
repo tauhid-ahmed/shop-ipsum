@@ -14,7 +14,7 @@ sendEmail.post("/", async (c) => {
     <EmailVerificationTemplate
       name={name}
       code={token}
-      verifyUrl={`${env.NEXT_PUBLIC_APP_URL}/${verifyEmailPath(
+      verifyUrl={`${env.APP_URL}/${verifyEmailPath(
         callbackUrl
       )}?token=${token}`}
     />
