@@ -3,6 +3,7 @@
 import { ShieldCheck, CreditCard, Headphones, Percent } from "lucide-react";
 import { Section } from "./layout/section";
 import { Container } from "./layout/container";
+import Heading from "./heading";
 
 const features = [
   {
@@ -57,8 +58,12 @@ export default function FeaturesGrid() {
                 <feature.icon className={`size-18`} />
               </span>
               <div className="relative">
-                <h3 className="font-semibold text-lg">{feature.title}</h3>
-                <p className="text-sm opacity-90">{feature.description}</p>
+                <Heading as="h3" size="lg" weight="bold">
+                  {feature.title}
+                </Heading>
+                <p className="text-sm text-muted-foreground font-medium">
+                  {feature.description}
+                </p>
               </div>
             </div>
           ))}
