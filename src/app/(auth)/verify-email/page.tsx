@@ -1,5 +1,6 @@
 import { getVerificationTokenByToken } from "@/db/queries/verification";
 import EmailVerificationForm from "@/app/(auth)/_components/email-verify-form";
+import { Button } from "@/components/ui/button";
 
 type VerifyEmailPageProps = {
   searchParams: Promise<{ token: string; callbackUrl: string }>;
@@ -26,5 +27,9 @@ export default async function VerifyEmailPage({
     }
   }
 
-  return <EmailVerificationForm initialData={tokenData} />;
+  return (
+    <>
+      <EmailVerificationForm initialData={tokenData} />
+    </>
+  );
 }

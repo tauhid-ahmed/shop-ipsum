@@ -69,7 +69,12 @@ export default function EmailVerificationForm({
   };
 
   return (
-    <AuthCard title="Please verify your email" socialInfo={false}>
+    <AuthCard
+      title="Check your email"
+      subtitle="You sent a code to"
+      redirectMessage="Code expires in 10 minutes"
+      socialInfo={false}
+    >
       <form onSubmit={handleSubmit}>
         <div className="w-fit mx-auto space-y-4">
           <InputOTP
@@ -96,8 +101,8 @@ export default function EmailVerificationForm({
             type="submit"
             className="w-full flex items-center justify-center"
             isSubmitting={isSubmitting}
-            idleLabel="Verify"
-            submittingLabel="Verifying"
+            idleLabel="Verify Code"
+            submittingLabel="Verifying Code"
           />
         </div>
       </form>
