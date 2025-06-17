@@ -5,6 +5,7 @@ import { SocialForm } from "./social-form";
 
 type AuthCardProps = {
   title: string;
+  subtitle?: string;
   redirectMessage?: string;
   redirectLabel?: string;
   redirectHref?: string;
@@ -13,6 +14,7 @@ type AuthCardProps = {
 
 export function AuthCard({
   title,
+  subtitle,
   redirectMessage,
   redirectHref,
   redirectLabel,
@@ -23,11 +25,16 @@ export function AuthCard({
     <div className="space-y-6 py-6">
       <div className="flex flex-col items-center space-y-1">
         <Logo size="lg" />
-        <Heading weight="bold" size="2xl">
+        <Heading as="h1" weight="bold" size="2xl">
           {title}
         </Heading>
+        {subtitle && (
+          <Heading as="h2" size="md">
+            {subtitle}
+          </Heading>
+        )}
       </div>
-      <Card className="px-6! py-10!">
+      <Card className="sm:px-6! sm:py-10!">
         <CardContent>
           <div className="space-y-4">
             {children}
