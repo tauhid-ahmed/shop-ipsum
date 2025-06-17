@@ -62,7 +62,6 @@ export default function ProductSeoMeta() {
             name="seoMetaKeywords"
             label="Meta Keywords (Optional)"
             placeholder="keyword1, keyword2, keyword3"
-            helperText="Comma-separated keywords. Less critical for modern SEO but can be used."
           />
         </div>
 

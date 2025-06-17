@@ -112,7 +112,7 @@ export function FilterColors() {
         defaultValue={selectedColor}
       >
         {colors.map((color) => (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3" key={`${color}`}>
             <RadioGroupItem
               value={color.name}
               id="r1"

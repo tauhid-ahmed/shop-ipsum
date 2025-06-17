@@ -74,9 +74,9 @@ export default function ProductDetails({
 
 function ProductCategoriesSection() {
   // State to hold the selected department value
-  const [selectedDepartment, setSelectedDepartment] = useState<
-    string | undefined
-  >(departmentOptions[0]?.value);
+  const [selectedDepartment] = useState<string | undefined>(
+    departmentOptions[0]?.value
+  );
 
   return (
     <Card>
@@ -115,7 +115,7 @@ function ProductCategoriesSection() {
 
 function ProductTags() {
   // Example: Current tags should ideally come from form state
-  const [currentTags, setCurrentTags] = useState<string[]>(["# Trending"]); // Manage with form state
+  const [currentTags] = useState<string[]>(["# Trending"]); // Manage with form state
   const suggestedTagLabels = [
     // Could be props or from a config
     "Trending",

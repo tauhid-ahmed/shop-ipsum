@@ -17,10 +17,10 @@ export default function ProductPromotionsDiscounts() {
   // In a real app, you'd likely manage a list of discounts
   // For simplicity, this example shows fields for a single discount
 
-  const handleAddDiscountRule = () => {
-    console.log("Add new discount rule");
-    // Logic to add another set of discount fields if managing multiple
-  };
+  // const handleAddDiscountRule = () => {
+  //   console.log("Add new discount rule");
+  //   // Logic to add another set of discount fields if managing multiple
+  // };
 
   return (
     <ProductFormCard
@@ -45,7 +45,6 @@ export default function ProductPromotionsDiscounts() {
           label="Discount Value"
           type="number"
           placeholder="e.g., 15 (for %) or 10 (for $)"
-          helperText="Enter percentage (e.g., 15) or fixed amount (e.g., 10)."
         />
         <TextField
           name="discountCode"

@@ -3,13 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { productFormSections } from "../form-sections.config";
 import { ProductFormCard } from "../ui/product-form-card";
-import { useFormContext } from "react-hook-form";
 import { LucideSparkles, LucideWand2 } from "lucide-react"; // Example icons
 
 const { productAiGenerator } = productFormSections;
 
 export default function ProductAiGenerator() {
-  const { setValue } = useFormContext(); // To potentially set form values
+  // const { setValue } = useFormContext(); // To potentially set form values
 
   const handleGenerateDescription = () => {
     console.log("AI: Generating product description...");

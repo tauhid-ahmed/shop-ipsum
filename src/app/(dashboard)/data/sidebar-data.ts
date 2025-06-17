@@ -10,7 +10,6 @@ import {
   Settings,
   Shield,
   ShoppingCart,
-  Store,
   Tag,
   TrendingUp,
   Truck,

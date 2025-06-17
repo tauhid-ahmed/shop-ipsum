@@ -6,7 +6,7 @@ export default function ProductsSearchPage() {
   return (
     <ProductsGrid>
       {[...Array(20).fill(0)].map((i, index) => (
-        <ProductsGridItem productId={`${index}`}>
+        <ProductsGridItem key={i + index} productId={`${index}`}>
           <ProductCard data={products[0]} />
         </ProductsGridItem>
       ))}

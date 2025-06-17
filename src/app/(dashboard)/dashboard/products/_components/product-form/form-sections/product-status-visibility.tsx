@@ -57,7 +57,6 @@ export default function ProductStatusVisibility() {
             name="productPublishDate"
             label="Publishing Date"
             type="datetime-local" // Or "date" if time is not needed
-            helperText="Schedule when the product goes live."
           />
           {/* <DatePickerField name="productPublishDate" label="Publishing Date" /> */}
         </div>

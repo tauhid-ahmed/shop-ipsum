@@ -33,7 +33,6 @@ export default function ProductReturnPolicy() {
           label="Return Window (Days)"
           type="number"
           placeholder="e.g., 30"
-          helperText="Number of days a customer has to return the product."
         />
         <TextArea
           name="returnPolicyDetails"

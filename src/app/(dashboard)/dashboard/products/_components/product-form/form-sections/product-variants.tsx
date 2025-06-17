@@ -1,4 +1,4 @@
-import { Heading, SelectField } from "@/components";
+import { SelectField } from "@/components";
 import { productFormSections } from "../form-sections.config";
 import { ProductFormCard } from "../ui/product-form-card";
 import ActionButton from "../action-button";
@@ -72,7 +72,7 @@ interface VariantItemProps {
 
 function VariantItem({ variant, index }: VariantItemProps) {
   // Each field name should be unique per variant, e.g., `variants.${index}.color` with react-hook-form
-  const fieldNamePrefix = `variant_${index}`;
+  const fieldNamePrefix = `variant_${index}-${variant}`;
 
   return (
     <div className="space-y-6 border-b border-dashed border-border pb-6 mb-6">

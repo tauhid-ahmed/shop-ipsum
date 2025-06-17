@@ -27,11 +27,7 @@ interface ProductFormProps {
   isLoading?: boolean; // To disable form while submitting/loading
 }
 
-export function ProductForm({
-  initialData,
-  onSubmit,
-  isLoading,
-}: ProductFormProps) {
+export function ProductForm({ initialData, onSubmit }: ProductFormProps) {
   const form = useForm({
     defaultValues: initialData || {},
     // resolver: zodResolver(yourProductSchema), // Add your Zod schema for validation
@@ -61,6 +57,7 @@ export function ProductForm({
           <ProductSeoMeta />
           <ProductShipping />
         </div>
+        <button className="hidden absolute">submit</button>
       </form>
     </Form>
   );
