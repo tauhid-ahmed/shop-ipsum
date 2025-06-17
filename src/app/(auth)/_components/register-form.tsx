@@ -15,11 +15,11 @@ import { SubmitButton } from "./submit-button";
 import { AuthCheckboxField } from "./auth-checkbox-field";
 
 const defaultValues = {
-  name: "Tauhid",
-  email: "tauhidxtauhid@gmail.com",
-  password: "1234zxcvW@",
-  confirm_password: "1234zxcvW@",
-  terms_and_condition: true,
+  name: "",
+  email: "",
+  password: "",
+  confirm_password: "",
+  terms_and_condition: false,
 };
 
 export default function RegisterForm() {
