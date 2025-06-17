@@ -17,8 +17,4 @@ export const navItems = [
     name: "Children",
     href: paths.childrenRoute(),
   },
-  {
-    name: "Gift",
-    href: paths.giftRoute(),
-  },
 ];

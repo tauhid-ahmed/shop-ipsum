@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { LucideMoveRight } from "lucide-react";
 import Embla, { useEmblaContext } from "@/components/embla";
 import { ProductCard } from "./";
-import { productsRoute } from "@/constants/paths";
+import { productsRoutePrefix } from "@/constants/paths";
 import { type ProductType } from "@/data/products";
 import { ProductSection } from ".";
 
@@ -28,7 +28,7 @@ export default function ProductReveal({
               {title}
             </Heading>
             <Button asChild variant="link">
-              <Link href={productsRoute()}>
+              <Link href={productsRoutePrefix()}>
                 See more <LucideMoveRight />
               </Link>
             </Button>
