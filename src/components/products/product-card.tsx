@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import React, { ReactElement, useRef, Ref } from "react";
 import { cn } from "@/lib/utils";
-import { productDetailsPath } from "@/constants/paths";
+import { productDetailsRoute } from "@/constants/paths";
 import { QuickShop } from "./quick-shop";
 import { StarRatings } from "@/components/star-ratings";
 import { type ProductType } from "@/data/products";
@@ -41,7 +41,7 @@ export default function ProductCard({
             </Button>
           </div>
           <Link
-            href={`${productDetailsPath(data.slug)}`}
+            href={`${productDetailsRoute(data.slug)}`}
             className="relative h-44 md:h-52 lg:h-60 rounded overflow-hidden flex items-center justify-center bg-accent/50"
           >
             <div className="inline-block h-full rounded overflow-hidden group-hover/card:scale-150 transition-transform duration-300">
@@ -62,7 +62,7 @@ export default function ProductCard({
         </div>
         <Link
           className="flex flex-col justify-between flex-1 gap-3"
-          href={productDetailsPath(data.slug)}
+          href={productDetailsRoute(data.slug)}
         >
           <CardHeader className="p-0 text-center">
             <CardTitle className="font-normal text-sm">

@@ -3,22 +3,22 @@ import * as paths from "@/constants/paths";
 export const navItems = [
   {
     name: "Home",
-    href: paths.homePath(),
+    href: paths.homeRoute(),
   },
   {
     name: "Men",
-    href: paths.menPath(),
+    href: paths.menRoute(),
   },
   {
     name: "Women",
-    href: paths.womenPath(),
+    href: paths.womenRoute(),
   },
   {
     name: "Children",
-    href: paths.childrenPath(),
+    href: paths.childrenRoute(),
   },
   {
     name: "Gift",
-    href: paths.giftPath(),
+    href: paths.giftRoute(),
   },
 ];

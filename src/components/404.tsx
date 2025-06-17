@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Heading } from "@/components";
 import { Button } from "@/components/ui/button";
-import { homePath } from "@/constants/paths";
+import { homeRoute } from "@/constants/paths";
 
 type NotFoundProps = {
   backLink?: string;
 } & React.ComponentProps<"div">;
 
-export default function NotFound({ backLink = homePath() }: NotFoundProps) {
+export default function NotFound({ backLink = homeRoute() }: NotFoundProps) {
   return (
     <div className="space-y-8 text-center">
       <div className="space-y-4">

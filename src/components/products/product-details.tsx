@@ -2,7 +2,7 @@
 import { Heading } from "@/components";
 import { DotSeparator } from "@/components/dot-separator";
 import { Button } from "@/components/ui/button";
-import { signInPath } from "@/constants/paths";
+import { signInRoute } from "@/constants/paths";
 import { type ProductType } from "@/data/products";
 import { useAuth } from "@/hooks/useAuth";
 import { useProductAttributes } from "@/hooks/useProductAttributes";
@@ -179,7 +179,7 @@ function CTAAction() {
       <Button
         onClick={() => {
           if (!user) {
-            redirect(signInPath());
+            redirect(signInRoute());
           }
         }}
         className="w-full"

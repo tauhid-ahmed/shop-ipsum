@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { data, ProductType } from "@/data/products";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { productDetailsPath, signInPath } from "@/constants/paths";
+import { productDetailsRoute, signInRoute } from "@/constants/paths";
 import { LucidePlus } from "lucide-react";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 import Link from "next/link";
@@ -147,7 +147,7 @@ function ProductCTA({ slug }: { slug: string; productId: string }) {
   const router = useRouter();
   const handleAddToCart = () => {
     if (!isAuthenticated) {
-      return router.push(signInPath(productDetailsPath(slug)));
+      return router.push(signInRoute(productDetailsRoute(slug)));
     }
     alert("To be implemented");
   };
@@ -157,7 +157,7 @@ function ProductCTA({ slug }: { slug: string; productId: string }) {
         Add to cart
       </Button>
       <Button className="w-full" asChild size="lg" variant="link">
-        <Link href={productDetailsPath(slug)}>View Details</Link>
+        <Link href={productDetailsRoute(slug)}>View Details</Link>
       </Button>
     </div>
   );

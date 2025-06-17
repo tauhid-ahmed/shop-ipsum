@@ -3,7 +3,7 @@ import { Heading } from "@/components";
 import { Container } from "./layout/container";
 import { Section } from "./layout/section";
 import { Button } from "./ui/button";
-import { homePath } from "@/constants/paths";
+import { homeRoute } from "@/constants/paths";
 
 type ErrorProps = {
   code?: number;
@@ -48,7 +48,7 @@ export default function Error({
             <Button onClick={reset} size="lg">
               Retry
             </Button>
-            <Link href={homePath()} passHref>
+            <Link href={homeRoute()} passHref>
               <Button size="lg" variant="ghost" asChild>
                 <span>Back to home</span>
               </Button>
