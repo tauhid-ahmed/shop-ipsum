@@ -17,6 +17,17 @@ export default async function middleware(req: NextRequest) {
   const { nextUrl } = req;
   const isLoggedIn = !!session?.user;
 
+  const sessionCartId = req.cookies.get("sessionCartId");
+  if (!sessionCartId) {
+    const newSessionCartId = crypto.randomUUID();
+    const newRequestHeaders = new Headers(req.headers);
+    const response = NextResponse.next({
+      headers: newRequestHeaders,
+    });
+    response.cookies.set("sessionCartId", newSessionCartId);
+    return response;
+  }
+
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isPublicRoute =
     nextUrl.pathname === homeRoute() ||
