@@ -8,9 +8,7 @@ export default function PublicLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="shrink-0 sticky top-0 z-50">
-        <Header />
-      </div>
+      <Header />
       <main className="flex-1">{children}</main>
       <div className="shrink-0">
         <Footer />
