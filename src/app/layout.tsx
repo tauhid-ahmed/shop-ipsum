@@ -49,7 +49,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${inter.className} antialiased bg-background`}
+        className={`${inter.variable} ${inter.className} antialiased bg-background overflow-x-hidden`}
       >
         <SessionProvider>
           <Analytics />
