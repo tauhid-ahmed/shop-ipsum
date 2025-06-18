@@ -30,6 +30,12 @@ export function DesktopNavigation() {
     setShowPopover(false);
     setActiveLabel("");
   };
+
+  const onClick = () => {
+    setShowPopover(false);
+    setActiveLabel("");
+  };
+
   return (
     <nav className="hidden lg:block" onPointerLeave={handlePointerLeave}>
       <ul className="flex gap-4">
@@ -60,7 +66,7 @@ export function DesktopNavigation() {
                   duration: 0.3,
                 }}
               >
-                <NavigationContent label={activeLabel} />
+                <NavigationContent label={activeLabel} onClick={onClick} />
               </motion.div>
             </PopoverContent>
           )}
@@ -70,7 +76,13 @@ export function DesktopNavigation() {
   );
 }
 
-function NavigationContent({ label }: { label: string }) {
+function NavigationContent({
+  label,
+  onClick,
+}: {
+  label: string;
+  onClick: () => void;
+}) {
   const data = getStoreNavigationSectionByLabel(label);
   return (
     <Container>
@@ -93,7 +105,11 @@ function NavigationContent({ label }: { label: string }) {
                 <Heading as="h3" size="default" className="text-background">
                   {item.name}
                 </Heading>
-                <Link className="text-sm hover:underline" href={item.href}>
+                <Link
+                  onClick={onClick}
+                  className="text-sm hover:underline"
+                  href={item.href}
+                >
                   Shop now
                 </Link>
               </span>
@@ -108,7 +124,7 @@ function NavigationContent({ label }: { label: string }) {
               </Heading>
               <ul className="text-foreground/80 space-y-2">
                 {section.items.map((item) => (
-                  <li key={item.name}>
+                  <li onClick={onClick} key={item.name}>
                     <Link
                       className="hover:underline hover:text-primary"
                       href={item.href}
