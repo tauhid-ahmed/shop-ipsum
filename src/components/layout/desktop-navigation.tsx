@@ -44,18 +44,24 @@ export function DesktopNavigation() {
             <PopoverTrigger
               key={label}
               onPointerEnter={handlePointerEnter.bind(null, label)}
-              className={cn(
-                "relative text-foreground/80 hover:text-foreground cursor-pointer after:h-0.5 after:inset-x-0 after:bg-primary after:absolute after:-bottom-6 after:opacity-0 hover:after:opacity-100 before:absolute before:-inset-x-4 before:-inset-y-6 after:translate-y-0.5 hover:after:translate-y-0 transition-[opacity,transform] after:duration-500 after:pointer-events-none",
-                label === activeLabel && "after:opacity-100 after:translate-y-0"
-              )}
+              asChild
             >
-              {label}
+              <div
+                className={cn(
+                  "relative text-foreground/80 hover:text-foreground cursor-pointer after:h-0.5 after:inset-x-0 after:bg-primary after:absolute after:-bottom-6 after:opacity-0 hover:after:opacity-100 before:absolute before:-inset-x-4 before:-inset-y-6 after:translate-y-0.5 hover:after:translate-y-0 transition-[opacity,transform] after:duration-500 after:pointer-events-none before:z-10",
+                  label === activeLabel &&
+                    "after:opacity-100 after:translate-y-0"
+                )}
+              >
+                {label}
+              </div>
             </PopoverTrigger>
           ))}
+
           {showPopover && (
             <PopoverContent
               onPointerLeave={handlePointerLeave}
-              className="w-screen mt-5"
+              className="w-screen mt-5 relative before:absolute before:inset-x-0 before:h-8 before:-top-7"
             >
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
