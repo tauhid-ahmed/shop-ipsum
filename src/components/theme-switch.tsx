@@ -30,7 +30,7 @@ export default function ThemeSwitch({
       onCheckedChange={toggleTheme}
       data-slot="switch"
       className={cn(
-        "peer focus-visible:border-ring focus-visible:ring-ring inline-flex h-6 w-10 shrink-0 items-center rounded-full border-2 border-primary outline-none focus-visible:ring-px disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer p-0.5",
+        "peer focus-visible:border-ring focus-visible:ring-ring inline-flex h-6 w-10 shrink-0 items-center rounded-full border border-primary outline-none focus-visible:ring-px disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer p-1",
         isDark
           ? "justify-end border-sky-600"
           : "justify-start border-amber-600",
@@ -48,7 +48,7 @@ export default function ThemeSwitch({
         <motion.div layout>
           <LucideSunMoon
             className={cn(
-              "stroke-3",
+              "stroke-2",
               isDark ? "text-sky-600" : "text-amber-600"
             )}
           />
