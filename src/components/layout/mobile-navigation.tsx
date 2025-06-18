@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { navItems } from "@/data/nav-data";
 import { ActiveRoute } from "./active-route";
 
-export default function Navigation() {
+export function MobileNavigation() {
   const [open, setOpen] = React.useState(false);
   const [subMenuOpen, setSubMenuOpen] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
