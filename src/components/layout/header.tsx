@@ -7,6 +7,7 @@ import { User } from "next-auth";
 import { Container } from "./container";
 import { DesktopNavigation } from "./desktop-navigation";
 import { MobileNavigation } from "./mobile-navigation";
+import { CartWidget } from "../cart/cart-widget";
 
 export default async function Header() {
   const session = await getServerSession();
@@ -28,6 +29,7 @@ export default async function Header() {
               <div className="hidden lg:block">
                 <ProductSearchWidget />
               </div>
+              <CartWidget />
               <WishlistOverview />
               <UserProfileWidget user={session as User} />
             </div>
