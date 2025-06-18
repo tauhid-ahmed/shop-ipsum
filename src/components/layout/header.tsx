@@ -7,7 +7,7 @@ import { getServerSession } from "@/lib/get-server-session";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Container } from "./container";
-import { DesktopNav } from "./desktop-nav";
+import { DesktopNavigation } from "./desktop-navigation";
 import Navigation from "./mobile-nav";
 
 export default async function Header() {
@@ -22,7 +22,7 @@ export default async function Header() {
             <ProductSearchWidget />
           </div>
           <div className="flex-1 lg:flex gap-4 hidden">
-            <DesktopNav />
+            <DesktopNavigation />
           </div>
           <Logo />
           <div className="flex-1 flex justify-end">
