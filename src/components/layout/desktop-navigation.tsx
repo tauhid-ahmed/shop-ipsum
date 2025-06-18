@@ -45,7 +45,7 @@ export function DesktopNavigation() {
               key={label}
               onPointerEnter={handlePointerEnter.bind(null, label)}
               className={cn(
-                "relative text-foreground/80 hover:text-foreground cursor-pointer after:h-0.5 after:inset-x-0 after:bg-primary after:absolute after:-bottom-6 after:opacity-0 hover:after:opacity-100 before:absolute before:-inset-x-4 before:-inset-y-6 after:translate-y-0.5 hover:after:translate-y-0 transition-[opacity_transform] after:duration-500",
+                "relative text-foreground/80 hover:text-foreground cursor-pointer after:h-0.5 after:inset-x-0 after:bg-primary after:absolute after:-bottom-6 after:opacity-0 hover:after:opacity-100 before:absolute before:-inset-x-4 before:-inset-y-6 after:translate-y-0.5 hover:after:translate-y-0 transition-[opacity,transform] after:duration-500",
                 label === activeLabel && "after:opacity-100 after:translate-y-0"
               )}
             >
