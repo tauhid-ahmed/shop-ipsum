@@ -9,9 +9,10 @@ import { Button } from "../ui/button";
 import { Container } from "./container";
 import { DesktopNavigation } from "./desktop-navigation";
 import { MobileNavigation } from "./mobile-navigation";
+import { User } from "next-auth";
 
 export default async function Header() {
-  const user = await getServerSession();
+  const session = await getServerSession();
 
   return (
     <header className="border-b border-border bg-secondary/50 py-4 z-50 relative backdrop-blur text-base lg:mx-0 h-18 shadow">
@@ -31,17 +32,7 @@ export default async function Header() {
                 <ProductSearchWidget />
               </div>
               <WishlistOverview />
-              {!user ? (
-                <SignInButton />
-              ) : (
-                <UserProfileWidget
-                  user={{
-                    name: user.name ?? "",
-                    email: user.email ?? "",
-                    image: user?.image ?? "",
-                  }}
-                />
-              )}
+              <UserProfileWidget user={session as User} />
             </div>
           </div>
         </nav>
