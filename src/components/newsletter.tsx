@@ -31,14 +31,14 @@ export default function NewsLetter() {
     <Section padding="sm">
       <Container>
         <div className="relative rounded-xl overflow-hidden">
-          <div className="opacity-15 brightness-150 absolute inset-0 after:absolute after:inset-0 after:bg-gradient-to-br after:from-primary/50 after:to-transparent">
+          <div className="opacity-20 brightness-150 absolute inset-0 after:absolute after:inset-0 after:bg-gradient-to-br after:from-primary/50 after:to-transparent">
             <Image
               className="size-full object-cover"
               src={newsLetterCoverImage}
               alt="newsletter cover image"
             />
           </div>
-          <Card className="bg-transparent z-10 relative brightness-125 backdrop-blur-xs">
+          <Card className="bg-transparent z-10 relative brightness-125">
             <CardContent className="p-8 md:p-12">
               <CardHeader className="p-0 mb-4 text-center">
                 <LucideMail className="size-10 md:size-14 mx-auto text-emerald-500" />
