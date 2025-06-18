@@ -48,8 +48,8 @@ interface EmblaProviderProps<T = unknown> {
 
 export default function Embla({
   loop = true,
-  autoplay = false,
-  delay = 6000,
+  autoplay = true,
+  delay = 3000,
   data = [],
   align = "center",
   playOnInit = false,
