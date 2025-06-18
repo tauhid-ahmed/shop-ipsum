@@ -2,14 +2,11 @@ import { Logo } from "@/components";
 import { ProductSearchWidget } from "@/components/products";
 import { UserProfileWidget } from "@/components/users/";
 import WishlistOverview from "@/components/wishlist/wishlist-overview";
-import { signInRoute } from "@/constants/paths";
 import { getServerSession } from "@/lib/get-server-session";
-import Link from "next/link";
-import { Button } from "../ui/button";
+import { User } from "next-auth";
 import { Container } from "./container";
 import { DesktopNavigation } from "./desktop-navigation";
 import { MobileNavigation } from "./mobile-navigation";
-import { User } from "next-auth";
 
 export default async function Header() {
   const session = await getServerSession();
