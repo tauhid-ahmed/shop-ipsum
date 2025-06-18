@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Container } from "./container";
 import { DesktopNavigation } from "./desktop-navigation";
-import Navigation from "./mobile-nav";
+import { MobileNavigation } from "./mobile-navigation";
 
 export default async function Header() {
   const user = await getServerSession();
@@ -18,7 +18,7 @@ export default async function Header() {
       <Container size="lg">
         <nav className="flex items-center text-foreground/90">
           <div className="flex flex-1 gap-1 lg:hidden">
-            <Navigation />
+            <MobileNavigation />
             <ProductSearchWidget />
           </div>
           <div className="flex-1 lg:flex gap-4 hidden">
