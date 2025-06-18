@@ -141,7 +141,7 @@ function GuestProfileHeader() {
         Guest User
       </Heading>
       <div className="flex gap-2 justify-center mt-2">
-        <Button size="sm" asChild>
+        <Button size="sm" asChild className="px-10!">
           <Link href={signInRoute()}>
             <LucideLogIn /> Sign in
           </Link>
