@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ProductSection } from ".";
+import marketingCalloutCoverImage from "@/images/marketing-callout-cover.webp";
 
 type ProductPromoProps = {
   title: string;
@@ -20,13 +21,14 @@ export default function ProductMarketingCallout({
   return (
     <ProductSection>
       <div className="relative h-60 lg:h-84 bg-accent/50 flex items-center justify-center px-4 rounded overflow-hidden">
-        <div className="absolute inset-0 -z-10 opacity-20">
+        <div className="opacity-15 brightness-150 absolute inset-0 after:absolute after:inset-0 after:bg-gradient-to-br after:from-primary/50 after:to-transparent">
           <Image
-            src="/assets/section/section-bg-01.webp"
-            fill
-            alt="section image"
+            className="size-full object-cover"
+            src={marketingCalloutCoverImage}
+            alt="newsletter cover image"
           />
         </div>
+
         <div className="flex flex-col gap-3 md:gap-4 text-center">
           <Heading align="center" size="3xl" weight="bold">
             {title}
