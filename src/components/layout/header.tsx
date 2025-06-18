@@ -40,11 +40,3 @@ export default async function Header() {
     </header>
   );
 }
-
-function SignInButton() {
-  return (
-    <Button asChild>
-      <Link href={signInRoute()}>Sign In</Link>
-    </Button>
-  );
-}
