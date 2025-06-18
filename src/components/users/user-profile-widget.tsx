@@ -1,6 +1,6 @@
 "use client";
 import { Heading } from "@/components";
-import { ThemeSwitch } from "@/components/theme-switch";
+import { ThemeSwitch } from "@/components";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
