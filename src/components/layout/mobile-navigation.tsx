@@ -1,88 +1,136 @@
 "use client";
-import { LucideListMinus, LucidePanelLeftClose } from "lucide-react";
+import { Heading } from "@/components";
 import { Button } from "@/components/ui/button";
-import React from "react";
-import { AnimatePresence, motion, MotionConfig } from "motion/react";
-import { useRootClick } from "@/hooks/useRootClick";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  getStoreNavigationSectionByLabel,
+  getStoreNavigationSectionLabels,
+} from "@/data/store-navigation";
 import { cn } from "@/lib/utils";
-import { navItems } from "@/data/nav-data";
-import { ActiveRoute } from "./active-route";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import { LucideMenu, LucideX } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 
 export function MobileNavigation() {
-  const [open, setOpen] = React.useState(false);
-  const [subMenuOpen, setSubMenuOpen] = React.useState(false);
-  const ref = React.useRef<HTMLDivElement>(null);
+  const [activeLabel, setActiveLabel] = useState("Men");
+  const labels = useMemo(() => getStoreNavigationSectionLabels(), []);
+  const [isSheetOpen, setSheetOpen] = useState(false);
 
-  useRootClick(() => {
-    setOpen(false);
-    setSubMenuOpen(false);
-  }, ref);
+  const handleActiveLabel = (label: string) => setActiveLabel(label);
+  const handleSheetOpen = () => setSheetOpen(false);
 
   return (
-    <div>
-      <Button
-        onClick={() => {
-          setOpen(!open);
-          setSubMenuOpen(false);
-        }}
-        variant="ghost"
-        shape="pill"
-        size="icon"
-      >
-        <LucideListMinus />
-      </Button>
-      <AnimatePresence mode="wait">
-        {open && (
-          <div
-            ref={ref}
-            className={cn(
-              "fixed left-0 top-16 w-72 h-[calc(100vh-4rem)] [&>*]:p-6",
-              open && "pointer-events-auto",
-              !open && "pointer-events-none"
-            )}
-          >
-            <MotionConfig
-              transition={{ duration: 0.3, type: "tween", ease: "easeInOut" }}
-            >
-              <motion.div
-                key={open ? "open" : "closed"}
-                initial={{ x: "-100%" }}
-                animate={{ x: open ? 0 : "-100%" }}
-                exit={{ x: "-100%" }}
-                className="absolute inset-0 bg-popover text-popover-foreground shadow-lg border-r border-border"
-              >
-                <ul className="space-y-2 ml-3">
-                  {navItems.map((item) => (
-                    <li key={item.href}>
-                      <ActiveRoute href={item.href}>{item.name}</ActiveRoute>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-              <motion.div
-                initial={{ x: "-100%" }}
-                animate={{ x: subMenuOpen ? 0 : "-100%" }}
-                exit={{ x: "-100%" }}
-                className="absolute inset-0 bg-popover text-popover-foreground  border border-border shadow-lg"
-              >
-                <div className="-mt-4 -ml-2 pb-1 flex justify-between items-center">
+    <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
+      <SheetTrigger asChild>
+        <Button variant="ghost">
+          <LucideMenu />
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="left" className="px-2 bg-popover">
+        <SheetHeader className="py-5 space-y-4">
+          <SheetClose asChild>
+            <Button size="icon" variant="ghost">
+              <LucideX />
+            </Button>
+          </SheetClose>
+          <VisuallyHidden.Root>
+            <SheetTitle>Mobile Navigation</SheetTitle>
+          </VisuallyHidden.Root>
+          <div className="border-b -mx-6 px-6">
+            <ul className="flex text-center">
+              {labels.map((label) => (
+                <li
+                  className={cn(
+                    "flex-1 relative group after:absolute after:-bottom-px after:h-0.5 after:bg-primary after:inset-x-0 after:opacity-0",
+                    {
+                      "after:opacity-100": activeLabel === label,
+                    }
+                  )}
+                  key={label}
+                >
                   <Button
+                    onClick={handleActiveLabel.bind(null, label)}
                     variant="ghost"
-                    shape="pill"
-                    onClick={() => setSubMenuOpen(false)}
+                    className={cn(
+                      "hover:bg-transparent! py-6 text-primary/70 hover:text-primary",
+                      {
+                        "text-primary": activeLabel === label,
+                      }
+                    )}
                   >
-                    <LucidePanelLeftClose />
-                    <strong>Main Menu</strong>
+                    {label}
                   </Button>
-                </div>
-                <div className="mt-4">
-                  <span>Top Picks</span>
-                </div>
-              </motion.div>
-            </MotionConfig>
+                </li>
+              ))}
+            </ul>
           </div>
-        )}
-      </AnimatePresence>
+        </SheetHeader>
+        <div className="flex-1 overflow-y-scroll px-6">
+          <NavigationContent label={activeLabel} onClick={handleSheetOpen} />
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+}
+
+function NavigationContent({
+  label,
+  onClick,
+}: {
+  label: string;
+  onClick: () => void;
+}) {
+  const data = getStoreNavigationSectionByLabel(label);
+  return (
+    <div className="space-y-8">
+      <div className="flex gap-2">
+        {data?.featured.map((item) => (
+          <div className="shrink-0 flex-1" key={item.name}>
+            <div className="aspect-square rounded-lg overflow-hidden">
+              <Image src={item.image} alt={item.name} />
+            </div>
+            <Heading className="mt-2" as="h3" size="md">
+              {item.name}
+            </Heading>
+            <Button asChild variant="link" className="px-0">
+              <Link onClick={onClick} className="text-sm" href={item.href}>
+                Shop now
+              </Link>
+            </Button>
+          </div>
+        ))}
+      </div>
+      <div className="pb-10 space-y-10">
+        {data?.sections.map((section) => (
+          <div className="space-y-4" key={section.name}>
+            <Heading as="h3" weight="bold">
+              {section.name}
+            </Heading>
+            <ul className="space-y-2">
+              {section.items.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    onClick={onClick}
+                    className="text-sm text-foreground/70 hover:text-foreground active:text-foreground"
+                    href={item.href}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
