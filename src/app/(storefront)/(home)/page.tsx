@@ -13,10 +13,10 @@ export default async function Home() {
     <>
       <IntroBanner />
 
-      <ProductReveal title="Trending" products={products} />
+      <ProductReveal title="Trending" products={[...products, ...products]} />
       <FeaturesGrid />
 
-      <ProductReveal title="Featured" products={products} />
+      <ProductReveal title="Featured" products={[...products, ...products]} />
       <ProductMarketingCallout
         title="Get 25% off during our one-time sale"
         description="Most of our products are limited releases that won't come back. Get your favorite items while they're in stock."
