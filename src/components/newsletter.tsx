@@ -41,7 +41,7 @@ export default function NewsLetter() {
           <Card className="bg-transparent z-10 relative">
             <CardContent className="p-8 md:p-12">
               <CardHeader className="p-0 mb-4 text-center">
-                <LucideMail className="size-10 md:size-14 mx-auto text-emerald-500" />
+                <LucideMail className="size-10 md:size-14 mx-auto text-primary" />
                 <CardTitle className="text-2xl md:text-4xl">
                   Stay Updated
                 </CardTitle>
