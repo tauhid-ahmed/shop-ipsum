@@ -1,5 +1,5 @@
 "use client";
-import { Heading, ThemeSwitch } from "@/components";
+import { DangerButton, Heading, ThemeSwitch } from "@/components";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -167,9 +167,13 @@ function SignOutButton() {
   if (!user) return null;
   return (
     <div className="bg-accent/50">
-      <Button onClick={() => signOut()} className="w-full" variant="outline">
+      <DangerButton
+        onClick={() => signOut()}
+        className="w-full"
+        variant="outline"
+      >
         Sign out
-      </Button>
+      </DangerButton>
     </div>
   );
 }
