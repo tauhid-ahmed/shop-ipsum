@@ -19,7 +19,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
-import { useState } from "react";
 
 export function CartWidget() {
   return (
@@ -115,7 +114,7 @@ function CartBody() {
                     <LucidePlus className="size-4" />
                   </Button>
                 </div>
-                <strong className="font-medium text-foreground/80 text-lg">
+                <strong className="font-medium text-foreground/80">
                   $ {(1223).toFixed(2)}
                 </strong>
               </div>
