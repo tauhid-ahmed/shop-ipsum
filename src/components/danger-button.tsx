@@ -19,7 +19,6 @@ export default function DangerButton({
     <Button
       onPointerDown={handleInteractiveOn}
       onPointerEnter={handleInteractiveOn}
-      onPointerUp={handleInteractiveOff}
       onPointerLeave={handleInteractiveOff}
       variant={isInteractive ? "destructive" : variant}
       size="sm"
