@@ -8,8 +8,8 @@ type ProfileImageProps = {
 } & React.ComponentProps<"div">;
 
 const classnames = {
-  md: "size-6 text-sm",
-  lg: "size-8 lg:size-12 text-xl lg:text-2xl",
+  md: "size-8 text-sm",
+  lg: "size-12 text-xl lg:text-2xl",
 } as const;
 
 export default function UserProfilePicture({
