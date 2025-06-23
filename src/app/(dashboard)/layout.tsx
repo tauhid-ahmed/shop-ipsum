@@ -1,7 +1,7 @@
 import {
-  AdminContainer,
-  AdminHeader,
-  Sidebar,
+  DashboardHeader,
+  DashboardLayout,
+  DashboardSidebar,
   SidebarProvider,
 } from "./_components";
 
@@ -11,13 +11,12 @@ export default function AdminDashboardLayout({
   return (
     <>
       <SidebarProvider>
-        <AdminContainer>
-          <Sidebar />
-          <div className="px-[calc(var(--_sidebar-spacing))]">
-            <AdminHeader />
-            {children}
-          </div>
-        </AdminContainer>
+        <DashboardLayout
+          header={<DashboardHeader />}
+          sidebar={<DashboardSidebar />}
+        >
+          {children}
+        </DashboardLayout>
       </SidebarProvider>
     </>
   );
