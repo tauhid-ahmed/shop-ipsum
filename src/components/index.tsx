@@ -8,3 +8,4 @@ export { default as CheckboxField } from "./checkbox-field";
 export { default as NewsLetter } from "./newsletter";
 export { default as FeaturesGrid } from "./features-grid";
 export { default as ThemeSwitch } from "./theme-switch";
+export { default as DangerButton } from "./danger-button";

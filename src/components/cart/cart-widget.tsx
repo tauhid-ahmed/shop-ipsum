@@ -1,4 +1,6 @@
-import { Heading } from "@/components";
+"use client";
+
+import { DangerButton, Heading } from "@/components";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -16,7 +18,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { Badge } from "../ui/badge";
 
 export function CartWidget() {
@@ -64,78 +65,64 @@ function CartWidgetHeader() {
 function CartBody() {
   return (
     <div className="flex flex-col gap-8">
-      {Array.from({ length: 3 }).map((_, i) => {
+      {Array.from({ length: 5 }).map((_, i) => {
         return (
-          <React.Fragment key={i}>
-            <div className="flex gap-4 relative">
-              <Image
-                className="h-20 w-16 rounded mt-1 object-cover"
-                src={placeHolderImage}
-                alt="product image"
-              />
-              <div className="flex flex-col gap-1 overflow-hidden">
-                <div className="overflow-hidden space-y-2">
-                  <Heading
-                    className="text-ellipsis text-foreground/80"
-                    align="left"
-                    as="h4"
-                    size="sm"
-                  >
-                    Luxury
-                  </Heading>
-                  <Heading
-                    className="text-ellipsis text-foreground uppercase"
-                    align="left"
-                    as="h4"
-                    size="md"
-                  >
-                    Formal Jeans
-                  </Heading>
-                  <div className="text-xs space-x-2">
-                    <span>
-                      Size: <strong>XL</strong>
-                    </span>
-                    <span>
-                      Color: <strong>Purple</strong>
-                    </span>
-                  </div>
-                  <div className="space-x-2">
-                    <Badge className="bg-emerald-200 text-emerald-900">
-                      Free Shipping
-                    </Badge>
-                    <Badge className="bg-amber-200 text-amber-900">
-                      Disc 5%
-                    </Badge>
-                  </div>
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="inline-flex align-middle rounded-lg border-t border-b border-border">
-                      <div className="flex -my-px">
-                        <Button size="icon" variant="outline">
-                          <LucideMinus />
-                        </Button>
-                        <div className="aspect-square h-9 border-t-1 border-b-1 border-border text-center text-sm flex items-center justify-center">
-                          55
-                        </div>
-                        <Button size="icon" variant="outline">
-                          <LucidePlus />
-                        </Button>
-                      </div>
-                    </div>
-                    <p className="text-sm flex items-baseline gap-1">
-                      <strong className="font-medium">
-                        $ {(23).toFixed(2)}
-                      </strong>
-                    </p>
-                  </div>
-                </div>
+          <div className="flex gap-2 relative" key={i}>
+            <Image
+              className="h-20 w-16 rounded mt-1 object-cover"
+              src={placeHolderImage}
+              alt="product image"
+            />
+            <div className="overflow-hidden space-y-2">
+              <Heading
+                className="text-ellipsis text-foreground/80"
+                align="left"
+                as="h4"
+                size="sm"
+              >
+                Luxury
+              </Heading>
+              <Heading
+                className="text-ellipsis text-foreground uppercase"
+                align="left"
+                as="h4"
+                size="md"
+              >
+                Formal Jeans
+              </Heading>
+              <div className="text-xs space-x-4">
+                <span>
+                  Size: <strong>XL</strong>
+                </span>
+                <span>
+                  Color: <strong>Purple</strong>
+                </span>
               </div>
-              <div className="absolute top-0 right-1">
-                <Button variant="ghost" size="icon">
-                  <LucideX />
-                </Button>
+              <div className="space-x-2">
+                <Badge className="bg-emerald-200 text-emerald-900">
+                  Free Shipping
+                </Badge>
+                <Badge className="bg-amber-200 text-amber-900">Disc 5%</Badge>
+              </div>
+              <div className="flex items-baseline justify-between gap-2">
+                <div className="flex border items-center rounded overflow-hidden">
+                  <Button variant="ghost" size="sm">
+                    <LucideMinus className="size-4" />
+                  </Button>
+                  <span className="text-sm">55</span>
+                  <Button variant="ghost" size="sm">
+                    <LucidePlus className="size-4" />
+                  </Button>
+                </div>
+                <strong className="font-medium text-foreground/80">
+                  $ {(1223).toFixed(2)}
+                </strong>
               </div>
             </div>
-          </React.Fragment>
+            <DangerButton>
+              <LucideX />
+            </DangerButton>
+          </div>
         );
       })}
     </div>
