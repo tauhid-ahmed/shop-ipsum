@@ -1,70 +1,61 @@
 import { Heading } from "@/components";
-import { Container } from "@/components/layout/container";
-import { Section } from "@/components/layout/section";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import ProductSection from "./product-section";
 
 export default function ProductCategoryPreview() {
   return (
-    <Section padding="sm">
-      <Container>
-        <div className="space-y-4">
-          <Heading as="h2" size="2xl" align="left" weight="bold">
-            Shop by category
-          </Heading>
-          <div className="grid grid-cols-8 auto-rows-[minmax(theme(spacing.44),theme(spacing.44))] gap-2 [&>*]:border-1 [&>*]:border-primary/30 [&>*]:shadow items-stretch [&>*]:rounded-2xl [&>*]:overflow-hidden overflow-hidden">
-            <div className="col-span-8 md:col-span-3 md:row-span-2 h-full">
-              <PreviewCard
-                badge="Eid ul fitr fashion"
-                category="eid-ul-fitr-fashion"
-                image="eid-ul-fitor-fashion"
-                className="md:h-full"
-              />
-            </div>
-            <div className="col-span-8 md:col-span-2">
-              <PreviewCard
-                badge="Men fashion"
-                category="men-fashion"
-                image="men-fashion"
-              />
-            </div>
-            <div className="col-span-4 md:col-span-3">
-              <PreviewCard
-                badge="Kid fashion"
-                category="kid-fashion"
-                image="kid-fashion"
-              />
-            </div>
-            <div className="col-span-4 md:col-span-3">
-              <PreviewCard
-                badge="Winter fashion"
-                category="winter-fashion"
-                image="winter-fashion"
-              />
-            </div>
-            <div className="col-span-8 md:col-span-2">
-              <PreviewCard
-                badge="Summer fashion"
-                category="summer-fashion"
-                image="summer-fashion"
-              />
-            </div>
-          </div>
+    <ProductSection>
+      <div className="space-y-4">
+        <Heading as="h2" size="2xl" align="left" weight="bold">
+          Shop by category
+        </Heading>
+        <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-8 auto-rows-[theme(spacing.44)] gap-2 [&>*]:border-1 [&>*]:border-primary/30 [&>*]:shadow items-stretch [&>*]:rounded-2xl [&>*]:overflow-hidden overflow-hidden">
+          <CategoryCard
+            badge="Eid ul fitr fashion"
+            category="eid-ul-fitr-fashion"
+            image="eid-ul-fitor-fashion"
+            className="grid-col-1 col-span-4 md:col-span-3 md:row-span-2"
+          />
+          <CategoryCard
+            badge="Men fashion"
+            category="men-fashion"
+            image="men-fashion"
+            className="grid-col-4 col-span-4 md:grid-col-2 md:col-span-2"
+          />
+          <CategoryCard
+            badge="Kid fashion"
+            category="kid-fashion"
+            image="kid-fashion"
+            className="grid-col-1 grid-row-2 col-span-4 md:grid-col-3 md:col-span-3"
+          />
+          <CategoryCard
+            badge="Winter fashion"
+            category="winter-fashion"
+            image="winter-fashion"
+            className="grid-col-2 col-span-2 grid-row-2 md:grid-col-2 md:col-span-3"
+          />
+          <CategoryCard
+            badge="Summer fashion"
+            category="summer-fashion"
+            image="summer-fashion"
+            className="grid-col-6 col-span-2 grid-col-3 md:col-span-2"
+          />
         </div>
-      </Container>
-    </Section>
+      </div>
+    </ProductSection>
   );
 }
 
-type PreviewCardProps = {
+type CategoryCardProps = {
   image: string;
   className?: string;
   badge: string;
   category: string;
 };
 
-function PreviewCard({ image, className, badge }: PreviewCardProps) {
+function CategoryCard({ image, className, badge }: CategoryCardProps) {
   return (
     <Link
       href={"/"}
